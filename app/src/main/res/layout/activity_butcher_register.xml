@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Butcher Registration"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:textColor="#D32F2F"
+            android:layout_gravity="center"
+            android:layout_marginBottom="30dp"/>
+
+        <EditText
+            android:id="@+id/butcherName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Butcher Name"/>
+
+        <EditText
+            android:id="@+id/butcherEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:layout_marginTop="16dp"/>
+
+        <EditText
+            android:id="@+id/butcherPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:layout_marginTop="16dp"/>
+
+        <EditText
+            android:id="@+id/butcherExperience"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Years of Experience"
+            android:inputType="number"
+            android:layout_marginTop="16dp"/>
+
+        <EditText
+            android:id="@+id/butcherLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Location"
+            android:layout_marginTop="16dp"/>
+
+        <Button
+            android:id="@+id/butcherCreateButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Create Butcher Account"
+            android:backgroundTint="#F44336"
+            android:textColor="#FFFFFF"
+            android:layout_marginTop="30dp"/>
+
+    </LinearLayout>
+
+</ScrollView>
