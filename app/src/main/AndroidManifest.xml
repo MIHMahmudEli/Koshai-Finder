@@ -23,6 +23,11 @@
         <activity android:name=".ChooseRegisterActivity" />
         <activity android:name=".CustomerRegisterActivity" />
         <activity android:name=".ButcherRegisterActivity" />
+        <activity android:name=".DashboardActivity" />
+        <activity android:name=".ButcherBookingActivity" />
+        <activity android:name=".MeatShopActivity" />
+        <activity android:name=".ToolsAndGearActivity" />
+        <activity android:name=".CleaningServiceActivity" />
     </application>
 
 </manifest>

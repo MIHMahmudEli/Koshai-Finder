@@ -24,17 +24,14 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        // Login Fields
         val emailEditText = findViewById<EditText>(R.id.emailEditText)
         val passwordEditText = findViewById<EditText>(R.id.passwordEditText)
 
-        // Buttons
         val loginButton = findViewById<Button>(R.id.loginButton)
         val registerButton = findViewById<Button>(R.id.registerButton)
-        val googleLoginButton = findViewById<Button>(R.id.googleLoginButton)
 
-        // Forgot Password
-        val forgotPasswordText = findViewById<TextView>(R.id.forgotPasswordText)
+        val forgotPassword = findViewById<TextView>(R.id.forgotPasswordText)
+        val googleButton = findViewById<Button>(R.id.googleLoginButton)
 
         // Login Button
         loginButton.setOnClickListener {
@@ -46,7 +43,7 @@ class MainActivity : AppCompatActivity() {
 
                 Toast.makeText(
                     this,
-                    "Please fill all fields",
+                    "Please enter email and password",
                     Toast.LENGTH_SHORT
                 ).show()
 
@@ -57,38 +54,37 @@ class MainActivity : AppCompatActivity() {
                     "Login Successful",
                     Toast.LENGTH_SHORT
                 ).show()
+
+                // Dashboard Activity Open
+                val intent = Intent(this, DashboardActivity::class.java)
+                startActivity(intent)
+
             }
         }
 
         // Register Button
         registerButton.setOnClickListener {
-
-            startActivity(
-                Intent(this, ChooseRegisterActivity::class.java)
-            )
-
+            startActivity(Intent(this, ChooseRegisterActivity::class.java))
         }
 
         // Forgot Password
-        forgotPasswordText.setOnClickListener {
+        forgotPassword.setOnClickListener {
 
             Toast.makeText(
                 this,
-                "Password reset link sent to your email",
+                "Password reset link sent",
                 Toast.LENGTH_SHORT
             ).show()
-
         }
 
-        // Google Login
-        googleLoginButton.setOnClickListener {
+        // Continue with Google
+        googleButton.setOnClickListener {
 
             Toast.makeText(
                 this,
-                "Google Login Coming Soon",
+                "Google Login Clicked",
                 Toast.LENGTH_SHORT
             ).show()
-
         }
     }
 }
