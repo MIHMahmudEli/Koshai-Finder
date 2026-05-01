@@ -21,34 +21,34 @@ class DashboardActivity : AppCompatActivity() {
         setupProductButtons()
     }
 
-    // ── Quick Booking cards ────────────────────────────────────────────────────
+    // ── Quick Booking buttons ────────────────────────────────────────────────────
     private fun setupQuickBooking() {
-        findViewById<CardView>(R.id.cardBookButcher).setOnClickListener {
+        findViewById<CardView>(R.id.btnBookButcher).setOnClickListener {
             startActivity(Intent(this, ButcherBookingActivity::class.java))
         }
-        findViewById<CardView>(R.id.cardFullService).setOnClickListener {
+        findViewById<CardView>(R.id.btnFullService).setOnClickListener {
             toast("Full Service Package — Coming Soon")
         }
-        findViewById<CardView>(R.id.cardUrgent).setOnClickListener {
+        findViewById<CardView>(R.id.btnUrgentButcher).setOnClickListener {
             toast("Urgent Butcher — Finding nearest available koshai...")
         }
     }
 
-    // ── Marketplace cards ──────────────────────────────────────────────────────
+    // ── Marketplace buttons ──────────────────────────────────────────────────────
     private fun setupMarketplace() {
-        findViewById<CardView>(R.id.cardMeatShop).setOnClickListener {
+        findViewById<CardView>(R.id.btnMeatShop).setOnClickListener {
             startActivity(Intent(this, MeatShopActivity::class.java))
         }
-        findViewById<CardView>(R.id.cardTools).setOnClickListener {
+        findViewById<CardView>(R.id.btnToolsGear).setOnClickListener {
             startActivity(Intent(this, ToolsAndGearActivity::class.java))
         }
-        findViewById<CardView>(R.id.cardCleaning).setOnClickListener {
+        findViewById<CardView>(R.id.btnCleaningService).setOnClickListener {
             startActivity(Intent(this, CleaningServiceActivity::class.java))
         }
-        findViewById<CardView>(R.id.cardOffers).setOnClickListener {
+        findViewById<CardView>(R.id.btnExclusiveOffers).setOnClickListener {
             toast("Exclusive Offers — Eid special deals loading...")
         }
-        findViewById<CardView>(R.id.cardLiveStatus).setOnClickListener {
+        findViewById<CardView>(R.id.btnLiveStatus).setOnClickListener {
             toast("Live Status — Tracking butcher location...")
         }
         findViewById<TextView>(R.id.tvViewAll).setOnClickListener {

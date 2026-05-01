@@ -1,273 +1,234 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F5F5F5">
 
-    <!-- ── TOP BAR ─────────────────────────────────────────── -->
-    <LinearLayout
-        android:id="@+id/topBar"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="#1B5E35"
-        android:orientation="horizontal"
-        android:paddingHorizontal="16dp"
-        android:gravity="center_vertical">
-
-        <!-- Location -->
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
-
-            <TextView
-                android:text="📍"
-                android:textSize="16sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="4dp" />
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:text="Dhaka | 15 June 2024"
-                    android:textColor="#FFFFFF"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-                <TextView
-                    android:text="Eid ul-Adha approaching"
-                    android:textColor="#A8D5B5"
-                    android:textSize="10sp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <!-- Chat Icon -->
-        <TextView
-            android:id="@+id/btnChat"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:text="💬"
-            android:textSize="18sp"
-            android:gravity="center"
-            android:layout_marginEnd="8dp" />
-
-        <!-- Bell Icon with badge -->
-        <FrameLayout
-            android:layout_width="36dp"
-            android:layout_height="36dp">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="🔔"
-                android:textSize="18sp"
-                android:gravity="center" />
-
-            <TextView
-                android:layout_width="16dp"
-                android:layout_height="16dp"
-                android:text="1"
-                android:textColor="#FFFFFF"
-                android:textSize="9sp"
-                android:gravity="center"
-                android:background="@drawable/badge_red_circle"
-                android:layout_gravity="top|end" />
-        </FrameLayout>
-    </LinearLayout>
-
-    <!-- ── SCROLLABLE CONTENT ──────────────────────────────── -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="60dp"
-        android:layout_marginBottom="64dp"
-        android:scrollbars="none">
+        android:layout_above="@id/bottomNav">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingBottom="12dp">
+            android:paddingBottom="20dp">
 
-            <!-- ── HERO BANNER ── -->
-            <androidx.cardview.widget.CardView
+            <!-- Top Bar -->
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="130dp"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="14dp"
-                app:cardCornerRadius="14dp"
-                app:cardElevation="0dp"
-                app:cardBackgroundColor="#1B5E35">
+                android:layout_height="56dp"
+                android:background="#FFFFFF"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="16dp"
+                android:orientation="horizontal">
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:padding="18dp">
+                <ImageView
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:src="@android:drawable/ic_menu_myplaces"
+                    android:background="#E8F5E9"
+                    android:padding="6dp"
+                    android:contentDescription="Menu" />
 
-                    <LinearLayout
-                        android:id="@+id/bannerText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_centerVertical="true">
-
-                        <TextView
-                            android:text="YOUR COMPLETE"
-                            android:textColor="#A8D5B5"
-                            android:textSize="12sp"
-                            android:letterSpacing="0.06"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-
-                        <TextView
-                            android:text="EID SOLUTION"
-                            android:textColor="#FFFFFF"
-                            android:textSize="22sp"
-                            android:textStyle="bold"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-
-                        <TextView
-                            android:text="QURBANI SERVE"
-                            android:textColor="#1B5E35"
-                            android:textSize="10sp"
-                            android:textStyle="bold"
-                            android:background="@drawable/badge_yellow"
-                            android:paddingHorizontal="10dp"
-                            android:paddingVertical="4dp"
-                            android:layout_marginTop="8dp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-                    </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:paddingStart="10dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="🐄"
-                        android:textSize="64sp"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true" />
-                </RelativeLayout>
-            </androidx.cardview.widget.CardView>
+                        android:text="Dhaka | 15 June 2024"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:textColor="#1A1A1A" />
+                </LinearLayout>
 
-            <!-- ── SECTION: QUICK BOOKING ── -->
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:src="@android:drawable/ic_dialog_email"
+                    android:layout_marginEnd="12dp"
+                    android:contentDescription="Messages" />
+
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:src="@android:drawable/ic_popup_reminder"
+                    android:contentDescription="Notifications" />
+            </LinearLayout>
+
+            <!-- Banner -->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="12dp">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:cardCornerRadius="14dp"
+                    app:cardElevation="4dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#1B5E35"
+                        android:orientation="horizontal"
+                        android:padding="20dp"
+                        android:gravity="center_vertical">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="YOUR COMPLETE"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                android:textColor="#FFFFFF" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="EID SOLUTION"
+                                android:textSize="22sp"
+                                android:textStyle="bold"
+                                android:textColor="#E8B530"
+                                android:layout_marginBottom="12dp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="QURBANI SERVE"
+                                android:textSize="11sp"
+                                android:textColor="#1B5E35"
+                                android:background="#E8B530"
+                                android:paddingHorizontal="10dp"
+                                android:paddingVertical="4dp" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:gravity="center"
+                            android:text="🐄"
+                            android:textSize="48sp" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+            </FrameLayout>
+
+            <!-- Quick Booking Label -->
             <TextView
-                android:text="QUICK BOOKING"
-                android:textColor="#1A1A1A"
-                android:textSize="13sp"
-                android:textStyle="bold"
-                android:letterSpacing="0.08"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="QUICK BOOKING"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:textColor="#1A1A1A"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="10dp" />
 
+            <!-- Quick Booking Buttons -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingHorizontal="16dp">
+                android:paddingHorizontal="16dp"
+                android:weightSum="3">
 
-                <!-- Book a Butcher -->
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/cardBookButcher"
+                    android:id="@+id/btnBookButcher"
                     android:layout_width="0dp"
                     android:layout_height="90dp"
                     android:layout_weight="1"
-                    android:layout_marginEnd="8dp"
+                    android:layout_marginEnd="6dp"
                     android:clickable="true"
                     android:focusable="true"
-                    android:foreground="?attr/selectableItemBackground"
                     app:cardCornerRadius="12dp"
                     app:cardElevation="3dp"
-                    app:cardBackgroundColor="#2E7D52">
+                    app:cardBackgroundColor="#1B5E35">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
                         android:gravity="center"
-                        android:padding="10dp">
+                        android:orientation="vertical">
 
                         <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:text="🔪"
-                            android:textSize="24sp"
-                            android:layout_marginBottom="6dp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:textSize="28sp" />
 
                         <TextView
-                            android:text="BOOK A&#10;BUTCHER"
-                            android:textColor="#FFFFFF"
-                            android:textSize="11sp"
-                            android:textStyle="bold"
-                            android:gravity="center"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:text="BOOK A\nBUTCHER"
+                            android:textSize="10sp"
+                            android:textStyle="bold"
+                            android:textColor="#FFFFFF"
+                            android:gravity="center"
+                            android:layout_marginTop="4dp" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-                <!-- Full Service Package -->
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/cardFullService"
+                    android:id="@+id/btnFullService"
                     android:layout_width="0dp"
                     android:layout_height="90dp"
                     android:layout_weight="1"
-                    android:layout_marginEnd="8dp"
+                    android:layout_marginHorizontal="3dp"
                     android:clickable="true"
                     android:focusable="true"
-                    android:foreground="?attr/selectableItemBackground"
                     app:cardCornerRadius="12dp"
                     app:cardElevation="3dp"
-                    app:cardBackgroundColor="#2E7D52">
+                    app:cardBackgroundColor="#1B5E35">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
                         android:gravity="center"
-                        android:padding="10dp">
+                        android:orientation="vertical">
 
                         <TextView
-                            android:text="🐄➕🔪"
-                            android:textSize="18sp"
-                            android:layout_marginBottom="6dp"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:text="🐄➕"
+                            android:textSize="22sp" />
 
                         <TextView
-                            android:text="FULL SERVICE&#10;PACKAGE"
-                            android:textColor="#FFFFFF"
-                            android:textSize="11sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="FULL SERVICE\nPACKAGE"
+                            android:textSize="10sp"
                             android:textStyle="bold"
+                            android:textColor="#FFFFFF"
                             android:gravity="center"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:layout_marginTop="4dp" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-                <!-- Urgent Butcher -->
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/cardUrgent"
+                    android:id="@+id/btnUrgentButcher"
                     android:layout_width="0dp"
                     android:layout_height="90dp"
                     android:layout_weight="1"
+                    android:layout_marginStart="6dp"
                     android:clickable="true"
                     android:focusable="true"
-                    android:foreground="?attr/selectableItemBackground"
                     app:cardCornerRadius="12dp"
                     app:cardElevation="3dp"
                     app:cardBackgroundColor="#E8B530">
@@ -275,237 +236,341 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
                         android:gravity="center"
-                        android:padding="10dp">
+                        android:orientation="vertical">
 
                         <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:text="⚡"
-                            android:textSize="24sp"
-                            android:layout_marginBottom="6dp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:textSize="28sp" />
 
                         <TextView
-                            android:text="URGENT&#10;BUTCHER"
-                            android:textColor="#1A1A1A"
-                            android:textSize="11sp"
-                            android:textStyle="bold"
-                            android:gravity="center"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:text="URGENT\nBUTCHER"
+                            android:textSize="10sp"
+                            android:textStyle="bold"
+                            android:textColor="#1A1A1A"
+                            android:gravity="center"
+                            android:layout_marginTop="4dp" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
             </LinearLayout>
 
-            <!-- ── SECTION: EID MARKETPLACE ── -->
+            <!-- Eid Marketplace Label -->
             <TextView
-                android:text="EID MARKETPLACE"
-                android:textColor="#1A1A1A"
-                android:textSize="13sp"
-                android:textStyle="bold"
-                android:letterSpacing="0.08"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="EID MARKETPLACE"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:textColor="#1A1A1A"
                 android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="22dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginBottom="10dp" />
 
-            <!-- Row 1: 3 cards -->
+            <!-- Marketplace Grid Row 1 -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingHorizontal="16dp">
+                android:paddingHorizontal="16dp"
+                android:weightSum="3">
 
-                <!-- Meat Shop -->
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/cardMeatShop"
+                    android:id="@+id/btnMeatShop"
                     android:layout_width="0dp"
-                    android:layout_height="100dp"
+                    android:layout_height="90dp"
                     android:layout_weight="1"
-                    android:layout_marginEnd="8dp"
+                    android:layout_marginEnd="6dp"
                     android:clickable="true"
                     android:focusable="true"
-                    android:foreground="?attr/selectableItemBackground"
                     app:cardCornerRadius="12dp"
-                    app:cardElevation="2dp"
-                    app:cardBackgroundColor="#FDE8E8">
+                    app:cardElevation="3dp"
+                    app:cardBackgroundColor="#FCE4EC">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
                         android:gravity="center"
+                        android:orientation="vertical"
                         android:padding="8dp">
 
-                        <TextView android:text="🥩" android:textSize="26sp" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="4dp" />
-                        <TextView android:text="MEAT SHOP" android:textColor="#C0392B" android:textSize="10sp" android:textStyle="bold" android:gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" />
-                        <TextView android:text="(Dedicated)" android:textColor="#888888" android:textSize="9sp" android:layout_width="wrap_content" android:layout_height="wrap_content" />
-                        <TextView android:text="Local Beef/Mutton" android:textColor="#888888" android:textSize="9sp" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="🥩"
+                            android:textSize="26sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="MEAT SHOP"
+                            android:textSize="10sp"
+                            android:textStyle="bold"
+                            android:textColor="#1A1A1A"
+                            android:gravity="center" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Local Beef/Mutton"
+                            android:textSize="9sp"
+                            android:textColor="#666666"
+                            android:gravity="center" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-                <!-- Tools & Gear -->
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/cardTools"
+                    android:id="@+id/btnToolsGear"
                     android:layout_width="0dp"
-                    android:layout_height="100dp"
+                    android:layout_height="90dp"
                     android:layout_weight="1"
-                    android:layout_marginEnd="8dp"
+                    android:layout_marginHorizontal="3dp"
                     android:clickable="true"
                     android:focusable="true"
-                    android:foreground="?attr/selectableItemBackground"
                     app:cardCornerRadius="12dp"
-                    app:cardElevation="2dp"
-                    app:cardBackgroundColor="#FFF3CD">
+                    app:cardElevation="3dp"
+                    app:cardBackgroundColor="#FFF8E1">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
                         android:gravity="center"
+                        android:orientation="vertical"
                         android:padding="8dp">
 
-                        <TextView android:text="🔧" android:textSize="26sp" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="4dp" />
-                        <TextView android:text="TOOLS &amp; GEAR" android:textColor="#856404" android:textSize="10sp" android:textStyle="bold" android:gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" />
-                        <TextView android:text="Knives, Ropes, Bags" android:textColor="#888888" android:textSize="9sp" android:gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="🔧"
+                            android:textSize="26sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="TOOLS &amp; GEAR"
+                            android:textSize="10sp"
+                            android:textStyle="bold"
+                            android:textColor="#1A1A1A"
+                            android:gravity="center" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Knives, Ropes, Bags"
+                            android:textSize="9sp"
+                            android:textColor="#666666"
+                            android:gravity="center" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-                <!-- Cleaning Service -->
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/cardCleaning"
+                    android:id="@+id/btnCleaningService"
                     android:layout_width="0dp"
-                    android:layout_height="100dp"
+                    android:layout_height="90dp"
                     android:layout_weight="1"
+                    android:layout_marginStart="6dp"
                     android:clickable="true"
                     android:focusable="true"
-                    android:foreground="?attr/selectableItemBackground"
                     app:cardCornerRadius="12dp"
-                    app:cardElevation="2dp"
+                    app:cardElevation="3dp"
                     app:cardBackgroundColor="#E8F5E9">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
                         android:gravity="center"
+                        android:orientation="vertical"
                         android:padding="8dp">
 
-                        <TextView android:text="🧹" android:textSize="26sp" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="4dp" />
-                        <TextView android:text="CLEANING&#10;SERVICE" android:textColor="#2E7D52" android:textSize="10sp" android:textStyle="bold" android:gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="🧹"
+                            android:textSize="26sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="CLEANING\nSERVICE"
+                            android:textSize="10sp"
+                            android:textStyle="bold"
+                            android:textColor="#1A1A1A"
+                            android:gravity="center" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
             </LinearLayout>
 
-            <!-- Row 2: Exclusive Offers + Live Status -->
+            <!-- Offers + Live Status Row -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:paddingHorizontal="16dp"
-                android:layout_marginTop="8dp">
+                android:layout_marginTop="10dp"
+                android:weightSum="2">
 
-                <!-- Exclusive Offers -->
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/cardOffers"
+                    android:id="@+id/btnExclusiveOffers"
                     android:layout_width="0dp"
                     android:layout_height="70dp"
                     android:layout_weight="1"
-                    android:layout_marginEnd="8dp"
+                    android:layout_marginEnd="6dp"
                     android:clickable="true"
                     android:focusable="true"
-                    android:foreground="?attr/selectableItemBackground"
                     app:cardCornerRadius="12dp"
-                    app:cardElevation="2dp"
-                    app:cardBackgroundColor="#2E7D52">
+                    app:cardElevation="3dp"
+                    app:cardBackgroundColor="#1B5E35">
 
-                    <RelativeLayout
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
                         android:padding="12dp">
 
                         <LinearLayout
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:layout_centerVertical="true">
+                            android:layout_weight="1"
+                            android:orientation="vertical">
 
-                            <TextView android:text="EXCLUSIVE" android:textColor="#FFFFFF" android:textSize="11sp" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content" />
-                            <TextView android:text="OFFERS" android:textColor="#FFFFFF" android:textSize="11sp" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content" />
-                            <TextView android:text="OPEN NOW" android:textColor="#1B5E35" android:textSize="9sp" android:textStyle="bold" android:background="@drawable/badge_yellow" android:paddingHorizontal="6dp" android:paddingVertical="2dp" android:layout_marginTop="4dp" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="EXCLUSIVE\nOFFERS"
+                                android:textSize="11sp"
+                                android:textStyle="bold"
+                                android:textColor="#FFFFFF" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="GRAB NOW"
+                                android:textSize="9sp"
+                                android:textColor="#E8B530"
+                                android:layout_marginTop="2dp" />
                         </LinearLayout>
 
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="%" android:textColor="#E8B530" android:textSize="36sp" android:textStyle="bold" android:layout_alignParentEnd="true" android:layout_centerVertical="true" />
-                    </RelativeLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="%"
+                            android:textSize="30sp"
+                            android:textStyle="bold"
+                            android:textColor="#E8B530" />
+                    </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-                <!-- Live Status -->
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/cardLiveStatus"
+                    android:id="@+id/btnLiveStatus"
                     android:layout_width="0dp"
                     android:layout_height="70dp"
                     android:layout_weight="1"
+                    android:layout_marginStart="6dp"
                     android:clickable="true"
                     android:focusable="true"
-                    android:foreground="?attr/selectableItemBackground"
                     app:cardCornerRadius="12dp"
-                    app:cardElevation="2dp"
+                    app:cardElevation="3dp"
                     app:cardBackgroundColor="#FFFFFF">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:gravity="center_vertical"
                         android:orientation="vertical"
-                        android:padding="10dp"
-                        android:gravity="center_vertical">
+                        android:padding="12dp">
 
-                        <TextView android:text="LIVE STATUS" android:textColor="#1A1A1A" android:textSize="11sp" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="LIVE STATUS"
+                            android:textSize="11sp"
+                            android:textStyle="bold"
+                            android:textColor="#1A1A1A" />
 
-                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:layout_marginTop="6dp">
-                            <TextView android:text="👨" android:textSize="18sp" android:layout_marginEnd="6dp" android:layout_width="wrap_content" android:layout_height="wrap_content" />
-                            <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="vertical">
-                                <TextView android:text="Butcher on the way" android:textColor="#1A1A1A" android:textSize="10sp" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content" />
-                                <TextView android:text="(Arriving 20 min)" android:textColor="#888888" android:textSize="9sp" android:layout_width="wrap_content" android:layout_height="wrap_content" />
-                            </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:layout_marginTop="4dp">
+
+                            <View
+                                android:layout_width="8dp"
+                                android:layout_height="8dp"
+                                android:background="#4CAF50" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="  Butcher on the way"
+                                android:textSize="10sp"
+                                android:textColor="#333333" />
                         </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="(Arriving 20 min)"
+                            android:textSize="9sp"
+                            android:textColor="#888888" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
             </LinearLayout>
 
-            <!-- ── SHOP WITH US ── -->
+            <!-- Shop With Us Label -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:gravity="center_vertical"
                 android:paddingHorizontal="16dp"
-                android:layout_marginTop="22dp"
-                android:gravity="center_vertical">
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="4dp">
 
-                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
-                    <TextView android:text="SHOP WITH US" android:textColor="#1A1A1A" android:textSize="13sp" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content" />
-                    <TextView android:text="MEAT SHOP" android:textColor="#888888" android:textSize="11sp" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="SHOP WITH US"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:textColor="#1A1A1A" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="MEAT SHOP"
+                        android:textSize="11sp"
+                        android:textColor="#888888" />
                 </LinearLayout>
 
                 <TextView
                     android:id="@+id/tvViewAll"
-                    android:text="View All ›"
-                    android:textColor="#2E7D52"
-                    android:textSize="12sp"
-                    android:textStyle="bold"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:text="View All ›"
+                    android:textSize="12sp"
+                    android:textColor="#1B5E35"
+                    android:textStyle="bold"
+                    android:clickable="true"
+                    android:focusable="true" />
             </LinearLayout>
 
-            <!-- Product Horizontal Scroll -->
+            <!-- Meat Product Cards -->
             <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:scrollbars="none"
                 android:paddingHorizontal="16dp"
-                android:clipToPadding="false">
+                android:scrollbars="none">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -515,53 +580,206 @@
                     <!-- Beef Card -->
                     <androidx.cardview.widget.CardView
                         android:layout_width="150dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="200dp"
                         android:layout_marginEnd="10dp"
                         app:cardCornerRadius="12dp"
-                        app:cardElevation="2dp"
+                        app:cardElevation="3dp"
                         app:cardBackgroundColor="#FFFFFF">
 
-                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="10dp">
-                            <TextView android:text="🥩" android:textSize="40sp" android:gravity="center" android:layout_width="match_parent" android:layout_height="90dp" android:background="#FFF0F0" />
-                            <TextView android:text="Beef (Per Kg)" android:textColor="#1A1A1A" android:textSize="12sp" android:textStyle="bold" android:layout_marginTop="8dp" android:layout_width="wrap_content" android:layout_height="wrap_content" />
-                            <TextView android:text="⭐ 4.5" android:textColor="#E8B530" android:textSize="11sp" android:layout_marginTop="2dp" android:layout_width="wrap_content" android:layout_height="wrap_content" />
-                            <TextView android:text="৳390 BDT" android:textColor="#1A1A1A" android:textSize="13sp" android:textStyle="bold" android:layout_marginTop="2dp" android:layout_width="wrap_content" android:layout_height="wrap_content" />
-                            <Button android:id="@+id/btnAddBeef" android:text="Add to Cart" android:textSize="11sp" android:textColor="#FFFFFF" android:backgroundTint="#2E7D52" android:layout_width="match_parent" android:layout_height="32dp" android:layout_marginTop="6dp" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <FrameLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="100dp"
+                                android:background="#FFF3E0">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center"
+                                    android:text="🥩"
+                                    android:textSize="40sp" />
+                            </FrameLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="10dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Beef (Per Kg)"
+                                    android:textSize="12sp"
+                                    android:textStyle="bold"
+                                    android:textColor="#1A1A1A" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="⭐ 4.5"
+                                    android:textSize="11sp"
+                                    android:textColor="#888888" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="৳390 BDT"
+                                    android:textSize="13sp"
+                                    android:textStyle="bold"
+                                    android:textColor="#1B5E35" />
+
+                                <Button
+                                    android:id="@+id/btnAddBeef"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="30dp"
+                                    android:text="Add to Cart"
+                                    android:textSize="10sp"
+                                    android:backgroundTint="#1B5E35"
+                                    android:textColor="#FFFFFF"
+                                    android:layout_marginTop="4dp" />
+                            </LinearLayout>
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
 
                     <!-- Mutton Card -->
                     <androidx.cardview.widget.CardView
                         android:layout_width="150dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="200dp"
                         android:layout_marginEnd="10dp"
                         app:cardCornerRadius="12dp"
-                        app:cardElevation="2dp"
+                        app:cardElevation="3dp"
                         app:cardBackgroundColor="#FFFFFF">
 
-                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="10dp">
-                            <TextView android:text="🍖" android:textSize="40sp" android:gravity="center" android:layout_width="match_parent" android:layout_height="90dp" android:background="#FFF8EC" />
-                            <TextView android:text="Mutton (Per Kg)" android:textColor="#1A1A1A" android:textSize="12sp" android:textStyle="bold" android:layout_marginTop="8dp" android:layout_width="wrap_content" android:layout_height="wrap_content" />
-                            <TextView android:text="⭐ 4.5" android:textColor="#E8B530" android:textSize="11sp" android:layout_marginTop="2dp" android:layout_width="wrap_content" android:layout_height="wrap_content" />
-                            <TextView android:text="৳370 BDT" android:textColor="#1A1A1A" android:textSize="13sp" android:textStyle="bold" android:layout_marginTop="2dp" android:layout_width="wrap_content" android:layout_height="wrap_content" />
-                            <Button android:id="@+id/btnAddMutton" android:text="Add to Cart" android:textSize="11sp" android:textColor="#FFFFFF" android:backgroundTint="#2E7D52" android:layout_width="match_parent" android:layout_height="32dp" android:layout_marginTop="6dp" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <FrameLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="100dp"
+                                android:background="#F3E5F5">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center"
+                                    android:text="🍖"
+                                    android:textSize="40sp" />
+                            </FrameLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="10dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Mutton (Per Kg)"
+                                    android:textSize="12sp"
+                                    android:textStyle="bold"
+                                    android:textColor="#1A1A1A" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="⭐ 4.5"
+                                    android:textSize="11sp"
+                                    android:textColor="#888888" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="৳370 BDT"
+                                    android:textSize="13sp"
+                                    android:textStyle="bold"
+                                    android:textColor="#1B5E35" />
+
+                                <Button
+                                    android:id="@+id/btnAddMutton"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="30dp"
+                                    android:text="Add to Cart"
+                                    android:textSize="10sp"
+                                    android:backgroundTint="#1B5E35"
+                                    android:textColor="#FFFFFF"
+                                    android:layout_marginTop="4dp" />
+                            </LinearLayout>
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
 
-                    <!-- Premium Cuts Card -->
+                    <!-- Premium Card -->
                     <androidx.cardview.widget.CardView
                         android:layout_width="150dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="200dp"
                         app:cardCornerRadius="12dp"
-                        app:cardElevation="2dp"
+                        app:cardElevation="3dp"
                         app:cardBackgroundColor="#FFFFFF">
 
-                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="10dp">
-                            <TextView android:text="🥩" android:textSize="40sp" android:gravity="center" android:layout_width="match_parent" android:layout_height="90dp" android:background="#F0FFF4" />
-                            <TextView android:text="Premium Cuts" android:textColor="#1A1A1A" android:textSize="12sp" android:textStyle="bold" android:layout_marginTop="8dp" android:layout_width="wrap_content" android:layout_height="wrap_content" />
-                            <TextView android:text="⭐ 4.5" android:textColor="#E8B530" android:textSize="11sp" android:layout_marginTop="2dp" android:layout_width="wrap_content" android:layout_height="wrap_content" />
-                            <TextView android:text="৳360 BDT" android:textColor="#1A1A1A" android:textSize="13sp" android:textStyle="bold" android:layout_marginTop="2dp" android:layout_width="wrap_content" android:layout_height="wrap_content" />
-                            <Button android:id="@+id/btnAddPremium" android:text="Add to Cart" android:textSize="11sp" android:textColor="#FFFFFF" android:backgroundTint="#2E7D52" android:layout_width="match_parent" android:layout_height="32dp" android:layout_marginTop="6dp" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <FrameLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="100dp"
+                                android:background="#E8F5E9">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center"
+                                    android:text="🥓"
+                                    android:textSize="40sp" />
+                            </FrameLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="10dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Premium Cuts"
+                                    android:textSize="12sp"
+                                    android:textStyle="bold"
+                                    android:textColor="#1A1A1A" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="⭐ 4.5"
+                                    android:textSize="11sp"
+                                    android:textColor="#888888" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="৳360 BDT"
+                                    android:textSize="13sp"
+                                    android:textStyle="bold"
+                                    android:textColor="#1B5E35" />
+
+                                <Button
+                                    android:id="@+id/btnAddPremium"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="30dp"
+                                    android:text="Add to Cart"
+                                    android:textSize="10sp"
+                                    android:backgroundTint="#1B5E35"
+                                    android:textColor="#FFFFFF"
+                                    android:layout_marginTop="4dp" />
+                            </LinearLayout>
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
                 </LinearLayout>
@@ -570,45 +788,82 @@
         </LinearLayout>
     </ScrollView>
 
-    <!-- ── BOTTOM NAVIGATION ───────────────────────────────── -->
+    <!-- Bottom Navigation -->
     <LinearLayout
+        android:id="@+id/bottomNav"
         android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:layout_gravity="bottom"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
         android:background="#FFFFFF"
-        android:elevation="10dp"
+        android:elevation="8dp"
         android:orientation="horizontal"
         android:gravity="center_vertical">
 
-        <!-- Home -->
-        <LinearLayout android:id="@+id/navHome" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:orientation="vertical" android:gravity="center" android:background="?attr/selectableItemBackground">
-            <TextView android:text="🏠" android:textSize="20sp" android:gravity="center" android:layout_width="match_parent" android:layout_height="wrap_content" />
-            <TextView android:text="HOME" android:textColor="#1B5E35" android:textSize="9sp" android:textStyle="bold" android:gravity="center" android:layout_marginTop="2dp" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+        <LinearLayout
+            android:id="@+id/navHome"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:clickable="true"
+            android:focusable="true">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🏠" android:textSize="20sp"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Home" android:textSize="10sp" android:textColor="#1B5E35"/>
         </LinearLayout>
 
-        <!-- Bookings -->
-        <LinearLayout android:id="@+id/navBookings" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:orientation="vertical" android:gravity="center" android:background="?attr/selectableItemBackground">
-            <TextView android:text="📋" android:textSize="20sp" android:gravity="center" android:layout_width="match_parent" android:layout_height="wrap_content" />
-            <TextView android:text="BOOKINGS" android:textColor="#888888" android:textSize="9sp" android:gravity="center" android:layout_marginTop="2dp" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+        <LinearLayout
+            android:id="@+id/navBookings"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:clickable="true"
+            android:focusable="true">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="📋" android:textSize="20sp"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Bookings" android:textSize="10sp" android:textColor="#666666"/>
         </LinearLayout>
 
-        <!-- Store -->
-        <LinearLayout android:id="@+id/navStore" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:orientation="vertical" android:gravity="center" android:background="?attr/selectableItemBackground">
-            <TextView android:text="🛒" android:textSize="20sp" android:gravity="center" android:layout_width="match_parent" android:layout_height="wrap_content" />
-            <TextView android:text="STORE" android:textColor="#888888" android:textSize="9sp" android:gravity="center" android:layout_marginTop="2dp" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+        <LinearLayout
+            android:id="@+id/navStore"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:clickable="true"
+            android:focusable="true">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🛒" android:textSize="20sp"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Store" android:textSize="10sp" android:textColor="#666666"/>
         </LinearLayout>
 
-        <!-- Charity -->
-        <LinearLayout android:id="@+id/navCharity" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:orientation="vertical" android:gravity="center" android:background="?attr/selectableItemBackground">
-            <TextView android:text="❤️" android:textSize="20sp" android:gravity="center" android:layout_width="match_parent" android:layout_height="wrap_content" />
-            <TextView android:text="CHARITY" android:textColor="#888888" android:textSize="9sp" android:gravity="center" android:layout_marginTop="2dp" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+        <LinearLayout
+            android:id="@+id/navCharity"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:clickable="true"
+            android:focusable="true">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🤝" android:textSize="20sp"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Charity" android:textSize="10sp" android:textColor="#666666"/>
         </LinearLayout>
 
-        <!-- Profile -->
-        <LinearLayout android:id="@+id/navProfile" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:orientation="vertical" android:gravity="center" android:background="?attr/selectableItemBackground">
-            <TextView android:text="👤" android:textSize="20sp" android:gravity="center" android:layout_width="match_parent" android:layout_height="wrap_content" />
-            <TextView android:text="PROFILE" android:textColor="#888888" android:textSize="9sp" android:gravity="center" android:layout_marginTop="2dp" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+        <LinearLayout
+            android:id="@+id/navProfile"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:clickable="true"
+            android:focusable="true">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="👤" android:textSize="20sp"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Profile" android:textSize="10sp" android:textColor="#666666"/>
         </LinearLayout>
+
     </LinearLayout>
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</RelativeLayout>

@@ -11,7 +11,7 @@ class CleaningServiceActivity : AppCompatActivity() {
         setContentView(R.layout.activity_cleaning_service)
 
         findViewById<Button>(R.id.btnOrderService).setOnClickListener {
-            Toast.makeText(this, "Cleaning Service booked!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.cleaning_service_booked), Toast.LENGTH_SHORT).show()
         }
     }
 }
