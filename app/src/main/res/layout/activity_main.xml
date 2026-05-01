@@ -24,7 +24,8 @@
             android:layout_marginStart="-24dp"
             android:layout_marginEnd="-24dp"
             android:paddingTop="32dp"
-            android:paddingBottom="24dp">
+            android:paddingBottom="24dp"
+            android:baselineAligned="false">
 
             <!-- Knife Icon placeholder -->
             <TextView
@@ -32,14 +33,14 @@
                 android:layout_height="72dp"
                 android:background="#2E7D52"
                 android:gravity="center"
-                android:text="🔪"
+                android:text="@string/knife_emoji"
                 android:textSize="32sp"
                 android:layout_marginBottom="10dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="KoshaiLagbe"
+                android:text="@string/app_name"
                 android:textSize="26sp"
                 android:textStyle="bold"
                 android:textColor="#FFFFFF" />
@@ -47,7 +48,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Your Complete Eid Solution"
+                android:text="@string/eid_solution_title"
                 android:textSize="13sp"
                 android:textColor="#A8D5B5"
                 android:layout_marginTop="4dp" />
@@ -72,7 +73,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Welcome Back"
+                    android:text="@string/welcome_back"
                     android:textSize="22sp"
                     android:textStyle="bold"
                     android:textColor="#1B5E35"
@@ -81,7 +82,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Login to your account"
+                    android:text="@string/login_to_account"
                     android:textSize="13sp"
                     android:textColor="#888888"
                     android:layout_marginBottom="24dp" />
@@ -90,7 +91,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Email"
+                    android:text="@string/email_label"
                     android:textSize="13sp"
                     android:textStyle="bold"
                     android:textColor="#333333"
@@ -101,19 +102,20 @@
                     android:layout_width="match_parent"
                     android:layout_height="52dp"
                     android:background="@drawable/input_bg"
-                    android:hint="Enter your email"
+                    android:hint="@string/email_address_hint"
                     android:textColorHint="#BBBBBB"
                     android:textSize="14sp"
                     android:textColor="#1A1A1A"
                     android:inputType="textEmailAddress"
                     android:paddingHorizontal="14dp"
-                    android:layout_marginBottom="16dp" />
+                    android:layout_marginBottom="16dp"
+                    android:autofillHints="emailAddress" />
 
                 <!-- Password Field -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Password"
+                    android:text="@string/password_label"
                     android:textSize="13sp"
                     android:textStyle="bold"
                     android:textColor="#333333"
@@ -124,13 +126,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="52dp"
                     android:background="@drawable/input_bg"
-                    android:hint="Enter your password"
+                    android:hint="@string/password_hint"
                     android:textColorHint="#BBBBBB"
                     android:textSize="14sp"
                     android:textColor="#1A1A1A"
                     android:inputType="textPassword"
                     android:paddingHorizontal="14dp"
-                    android:layout_marginBottom="10dp" />
+                    android:layout_marginBottom="10dp"
+                    android:autofillHints="password" />
 
                 <!-- Forgot Password -->
                 <TextView
@@ -138,7 +141,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
-                    android:text="Forgot Password?"
+                    android:text="@string/forgot_password"
                     android:textColor="#1B5E35"
                     android:textStyle="bold"
                     android:textSize="13sp"
@@ -150,7 +153,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="52dp"
                     android:backgroundTint="#1B5E35"
-                    android:text="LOGIN"
+                    android:text="@string/login_button"
                     android:textColor="#FFFFFF"
                     android:textSize="15sp"
                     android:textStyle="bold"
@@ -162,7 +165,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="52dp"
                     android:backgroundTint="#E8B530"
-                    android:text="CREATE ACCOUNT"
+                    android:text="@string/create_account_button"
                     android:textColor="#1A1A1A"
                     android:textSize="15sp"
                     android:textStyle="bold"
@@ -174,7 +177,8 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:gravity="center_vertical"
-                    android:layout_marginBottom="20dp">
+                    android:layout_marginBottom="20dp"
+                    android:baselineAligned="false">
 
                     <View
                         android:layout_width="0dp"
@@ -185,7 +189,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="  OR  "
+                        android:text="@string/or_divider"
                         android:textColor="#AAAAAA"
                         android:textSize="12sp" />
 
@@ -202,7 +206,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="52dp"
                     android:backgroundTint="#FFFFFF"
-                    android:text="Continue with Google"
+                    android:text="@string/google_login"
                     android:textColor="#333333"
                     android:textSize="14sp"
                     android:textStyle="bold"
@@ -219,7 +223,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:layout_marginBottom="16dp"
-            android:text="© 2024 KoshaiLagbe. All rights reserved."
+            android:text="@string/copyright_text_2024"
             android:textColor="#AAAAAA"
             android:textSize="12sp" />
 

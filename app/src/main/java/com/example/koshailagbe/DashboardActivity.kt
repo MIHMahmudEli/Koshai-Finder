@@ -21,73 +21,87 @@ class DashboardActivity : AppCompatActivity() {
         setupProductButtons()
     }
 
-    // ── Quick Booking buttons ────────────────────────────────────────────────────
+    // ── Quick Booking buttons ─────────────────────────────────────────────
     private fun setupQuickBooking() {
         findViewById<CardView>(R.id.btnBookButcher).setOnClickListener {
             startActivity(Intent(this, ButcherBookingActivity::class.java))
         }
+
         findViewById<CardView>(R.id.btnFullService).setOnClickListener {
-            toast("Full Service Package — Coming Soon")
+            toast(getString(R.string.msg_coming_soon, getString(R.string.full_service_label)))
         }
+
         findViewById<CardView>(R.id.btnUrgentButcher).setOnClickListener {
-            toast("Urgent Butcher — Finding nearest available koshai...")
+            toast(getString(R.string.msg_urgent_butcher))
         }
     }
 
-    // ── Marketplace buttons ──────────────────────────────────────────────────────
+    // ── Marketplace buttons ───────────────────────────────────────────────
     private fun setupMarketplace() {
         findViewById<CardView>(R.id.btnMeatShop).setOnClickListener {
             startActivity(Intent(this, MeatShopActivity::class.java))
         }
+
         findViewById<CardView>(R.id.btnToolsGear).setOnClickListener {
             startActivity(Intent(this, ToolsAndGearActivity::class.java))
         }
+
         findViewById<CardView>(R.id.btnCleaningService).setOnClickListener {
             startActivity(Intent(this, CleaningServiceActivity::class.java))
         }
+
         findViewById<CardView>(R.id.btnExclusiveOffers).setOnClickListener {
-            toast("Exclusive Offers — Eid special deals loading...")
+            toast(getString(R.string.msg_exclusive_offers))
         }
+
         findViewById<CardView>(R.id.btnLiveStatus).setOnClickListener {
-            toast("Live Status — Tracking butcher location...")
+            toast(getString(R.string.msg_live_status))
         }
+
         findViewById<TextView>(R.id.tvViewAll).setOnClickListener {
             startActivity(Intent(this, MeatShopActivity::class.java))
         }
     }
 
-    // ── Product Add to Cart buttons ────────────────────────────────────────────
+    // ── Product buttons ──────────────────────────────────────────────────
     private fun setupProductButtons() {
         findViewById<Button>(R.id.btnAddBeef).setOnClickListener {
-            toast("Beef (Per Kg) added to cart — ৳390")
+            toast(getString(R.string.msg_added_to_cart_price, getString(R.string.beef_per_kg), "৳390"))
         }
+
         findViewById<Button>(R.id.btnAddMutton).setOnClickListener {
-            toast("Mutton (Per Kg) added to cart — ৳370")
+            toast(getString(R.string.msg_added_to_cart_price, getString(R.string.mutton_per_kg), "৳370"))
         }
+
         findViewById<Button>(R.id.btnAddPremium).setOnClickListener {
-            toast("Premium Cuts added to cart — ৳360")
+            toast(getString(R.string.msg_added_to_cart_price, getString(R.string.premium_cuts), "৳360"))
         }
     }
 
-    // ── Bottom Navigation ──────────────────────────────────────────────────────
+    // ── Bottom Navigation ────────────────────────────────────────────────
     private fun setupBottomNav() {
-        // Home — already here, do nothing
-        findViewById<LinearLayout>(R.id.navHome).setOnClickListener { /* already here */ }
+        findViewById<LinearLayout>(R.id.navHome).setOnClickListener {
+            // Already here
+        }
 
         findViewById<LinearLayout>(R.id.navBookings).setOnClickListener {
-            toast("My Bookings — Coming soon")
+            toast(getString(R.string.msg_coming_soon, getString(R.string.nav_bookings)))
         }
+
         findViewById<LinearLayout>(R.id.navStore).setOnClickListener {
             startActivity(Intent(this, MeatShopActivity::class.java))
         }
+
         findViewById<LinearLayout>(R.id.navCharity).setOnClickListener {
-            toast("Charity Distribution — Coming soon")
+            toast(getString(R.string.msg_coming_soon, getString(R.string.nav_charity)))
         }
+
         findViewById<LinearLayout>(R.id.navProfile).setOnClickListener {
-            toast("Profile — Coming soon")
+            toast(getString(R.string.msg_coming_soon, getString(R.string.nav_profile)))
         }
     }
 
-    private fun toast(msg: String) =
+    private fun toast(msg: String) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+    }
 }

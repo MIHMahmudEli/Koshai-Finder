@@ -14,22 +14,24 @@
         android:background="#1B5E35"
         android:orientation="horizontal"
         android:paddingHorizontal="16dp"
-        android:gravity="center_vertical">
+        android:gravity="center_vertical"
+        android:baselineAligned="false">
 
         <TextView
             android:id="@+id/btnBack"
             android:layout_width="32dp"
             android:layout_height="32dp"
-            android:text="←"
+            android:text="@string/back_arrow"
             android:textColor="#FFFFFF"
             android:textSize="22sp"
             android:gravity="center"
-            android:layout_marginEnd="12dp" />
+            android:layout_marginEnd="12dp"
+            android:contentDescription="@string/back_desc" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tools &amp; Gear"
+            android:text="@string/tools_and_gear_title"
             android:textColor="#FFFFFF"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -41,14 +43,15 @@
         android:layout_height="44dp"
         android:background="#FFFFFF"
         android:orientation="horizontal"
-        android:elevation="2dp">
+        android:elevation="2dp"
+        android:baselineAligned="false">
 
         <TextView
             android:id="@+id/tabHardware"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Hardware"
+            android:text="@string/tab_hardware"
             android:textColor="#FFFFFF"
             android:textSize="14sp"
             android:textStyle="bold"
@@ -60,7 +63,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Knives"
+            android:text="@string/tab_knives"
             android:textColor="#888888"
             android:textSize="14sp"
             android:gravity="center" />
@@ -91,7 +94,8 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:padding="14dp"
-                    android:gravity="center_vertical">
+                    android:gravity="center_vertical"
+                    android:baselineAligned="false">
 
                     <TextView
                         android:layout_width="70dp"
@@ -100,7 +104,8 @@
                         android:textSize="36sp"
                         android:gravity="center"
                         android:background="#FFF8EC"
-                        android:layout_marginEnd="14dp" />
+                        android:layout_marginEnd="14dp"
+                        android:contentDescription="@string/product_knives_kulves" />
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -109,19 +114,19 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:text="Knives Kulves"
+                            android:text="@string/product_knives_kulves"
                             android:textColor="#1A1A1A"
                             android:textSize="14sp"
                             android:textStyle="bold"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
 
-                        <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="horizontal">
-                            <TextView android:text="⭐⭐⭐⭐" android:textSize="10sp" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+                        <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="horizontal" android:baselineAligned="false">
+                            <TextView android:text="@string/rating_4_stars" android:textSize="10sp" android:layout_width="wrap_content" android:layout_height="wrap_content" android:contentDescription="@string/star_desc" />
                         </LinearLayout>
 
                         <TextView
-                            android:text="৳450 BDT"
+                            android:text="@string/price_450_bdt"
                             android:textColor="#2E7D52"
                             android:textSize="14sp"
                             android:textStyle="bold"
@@ -132,7 +137,7 @@
 
                     <Button
                         android:id="@+id/btnBuyKnife"
-                        android:text="BUY"
+                        android:text="@string/btn_buy"
                         android:textSize="12sp"
                         android:textColor="#FFFFFF"
                         android:backgroundTint="#1B5E35"
@@ -155,7 +160,8 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:padding="14dp"
-                    android:gravity="center_vertical">
+                    android:gravity="center_vertical"
+                    android:baselineAligned="false">
 
                     <TextView
                         android:layout_width="70dp"
@@ -164,7 +170,8 @@
                         android:textSize="36sp"
                         android:gravity="center"
                         android:background="#F0FFF4"
-                        android:layout_marginEnd="14dp" />
+                        android:layout_marginEnd="14dp"
+                        android:contentDescription="@string/product_chopping_blocks" />
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -173,19 +180,19 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:text="Chopping Blocks"
+                            android:text="@string/product_chopping_blocks"
                             android:textColor="#1A1A1A"
                             android:textSize="14sp"
                             android:textStyle="bold"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
 
-                        <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="horizontal">
-                            <TextView android:text="⭐⭐⭐⭐⭐" android:textSize="10sp" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+                        <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="horizontal" android:baselineAligned="false">
+                            <TextView android:text="@string/rating_5_stars" android:textSize="10sp" android:layout_width="wrap_content" android:layout_height="wrap_content" android:contentDescription="@string/star_desc" />
                         </LinearLayout>
 
                         <TextView
-                            android:text="৳350 BDT"
+                            android:text="@string/price_350_bdt"
                             android:textColor="#2E7D52"
                             android:textSize="14sp"
                             android:textStyle="bold"
@@ -196,7 +203,7 @@
 
                     <Button
                         android:id="@+id/btnBuyBlock"
-                        android:text="BUY"
+                        android:text="@string/btn_buy"
                         android:textSize="12sp"
                         android:textColor="#FFFFFF"
                         android:backgroundTint="#1B5E35"
@@ -219,7 +226,8 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:padding="14dp"
-                    android:gravity="center_vertical">
+                    android:gravity="center_vertical"
+                    android:baselineAligned="false">
 
                     <TextView
                         android:layout_width="70dp"
@@ -228,7 +236,8 @@
                         android:textSize="36sp"
                         android:gravity="center"
                         android:background="#FDE8E8"
-                        android:layout_marginEnd="14dp" />
+                        android:layout_marginEnd="14dp"
+                        android:contentDescription="@string/product_chopping_blotes" />
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -237,19 +246,19 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:text="Chopping Blotes"
+                            android:text="@string/product_chopping_blotes"
                             android:textColor="#1A1A1A"
                             android:textSize="14sp"
                             android:textStyle="bold"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
 
-                        <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="horizontal">
-                            <TextView android:text="⭐⭐⭐⭐" android:textSize="10sp" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+                        <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="horizontal" android:baselineAligned="false">
+                            <TextView android:text="@string/rating_4_stars" android:textSize="10sp" android:layout_width="wrap_content" android:layout_height="wrap_content" android:contentDescription="@string/star_desc" />
                         </LinearLayout>
 
                         <TextView
-                            android:text="৳280 BDT"
+                            android:text="@string/price_280_bdt"
                             android:textColor="#2E7D52"
                             android:textSize="14sp"
                             android:textStyle="bold"
@@ -260,7 +269,7 @@
 
                     <Button
                         android:id="@+id/btnBuyBlote"
-                        android:text="BUY"
+                        android:text="@string/btn_buy"
                         android:textSize="12sp"
                         android:textColor="#FFFFFF"
                         android:backgroundTint="#1B5E35"
@@ -283,7 +292,8 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:padding="14dp"
-                    android:gravity="center_vertical">
+                    android:gravity="center_vertical"
+                    android:baselineAligned="false">
 
                     <TextView
                         android:layout_width="70dp"
@@ -292,7 +302,8 @@
                         android:textSize="36sp"
                         android:gravity="center"
                         android:background="#FFF3CD"
-                        android:layout_marginEnd="14dp" />
+                        android:layout_marginEnd="14dp"
+                        android:contentDescription="@string/product_ropes_ropes" />
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -301,19 +312,19 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:text="Ropes Ropes"
+                            android:text="@string/product_ropes_ropes"
                             android:textColor="#1A1A1A"
                             android:textSize="14sp"
                             android:textStyle="bold"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
 
-                        <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="horizontal">
-                            <TextView android:text="⭐⭐⭐⭐⭐" android:textSize="10sp" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+                        <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="horizontal" android:baselineAligned="false">
+                            <TextView android:text="@string/rating_5_stars" android:textSize="10sp" android:layout_width="wrap_content" android:layout_height="wrap_content" android:contentDescription="@string/star_desc" />
                         </LinearLayout>
 
                         <TextView
-                            android:text="৳150 BDT"
+                            android:text="@string/price_150_bdt"
                             android:textColor="#2E7D52"
                             android:textSize="14sp"
                             android:textStyle="bold"
@@ -324,7 +335,7 @@
 
                     <Button
                         android:id="@+id/btnBuyRope"
-                        android:text="BUY"
+                        android:text="@string/btn_buy"
                         android:textSize="12sp"
                         android:textColor="#FFFFFF"
                         android:backgroundTint="#1B5E35"
@@ -339,7 +350,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
                 android:backgroundTint="#1B5E35"
-                android:text="GET BUNDLE"
+                android:text="@string/btn_get_bundle"
                 android:textColor="#FFFFFF"
                 android:textSize="15sp"
                 android:textStyle="bold"

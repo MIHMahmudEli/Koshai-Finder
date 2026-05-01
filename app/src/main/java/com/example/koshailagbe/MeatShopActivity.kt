@@ -27,7 +27,11 @@ class MeatShopActivity : AppCompatActivity() {
 
         // Add buttons
         val addClickListener = { itemName: String ->
-            Toast.makeText(this, getString(R.string.added_to_cart_msg, itemName), Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                this,
+                getString(R.string.added_to_cart_msg, itemName),
+                Toast.LENGTH_SHORT
+            ).show()
         }
 
         btnAddBeef.setOnClickListener { addClickListener("Beef") }
@@ -36,7 +40,11 @@ class MeatShopActivity : AppCompatActivity() {
         btnAddKeema.setOnClickListener { addClickListener("Keema") }
 
         btnAddToCart.setOnClickListener {
-            Toast.makeText(this, "Items added to your cart!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                this,
+                getString(R.string.added_to_cart_success),
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
 }

@@ -33,7 +33,7 @@ class ButcherBookingActivity : AppCompatActivity() {
         btnBookNowSecondary.setOnClickListener { bookingClickListener() }
         btnBookNowAlt.setOnClickListener { bookingClickListener() }
 
-        // Other buttons
+        // Other button
         btnAddToOutlier.setOnClickListener {
             Toast.makeText(this, "Added to Outlier list", Toast.LENGTH_SHORT).show()
         }

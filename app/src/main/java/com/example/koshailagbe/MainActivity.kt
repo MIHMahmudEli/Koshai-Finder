@@ -27,14 +27,14 @@ class MainActivity : AppCompatActivity() {
             val password = passwordEditText.text.toString().trim()
 
             when {
-                email.isEmpty()    -> toast("Please enter your email")
-                password.isEmpty() -> toast("Please enter your password")
+                email.isEmpty()    -> toast(getString(R.string.msg_please_enter_email))
+                password.isEmpty() -> toast(getString(R.string.msg_please_enter_password))
                 !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches() ->
-                    toast("Enter a valid email address")
+                    toast(getString(R.string.msg_valid_email))
                 password.length < 6 ->
-                    toast("Password must be at least 6 characters")
+                    toast(getString(R.string.msg_password_length))
                 else -> {
-                    toast("Login Successful!")
+                    toast(getString(R.string.msg_login_success))
                     startActivity(Intent(this, DashboardActivity::class.java))
                     finish()
                 }
@@ -50,15 +50,15 @@ class MainActivity : AppCompatActivity() {
         forgotPassword.setOnClickListener {
             val email = emailEditText.text.toString().trim()
             if (email.isEmpty()) {
-                toast("Enter your email first to reset password")
+                toast(getString(R.string.msg_reset_email_first))
             } else {
-                toast("Password reset link sent to $email")
+                toast(getString(R.string.msg_reset_sent, email))
             }
         }
 
         // ── Google Login ───────────────────────────────────────────────────────
         googleButton.setOnClickListener {
-            toast("Google Login — connect Firebase Auth to enable")
+            toast(getString(R.string.msg_google_login_firebase))
         }
     }
 

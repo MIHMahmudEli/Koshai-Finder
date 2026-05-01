@@ -6,14 +6,41 @@
     android:padding="16dp"
     android:background="#F8F9FA">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/cleaning_service_title"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:textColor="#1B4332"
-        android:layout_marginBottom="16dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="#1B5E35"
+        android:orientation="horizontal"
+        android:paddingHorizontal="16dp"
+        android:gravity="center_vertical"
+        android:layout_margin="-16dp"
+        android:layout_marginBottom="16dp"
+        android:baselineAligned="false">
+
+        <TextView
+            android:id="@+id/btnBack"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:text="@string/back_arrow"
+            android:textColor="#FFFFFF"
+            android:textSize="22sp"
+            android:gravity="center"
+            android:layout_marginEnd="12dp"
+            android:contentDescription="@string/back_desc" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cleaning_service_title"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="16dp" />
+
 
     <CheckBox
         android:layout_width="wrap_content"
