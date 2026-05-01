@@ -9,7 +9,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Post-Qurbani Cleaning Service"
+        android:text="@string/cleaning_service_title"
         android:textSize="16sp"
         android:textStyle="bold"
         android:textColor="#1B4332"
@@ -18,18 +18,18 @@
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Slaughter Area Wash" />
+        android:text="@string/slaughter_area_wash" />
 
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Waste Removal" />
+        android:text="@string/waste_removal" />
 
     <Button
         android:id="@+id/btnOrderService"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:text="Get Cleaning Service"
+        android:text="@string/get_cleaning_service"
         android:backgroundTint="#2D6A4F"
         android:layout_marginTop="24dp"/>
 

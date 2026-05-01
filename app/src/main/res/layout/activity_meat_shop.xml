@@ -9,7 +9,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Meat Shop Categories"
+        android:text="@string/meat_shop_categories"
         android:textSize="16sp"
         android:textStyle="bold"
         android:textColor="#1B4332"
