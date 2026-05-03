@@ -1,0 +1,502 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#F5F5F5">
+
+    <!-- Top Bar -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="#1B5E35"
+        android:orientation="horizontal"
+        android:paddingHorizontal="16dp"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/btnBack"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:text="←"
+            android:textColor="#FFFFFF"
+            android:textSize="22sp"
+            android:gravity="center"
+            android:layout_marginEnd="12dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Full Service Package"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Banner Card -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="14dp"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#1B5E35"
+                    android:orientation="horizontal"
+                    android:padding="16dp"
+                    android:gravity="center_vertical">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="YOUR COMPLETE"
+                            android:textSize="13sp"
+                            android:textStyle="bold"
+                            android:textColor="#FFFFFF" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="EID SOLUTION"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:textColor="#E8B530"
+                            android:layout_marginBottom="10dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="QURBANI SERVE"
+                            android:textSize="10sp"
+                            android:textColor="#1B5E35"
+                            android:background="#E8B530"
+                            android:paddingHorizontal="10dp"
+                            android:paddingVertical="4dp" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="72dp"
+                        android:layout_height="72dp"
+                        android:gravity="center"
+                        android:text="🐄"
+                        android:textSize="44sp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Description Card -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="2dp"
+                app:cardBackgroundColor="#FFFFFF">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:text="A comprehensive package is a comprehensive package with preclering animal components, core alignment and non-domestic package. Everything you need for a complete Qurbani service."
+                    android:textSize="13sp"
+                    android:textColor="#444444"
+                    android:lineSpacingMultiplier="1.4" />
+            </androidx.cardview.widget.CardView>
+
+            <!-- Services Grid Label -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Included Services"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="#1A1A1A"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Services Grid Row 1 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                android:layout_marginBottom="10dp">
+
+                <!-- Slaughter -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardSlaughter"
+                    android:layout_width="0dp"
+                    android:layout_height="90dp"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="6dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="2dp"
+                    app:cardBackgroundColor="#FFF8E1">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:padding="8dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="🐄"
+                            android:textSize="28sp"
+                            android:layout_marginBottom="4dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Slaughter"
+                            android:textSize="11sp"
+                            android:textStyle="bold"
+                            android:textColor="#1A1A1A"
+                            android:gravity="center" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- Skinning -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardSkinning"
+                    android:layout_width="0dp"
+                    android:layout_height="90dp"
+                    android:layout_weight="1"
+                    android:layout_marginHorizontal="3dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="2dp"
+                    app:cardBackgroundColor="#FFF8E1">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:padding="8dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="🔪"
+                            android:textSize="28sp"
+                            android:layout_marginBottom="4dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Skinning"
+                            android:textSize="11sp"
+                            android:textStyle="bold"
+                            android:textColor="#1A1A1A"
+                            android:gravity="center" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- Cutting -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardCutting"
+                    android:layout_width="0dp"
+                    android:layout_height="90dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="6dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="2dp"
+                    app:cardBackgroundColor="#FFF8E1">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:padding="8dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="🪓"
+                            android:textSize="28sp"
+                            android:layout_marginBottom="4dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Cutting"
+                            android:textSize="11sp"
+                            android:textStyle="bold"
+                            android:textColor="#1A1A1A"
+                            android:gravity="center" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+
+            <!-- Services Grid Row 2 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                android:layout_marginBottom="20dp">
+
+                <!-- Cleaning -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardCleaningService"
+                    android:layout_width="0dp"
+                    android:layout_height="90dp"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="6dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="2dp"
+                    app:cardBackgroundColor="#E8F5E9">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:padding="8dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="🧹"
+                            android:textSize="28sp"
+                            android:layout_marginBottom="4dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Cleaning"
+                            android:textSize="11sp"
+                            android:textStyle="bold"
+                            android:textColor="#1A1A1A"
+                            android:gravity="center" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- Disposal -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardDisposal"
+                    android:layout_width="0dp"
+                    android:layout_height="90dp"
+                    android:layout_weight="1"
+                    android:layout_marginHorizontal="3dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="2dp"
+                    app:cardBackgroundColor="#E8F5E9">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:padding="8dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="🗑️"
+                            android:textSize="28sp"
+                            android:layout_marginBottom="4dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Disposal"
+                            android:textSize="11sp"
+                            android:textStyle="bold"
+                            android:textColor="#1A1A1A"
+                            android:gravity="center" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- Empty placeholder -->
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="90dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="6dp" />
+            </LinearLayout>
+
+            <!-- Animal Weight Section -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="2dp"
+                app:cardBackgroundColor="#FFFFFF">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Select Animal Weight"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:textColor="#1A1A1A"
+                        android:layout_marginBottom="12dp" />
+
+                    <SeekBar
+                        android:id="@+id/seekBarWeight"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:max="100"
+                        android:progress="40"
+                        android:progressTint="#1B5E35"
+                        android:thumbTint="#1B5E35"
+                        android:layout_marginBottom="8dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Low"
+                            android:textSize="12sp"
+                            android:textColor="#888888" />
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="1dp"
+                            android:layout_weight="1" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="High"
+                            android:textSize="12sp"
+                            android:textColor="#888888" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tvWeightValue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Selected: ~200 kg"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:textColor="#1B5E35"
+                        android:gravity="center"
+                        android:layout_marginTop="8dp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Pricing summary -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="2dp"
+                app:cardBackgroundColor="#FFFFFF">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Estimated Price"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:textColor="#1A1A1A"
+                        android:layout_marginBottom="10dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="6dp">
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Slaughter + Skinning + Cutting" android:textSize="12sp" android:textColor="#555555" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="৳1,200" android:textSize="12sp" android:textColor="#1A1A1A" android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="6dp">
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Cleaning + Disposal" android:textSize="12sp" android:textColor="#555555" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="৳700" android:textSize="12sp" android:textColor="#1A1A1A" android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#E0E0E0" android:layout_marginVertical="8dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Total Package" android:textSize="14sp" android:textStyle="bold" android:textColor="#1A1A1A" />
+                        <TextView android:id="@+id/tvTotalPrice" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="৳1,900" android:textSize="16sp" android:textStyle="bold" android:textColor="#1B5E35" />
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Book Now Button -->
+            <Button
+                android:id="@+id/btnBookFullService"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:backgroundTint="#1B5E35"
+                android:text="BOOK FULL SERVICE"
+                android:textColor="#FFFFFF"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp" />
+
+            <Button
+                android:id="@+id/btnBookNowYellow"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:backgroundTint="#E8B530"
+                android:text="BOOK NOW"
+                android:textColor="#1A1A1A"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

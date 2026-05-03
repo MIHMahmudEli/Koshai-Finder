@@ -36,16 +36,16 @@ class CustomerRegisterActivity : AppCompatActivity() {
             val phoneVal    = phone.text.toString().trim()
 
             when {
-                nameVal.isEmpty()     -> toast("Please enter your full name")
-                emailVal.isEmpty()    -> toast("Please enter your email")
+                nameVal.isEmpty()     -> toast(getString(R.string.msg_full_name))
+                emailVal.isEmpty()    -> toast(getString(R.string.msg_please_enter_email))
                 !android.util.Patterns.EMAIL_ADDRESS.matcher(emailVal).matches() ->
-                    toast("Enter a valid email address")
+                    toast(getString(R.string.msg_valid_email))
                 passwordVal.length < 6 ->
-                    toast("Password must be at least 6 characters")
-                phoneVal.isEmpty()    -> toast("Please enter your phone number")
-                phoneVal.length < 11  -> toast("Enter a valid phone number")
+                    toast(getString(R.string.msg_password_length))
+                phoneVal.isEmpty()    -> toast(getString(R.string.msg_phone_number))
+                phoneVal.length < 11  -> toast(getString(R.string.msg_phone_number))
                 else -> {
-                    toast("Customer Account Created Successfully!")
+                    toast(getString(R.string.msg_customer_account_created))
                     // Clear fields
                     name.text.clear()
                     email.text.clear()

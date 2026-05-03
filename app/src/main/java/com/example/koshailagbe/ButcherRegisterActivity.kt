@@ -42,18 +42,18 @@ class ButcherRegisterActivity : AppCompatActivity() {
             val rateGoatVal   = rateGoat.text.toString().trim()
 
             when {
-                nameVal.isEmpty()     -> toast("Please enter your full name")
-                emailVal.isEmpty()    -> toast("Please enter your email")
+                nameVal.isEmpty()     -> toast(getString(R.string.msg_full_name))
+                emailVal.isEmpty()    -> toast(getString(R.string.msg_please_enter_email))
                 !android.util.Patterns.EMAIL_ADDRESS.matcher(emailVal).matches() ->
-                    toast("Enter a valid email address")
+                    toast(getString(R.string.msg_valid_email))
                 passwordVal.length < 6 ->
-                    toast("Password must be at least 6 characters")
-                expVal.isEmpty()      -> toast("Please enter years of experience")
-                locationVal.isEmpty() -> toast("Please enter your district/location")
-                rateCowVal.isEmpty()  -> toast("Please enter your rate per cow")
-                rateGoatVal.isEmpty() -> toast("Please enter your rate per goat")
+                    toast(getString(R.string.msg_password_length))
+                expVal.isEmpty()      -> toast(getString(R.string.msg_experience))
+                locationVal.isEmpty() -> toast(getString(R.string.msg_location))
+                rateCowVal.isEmpty()  -> toast(getString(R.string.msg_rate_cow))
+                rateGoatVal.isEmpty() -> toast(getString(R.string.msg_rate_goat))
                 else -> {
-                    toast("Butcher Account Created! Pending admin verification.")
+                    toast(getString(R.string.msg_butcher_account_created))
                     // Clear fields
                     name.text.clear()
                     email.text.clear()

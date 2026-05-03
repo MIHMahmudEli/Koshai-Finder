@@ -55,7 +55,7 @@ class DashboardActivity : AppCompatActivity() {
         }
 
         findViewById<CardView>(R.id.btnLiveStatus).setOnClickListener {
-            toast(getString(R.string.msg_live_status))
+            startActivity(Intent(this, LiveStatusTrackingActivity::class.java))
         }
 
         findViewById<TextView>(R.id.tvViewAll).setOnClickListener {
@@ -85,7 +85,7 @@ class DashboardActivity : AppCompatActivity() {
         }
 
         findViewById<LinearLayout>(R.id.navBookings).setOnClickListener {
-            toast(getString(R.string.msg_coming_soon, getString(R.string.nav_bookings)))
+            startActivity(Intent(this, LiveStatusTrackingActivity::class.java))
         }
 
         findViewById<LinearLayout>(R.id.navStore).setOnClickListener {
