@@ -108,7 +108,7 @@ class LiveStatusTrackingFragment : Fragment() {
             findNavController().navigate(R.id.charityDistributionFragment)
         }
         view.findViewById<LinearLayout>(R.id.navProfile).setOnClickListener {
-            toast("Profile — Coming soon")
+            findNavController().navigate(R.id.profileFragment)
         }
     }
 

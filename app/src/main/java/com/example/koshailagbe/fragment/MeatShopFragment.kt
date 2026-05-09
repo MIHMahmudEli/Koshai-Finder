@@ -67,6 +67,26 @@ class MeatShopFragment : Fragment() {
         view.findViewById<TextView>(R.id.tvViewAll).setOnClickListener {
             toast("All products — Coming soon")
         }
+
+        setupBottomNav(view)
+    }
+
+    private fun setupBottomNav(view: View) {
+        view.findViewById<View>(R.id.navHome).setOnClickListener {
+            findNavController().navigate(R.id.dashboardFragment)
+        }
+        view.findViewById<View>(R.id.navBookings).setOnClickListener {
+            findNavController().navigate(R.id.liveStatusTrackingFragment)
+        }
+        view.findViewById<View>(R.id.navStore).setOnClickListener {
+            // Already here
+        }
+        view.findViewById<View>(R.id.navCharity).setOnClickListener {
+            findNavController().navigate(R.id.charityDistributionFragment)
+        }
+        view.findViewById<View>(R.id.navProfile).setOnClickListener {
+            findNavController().navigate(R.id.profileFragment)
+        }
     }
 
     private fun toast(msg: String) =

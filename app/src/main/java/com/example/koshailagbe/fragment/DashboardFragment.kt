@@ -48,6 +48,26 @@ class DashboardFragment : Fragment() {
         view.findViewById<View>(R.id.btnLiveStatus).setOnClickListener {
             findNavController().navigate(R.id.action_dashboard_to_liveStatusTracking)
         }
+
+        setupBottomNav(view)
+    }
+
+    private fun setupBottomNav(view: View) {
+        view.findViewById<View>(R.id.navHome).setOnClickListener {
+            // Already here
+        }
+        view.findViewById<View>(R.id.navBookings).setOnClickListener {
+            findNavController().navigate(R.id.liveStatusTrackingFragment)
+        }
+        view.findViewById<View>(R.id.navStore).setOnClickListener {
+            findNavController().navigate(R.id.meatShopFragment)
+        }
+        view.findViewById<View>(R.id.navCharity).setOnClickListener {
+            findNavController().navigate(R.id.charityDistributionFragment)
+        }
+        view.findViewById<View>(R.id.navProfile).setOnClickListener {
+            findNavController().navigate(R.id.profileFragment)
+        }
     }
 
     private fun toast(msg: String) =

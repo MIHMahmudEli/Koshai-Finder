@@ -99,7 +99,7 @@ class CharityDistributionFragment : Fragment() {
             findNavController().navigate(R.id.dashboardFragment)
         }
         view.findViewById<LinearLayout>(R.id.navBookings).setOnClickListener {
-            toast("My Bookings — Coming soon")
+            findNavController().navigate(R.id.liveStatusTrackingFragment)
         }
         view.findViewById<LinearLayout>(R.id.navStore).setOnClickListener {
             findNavController().navigate(R.id.meatShopFragment)
@@ -108,7 +108,7 @@ class CharityDistributionFragment : Fragment() {
             // Already here
         }
         view.findViewById<LinearLayout>(R.id.navProfile).setOnClickListener {
-            toast("Profile — Coming soon")
+            findNavController().navigate(R.id.profileFragment)
         }
     }
 

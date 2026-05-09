@@ -50,7 +50,7 @@ class ProfileFragment : Fragment() {
     // ── App Controls cards ────────────────────────────────────────────────
     private fun setupAppControlCards(view: View) {
         view.findViewById<CardView>(R.id.cardMyBookings).setOnClickListener {
-            toast("My Bookings — Coming soon")
+            findNavController().navigate(R.id.liveStatusTrackingFragment)
         }
         view.findViewById<CardView>(R.id.cardEidToolsOrders).setOnClickListener {
             toast("Eid Tools Orders — Coming soon")
@@ -100,7 +100,7 @@ class ProfileFragment : Fragment() {
             findNavController().navigate(R.id.dashboardFragment)
         }
         view.findViewById<LinearLayout>(R.id.navBookings).setOnClickListener {
-            toast("My Bookings — Coming soon")
+            findNavController().navigate(R.id.liveStatusTrackingFragment)
         }
         view.findViewById<LinearLayout>(R.id.navStore).setOnClickListener {
             findNavController().navigate(R.id.meatShopFragment)

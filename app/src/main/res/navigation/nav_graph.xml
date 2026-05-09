@@ -148,4 +148,21 @@
         android:label="Charity Distribution"
         tools:layout="@layout/fragment_charity_distribution" />
 
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.koshailagbe.fragment.ProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile">
+
+        <action
+            android:id="@+id/action_profile_to_login"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
+
+        <action
+            android:id="@+id/action_profile_to_koshaiLogin"
+            app:destination="@id/butcherRegisterFragment" />
+    </fragment>
+
 </navigation>
