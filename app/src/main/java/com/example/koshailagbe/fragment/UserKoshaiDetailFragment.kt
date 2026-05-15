@@ -56,7 +56,10 @@ class UserKoshaiDetailFragment : Fragment() {
                 if (!isAdded) return@addSnapshotListener
                 if (e != null) return@addSnapshotListener
                 
-                val reviews = snapshot?.documents?.mapNotNull { it.toObject(Review::class.java) } ?: emptyList()
+                val reviews = snapshot?.documents?.mapNotNull { doc ->
+                    val r = doc.toObject(Review::class.java)
+                    if (r?.isHidden == true) null else r
+                } ?: emptyList()
                 reviewAdapter.updateList(reviews)
             }
     }
@@ -128,6 +131,52 @@ class UserKoshaiDetailFragment : Fragment() {
                 putString("receiverPhoto", profile.photoUrl)
             }
             findNavController().navigate(R.id.action_userKoshaiDetailFragment_to_chatFragment, bundle)
+        }
+
+        binding.btnReport.setOnClickListener {
+            showReportDialog()
+        }
+    }
+
+    private fun showReportDialog() {
+        val profile = koshaiProfile ?: return
+        val reasons = arrayOf("Fake Profile", "Overcharging", "Bad Behavior", "No-show", "Other")
+        var selectedReason = reasons[0]
+
+        com.google.android.material.dialog.MaterialAlertDialogBuilder(requireContext())
+            .setTitle("Report ${profile.name}")
+            .setSingleChoiceItems(reasons, 0) { _, which ->
+                selectedReason = reasons[which]
+            }
+            .setPositiveButton("Submit") { _, _ ->
+                submitReport(selectedReason)
+            }
+            .setNegativeButton("Cancel", null)
+            .show()
+    }
+
+    private fun submitReport(reason: String) {
+        val profile = koshaiProfile ?: return
+        val currentUser = com.google.firebase.auth.FirebaseAuth.getInstance().currentUser ?: return
+        
+        // Fetch reporter name first
+        db.collection("users").document(currentUser.uid).get().addOnSuccessListener { userDoc ->
+            val reporterName = userDoc.getString("name") ?: "Anonymous User"
+            
+            val report = com.example.koshailagbe.model.Report(
+                bookingId = "profile_report", // Not tied to a specific booking
+                reporterId = currentUser.uid,
+                reporterName = reporterName,
+                reportedEntityId = profile.id,
+                reportedEntityName = profile.name,
+                reason = reason,
+                details = "Reported directly from profile page.",
+                status = "pending"
+            )
+
+            db.collection("reports").add(report).addOnSuccessListener {
+                Toast.makeText(requireContext(), "Report submitted. Thank you.", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 

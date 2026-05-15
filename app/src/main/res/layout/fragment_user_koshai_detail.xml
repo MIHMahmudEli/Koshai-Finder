@@ -269,13 +269,26 @@
                             android:src="@android:drawable/ic_menu_info_details"
                             app:tint="#1A237E" />
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
+                            android:layout_weight="1"
                             android:text="About"
                             android:textColor="#1A237E"
                             android:textSize="16sp"
                             android:textStyle="bold" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnReport"
+                            style="@style/Widget.Material3.Button.TextButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Report"
+                            android:textColor="#C62828"
+                            android:textSize="12sp"
+                            app:icon="@android:drawable/ic_menu_report_image"
+                            app:iconSize="14dp"
+                            app:iconTint="#C62828" />
                     </LinearLayout>
 
                     <TextView

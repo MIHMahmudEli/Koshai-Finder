@@ -34,6 +34,10 @@ class AdminHomeFragment : Fragment() {
             findNavController().navigate(R.id.action_adminHomeFragment_to_adminUserManagementFragment)
         }
 
+        binding.cardModeration.setOnClickListener {
+            findNavController().navigate(R.id.action_adminHomeFragment_to_adminDisputeReviewFragment)
+        }
+
         return binding.root
     }
 
