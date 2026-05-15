@@ -7,23 +7,26 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingBottom="48dp">
 
         <View
             android:id="@+id/headerBg"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:background="@drawable/bg_dashboard_header"
+            android:layout_height="220dp"
+            android:background="@drawable/bg_login_gradient"
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnBack"
             style="@style/Widget.Material3.Button.IconButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="32dp"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="48dp"
+            android:background="@drawable/bg_glass_card"
             app:icon="@android:drawable/ic_menu_revert"
+            app:iconPadding="0dp"
             app:iconTint="@android:color/white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -31,35 +34,38 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnEditProfile"
             style="@style/Widget.Material3.Button.IconButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="8dp"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_marginTop="48dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/bg_glass_card"
             app:icon="@android:drawable/ic_menu_edit"
+            app:iconPadding="0dp"
             app:iconTint="@android:color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/ivProfile"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginTop="-50dp"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="-60dp"
             android:background="@android:color/white"
             android:padding="4dp"
-            android:src="@android:drawable/ic_menu_my_calendar"
+            android:src="@drawable/ic_profile"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/headerBg"
-            app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full" />
+            app:shapeAppearanceOverlay="@style/CircleImage" />
 
         <TextView
             android:id="@+id/tvName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:text="Koshai Name"
-            android:textSize="22sp"
+            android:layout_marginTop="16dp"
+            android:text="Expert Professional"
+            android:textColor="#212121"
+            android:textSize="26sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -70,10 +76,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="32dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="12dp"
             android:gravity="center"
-            android:text="Expert in cattle and goat slaughtering with 5+ years of experience in Dhaka."
-            android:textColor="#757575"
+            android:text="Professional specialist with extensive experience in providing top-quality service."
+            android:textColor="#616161"
+            android:textSize="15sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvName" />
@@ -82,36 +89,43 @@
             android:id="@+id/statsLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/bg_bottom_sheet_surface"
             android:gravity="center"
             android:orientation="horizontal"
+            android:padding="20dp"
             app:layout_constraintTop_toBottomOf="@id/tvBio">
-            
+
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:orientation="vertical">
+
                 <TextView
                     android:id="@+id/tvRating"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="4.9"
-                    android:textSize="20sp"
+                    android:text="0.0"
+                    android:textColor="#FFB300"
+                    android:textSize="22sp"
                     android:textStyle="bold" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
                     android:text="Rating"
                     android:textColor="#757575"
-                    android:textSize="12sp" />
+                    android:textSize="13sp" />
             </LinearLayout>
 
             <View
                 android:layout_width="1dp"
                 android:layout_height="40dp"
-                android:background="#EEEEEE" />
+                android:background="#E0E0E0" />
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -119,19 +133,23 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:orientation="vertical">
+
                 <TextView
                     android:id="@+id/tvJobs"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="120"
-                    android:textSize="20sp"
+                    android:text="0"
+                    android:textColor="#1565C0"
+                    android:textSize="22sp"
                     android:textStyle="bold" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Jobs"
+                    android:layout_marginTop="4dp"
+                    android:text="Total Jobs"
                     android:textColor="#757575"
-                    android:textSize="12sp" />
+                    android:textSize="13sp" />
             </LinearLayout>
         </LinearLayout>
 
@@ -141,8 +159,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="32dp"
-            android:text="Customer Reviews"
-            android:textColor="#1565C0"
+            android:text="Patient Testimonials"
+            android:textColor="#212121"
+            android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/statsLayout" />
@@ -151,8 +170,10 @@
             android:id="@+id/rvReviews"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
+            android:clipToPadding="false"
             android:nestedScrollingEnabled="false"
+            android:paddingHorizontal="16dp"
             app:layout_constraintTop_toBottomOf="@id/lblReviews" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

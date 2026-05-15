@@ -32,16 +32,6 @@ class LeaderboardAdapter(
             .placeholder(R.drawable.ic_profile)
             .error(R.drawable.ic_profile)
             .into(binding.ivAvatar)
-        
-        val earningsFormatted = when {
-            koshai.earnings >= 1_000_000 -> "৳${String.format("%.1fM", koshai.earnings / 1_000_000.0)}"
-            koshai.earnings >= 1_000     -> {
-                val s = String.format("%.1fk", koshai.earnings / 1_000.0)
-                "৳${if (s.endsWith(".0k")) s.replace(".0k", "k") else s}"
-            }
-            else -> "৳${koshai.earnings.toInt()}"
-        }
-        binding.tvEarnings.text = earningsFormatted
     }
 
     override fun getItemCount() = koshais.size

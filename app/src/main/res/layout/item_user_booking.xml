@@ -6,100 +6,109 @@
     android:layout_marginBottom="16dp"
     app:cardCornerRadius="20dp"
     app:cardElevation="2dp"
-    app:strokeWidth="1dp"
-    app:strokeColor="#F0F0F0">
+    app:strokeWidth="0dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="20dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <TextView
                 android:id="@+id/tvKoshaiName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Koshai Name"
+                android:textColor="#212121"
                 android:textSize="18sp"
-                android:textStyle="bold"
-                android:textColor="#1A1A1A" />
+                android:textStyle="bold" />
+
             <TextView
                 android:id="@+id/tvStatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:background="@drawable/bg_status_badge"
+                android:backgroundTint="#E3F2FD"
                 android:paddingHorizontal="12dp"
-                android:paddingVertical="4dp"
+                android:paddingVertical="6dp"
                 android:text="PENDING"
-                android:textColor="@android:color/white"
-                android:textSize="10sp"
+                android:textColor="#1E88E5"
+                android:textSize="11sp"
                 android:textStyle="bold" />
         </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
+            android:layout_marginTop="16dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
             <ImageView
-                android:layout_width="16dp"
-                android:layout_height="16dp"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
                 android:src="@android:drawable/ic_menu_my_calendar"
                 app:tint="#1565C0" />
+
             <TextView
                 android:id="@+id/tvDateTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="12dp"
                 android:text="Oct 24, 2026 | 08:00-10:00"
-                android:textColor="#444444"
+                android:textColor="#424242"
                 android:textSize="14sp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
             <ImageView
-                android:layout_width="16dp"
-                android:layout_height="16dp"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
                 android:src="@android:drawable/ic_dialog_map"
                 app:tint="#757575" />
+
             <TextView
                 android:id="@+id/tvAddress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="12dp"
+                android:ellipsize="end"
+                android:maxLines="1"
                 android:text="Service Address"
                 android:textColor="#757575"
-                android:textSize="14sp"
-                android:maxLines="1"
-                android:ellipsize="end" />
+                android:textSize="14sp" />
         </LinearLayout>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginVertical="12dp"
-            android:background="#F0F0F0" />
+            android:layout_marginVertical="16dp"
+            android:background="#F5F5F5" />
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <TextView
                 android:id="@+id/tvAnimals"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="1 Cow, 2 Goats"
-                android:textColor="#1A1A1A"
-                android:textSize="14sp" />
+                android:textColor="#212121"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
             <TextView
                 android:id="@+id/tvPrice"
                 android:layout_width="wrap_content"
@@ -107,20 +116,19 @@
                 android:layout_alignParentEnd="true"
                 android:text="৳4,500"
                 android:textColor="#2E7D32"
-                android:textStyle="bold"
-                android:textSize="16sp" />
+                android:textSize="18sp"
+                android:textStyle="bold" />
         </RelativeLayout>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnReview"
+            style="@style/Widget.Material3.Button.TonalButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:text="Rate &amp; Review"
             android:visibility="gone"
-            app:cornerRadius="12dp"
-            app:backgroundTint="#1565C0"
-            style="@style/Widget.MaterialComponents.Button.UnelevatedButton"/>
+            app:cornerRadius="12dp" />
 
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

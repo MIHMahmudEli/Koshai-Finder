@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,19 +9,23 @@
         android:id="@+id/appBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/white">
+        android:background="@android:color/transparent"
+        app:elevation="0dp">
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:title="Koshai Leaderboard"
-            app:navigationIcon="@android:drawable/ic_menu_revert" />
+            app:title="Hall of Fame"
+            app:titleCentered="true"
+            app:titleTextColor="@android:color/white"
+            app:navigationIcon="@android:drawable/ic_menu_revert"
+            app:navigationIconTint="@android:color/white" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintTop_toBottomOf="@id/appBar">
+        android:clipToPadding="false">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -31,18 +35,18 @@
             <!-- Top 3 Podium Section -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="260dp"
-                android:background="@drawable/bg_dashboard_header"
-                android:paddingBottom="24dp">
+                android:layout_height="320dp"
+                android:background="@drawable/bg_login_gradient"
+                android:paddingBottom="32dp">
 
                 <TextView
                     android:id="@+id/tvLeaderboardTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="Koshai Hall of Fame"
+                    android:layout_marginTop="72dp"
+                    android:text="Koshai Champions"
                     android:textColor="@android:color/white"
-                    android:textSize="22sp"
+                    android:textSize="24sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -59,33 +63,34 @@
                     app:layout_constraintEnd_toStartOf="@id/podium1"
                     app:layout_constraintHorizontal_chainStyle="packed"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginEnd="16dp">
+                    android:layout_marginEnd="12dp">
 
                     <com.google.android.material.imageview.ShapeableImageView
                         android:id="@+id/ivRank2"
-                        android:layout_width="65dp"
-                        android:layout_height="65dp"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
                         android:padding="3dp"
-                        android:background="#E0E0E0"
+                        android:background="#C0C0C0"
                         app:shapeAppearanceOverlay="@style/CircleImage"
-                        android:src="@android:drawable/ic_menu_gallery" />
+                        android:src="@drawable/ic_profile" />
                     <TextView
                         android:id="@+id/tvName2"
-                        android:layout_width="80dp"
+                        android:layout_width="85dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:text="Koshai 2"
                         android:textAlignment="center"
                         android:textColor="@android:color/white"
-                        android:textSize="12sp"
+                        android:textSize="13sp"
                         android:textStyle="bold"
                         android:ellipsize="end"
                         android:maxLines="1" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="#2"
+                        android:text="🥈 Silver"
                         android:textColor="#E0E0E0"
+                        android:textSize="11sp"
                         android:textStyle="bold" />
                 </LinearLayout>
 
@@ -99,34 +104,34 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginBottom="24dp">
+                    android:layout_marginBottom="32dp">
 
                     <com.google.android.material.imageview.ShapeableImageView
                         android:id="@+id/ivRank1"
-                        android:layout_width="90dp"
-                        android:layout_height="90dp"
-                        android:padding="4dp"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:padding="5dp"
                         android:background="#FFD700"
                         app:shapeAppearanceOverlay="@style/CircleImage"
-                        android:src="@android:drawable/ic_menu_gallery" />
+                        android:src="@drawable/ic_profile" />
                     <TextView
                         android:id="@+id/tvName1"
-                        android:layout_width="100dp"
+                        android:layout_width="110dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="10dp"
                         android:text="Champion"
                         android:textAlignment="center"
                         android:textColor="@android:color/white"
-                        android:textSize="14sp"
+                        android:textSize="16sp"
                         android:textStyle="bold"
                         android:ellipsize="end"
                         android:maxLines="1" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="#1"
+                        android:text="🥇 Gold"
                         android:textColor="#FFD700"
-                        android:textSize="18sp"
+                        android:textSize="14sp"
                         android:textStyle="bold" />
                 </LinearLayout>
 
@@ -139,33 +144,34 @@
                     android:orientation="vertical"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@id/podium1"
-                    android:layout_marginStart="16dp">
+                    android:layout_marginStart="12dp">
 
                     <com.google.android.material.imageview.ShapeableImageView
                         android:id="@+id/ivRank3"
-                        android:layout_width="65dp"
-                        android:layout_height="65dp"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
                         android:padding="3dp"
                         android:background="#CD7F32"
                         app:shapeAppearanceOverlay="@style/CircleImage"
-                        android:src="@android:drawable/ic_menu_gallery" />
+                        android:src="@drawable/ic_profile" />
                     <TextView
                         android:id="@+id/tvName3"
-                        android:layout_width="80dp"
+                        android:layout_width="85dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:text="Koshai 3"
                         android:textAlignment="center"
                         android:textColor="@android:color/white"
-                        android:textSize="12sp"
+                        android:textSize="13sp"
                         android:textStyle="bold"
                         android:ellipsize="end"
                         android:maxLines="1" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="#3"
+                        android:text="🥉 Bronze"
                         android:textColor="#CD7F32"
+                        android:textSize="11sp"
                         android:textStyle="bold" />
                 </LinearLayout>
 
@@ -175,13 +181,14 @@
                 android:id="@+id/rvLeaderboard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="-16dp"
+                android:layout_marginTop="-24dp"
                 android:background="@drawable/bg_bottom_sheet_surface"
-                android:paddingTop="24dp"
+                android:paddingTop="32dp"
+                android:paddingBottom="48dp"
                 android:clipToPadding="false"
                 android:nestedScrollingEnabled="false" />
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
