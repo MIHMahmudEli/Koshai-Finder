@@ -130,6 +130,20 @@ class SplashFragment : Fragment() {
 
     private fun navigate(actionId: Int) {
         if (!isAdded) return
+
+        // Auto-subscribe to relevant topics for announcements
+        val fcm = com.google.firebase.messaging.FirebaseMessaging.getInstance()
+        fcm.subscribeToTopic("announcements")
+        
+        val role = com.example.koshailagbe.utils.SharedPrefsHelper.getUserRole(requireContext())
+        if (role == com.example.koshailagbe.utils.SharedPrefsHelper.ROLE_USER) {
+            fcm.subscribeToTopic("all_users")
+            fcm.unsubscribeFromTopic("all_koshais")
+        } else if (role == com.example.koshailagbe.utils.SharedPrefsHelper.ROLE_KOSHAI) {
+            fcm.subscribeToTopic("all_koshais")
+            fcm.unsubscribeFromTopic("all_users")
+        }
+
         findNavController().navigate(
             actionId,
             null,

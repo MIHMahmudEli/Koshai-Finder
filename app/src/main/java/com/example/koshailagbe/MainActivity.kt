@@ -10,6 +10,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsControllerCompat
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
 import com.example.koshailagbe.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -37,6 +40,7 @@ class MainActivity : AppCompatActivity() {
 
         askNotificationPermission()
         updateFcmToken()
+        setupAnnouncementListener()
     }
 
     private fun askNotificationPermission() {
@@ -67,6 +71,56 @@ class MainActivity : AppCompatActivity() {
 
     private var bookingListener: com.google.firebase.firestore.ListenerRegistration? = null
     private var chatListener: com.google.firebase.firestore.ListenerRegistration? = null
+    private var announcementListener: com.google.firebase.firestore.ListenerRegistration? = null
+
+    private fun setupAnnouncementListener() {
+        val db = FirebaseFirestore.getInstance()
+        
+        // Listen for new announcements added in the last 10 seconds to avoid spamming old ones on start
+        val startTime = com.google.firebase.Timestamp(java.util.Date(System.currentTimeMillis() - 10000))
+        
+        announcementListener = db.collection("announcements")
+            .whereGreaterThan("timestamp", startTime)
+            .addSnapshotListener { snapshot, e ->
+                if (e != null || snapshot == null) return@addSnapshotListener
+                
+                val role = com.example.koshailagbe.utils.SharedPrefsHelper.getUserRole(this)
+                
+                for (change in snapshot.documentChanges) {
+                    if (change.type == com.google.firebase.firestore.DocumentChange.Type.ADDED) {
+                        val announcement = change.document.toObject(com.example.koshailagbe.model.Announcement::class.java)
+                        
+                        // Check if announcement targets this user
+                        if (announcement.target == "all" || 
+                            (announcement.target == "users" && role == com.example.koshailagbe.utils.SharedPrefsHelper.ROLE_USER) ||
+                            (announcement.target == "koshais" && role == com.example.koshailagbe.utils.SharedPrefsHelper.ROLE_KOSHAI)) {
+                            
+                            showLocalNotification(announcement.title, announcement.message)
+                        }
+                    }
+                }
+            }
+    }
+
+    private fun showLocalNotification(title: String, message: String) {
+        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        val channelId = "system_announcements"
+        
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(channelId, "Announcements", NotificationManager.IMPORTANCE_HIGH)
+            notificationManager.createNotificationChannel(channel)
+        }
+        
+        val notification = androidx.core.app.NotificationCompat.Builder(this, channelId)
+            .setSmallIcon(R.mipmap.ic_launcher)
+            .setContentTitle(title)
+            .setContentText(message)
+            .setPriority(androidx.core.app.NotificationCompat.PRIORITY_HIGH)
+            .setAutoCancel(true)
+            .build()
+            
+        notificationManager.notify(System.currentTimeMillis().toInt(), notification)
+    }
 
     private fun listenForBookingUpdates() {
         val uid = FirebaseAuth.getInstance().currentUser?.uid ?: return
@@ -125,5 +179,6 @@ class MainActivity : AppCompatActivity() {
         super.onStop()
         bookingListener?.remove()
         chatListener?.remove()
+        announcementListener?.remove()
     }
 }
