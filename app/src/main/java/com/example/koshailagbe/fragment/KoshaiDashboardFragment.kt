@@ -122,8 +122,8 @@ class KoshaiDashboardFragment : Fragment() {
 
     private fun updateUI(profile: KoshaiProfile) {
         binding.tvKoshaiName.text = "Welcome, ${profile.name}"
-        binding.tvTotalJobs.text = profile.totalJobs.toString()
-        binding.tvEarnings.text = "৳${profile.earnings}"
+        // tvTotalJobs is updated by fetchBookingCounts() with live active job count
+        binding.tvEarnings.text = "৳${formatShort(profile.earnings.toLong())}"
         binding.tvRating.text = String.format("%.1f", profile.rating)
 
         Glide.with(this)
@@ -149,6 +149,17 @@ class KoshaiDashboardFragment : Fragment() {
         }
     }
 
+    /**
+     * Formats a number into a compact shorthand:
+     * 500 → 500, 1500 → 1.5k, 1200000 → 1.2M
+     */
+    private fun formatShort(value: Long): String = when {
+        value >= 1_000_000 -> String.format("%.1fM", value / 1_000_000.0)
+        value >= 1_000    -> String.format("%.1fk", value / 1_000.0)
+            .replace(".0k", "k")   // 10.0k → 10k
+        else -> value.toString()
+    }
+
     private fun updateStatus(status: String) {
         val uid = auth.currentUser?.uid ?: return
         db.collection("koshais").document(uid).update("status", status)
@@ -161,31 +172,38 @@ class KoshaiDashboardFragment : Fragment() {
 
     private fun fetchBookingCounts() {
         val uid = auth.currentUser?.uid ?: return
-        
-        // Fetch Pending Requests
-        db.collection("bookings")
-            .whereEqualTo("koshaiId", uid)
-            .whereEqualTo("status", "pending")
-            .get()
-            .addOnSuccessListener { docs ->
-                if (!isAdded) return@addOnSuccessListener
-                val count = docs.size()
-                binding.tvRequestCount.text = "$count pending requests"
-            }
 
-        // Fetch Today's Confirmed Bookings (Simplified)
+        // Real-time listener for ALL active bookings (confirmed, en_route, arrived)
+        // This drives both tvTotalJobs (active count) and the schedule info card
         db.collection("bookings")
             .whereEqualTo("koshaiId", uid)
-            .whereEqualTo("status", "confirmed")
-            .get()
-            .addOnSuccessListener { docs ->
-                if (!isAdded) return@addOnSuccessListener
-                val count = docs.size()
-                if (count > 0) {
-                    binding.tvScheduleInfo.text = "You have $count jobs today"
-                } else {
-                    binding.tvScheduleInfo.text = "No bookings for today"
+            .addSnapshotListener { snapshots, e ->
+                if (!isAdded) return@addSnapshotListener
+                if (e != null || snapshots == null) return@addSnapshotListener
+
+                val activeStatuses = setOf("confirmed", "en_route", "arrived")
+                var activeCount = 0
+                var pendingCount = 0
+
+                for (doc in snapshots.documents) {
+                    val status = doc.getString("status") ?: continue
+                    when (status) {
+                        in activeStatuses -> activeCount++
+                        "pending"        -> pendingCount++
+                    }
                 }
+
+                // Active jobs = accepted bookings currently in progress
+                binding.tvTotalJobs.text = activeCount.toString()
+
+                // Pending requests badge
+                binding.tvRequestCount.text = "$pendingCount pending requests"
+
+                // Schedule info
+                binding.tvScheduleInfo.text = if (activeCount > 0)
+                    "You have $activeCount active jobs"
+                else
+                    "No active jobs right now"
             }
     }
 
