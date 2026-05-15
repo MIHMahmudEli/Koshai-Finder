@@ -62,38 +62,50 @@ class SplashFragment : Fragment() {
         } else if (savedRole == com.example.koshailagbe.utils.SharedPrefsHelper.ROLE_KOSHAI) {
             navigate(R.id.action_splashFragment_to_koshaiHomeFragment)
             return
+        } else if (savedRole == com.example.koshailagbe.utils.SharedPrefsHelper.ROLE_ADMIN) {
+            navigate(R.id.action_splashFragment_to_adminHomeFragment)
+            return
         }
 
         // Check which role this user has
-        db.collection("users")
-            .document(uid)
-            .get()
-            .addOnSuccessListener { userDoc ->
+        db.collection("admin").document(uid).get()
+            .addOnSuccessListener { adminDoc ->
                 if (!isAdded) return@addOnSuccessListener
-                if (userDoc.exists()) {
-                    com.example.koshailagbe.utils.SharedPrefsHelper.saveUserRole(requireContext(), com.example.koshailagbe.utils.SharedPrefsHelper.ROLE_USER)
-                    navigate(R.id.action_splashFragment_to_userHomeFragment)
+                if (adminDoc.exists()) {
+                    com.example.koshailagbe.utils.SharedPrefsHelper.saveUserRole(requireContext(), com.example.koshailagbe.utils.SharedPrefsHelper.ROLE_ADMIN)
+                    navigate(R.id.action_splashFragment_to_adminHomeFragment)
                 } else {
-                    // Not a user — check koshais
-                    db.collection("koshais")
-                        .document(uid)
-                        .get()
-                        .addOnSuccessListener { koshaiDoc ->
+                    db.collection("users").document(uid).get()
+                        .addOnSuccessListener { userDoc ->
                             if (!isAdded) return@addOnSuccessListener
-                            when {
-                                koshaiDoc.exists() -> {
-                                    com.example.koshailagbe.utils.SharedPrefsHelper.saveUserRole(requireContext(), com.example.koshailagbe.utils.SharedPrefsHelper.ROLE_KOSHAI)
-                                    navigate(R.id.action_splashFragment_to_koshaiHomeFragment)
-                                }
-                                else -> {
-                                    // Logged in but no profile — go to role selection
-                                    navigate(R.id.action_splashFragment_to_roleFragment)
-                                }
+                            if (userDoc.exists()) {
+                                com.example.koshailagbe.utils.SharedPrefsHelper.saveUserRole(requireContext(), com.example.koshailagbe.utils.SharedPrefsHelper.ROLE_USER)
+                                navigate(R.id.action_splashFragment_to_userHomeFragment)
+                            } else {
+                                // Not a user — check koshais
+                                db.collection("koshais").document(uid).get()
+                                    .addOnSuccessListener { koshaiDoc ->
+                                        if (!isAdded) return@addOnSuccessListener
+                                        when {
+                                            koshaiDoc.exists() -> {
+                                                com.example.koshailagbe.utils.SharedPrefsHelper.saveUserRole(requireContext(), com.example.koshailagbe.utils.SharedPrefsHelper.ROLE_KOSHAI)
+                                                navigate(R.id.action_splashFragment_to_koshaiHomeFragment)
+                                            }
+                                            else -> {
+                                                // Logged in but no profile — go to role selection
+                                                navigate(R.id.action_splashFragment_to_roleFragment)
+                                            }
+                                        }
+                                    }
+                                    .addOnFailureListener {
+                                        if (!isAdded) return@addOnFailureListener
+                                        auth.signOut()
+                                        goToLogin()
+                                    }
                             }
                         }
                         .addOnFailureListener {
                             if (!isAdded) return@addOnFailureListener
-                            // Firestore failed — silently go to login (don't show error)
                             auth.signOut()
                             goToLogin()
                         }
@@ -101,7 +113,6 @@ class SplashFragment : Fragment() {
             }
             .addOnFailureListener {
                 if (!isAdded) return@addOnFailureListener
-                // Firestore failed (rules/network) — silently go to login
                 auth.signOut()
                 goToLogin()
             }

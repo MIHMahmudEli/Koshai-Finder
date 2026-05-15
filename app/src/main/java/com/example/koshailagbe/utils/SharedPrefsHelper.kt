@@ -9,6 +9,7 @@ object SharedPrefsHelper {
 
     const val ROLE_USER = "user"
     const val ROLE_KOSHAI = "koshai"
+    const val ROLE_ADMIN = "admin"
 
     private fun getPrefs(context: Context): SharedPreferences {
         return context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)

@@ -11,6 +11,7 @@
         <action android:id="@+id/action_splashFragment_to_loginFragment"         app:destination="@id/loginFragment" />
         <action android:id="@+id/action_splashFragment_to_userHomeFragment"      app:destination="@id/userHomeFragment" />
         <action android:id="@+id/action_splashFragment_to_koshaiHomeFragment"    app:destination="@id/koshaiHomeFragment" />
+        <action android:id="@+id/action_splashFragment_to_adminHomeFragment"     app:destination="@id/adminHomeFragment" />
         <action android:id="@+id/action_splashFragment_to_roleFragment"          app:destination="@id/roleFragment" />
     </fragment>
 
@@ -22,6 +23,7 @@
         <action android:id="@+id/action_loginFragment_to_roleFragment"                  app:destination="@id/roleFragment" />
         <action android:id="@+id/action_loginFragment_to_userHomeFragment"               app:destination="@id/userHomeFragment" />
         <action android:id="@+id/action_loginFragment_to_koshaiHomeFragment"             app:destination="@id/koshaiHomeFragment" />
+        <action android:id="@+id/action_loginFragment_to_adminHomeFragment"              app:destination="@id/adminHomeFragment" />
         <action android:id="@+id/action_loginFragment_to_forgotPasswordFragment"         app:destination="@id/forgotPasswordFragment" />
         <action android:id="@+id/action_loginFragment_to_emailVerificationFragment"      app:destination="@id/emailVerificationFragment" />
     </fragment>
@@ -93,5 +95,10 @@
     <fragment
         android:id="@+id/koshaiHomeFragment"
         android:name="com.example.koshailagbe.fragment.KoshaiHomeFragment" />
+
+    <!-- Admin Home -->
+    <fragment
+        android:id="@+id/adminHomeFragment"
+        android:name="com.example.koshailagbe.fragment.AdminHomeFragment" />
 
 </navigation>

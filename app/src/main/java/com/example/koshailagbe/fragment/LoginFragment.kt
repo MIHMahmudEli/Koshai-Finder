@@ -118,32 +118,47 @@ class LoginFragment : Fragment() {
             resetLoginButton()
             return
         }
-        db.collection("users").document(uid).get()
-            .addOnSuccessListener { userDoc ->
+        db.collection("admin").document(uid).get()
+            .addOnSuccessListener { adminDoc ->
                 if (!isAdded) return@addOnSuccessListener
-                if (userDoc.exists()) {
-                    com.example.koshailagbe.utils.SharedPrefsHelper.saveUserRole(requireContext(), com.example.koshailagbe.utils.SharedPrefsHelper.ROLE_USER)
+                if (adminDoc.exists()) {
+                    com.example.koshailagbe.utils.SharedPrefsHelper.saveUserRole(requireContext(), com.example.koshailagbe.utils.SharedPrefsHelper.ROLE_ADMIN)
                     findNavController().navigate(
-                        R.id.action_loginFragment_to_userHomeFragment,
+                        R.id.action_loginFragment_to_adminHomeFragment,
                         null,
                         androidx.navigation.NavOptions.Builder()
                             .setPopUpTo(R.id.loginFragment, true).build()
                     )
                 } else {
-                    db.collection("koshais").document(uid).get()
-                        .addOnSuccessListener { koshaiDoc ->
+                    db.collection("users").document(uid).get()
+                        .addOnSuccessListener { userDoc ->
                             if (!isAdded) return@addOnSuccessListener
-                            if (koshaiDoc.exists()) {
-                                com.example.koshailagbe.utils.SharedPrefsHelper.saveUserRole(requireContext(), com.example.koshailagbe.utils.SharedPrefsHelper.ROLE_KOSHAI)
+                            if (userDoc.exists()) {
+                                com.example.koshailagbe.utils.SharedPrefsHelper.saveUserRole(requireContext(), com.example.koshailagbe.utils.SharedPrefsHelper.ROLE_USER)
                                 findNavController().navigate(
-                                    R.id.action_loginFragment_to_koshaiHomeFragment,
+                                    R.id.action_loginFragment_to_userHomeFragment,
                                     null,
                                     androidx.navigation.NavOptions.Builder()
                                         .setPopUpTo(R.id.loginFragment, true).build()
                                 )
                             } else {
-                                resetLoginButton()
-                                Toast.makeText(requireContext(), "Account not found.", Toast.LENGTH_SHORT).show()
+                                db.collection("koshais").document(uid).get()
+                                    .addOnSuccessListener { koshaiDoc ->
+                                        if (!isAdded) return@addOnSuccessListener
+                                        if (koshaiDoc.exists()) {
+                                            com.example.koshailagbe.utils.SharedPrefsHelper.saveUserRole(requireContext(), com.example.koshailagbe.utils.SharedPrefsHelper.ROLE_KOSHAI)
+                                            findNavController().navigate(
+                                                R.id.action_loginFragment_to_koshaiHomeFragment,
+                                                null,
+                                                androidx.navigation.NavOptions.Builder()
+                                                    .setPopUpTo(R.id.loginFragment, true).build()
+                                            )
+                                        } else {
+                                            resetLoginButton()
+                                            Toast.makeText(requireContext(), "Account not found.", Toast.LENGTH_SHORT).show()
+                                        }
+                                    }
+                                    .addOnFailureListener { resetLoginButton() }
                             }
                         }
                         .addOnFailureListener { resetLoginButton() }
