@@ -8,11 +8,26 @@
     <fragment
         android:id="@+id/splashFragment"
         android:name="com.example.koshailagbe.fragment.SplashFragment">
-        <action android:id="@+id/action_splashFragment_to_loginFragment"         app:destination="@id/loginFragment" />
-        <action android:id="@+id/action_splashFragment_to_userHomeFragment"      app:destination="@id/userHomeFragment" />
-        <action android:id="@+id/action_splashFragment_to_koshaiDashboardFragment"    app:destination="@id/koshaiDashboardFragment" />
-        <action android:id="@+id/action_splashFragment_to_adminHomeFragment"     app:destination="@id/adminHomeFragment" />
-        <action android:id="@+id/action_splashFragment_to_roleFragment"          app:destination="@id/roleFragment" />
+        <action android:id="@+id/action_splashFragment_to_loginFragment"         app:destination="@id/loginFragment"        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
+        <action android:id="@+id/action_splashFragment_to_userHomeFragment"      app:destination="@id/userHomeFragment"        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
+        <action android:id="@+id/action_splashFragment_to_koshaiDashboardFragment"    app:destination="@id/koshaiDashboardFragment"        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
+        <action android:id="@+id/action_splashFragment_to_adminHomeFragment"     app:destination="@id/adminHomeFragment"        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
+        <action android:id="@+id/action_splashFragment_to_roleFragment"          app:destination="@id/roleFragment"        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <!-- Login -->
@@ -20,29 +35,62 @@
         android:id="@+id/loginFragment"
         android:name="com.example.koshailagbe.fragment.LoginFragment"
         android:label="Login">
-        <action android:id="@+id/action_loginFragment_to_roleFragment"                  app:destination="@id/roleFragment" />
-        <action android:id="@+id/action_loginFragment_to_userHomeFragment"               app:destination="@id/userHomeFragment" />
-        <action android:id="@+id/action_loginFragment_to_koshaiDashboardFragment"             app:destination="@id/koshaiDashboardFragment" />
-        <action android:id="@+id/action_loginFragment_to_adminHomeFragment"              app:destination="@id/adminHomeFragment" />
-        <action android:id="@+id/action_loginFragment_to_forgotPasswordFragment"         app:destination="@id/forgotPasswordFragment" />
-        <action android:id="@+id/action_loginFragment_to_emailVerificationFragment"      app:destination="@id/emailVerificationFragment" />
+        <action android:id="@+id/action_loginFragment_to_roleFragment"                  app:destination="@id/roleFragment"        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
+        <action android:id="@+id/action_loginFragment_to_userHomeFragment"               app:destination="@id/userHomeFragment"        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
+        <action android:id="@+id/action_loginFragment_to_koshaiDashboardFragment"             app:destination="@id/koshaiDashboardFragment"        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
+        <action android:id="@+id/action_loginFragment_to_adminHomeFragment"              app:destination="@id/adminHomeFragment"        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
+        <action android:id="@+id/action_loginFragment_to_forgotPasswordFragment"         app:destination="@id/forgotPasswordFragment"        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
+        <action android:id="@+id/action_loginFragment_to_emailVerificationFragment"      app:destination="@id/emailVerificationFragment"        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <!-- Forgot Password -->
     <fragment
         android:id="@+id/forgotPasswordFragment"
         android:name="com.example.koshailagbe.fragment.ForgotPasswordFragment"
-        android:label="Forgot Password" />
+        android:label="Forgot Password"        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
 
     <!-- Role Select -->
     <fragment
         android:id="@+id/roleFragment"
         android:name="com.example.koshailagbe.fragment.RoleFragment"
         android:label="Choose Role">
-        <action android:id="@+id/action_roleFragment_to_registerUserFragment"   app:destination="@id/registerUserFragment" />
-        <action android:id="@+id/action_roleFragment_to_registerKoshaiFragment" app:destination="@id/registerKoshaiFragment" />
-        <action android:id="@+id/action_roleFragment_to_userHomeFragment"       app:destination="@id/userHomeFragment" />
-        <action android:id="@+id/action_roleFragment_to_koshaiDashboardFragment"     app:destination="@id/koshaiDashboardFragment" />
+        <action android:id="@+id/action_roleFragment_to_registerUserFragment"   app:destination="@id/registerUserFragment"        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
+        <action android:id="@+id/action_roleFragment_to_registerKoshaiFragment" app:destination="@id/registerKoshaiFragment"        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
+        <action android:id="@+id/action_roleFragment_to_userHomeFragment"       app:destination="@id/userHomeFragment"        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
+        <action android:id="@+id/action_roleFragment_to_koshaiDashboardFragment"     app:destination="@id/koshaiDashboardFragment"        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <!-- Register User -->
@@ -50,8 +98,14 @@
         android:id="@+id/registerUserFragment"
         android:name="com.example.koshailagbe.fragment.RegisterUserFragment"
         android:label="Register as User">
-        <action android:id="@+id/action_registerUserFragment_to_userHomeFragment"           app:destination="@id/userHomeFragment" />
-        <action android:id="@+id/action_registerUserFragment_to_emailVerificationFragment"  app:destination="@id/emailVerificationFragment" />
+        <action android:id="@+id/action_registerUserFragment_to_userHomeFragment"           app:destination="@id/userHomeFragment"        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
+        <action android:id="@+id/action_registerUserFragment_to_emailVerificationFragment"  app:destination="@id/emailVerificationFragment"        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <!-- Register Koshai -->
@@ -93,13 +147,19 @@
         android:label="Koshai Finder">
         <action
             android:id="@+id/action_userHomeFragment_to_userKoshaiDetailFragment"
-            app:destination="@id/userKoshaiDetailFragment" />
+            app:destination="@id/userKoshaiDetailFragment"
+            app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_userHomeFragment_to_userBookingsFragment"
-            app:destination="@id/userBookingsFragment" />
+            app:destination="@id/userBookingsFragment"
+            app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_userHomeFragment_to_userProfileFragment"
-            app:destination="@id/userProfileFragment" />
+            app:destination="@id/userProfileFragment"
+            app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <fragment
@@ -108,7 +168,9 @@
         android:label="My Profile">
         <action
             android:id="@+id/action_userProfileFragment_to_editProfileFragment"
-            app:destination="@id/editProfileFragment" />
+            app:destination="@id/editProfileFragment"
+            app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <fragment
