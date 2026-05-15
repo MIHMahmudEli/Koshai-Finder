@@ -62,7 +62,7 @@ class UserKoshaiDetailFragment : Fragment() {
     }
 
     private fun setupToolbar() {
-        binding.toolbar.setNavigationOnClickListener { findNavController().popBackStack() }
+        binding.btnBack.setOnClickListener { findNavController().popBackStack() }
     }
 
     private fun loadKoshaiData() {
@@ -76,14 +76,20 @@ class UserKoshaiDetailFragment : Fragment() {
     }
 
     private fun updateUI(profile: KoshaiProfile, doc: com.google.firebase.firestore.DocumentSnapshot) {
-        binding.collapsingToolbar.title = profile.name
+        binding.tvName.text = profile.name
         binding.tvCowRate.text = "৳${String.format("%.0f", profile.ratePerCow)}"
         binding.tvGoatRate.text = "৳${String.format("%.0f", profile.ratePerGoat)}"
-        binding.tvFullLocation.text = "Available in ${profile.upazila}, ${profile.district}"
-        
-        // Use bio if available, otherwise a helpful placeholder
-        val bio = doc.getString("bio") ?: "Experienced Koshai available for professional slaughtering and cleaning services."
-        binding.tvBio.text = bio
+        binding.tvFullLocation.text = "📍 Available in ${profile.upazila}, ${profile.district}"
+        binding.tvLocation.text = "${profile.upazila}, ${profile.district}"
+
+        // Show About card only if bio is available
+        val bio = doc.getString("bio")?.trim()
+        if (!bio.isNullOrEmpty()) {
+            binding.cardAbout.visibility = View.VISIBLE
+            binding.tvBio.text = bio
+        } else {
+            binding.cardAbout.visibility = View.GONE
+        }
     }
 
     private var doc: com.google.firebase.firestore.DocumentSnapshot? = null

@@ -65,12 +65,13 @@ class ChatFragment : Fragment() {
     }
 
     private fun setupUI() {
-        binding.toolbar.setNavigationOnClickListener { findNavController().popBackStack() }
+        binding.btnBack.setOnClickListener { findNavController().popBackStack() }
         binding.tvChatPartnerName.text = receiverName ?: "Koshai"
         
         Glide.with(this)
             .load(receiverPhoto)
-            .placeholder(R.drawable.bg_dashboard_header)
+            .placeholder(R.drawable.ic_profile)
+            .error(R.drawable.ic_profile)
             .into(binding.ivPartnerProfile)
     }
 

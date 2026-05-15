@@ -42,6 +42,10 @@ class UserBookingsFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
+        binding.btnBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
+        
         adapter = UserBookingsAdapter(
             emptyList(),
             onItemClick = { booking ->

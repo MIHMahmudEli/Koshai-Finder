@@ -40,6 +40,9 @@ class ChatListFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
+        binding.btnBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
         val currentUserId = auth.currentUser?.uid ?: ""
         adapter = ChatListAdapter(currentUserId, emptyList()) { room ->
             val otherUserId = room.participants.firstOrNull { it != currentUserId } ?: ""

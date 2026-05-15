@@ -72,7 +72,7 @@ class BookingRequestFragment : Fragment() {
     }
 
     private fun setupListeners() {
-        binding.toolbar.setNavigationOnClickListener { findNavController().popBackStack() }
+        binding.btnBack.setOnClickListener { findNavController().popBackStack() }
         binding.btnSelectDate.setOnClickListener { showDatePicker() }
         
         binding.btnAddCow.setOnClickListener { cowCount++; updateUI() }

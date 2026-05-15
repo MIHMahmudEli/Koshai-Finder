@@ -37,6 +37,13 @@ class ChatAdapter(
             binding.tvMessage.text = message.text
             val sdf = SimpleDateFormat("hh:mm a", Locale.getDefault())
             binding.tvTime.text = sdf.format(message.timestamp.toDate())
+
+            // Dynamic tint for received bubbles to separate users
+            val colors = listOf(
+                "#F1F8E9", "#E3F2FD", "#FCE4EC", "#FFF3E0", "#F3E5F5", "#E0F2F1", "#E8EAF6", "#EFEBE9"
+            )
+            val colorIndex = Math.abs(message.senderId.hashCode()) % colors.size
+            binding.messageContainer.background.setTint(android.graphics.Color.parseColor(colors[colorIndex]))
         }
     }
 

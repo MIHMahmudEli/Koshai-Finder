@@ -35,7 +35,7 @@ class AvailabilityFragment : Fragment() {
     }
 
     private fun setupToolbar() {
-        binding.toolbar.setNavigationOnClickListener { findNavController().popBackStack() }
+        binding.btnBack.setOnClickListener { findNavController().popBackStack() }
     }
 
     private fun setupListeners() {

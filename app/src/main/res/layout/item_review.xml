@@ -3,17 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="12dp"
-    app:cardCornerRadius="16dp"
-    app:cardElevation="0dp"
-    app:strokeColor="#F0F0F0"
-    app:strokeWidth="1dp">
+    android:layout_marginHorizontal="20dp"
+    android:layout_marginBottom="16dp"
+    app:cardCornerRadius="24dp"
+    app:cardElevation="2dp"
+    app:strokeWidth="0dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="20dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -24,7 +24,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="User Name"
-                android:textColor="#1A1A1A"
+                android:textColor="#212121"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <RatingBar
@@ -34,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:numStars="5"
-                android:progressTint="#FFD600"
+                android:progressTint="#FFB300"
                 android:rating="5" />
         </RelativeLayout>
 
@@ -42,18 +43,18 @@
             android:id="@+id/tvComment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="12dp"
             android:text="The service was excellent. Highly recommended!"
-            android:textColor="#444444"
+            android:textColor="#424242"
             android:textSize="14sp" />
 
         <TextView
             android:id="@+id/tvDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="12dp"
             android:text="Oct 24, 2026"
-            android:textColor="#9E9E9E"
+            android:textColor="#757575"
             android:textSize="12sp" />
 
     </LinearLayout>

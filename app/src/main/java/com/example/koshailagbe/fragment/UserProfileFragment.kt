@@ -39,6 +39,17 @@ class UserProfileFragment : Fragment() {
         binding.btnEditProfile.setOnClickListener {
             findNavController().navigate(R.id.action_userProfileFragment_to_editProfileFragment)
         }
+        binding.btnLogout.setOnClickListener {
+            com.example.koshailagbe.utils.SharedPrefsHelper.clearUserRole(requireContext())
+            auth.signOut()
+            findNavController().navigate(
+                R.id.loginFragment,
+                null,
+                androidx.navigation.NavOptions.Builder()
+                    .setPopUpTo(R.id.nav_graph, true)
+                    .build()
+            )
+        }
     }
 
     private fun loadUserProfile() {

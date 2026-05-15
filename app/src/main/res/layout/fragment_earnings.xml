@@ -5,22 +5,24 @@
     android:layout_height="match_parent"
     android:background="#F8F9FA">
 
-    <!-- Header with Stats -->
+    <!-- Header Section -->
     <View
         android:id="@+id/headerBg"
         android:layout_width="match_parent"
         android:layout_height="280dp"
-        android:background="@drawable/bg_dashboard_header"
+        android:background="@drawable/bg_login_gradient"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnBack"
         style="@style/Widget.Material3.Button.IconButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="48dp"
+        android:background="@drawable/bg_glass_card"
         app:icon="@android:drawable/ic_menu_revert"
+        app:iconPadding="0dp"
         app:iconTint="@android:color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -30,10 +32,11 @@
         android:layout_height="wrap_content"
         android:text="My Earnings"
         android:textColor="@android:color/white"
-        android:textSize="20sp"
+        android:textSize="22sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@id/btnBack"
         app:layout_constraintStart_toEndOf="@id/btnBack"
+        android:layout_marginStart="12dp"
         app:layout_constraintTop_toTopOf="@id/btnBack" />
 
     <LinearLayout
@@ -42,7 +45,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="vertical"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintTop_toBottomOf="@id/btnBack">
         
         <TextView
@@ -51,20 +54,20 @@
             android:layout_height="wrap_content"
             android:text="৳0.00"
             android:textColor="@android:color/white"
-            android:textSize="40sp"
+            android:textSize="44sp"
             android:textStyle="bold" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Total Earnings"
-            android:textColor="#E3F2FD"
+            android:text="Total Life-time Earnings"
+            android:textColor="#E0E0E0"
             android:textSize="14sp"
-            android:alpha="0.8" />
+            android:alpha="0.9" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="28dp"
             android:orientation="horizontal"
             android:paddingHorizontal="24dp">
 
@@ -80,21 +83,20 @@
                     android:layout_height="wrap_content"
                     android:text="৳0.00"
                     android:textColor="@android:color/white"
-                    android:textSize="18sp"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="This Month"
-                    android:textColor="#E3F2FD"
-                    android:textSize="12sp"
-                    android:alpha="0.7" />
+                    android:textColor="#E0E0E0"
+                    android:textSize="12sp" />
             </LinearLayout>
 
             <View
                 android:layout_width="1dp"
-                android:layout_height="30dp"
-                android:background="#40FFFFFF"
+                android:layout_height="32dp"
+                android:background="#4DFFFFFF"
                 android:layout_gravity="center" />
 
             <LinearLayout
@@ -109,43 +111,43 @@
                     android:layout_height="wrap_content"
                     android:text="৳0.00"
                     android:textColor="@android:color/white"
-                    android:textSize="18sp"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Pending"
-                    android:textColor="#E3F2FD"
-                    android:textSize="12sp"
-                    android:alpha="0.7" />
+                    android:textColor="#E0E0E0"
+                    android:textSize="12sp" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/contentCard"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="16dp"
-        app:cardCornerRadius="24dp"
-        app:cardElevation="4dp"
+        android:layout_marginTop="24dp"
+        app:cardCornerRadius="28dp"
+        app:cardElevation="2dp"
+        app:strokeWidth="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/statsLayout"
-        android:layout_marginBottom="-24dp">
+        android:layout_marginBottom="-32dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:paddingTop="24dp"
-            android:paddingBottom="24dp">
+            android:paddingTop="28dp"
+            android:paddingBottom="48dp">
 
             <com.google.android.material.chip.ChipGroup
                 android:id="@+id/chipGroupFilter"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="24dp"
-                android:layout_marginTop="8dp"
                 app:singleSelection="true"
                 app:selectionRequired="true">
                 <com.google.android.material.chip.Chip
@@ -173,18 +175,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
-                android:layout_marginTop="24dp"
-                android:text="Recent Transactions"
-                android:textColor="#1565C0"
+                android:layout_marginTop="28dp"
+                android:text="History"
+                android:textColor="#212121"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvEarnings"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="16dp"
                 android:clipToPadding="false"
-                android:paddingBottom="40dp" />
+                android:paddingBottom="24dp" />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 

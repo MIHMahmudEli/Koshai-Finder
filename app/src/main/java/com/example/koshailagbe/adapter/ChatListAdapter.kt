@@ -36,9 +36,17 @@ class ChatListAdapter(
         val sdf = SimpleDateFormat("hh:mm a", Locale.getDefault())
         binding.tvTime.text = sdf.format(room.lastTimestamp.toDate())
 
+        // Dynamic background colors for better separation
+        val colors = listOf(
+            "#F1F8E9", "#E3F2FD", "#FCE4EC", "#FFF3E0", "#F3E5F5", "#E0F2F1", "#E8EAF6", "#EFEBE9"
+        )
+        val colorIndex = Math.abs(otherUserId.hashCode()) % colors.size
+        binding.cardContainer.setCardBackgroundColor(android.graphics.Color.parseColor(colors[colorIndex]))
+
         Glide.with(holder.itemView.context)
             .load(room.userPhotos[otherUserId])
-            .placeholder(R.drawable.bg_dashboard_header)
+            .placeholder(R.drawable.ic_profile)
+            .error(R.drawable.ic_profile)
             .into(binding.ivProfile)
 
         binding.root.setOnClickListener { onItemClick(room) }

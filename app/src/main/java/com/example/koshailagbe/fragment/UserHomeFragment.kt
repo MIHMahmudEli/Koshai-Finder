@@ -29,6 +29,8 @@ class UserHomeFragment : Fragment() {
     private lateinit var nearbyAdapter: KoshaiDiscoveryAdapter
     
     private var allKoshais = listOf<KoshaiProfile>()
+    private var userDistrict: String? = null
+    private var userUpazila: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,9 +42,10 @@ class UserHomeFragment : Fragment() {
 
         setupRecyclerViews()
         setupSearch()
+        setupChips()
         setupLogout()
         fetchKoshais()
-        loadUserProfileImage()
+        loadUserProfile()
 
         return binding.root
     }
@@ -77,10 +80,60 @@ class UserHomeFragment : Fragment() {
         })
     }
 
+    private fun setupChips() {
+        binding.chipAll.setOnClickListener { filterKoshais(null) }
+        binding.chipCattleExpert.setOnClickListener { filterByCategory("cattle") }
+        binding.chipGoatSheep.setOnClickListener { filterByCategory("goat") }
+        binding.chipNearby.setOnClickListener { filterNearby() }
+    }
+
+    private fun filterByCategory(category: String) {
+        val filtered = when (category) {
+            "cattle" -> allKoshais.filter { it.ratePerCow > 0 }
+            "goat" -> allKoshais.filter { it.ratePerGoat > 0 || it.ratePerSheep > 0 }
+            else -> allKoshais
+        }
+        updateDiscoveryLists(filtered)
+    }
+
+    private fun filterNearby() {
+        if (userDistrict == null) {
+            updateDiscoveryLists(allKoshais)
+            return
+        }
+        val filtered = allKoshais.filter {
+            it.district.contains(userDistrict!!, ignoreCase = true) ||
+            it.upazila.contains(userUpazila ?: "", ignoreCase = true)
+        }
+        updateDiscoveryLists(filtered)
+    }
+
+    private fun updateDiscoveryLists(list: List<KoshaiProfile>) {
+        nearbyAdapter.updateList(list)
+        
+        // Toggle visibility of empty state
+        if (list.isEmpty()) {
+            binding.emptyStateView.visibility = View.VISIBLE
+            binding.rvNearby.visibility = View.GONE
+            binding.sectionTopRated.visibility = View.GONE
+            binding.rvTopRated.visibility = View.GONE
+            binding.lblNearby.visibility = View.GONE
+        } else {
+            binding.emptyStateView.visibility = View.GONE
+            binding.rvNearby.visibility = View.VISIBLE
+            binding.sectionTopRated.visibility = View.VISIBLE
+            binding.rvTopRated.visibility = View.VISIBLE
+            binding.lblNearby.visibility = View.VISIBLE
+            
+            // Only update top rated if it's the "All" view or if results are plenty
+            val topRated = list.sortedByDescending { it.rating }.take(5)
+            topRatedAdapter.updateList(topRated)
+        }
+    }
+
     private fun filterKoshais(query: String?) {
         if (query.isNullOrEmpty()) {
-            topRatedAdapter.updateList(allKoshais.sortedByDescending { it.rating }.take(5))
-            nearbyAdapter.updateList(allKoshais)
+            updateDiscoveryLists(allKoshais)
             return
         }
 
@@ -90,26 +143,26 @@ class UserHomeFragment : Fragment() {
             it.name.contains(query, ignoreCase = true)
         }
         
-        nearbyAdapter.updateList(filtered)
+        updateDiscoveryLists(filtered)
     }
 
     private fun fetchKoshais() {
+        binding.progressBar.visibility = View.VISIBLE
         db.collection("koshais")
             .get()
             .addOnSuccessListener { snapshots ->
                 if (!isAdded) return@addOnSuccessListener
+                binding.progressBar.visibility = View.GONE
                 
                 allKoshais = snapshots.documents.mapNotNull { doc ->
                     doc.toObject(KoshaiProfile::class.java)?.apply { id = doc.id }
                 }
                 
-                // Top Rated: Sorted by rating
-                val topRated = allKoshais.sortedByDescending { it.rating }.take(5)
-                topRatedAdapter.updateList(topRated)
-                
-                // Available: Sorted by status (Online first)
-                val sorted = allKoshais.sortedWith(compareByDescending<KoshaiProfile> { it.status == "online" }.thenByDescending { it.rating })
-                nearbyAdapter.updateList(sorted)
+                updateDiscoveryLists(allKoshais)
+            }
+            .addOnFailureListener {
+                if (!isAdded) return@addOnFailureListener
+                binding.progressBar.visibility = View.GONE
             }
     }
 
@@ -144,11 +197,15 @@ class UserHomeFragment : Fragment() {
         }
     }
 
-    private fun loadUserProfileImage() {
+    private fun loadUserProfile() {
         val uid = auth.currentUser?.uid ?: return
         db.collection("users").document(uid).get()
             .addOnSuccessListener { doc ->
                 if (!isAdded) return@addOnSuccessListener
+                
+                userDistrict = doc.getString("district")
+                userUpazila = doc.getString("upazila")
+                
                 val photoUrl = doc.getString("photoUrl")
                 Glide.with(this)
                     .load(photoUrl)

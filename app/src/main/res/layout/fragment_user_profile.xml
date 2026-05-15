@@ -21,7 +21,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="48dp"
         android:background="@drawable/bg_glass_card"
-        app:icon="@android:drawable/ic_menu_revert"
+        app:icon="@drawable/ic_back"
         app:iconPadding="0dp"
         app:iconTint="@android:color/white"
         app:layout_constraintStart_toStartOf="parent"
@@ -46,8 +46,8 @@
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:layout_marginTop="-60dp"
-        android:background="@android:color/white"
-        android:padding="4dp"
+        android:background="@drawable/bg_glass_card"
+        android:padding="6dp"
         android:src="@drawable/ic_profile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -104,7 +104,7 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:src="@android:drawable/ic_menu_call"
-                    app:tint="#1565C0" />
+                    app:tint="#1A237E" />
                 <TextView
                     android:id="@+id/tvPhone"
                     android:layout_width="wrap_content"
@@ -130,7 +130,7 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:src="@android:drawable/ic_dialog_map"
-                    app:tint="#1565C0" />
+                    app:tint="#1A237E" />
                 <TextView
                     android:id="@+id/tvLocation"
                     android:layout_width="wrap_content"
@@ -148,13 +148,15 @@
         android:id="@+id/btnLogout"
         style="@style/Widget.Material3.Button.TonalButton"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="64dp"
         android:layout_marginHorizontal="24dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="40dp"
         android:text="Logout"
         android:textColor="#C62828"
+        android:textSize="16sp"
+        android:textStyle="bold"
         app:backgroundTint="#FEEBEE"
-        app:cornerRadius="16dp"
+        app:cornerRadius="20dp"
         app:icon="@android:drawable/ic_lock_power_off"
         app:iconTint="#C62828"
         app:layout_constraintTop_toBottomOf="@id/infoCard" />

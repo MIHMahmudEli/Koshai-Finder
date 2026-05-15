@@ -77,6 +77,9 @@ class EditProfileFragment : Fragment() {
                 
                 binding.etName.setText(doc.getString("name"))
                 binding.etPhone.setText(doc.getString("phone"))
+                binding.etDistrict.setText(doc.getString("district"))
+                binding.etUpazila.setText(doc.getString("upazila"))
+                
                 if (userRole == SharedPrefsHelper.ROLE_KOSHAI) {
                     binding.etBio.setText(doc.getString("bio"))
                 }
@@ -107,10 +110,12 @@ class EditProfileFragment : Fragment() {
     private fun saveProfile() {
         val name = binding.etName.text.toString().trim()
         val phone = binding.etPhone.text.toString().trim()
+        val district = binding.etDistrict.text.toString().trim()
+        val upazila = binding.etUpazila.text.toString().trim()
         val bio = if (userRole == SharedPrefsHelper.ROLE_KOSHAI) binding.etBio.text.toString().trim() else null
 
-        if (name.isEmpty()) {
-            showSnackBar("Name cannot be empty", isError = true)
+        if (name.isEmpty() || district.isEmpty() || upazila.isEmpty()) {
+            showSnackBar("Name and Location cannot be empty", isError = true)
             return
         }
 
@@ -118,13 +123,13 @@ class EditProfileFragment : Fragment() {
         binding.progressBar.visibility = View.VISIBLE
 
         if (imageUri != null) {
-            uploadImageAndSave(name, phone, bio)
+            uploadImageAndSave(name, phone, district, upazila, bio)
         } else {
-            updateFirestore(name, phone, bio, currentPhotoUrl)
+            updateFirestore(name, phone, district, upazila, bio, currentPhotoUrl)
         }
     }
 
-    private fun uploadImageAndSave(name: String, phone: String, bio: String?) {
+    private fun uploadImageAndSave(name: String, phone: String, district: String, upazila: String, bio: String?) {
         val uid = auth.currentUser?.uid ?: return
         val ref = storage.reference.child("profile_photos/$uid.jpg")
 
@@ -132,7 +137,7 @@ class EditProfileFragment : Fragment() {
             ref.putFile(uri)
                 .addOnSuccessListener {
                     ref.downloadUrl.addOnSuccessListener { downloadUri ->
-                        updateFirestore(name, phone, bio, downloadUri.toString())
+                        updateFirestore(name, phone, district, upazila, bio, downloadUri.toString())
                     }
                 }
                 .addOnFailureListener {
@@ -143,13 +148,15 @@ class EditProfileFragment : Fragment() {
         }
     }
 
-    private fun updateFirestore(name: String, phone: String, bio: String?, photoUrl: String?) {
+    private fun updateFirestore(name: String, phone: String, district: String, upazila: String, bio: String?, photoUrl: String?) {
         val uid = auth.currentUser?.uid ?: return
         val collection = if (userRole == SharedPrefsHelper.ROLE_KOSHAI) "koshais" else "users"
 
         val updates = mutableMapOf<String, Any>(
             "name" to name,
-            "phone" to phone
+            "phone" to phone,
+            "district" to district,
+            "upazila" to upazila
         )
         photoUrl?.let { updates["photoUrl"] = it }
         bio?.let { updates["bio"] = it }
