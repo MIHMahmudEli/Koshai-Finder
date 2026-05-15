@@ -50,7 +50,13 @@ class BookingDetailFragment : Fragment() {
         binding.btnBack.setOnClickListener { findNavController().popBackStack() }
         
         binding.btnChat.setOnClickListener {
-            showSnackBar("Chat feature coming soon!")
+            booking?.let {
+                val bundle = Bundle().apply {
+                    putString("bookingId", it.id)
+                    putString("receiverId", it.userId)
+                }
+                findNavController().navigate(R.id.action_bookingDetailFragment_to_chatFragment, bundle)
+            }
         }
 
         binding.btnGetDirections.setOnClickListener {

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.koshailagbe.R
 import com.example.koshailagbe.adapter.BookingAdapter
 import com.example.koshailagbe.databinding.FragmentBookingManagerBinding
 import com.example.koshailagbe.model.Booking
