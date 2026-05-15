@@ -112,8 +112,25 @@ class KoshaiDashboardFragment : Fragment() {
                 if (e != null) return@addSnapshotListener
                 
                 koshaiProfile = snapshot?.toObject(KoshaiProfile::class.java)
-                koshaiProfile?.let { updateUI(it) }
+                koshaiProfile?.let { 
+                    updateUI(it)
+                    checkProfileCompletion(it)
+                }
             }
+    }
+
+    private fun checkProfileCompletion(profile: KoshaiProfile) {
+        // If bio is empty or they haven't set their upazila, prompt them
+        if ((profile.bio.isNullOrEmpty() || profile.upazila.isEmpty()) && isAdded) {
+            com.google.android.material.dialog.MaterialAlertDialogBuilder(requireContext())
+                .setTitle("Complete Your Profile")
+                .setMessage("A complete profile helps you get more bookings. Add a bio and specify your exact service area now.")
+                .setPositiveButton("Complete Now") { _, _ ->
+                    findNavController().navigate(R.id.action_koshaiDashboardFragment_to_koshaiProfileFragment)
+                }
+                .setNegativeButton("Later", null)
+                .show()
+        }
     }
 
     private fun updateUI(profile: KoshaiProfile) {

@@ -26,4 +26,12 @@ object SharedPrefsHelper {
     fun clearUserRole(context: Context) {
         getPrefs(context).edit().remove(KEY_USER_ROLE).apply()
     }
+
+    fun isFirstRun(context: Context): Boolean {
+        return getPrefs(context).getBoolean("first_run", true)
+    }
+
+    fun setFirstRunComplete(context: Context) {
+        getPrefs(context).edit().putBoolean("first_run", false).apply()
+    }
 }

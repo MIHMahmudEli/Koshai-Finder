@@ -28,6 +28,7 @@
         app:exitAnim="@anim/slide_out_left"
         app:popEnterAnim="@anim/slide_in_left"
         app:popExitAnim="@anim/slide_out_right" />
+        <action android:id="@+id/action_splashFragment_to_onboardingFragment"    app:destination="@id/onboardingFragment" />
     </fragment>
 
     <!-- Login -->
@@ -410,5 +411,26 @@
         android:id="@+id/leaderboardFragment"
         android:name="com.example.koshailagbe.fragment.LeaderboardFragment"
         android:label="Leaderboard" />
+
+    <!-- Offline Support -->
+    <fragment
+        android:id="@+id/offlineFragment"
+        android:name="com.example.koshailagbe.fragment.OfflineFragment"
+        android:label="No Connection" />
+
+    <fragment
+        android:id="@+id/onboardingFragment"
+        android:name="com.example.koshailagbe.fragment.OnboardingFragment"
+        android:label="Welcome">
+        <action
+            android:id="@+id/action_onboardingFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/onboardingFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 
 </navigation>

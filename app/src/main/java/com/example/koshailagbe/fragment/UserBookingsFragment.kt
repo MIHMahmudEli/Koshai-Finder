@@ -104,7 +104,28 @@ class UserBookingsFragment : Fragment() {
                 }?.sortedByDescending { it.createdAt } ?: emptyList()
 
                 filterAndDisplay()
+                checkForUnreviewedBooking()
             }
+    }
+
+    private fun checkForUnreviewedBooking() {
+        // Find the most recent completed booking that hasn't been reviewed
+        val unreviewed = allBookings.find { it.status == "completed" && !it.isReviewed }
+        if (unreviewed != null && isAdded) {
+            com.google.android.material.dialog.MaterialAlertDialogBuilder(requireContext())
+                .setTitle("How was your experience?")
+                .setMessage("You recently completed a booking with ${unreviewed.koshaiName}. Would you like to leave a review?")
+                .setPositiveButton("Rate Now") { _, _ ->
+                    val bundle = Bundle().apply {
+                        putString("bookingId", unreviewed.id)
+                        putString("koshaiId", unreviewed.koshaiId)
+                        putString("koshaiName", unreviewed.koshaiName)
+                    }
+                    findNavController().navigate(R.id.action_userBookingsFragment_to_reviewFragment, bundle)
+                }
+                .setNegativeButton("Maybe Later", null)
+                .show()
+        }
     }
 
     private fun filterAndDisplay() {

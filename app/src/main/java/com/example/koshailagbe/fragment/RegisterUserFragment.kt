@@ -40,18 +40,26 @@ class RegisterUserFragment : Fragment() {
         val referral = binding.etReferral.text.toString().trim()
         val password = binding.etPassword.text.toString().trim()
 
-        // Validation
-        if (name.isEmpty() || email.isEmpty() || phone.isEmpty() || district.isEmpty() || upazila.isEmpty() || password.isEmpty()) {
-            showSnackBar("Please fill all required fields", isError = true)
-            return
-        }
+        // Strict Validation
+        if (name.length < 3) {
+            binding.tilName.error = "Name must be at least 3 characters"; return
+        } else binding.tilName.error = null
+
         if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             binding.tilEmail.error = "Enter a valid email address"; return
         } else binding.tilEmail.error = null
 
-        if (phone.length < 10) {
-            binding.tilPhone.error = "Enter a valid phone number"; return
+        if (phone.length != 11) {
+            binding.tilPhone.error = "Enter a valid 11-digit phone number"; return
         } else binding.tilPhone.error = null
+
+        if (district.isEmpty()) {
+            binding.tilDistrict.error = "District is required"; return
+        } else binding.tilDistrict.error = null
+
+        if (upazila.isEmpty()) {
+            binding.tilUpazila.error = "Upazila is required"; return
+        } else binding.tilUpazila.error = null
 
         if (password.length < 6) {
             binding.tilPassword.error = "Password must be at least 6 characters"; return

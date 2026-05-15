@@ -17,6 +17,7 @@ import com.example.koshailagbe.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.messaging.FirebaseMessaging
+import androidx.navigation.findNavController
 
 class MainActivity : AppCompatActivity() {
 
@@ -41,6 +42,36 @@ class MainActivity : AppCompatActivity() {
         askNotificationPermission()
         updateFcmToken()
         setupAnnouncementListener()
+        setupBackConfirmation()
+    }
+
+    private fun setupBackConfirmation() {
+        val callback = object : androidx.activity.OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                val navController = findNavController(R.id.nav_host_fragment)
+                val currentDest = navController.currentDestination?.id
+                
+                // Only show confirmation if at root screens
+                if (currentDest == R.id.userHomeFragment || 
+                    currentDest == R.id.koshaiDashboardFragment || 
+                    currentDest == R.id.loginFragment || 
+                    currentDest == R.id.adminHomeFragment) {
+                    
+                    com.google.android.material.dialog.MaterialAlertDialogBuilder(this@MainActivity)
+                        .setTitle("Exit App")
+                        .setMessage("Are you sure you want to exit Koshai Finder?")
+                        .setPositiveButton("Exit") { _, _ -> finish() }
+                        .setNegativeButton("Stay", null)
+                        .show()
+                } else {
+                    // Otherwise, just pop the backstack
+                    isEnabled = false
+                    onBackPressedDispatcher.onBackPressed()
+                    isEnabled = true
+                }
+            }
+        }
+        onBackPressedDispatcher.addCallback(this, callback)
     }
 
     private fun askNotificationPermission() {

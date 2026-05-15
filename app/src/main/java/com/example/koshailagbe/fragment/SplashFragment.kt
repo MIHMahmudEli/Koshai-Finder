@@ -16,22 +16,73 @@ class SplashFragment : Fragment() {
 
     private lateinit var auth: FirebaseAuth
     private lateinit var db: FirebaseFirestore
+    private var _binding: com.example.koshailagbe.databinding.FragmentSplashBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val view = inflater.inflate(R.layout.fragment_splash, container, false)
+        _binding = com.example.koshailagbe.databinding.FragmentSplashBinding.inflate(inflater, container, false)
 
         auth = FirebaseAuth.getInstance()
         db = FirebaseFirestore.getInstance()
 
-        Handler(Looper.getMainLooper()).postDelayed({
-            checkUser()
-        }, 1500)
+        startBrandingAnimations()
 
-        return view
+        Handler(Looper.getMainLooper()).postDelayed({
+            if (com.example.koshailagbe.utils.NetworkUtils.isInternetAvailable(requireContext())) {
+                checkOnboardingAndUser()
+            } else {
+                findNavController().navigate(R.id.offlineFragment)
+            }
+        }, 2500) // Longer delay for animation
+
+        return binding.root
+    }
+
+    private fun startBrandingAnimations() {
+        // Logo entrance: Scale and Fade
+        binding.cardLogo.alpha = 0f
+        binding.cardLogo.scaleX = 0.5f
+        binding.cardLogo.scaleY = 0.5f
+        binding.cardLogo.animate()
+            .alpha(1f)
+            .scaleX(1f)
+            .scaleY(1f)
+            .setDuration(1000)
+            .setInterpolator(android.view.animation.OvershootInterpolator())
+            .start()
+
+        // Text entrance: Slide up and Fade
+        binding.tvAppName.alpha = 0f
+        binding.tvAppName.translationY = 50f
+        binding.tvAppName.animate()
+            .alpha(1f)
+            .translationY(0f)
+            .setDuration(800)
+            .setStartDelay(500)
+            .start()
+
+        binding.tvAppSlogan.alpha = 0f
+        binding.tvAppSlogan.translationY = 30f
+        binding.tvAppSlogan.animate()
+            .alpha(1f)
+            .translationY(0f)
+            .setDuration(800)
+            .setStartDelay(800)
+            .start()
+    }
+
+    private fun checkOnboardingAndUser() {
+        if (!isAdded) return
+        
+        if (com.example.koshailagbe.utils.SharedPrefsHelper.isFirstRun(requireContext())) {
+            findNavController().navigate(R.id.action_splashFragment_to_onboardingFragment)
+        } else {
+            checkUser()
+        }
     }
 
     private fun checkUser() {
@@ -162,5 +213,10 @@ class SplashFragment : Fragment() {
                 .setPopUpTo(R.id.splashFragment, true)
                 .build()
         )
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

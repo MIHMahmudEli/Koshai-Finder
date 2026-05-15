@@ -21,5 +21,6 @@ data class KoshaiProfile(
     var ratePerGoat: Double = 0.0,
     var ratePerSheep: Double = 0.0,
     var isBanned: Boolean = false,
-    var bannedReason: String = ""
+    var bannedReason: String = "",
+    var bio: String = ""
 )
