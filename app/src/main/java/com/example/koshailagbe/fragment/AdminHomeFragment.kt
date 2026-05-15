@@ -36,27 +36,43 @@ class AdminHomeFragment : Fragment() {
     private fun setupStats() {
         val db = com.google.firebase.firestore.FirebaseFirestore.getInstance()
 
-        // Pending Koshais
+        // 1. Koshai Stats (Verified count & Total Jobs & System Earnings)
         db.collection("koshais")
-            .whereEqualTo("isVerified", false)
             .addSnapshotListener { snapshot, _ ->
                 if (!isAdded) return@addSnapshotListener
-                val count = snapshot?.size() ?: 0
-                binding.tvPendingCount.text = "$count pending registrations"
+                val docs = snapshot?.documents ?: emptyList()
+                
+                val verifiedCount = docs.count { it.getBoolean("isVerified") == true }
+                val totalJobs = docs.sumOf { it.getLong("totalJobs") ?: 0L }
+                val totalEarnings = docs.sumOf { it.getDouble("earnings") ?: 0.0 }
+                
+                binding.tvTotalVerified.text = verifiedCount.toString()
+                binding.tvCompletedJobs.text = totalJobs.toString()
+                binding.tvTotalEarnings.text = "৳${String.format("%.0f", totalEarnings)}"
+                
+                // Also update the pending count for the verification card
+                val pendingCount = docs.count { it.getBoolean("isVerified") == false }
+                binding.tvPendingCount.text = "$pendingCount pending registrations"
             }
 
-        // Total Users
+        // 2. User Stats
         db.collection("users")
             .addSnapshotListener { snapshot, _ ->
                 if (!isAdded) return@addSnapshotListener
                 binding.tvTotalUsers.text = (snapshot?.size() ?: 0).toString()
             }
 
-        // Total Koshais
-        db.collection("koshais")
+        // 3. Booking Activity (Pending vs Active)
+        db.collection("bookings")
             .addSnapshotListener { snapshot, _ ->
                 if (!isAdded) return@addSnapshotListener
-                binding.tvTotalKoshais.text = (snapshot?.size() ?: 0).toString()
+                val docs = snapshot?.documents ?: emptyList()
+                
+                val pending = docs.count { it.getString("status") == "pending" }
+                val active = docs.count { it.getString("status") == "accepted" }
+                
+                binding.tvPendingBookings.text = pending.toString()
+                binding.tvActiveBookings.text = active.toString()
             }
     }
 
