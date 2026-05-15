@@ -18,5 +18,6 @@ data class Booking(
     var isGroupBooking: Boolean = false,
     var userName: String = "",
     var koshaiName: String = "",
-    var createdAt: Timestamp = Timestamp.now()
+    var createdAt: Timestamp = Timestamp.now(),
+    var isReviewed: Boolean = false
 )

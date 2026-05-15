@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.koshailagbe.R
 import com.example.koshailagbe.adapter.UserBookingsAdapter
 import com.example.koshailagbe.databinding.FragmentUserBookingsBinding
 import com.example.koshailagbe.model.Booking
@@ -41,9 +42,20 @@ class UserBookingsFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        adapter = UserBookingsAdapter(emptyList()) { booking ->
-            // Optionally navigate to a booking detail screen
-        }
+        adapter = UserBookingsAdapter(
+            emptyList(),
+            onItemClick = { booking ->
+                // Optionally navigate to a booking detail screen
+            },
+            onReviewClick = { booking ->
+                val bundle = Bundle().apply {
+                    putString("bookingId", booking.id)
+                    putString("koshaiId", booking.koshaiId)
+                    putString("koshaiName", booking.koshaiName)
+                }
+                findNavController().navigate(R.id.action_userBookingsFragment_to_reviewFragment, bundle)
+            }
+        )
         binding.rvUserBookings.layoutManager = LinearLayoutManager(requireContext())
         binding.rvUserBookings.adapter = adapter
     }

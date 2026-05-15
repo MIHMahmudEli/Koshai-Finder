@@ -102,7 +102,26 @@
     <fragment
         android:id="@+id/userBookingsFragment"
         android:name="com.example.koshailagbe.fragment.UserBookingsFragment"
-        android:label="My Bookings" />
+        android:label="My Bookings">
+        <action
+            android:id="@+id/action_userBookingsFragment_to_reviewFragment"
+            app:destination="@id/reviewFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/reviewFragment"
+        android:name="com.example.koshailagbe.fragment.ReviewFragment"
+        android:label="Rate Koshai">
+        <argument
+            android:name="bookingId"
+            app:argType="string" />
+        <argument
+            android:name="koshaiId"
+            app:argType="string" />
+        <argument
+            android:name="koshaiName"
+            app:argType="string" />
+    </fragment>
 
     <fragment
         android:id="@+id/chatListFragment"

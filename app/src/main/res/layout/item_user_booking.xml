@@ -111,5 +111,16 @@
                 android:textSize="16sp" />
         </RelativeLayout>
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnReview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Rate &amp; Review"
+            android:visibility="gone"
+            app:cornerRadius="12dp"
+            app:backgroundTint="#1565C0"
+            style="@style/Widget.MaterialComponents.Button.UnelevatedButton"/>
+
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

@@ -7,9 +7,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.koshailagbe.R
+import com.example.koshailagbe.adapter.ReviewAdapter
 import com.example.koshailagbe.databinding.FragmentUserKoshaiDetailBinding
 import com.example.koshailagbe.model.KoshaiProfile
+import com.example.koshailagbe.model.Review
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 
 class UserKoshaiDetailFragment : Fragment() {
 
@@ -19,6 +22,7 @@ class UserKoshaiDetailFragment : Fragment() {
     private var koshaiId: String? = null
     private lateinit var db: FirebaseFirestore
     private var koshaiProfile: KoshaiProfile? = null
+    private lateinit var reviewAdapter: ReviewAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,10 +34,31 @@ class UserKoshaiDetailFragment : Fragment() {
         koshaiId = arguments?.getString("koshaiId")
         
         setupToolbar()
+        setupReviewsRecyclerView()
         loadKoshaiData()
+        loadReviews()
         setupActions()
 
         return binding.root
+    }
+
+    private fun setupReviewsRecyclerView() {
+        reviewAdapter = ReviewAdapter(emptyList())
+        binding.rvReviews.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(requireContext())
+        binding.rvReviews.adapter = reviewAdapter
+    }
+
+    private fun loadReviews() {
+        val id = koshaiId ?: return
+        db.collection("koshais").document(id).collection("reviews")
+            .orderBy("timestamp", com.google.firebase.firestore.Query.Direction.DESCENDING)
+            .addSnapshotListener { snapshot, e ->
+                if (!isAdded) return@addSnapshotListener
+                if (e != null) return@addSnapshotListener
+                
+                val reviews = snapshot?.documents?.mapNotNull { it.toObject(Review::class.java) } ?: emptyList()
+                reviewAdapter.updateList(reviews)
+            }
     }
 
     private fun setupToolbar() {

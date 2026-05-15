@@ -12,7 +12,8 @@ import java.util.*
 
 class UserBookingsAdapter(
     private var bookings: List<Booking>,
-    private val onItemClick: (Booking) -> Unit
+    private val onItemClick: (Booking) -> Unit,
+    private val onReviewClick: (Booking) -> Unit
 ) : RecyclerView.Adapter<UserBookingsAdapter.BookingViewHolder>() {
 
     inner class BookingViewHolder(val binding: ItemUserBookingBinding) : RecyclerView.ViewHolder(binding.root)
@@ -50,6 +51,14 @@ class UserBookingsAdapter(
         }
         binding.tvStatus.backgroundTintList = ColorStateList.valueOf(Color.parseColor(color))
 
+        // Review button visibility
+        if (booking.status == "completed" && !booking.isReviewed) {
+            binding.btnReview.visibility = android.view.View.VISIBLE
+        } else {
+            binding.btnReview.visibility = android.view.View.GONE
+        }
+
+        binding.btnReview.setOnClickListener { onReviewClick(booking) }
         binding.root.setOnClickListener { onItemClick(booking) }
     }
 

@@ -8,14 +8,18 @@ import com.example.koshailagbe.model.Review
 import java.text.SimpleDateFormat
 import java.util.*
 
-class ReviewAdapter(
-    private var reviews: List<Review>
-) : RecyclerView.Adapter<ReviewAdapter.ReviewViewHolder>() {
+class ReviewAdapter(private var reviews: List<Review>) :
+    RecyclerView.Adapter<ReviewAdapter.ReviewViewHolder>() {
 
-    inner class ReviewViewHolder(val binding: ItemReviewBinding) : RecyclerView.ViewHolder(binding.root)
+    inner class ReviewViewHolder(val binding: ItemReviewBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReviewViewHolder {
-        val binding = ItemReviewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemReviewBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
+        )
         return ReviewViewHolder(binding)
     }
 
@@ -27,7 +31,7 @@ class ReviewAdapter(
         binding.ratingBar.rating = review.rating
         binding.tvComment.text = review.comment
         
-        val sdf = SimpleDateFormat("dd MMM yyyy", Locale.getDefault())
+        val sdf = SimpleDateFormat("MMM dd, yyyy", Locale.getDefault())
         binding.tvDate.text = sdf.format(review.timestamp.toDate())
     }
 
