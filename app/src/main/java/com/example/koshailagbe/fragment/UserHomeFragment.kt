@@ -148,22 +148,18 @@ class UserHomeFragment : Fragment() {
 
     private fun fetchKoshais() {
         binding.progressBar.visibility = View.VISIBLE
-        db.collection("koshais")
-            .get()
-            .addOnSuccessListener { snapshots ->
-                if (!isAdded) return@addOnSuccessListener
-                binding.progressBar.visibility = View.GONE
-                
-                allKoshais = snapshots.documents.mapNotNull { doc ->
-                    doc.toObject(KoshaiProfile::class.java)?.apply { id = doc.id }
-                }
-                
-                updateDiscoveryLists(allKoshais)
+        db.collection("koshais").addSnapshotListener { snapshots, e ->
+            if (!isAdded) return@addSnapshotListener
+            binding.progressBar.visibility = View.GONE
+            
+            if (e != null || snapshots == null) return@addSnapshotListener
+            
+            allKoshais = snapshots.documents.mapNotNull { doc ->
+                doc.toObject(KoshaiProfile::class.java)?.apply { id = doc.id }
             }
-            .addOnFailureListener {
-                if (!isAdded) return@addOnFailureListener
-                binding.progressBar.visibility = View.GONE
-            }
+            
+            updateDiscoveryLists(allKoshais)
+        }
     }
 
     private fun navigateToDetail(koshai: KoshaiProfile) {

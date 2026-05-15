@@ -67,20 +67,37 @@ class UserKoshaiDetailFragment : Fragment() {
 
     private fun loadKoshaiData() {
         val id = koshaiId ?: return
-        db.collection("koshais").document(id).get()
-            .addOnSuccessListener { doc ->
-                if (!isAdded) return@addOnSuccessListener
-                koshaiProfile = doc.toObject(KoshaiProfile::class.java)?.apply { this.id = doc.id }
-                koshaiProfile?.let { updateUI(it, doc) }
+        db.collection("koshais").document(id).addSnapshotListener { snapshot, e ->
+            if (!isAdded || e != null) return@addSnapshotListener
+            
+            snapshot?.let { doc ->
+                if (doc.exists()) {
+                    koshaiProfile = doc.toObject(KoshaiProfile::class.java)?.apply { this.id = doc.id }
+                    koshaiProfile?.let { updateUI(it, doc) }
+                }
             }
+        }
     }
 
     private fun updateUI(profile: KoshaiProfile, doc: com.google.firebase.firestore.DocumentSnapshot) {
-        binding.tvName.text = profile.name
-        binding.tvCowRate.text = "৳${String.format("%.0f", profile.ratePerCow)}"
-        binding.tvGoatRate.text = "৳${String.format("%.0f", profile.ratePerGoat)}"
-        binding.tvFullLocation.text = "📍 Available in ${profile.upazila}, ${profile.district}"
-        binding.tvLocation.text = "${profile.upazila}, ${profile.district}"
+        binding.tvName.text = doc.getString("name") ?: profile.name
+
+        // Read numeric fields directly from snapshot to avoid Int→Long deserialization issues
+        val rating = doc.getDouble("rating") ?: 0.0
+        val totalJobs = doc.getLong("totalJobs") ?: 0L
+
+        binding.tvRating.text = String.format("%.1f", rating)
+        binding.tvJobCount.text = totalJobs.toString()
+
+        val cowRate = doc.getDouble("ratePerCow") ?: 0.0
+        val goatRate = doc.getDouble("ratePerGoat") ?: 0.0
+        binding.tvCowRate.text = "৳${String.format("%.0f", cowRate)}"
+        binding.tvGoatRate.text = "৳${String.format("%.0f", goatRate)}"
+
+        val upazila = doc.getString("upazila") ?: ""
+        val district = doc.getString("district") ?: ""
+        binding.tvFullLocation.text = "📍 Available in $upazila, $district"
+        binding.tvLocation.text = "$upazila, $district"
 
         // Show About card only if bio is available
         val bio = doc.getString("bio")?.trim()

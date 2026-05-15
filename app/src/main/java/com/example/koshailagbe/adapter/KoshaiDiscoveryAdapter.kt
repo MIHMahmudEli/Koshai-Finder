@@ -61,6 +61,7 @@ class KoshaiDiscoveryAdapter(
             holder.binding.tvName.text = koshai.name
             holder.binding.tvLocation.text = "${koshai.upazila}, ${koshai.district}"
             holder.binding.tvRating.text = String.format("%.1f", koshai.rating)
+            holder.binding.tvJobs.text = "(${koshai.totalJobs})"
             holder.binding.tvPrice.text = "৳${String.format("%.0f", koshai.ratePerCow)}"
 
             Glide.with(holder.itemView.context)
