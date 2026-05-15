@@ -19,5 +19,7 @@ data class KoshaiProfile(
     var earnings: Double = 0.0,  // Double to match Firestore FieldValue.increment()
     var ratePerCow: Double = 0.0,
     var ratePerGoat: Double = 0.0,
-    var ratePerSheep: Double = 0.0
+    var ratePerSheep: Double = 0.0,
+    var isBanned: Boolean = false,
+    var bannedReason: String = ""
 )

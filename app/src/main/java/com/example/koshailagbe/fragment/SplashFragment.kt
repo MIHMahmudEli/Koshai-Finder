@@ -79,6 +79,11 @@ class SplashFragment : Fragment() {
                         .addOnSuccessListener { userDoc ->
                             if (!isAdded) return@addOnSuccessListener
                             if (userDoc.exists()) {
+                                if (userDoc.getBoolean("isBanned") == true) {
+                                    auth.signOut()
+                                    goToLogin()
+                                    return@addOnSuccessListener
+                                }
                                 com.example.koshailagbe.utils.SharedPrefsHelper.saveUserRole(requireContext(), com.example.koshailagbe.utils.SharedPrefsHelper.ROLE_USER)
                                 navigate(R.id.action_splashFragment_to_userHomeFragment)
                             } else {
@@ -87,7 +92,12 @@ class SplashFragment : Fragment() {
                                     .addOnSuccessListener { koshaiDoc ->
                                         if (!isAdded) return@addOnSuccessListener
                                         when {
-                                            koshaiDoc.exists() -> {
+                                        koshaiDoc.exists() -> {
+                                            if (koshaiDoc.getBoolean("isBanned") == true) {
+                                                auth.signOut()
+                                                goToLogin()
+                                                return@addOnSuccessListener
+                                            }
                                             com.example.koshailagbe.utils.SharedPrefsHelper.saveUserRole(requireContext(), com.example.koshailagbe.utils.SharedPrefsHelper.ROLE_KOSHAI)
                                             navigate(R.id.action_splashFragment_to_koshaiDashboardFragment)
                                         }

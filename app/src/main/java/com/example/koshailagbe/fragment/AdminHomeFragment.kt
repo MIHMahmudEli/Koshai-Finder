@@ -30,6 +30,10 @@ class AdminHomeFragment : Fragment() {
             findNavController().navigate(R.id.action_adminHomeFragment_to_adminKoshaiVerificationFragment)
         }
 
+        binding.cardManagement.setOnClickListener {
+            findNavController().navigate(R.id.action_adminHomeFragment_to_adminUserManagementFragment)
+        }
+
         return binding.root
     }
 

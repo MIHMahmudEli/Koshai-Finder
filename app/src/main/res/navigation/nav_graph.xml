@@ -324,11 +324,21 @@
             app:destination="@id/adminKoshaiVerificationFragment"
             app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_adminHomeFragment_to_adminUserManagementFragment"
+            app:destination="@id/adminUserManagementFragment"
+            app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <fragment
         android:id="@+id/adminKoshaiVerificationFragment"
         android:name="com.example.koshailagbe.fragment.AdminKoshaiVerificationFragment"
         android:label="Verification Queue" />
+
+    <fragment
+        android:id="@+id/adminUserManagementFragment"
+        android:name="com.example.koshailagbe.fragment.AdminUserManagementFragment"
+        android:label="Account Management" />
 
 </navigation>

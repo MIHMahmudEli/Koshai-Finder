@@ -131,6 +131,12 @@ class LoginFragment : Fragment() {
                         .addOnSuccessListener { userDoc ->
                             if (!isAdded) return@addOnSuccessListener
                             if (userDoc.exists()) {
+                                if (userDoc.getBoolean("isBanned") == true) {
+                                    resetLoginButton()
+                                    showSnackBar("Your account is banned. Contact support.", isError = true)
+                                    auth.signOut()
+                                    return@addOnSuccessListener
+                                }
                                 com.example.koshailagbe.utils.SharedPrefsHelper.saveUserRole(requireContext(), com.example.koshailagbe.utils.SharedPrefsHelper.ROLE_USER)
                                 findNavController().navigate(
                                     R.id.action_loginFragment_to_userHomeFragment,
@@ -143,6 +149,12 @@ class LoginFragment : Fragment() {
                                     .addOnSuccessListener { koshaiDoc ->
                                         if (!isAdded) return@addOnSuccessListener
                                         if (koshaiDoc.exists()) {
+                                            if (koshaiDoc.getBoolean("isBanned") == true) {
+                                                resetLoginButton()
+                                                showSnackBar("Your account is banned. Contact support.", isError = true)
+                                                auth.signOut()
+                                                return@addOnSuccessListener
+                                            }
                                             com.example.koshailagbe.utils.SharedPrefsHelper.saveUserRole(requireContext(), com.example.koshailagbe.utils.SharedPrefsHelper.ROLE_KOSHAI)
                                             findNavController().navigate(
                                                 R.id.action_loginFragment_to_koshaiDashboardFragment,
