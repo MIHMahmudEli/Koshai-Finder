@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primary_green">
+    android:background="@drawable/bg_login_gradient">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -16,21 +16,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- Optional icon placeholder, we can use an emoji or vector if available. For now, text is central. -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Koshai Finder"
             android:textSize="48sp"
             android:textStyle="bold"
-            android:textColor="@color/white" />
+            android:textColor="@android:color/white" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="কোশাই ফাইন্ডার বাংলাদেশ"
             android:textSize="20sp"
-            android:textColor="@color/light_green"
+            android:textColor="#E0E0E0"
             android:layout_marginTop="8dp" />
             
     </LinearLayout>
@@ -38,10 +37,10 @@
     <ProgressBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:indeterminateTint="@color/light_green"
+        android:indeterminateTint="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="48dp" />
+        android:layout_marginBottom="64dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

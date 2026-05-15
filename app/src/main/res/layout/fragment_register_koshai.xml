@@ -16,42 +16,45 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="48dp"
             android:text="Koshai Partner"
-            android:textColor="@color/primary_green"
-            android:textSize="28sp"
+            android:textColor="@android:color/white"
+            android:textSize="32sp"
             android:textStyle="bold" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="32dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="40dp"
             android:text="Join our network of professional Koshais"
-            android:textColor="@color/gray_text"
+            android:textColor="#E0E0E0"
             android:textSize="14sp" />
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="24dp"
-            app:cardElevation="4dp"
+            app:cardBackgroundColor="@android:color/transparent"
+            app:cardCornerRadius="28dp"
+            app:cardElevation="0dp"
             app:strokeWidth="0dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/bg_glass_card"
                 android:orientation="vertical"
-                android:padding="24dp">
+                android:padding="28dp">
 
                 <!-- Section: Personal Info -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="12dp"
+                    android:layout_marginBottom="16dp"
                     android:text="Personal Information"
-                    android:textColor="@color/primary_green"
-                    android:textSize="13sp"
+                    android:textColor="@android:color/white"
+                    android:textSize="14sp"
                     android:textStyle="bold" />
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -61,12 +64,17 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
                     android:hint="Full Name"
-                    app:startIconDrawable="@android:drawable/ic_menu_edit">
+                    android:textColorHint="#BDBDBD"
+                    app:boxStrokeColor="@android:color/white"
+                    app:hintTextColor="@android:color/white"
+                    app:startIconDrawable="@android:drawable/ic_menu_edit"
+                    app:startIconTint="@android:color/white">
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="textPersonName" />
+                        android:inputType="textPersonName"
+                        android:textColor="@android:color/white" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -76,12 +84,17 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
                     android:hint="Email Address"
-                    app:startIconDrawable="@android:drawable/sym_action_email">
+                    android:textColorHint="#BDBDBD"
+                    app:boxStrokeColor="@android:color/white"
+                    app:hintTextColor="@android:color/white"
+                    app:startIconDrawable="@android:drawable/sym_action_email"
+                    app:startIconTint="@android:color/white">
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etEmail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="textEmailAddress" />
+                        android:inputType="textEmailAddress"
+                        android:textColor="@android:color/white" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -91,14 +104,20 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
                     android:hint="Phone Number"
+                    android:textColorHint="#BDBDBD"
+                    app:boxStrokeColor="@android:color/white"
+                    app:hintTextColor="@android:color/white"
                     app:prefixText="+88 "
-                    app:startIconDrawable="@android:drawable/ic_menu_call">
+                    app:prefixTextColor="@android:color/white"
+                    app:startIconDrawable="@android:drawable/ic_menu_call"
+                    app:startIconTint="@android:color/white">
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etPhone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="phone"
-                        android:maxLength="11" />
+                        android:maxLength="11"
+                        android:textColor="@android:color/white" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <LinearLayout
@@ -114,12 +133,16 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
                         android:layout_weight="1"
-                        android:hint="District">
+                        android:hint="District"
+                        android:textColorHint="#BDBDBD"
+                        app:boxStrokeColor="@android:color/white"
+                        app:hintTextColor="@android:color/white">
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/etDistrict"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:inputType="text" />
+                            android:inputType="text"
+                            android:textColor="@android:color/white" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -129,12 +152,16 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_weight="1"
-                        android:hint="Upazila">
+                        android:hint="Upazila"
+                        android:textColorHint="#BDBDBD"
+                        app:boxStrokeColor="@android:color/white"
+                        app:hintTextColor="@android:color/white">
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/etUpazila"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:inputType="text" />
+                            android:inputType="text"
+                            android:textColor="@android:color/white" />
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
 
@@ -142,11 +169,11 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="12dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
                     android:text="Service Rates"
-                    android:textColor="@color/primary_green"
-                    android:textSize="13sp"
+                    android:textColor="@android:color/white"
+                    android:textSize="14sp"
                     android:textStyle="bold" />
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -156,12 +183,17 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="12dp"
                     android:hint="Rate per Cow"
-                    app:suffixText="৳">
+                    android:textColorHint="#BDBDBD"
+                    app:boxStrokeColor="@android:color/white"
+                    app:hintTextColor="@android:color/white"
+                    app:suffixText="৳"
+                    app:suffixTextColor="@android:color/white">
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etRateCow"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="numberDecimal" />
+                        android:inputType="numberDecimal"
+                        android:textColor="@android:color/white" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -171,12 +203,17 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="12dp"
                     android:hint="Rate per Goat"
-                    app:suffixText="৳">
+                    android:textColorHint="#BDBDBD"
+                    app:boxStrokeColor="@android:color/white"
+                    app:hintTextColor="@android:color/white"
+                    app:suffixText="৳"
+                    app:suffixTextColor="@android:color/white">
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etRateGoat"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="numberDecimal" />
+                        android:inputType="numberDecimal"
+                        android:textColor="@android:color/white" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -184,14 +221,19 @@
                     style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
+                    android:layout_marginBottom="24dp"
                     android:hint="Rate per Sheep"
-                    app:suffixText="৳">
+                    android:textColorHint="#BDBDBD"
+                    app:boxStrokeColor="@android:color/white"
+                    app:hintTextColor="@android:color/white"
+                    app:suffixText="৳"
+                    app:suffixTextColor="@android:color/white">
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etRateSheep"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="numberDecimal" />
+                        android:inputType="numberDecimal"
+                        android:textColor="@android:color/white" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <!-- Section: Account -->
@@ -199,10 +241,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:layout_marginBottom="12dp"
+                    android:layout_marginBottom="16dp"
                     android:text="Account Security"
-                    android:textColor="@color/primary_green"
-                    android:textSize="13sp"
+                    android:textColor="@android:color/white"
+                    android:textSize="14sp"
                     android:textStyle="bold" />
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -210,22 +252,30 @@
                     style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="24dp"
+                    android:layout_marginBottom="32dp"
                     android:hint="Password"
+                    android:textColorHint="#BDBDBD"
+                    app:boxStrokeColor="@android:color/white"
+                    app:hintTextColor="@android:color/white"
                     app:passwordToggleEnabled="true"
-                    app:startIconDrawable="@android:drawable/ic_lock_idle_lock">
+                    app:passwordToggleTint="@android:color/white"
+                    app:startIconDrawable="@android:drawable/ic_lock_idle_lock"
+                    app:startIconTint="@android:color/white">
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etPassword"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="textPassword" />
+                        android:inputType="textPassword"
+                        android:textColor="@android:color/white" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnRegisterKoshai"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
+                    android:backgroundTint="@android:color/white"
                     android:text="Submit Application"
+                    android:textColor="#1A237E"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     app:cornerRadius="16dp" />
@@ -238,10 +288,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="24dp"
             android:padding="8dp"
             android:text="Already have an account? Login"
-            android:textColor="@color/primary_green"
+            android:textColor="@android:color/white"
             android:textStyle="bold" />
 
     </LinearLayout>
