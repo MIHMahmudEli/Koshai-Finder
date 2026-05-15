@@ -52,11 +52,15 @@ class MainActivity : AppCompatActivity() {
                 val currentDest = navController.currentDestination?.id
                 
                 // Only show confirmation if at root screens
-                if (currentDest == R.id.userHomeFragment || 
-                    currentDest == R.id.koshaiDashboardFragment || 
-                    currentDest == R.id.loginFragment || 
-                    currentDest == R.id.adminHomeFragment) {
-                    
+                val isRootScreen = when (currentDest) {
+                    resources.getIdentifier("userHomeFragment", "id", packageName),
+                    resources.getIdentifier("koshaiDashboardFragment", "id", packageName),
+                    resources.getIdentifier("loginFragment", "id", packageName),
+                    resources.getIdentifier("adminHomeFragment", "id", packageName) -> true
+                    else -> false
+                }
+
+                if (isRootScreen) {
                     com.google.android.material.dialog.MaterialAlertDialogBuilder(this@MainActivity)
                         .setTitle("Exit App")
                         .setMessage("Are you sure you want to exit Koshai Finder?")
