@@ -12,16 +12,18 @@ import com.example.koshailagbe.databinding.FragmentEarningsBinding
 import com.example.koshailagbe.model.Booking
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ListenerRegistration
 
 class EarningsFragment : Fragment() {
 
     private var _binding: FragmentEarningsBinding? = null
     private val binding get() = _binding!!
-    
+
     private lateinit var auth: FirebaseAuth
     private lateinit var db: FirebaseFirestore
     private lateinit var adapter: EarningAdapter
     private var allCompletedBookings: List<Booking> = emptyList()
+    private var earningsListener: ListenerRegistration? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,7 +42,7 @@ class EarningsFragment : Fragment() {
     }
 
     private fun setupFilters() {
-        binding.chipGroupFilter.setOnCheckedStateChangeListener { group, checkedIds ->
+        binding.chipGroupFilter.setOnCheckedStateChangeListener { _, checkedIds ->
             filterBookings(checkedIds.firstOrNull())
         }
     }
@@ -81,23 +83,25 @@ class EarningsFragment : Fragment() {
 
     private fun fetchEarnings() {
         val uid = auth.currentUser?.uid ?: return
-        
-        db.collection("bookings")
+
+        // Real-time listener — updates automatically when any booking changes
+        earningsListener = db.collection("bookings")
             .whereEqualTo("koshaiId", uid)
-            .get()
-            .addOnSuccessListener { snapshots ->
-                if (!isAdded) return@addOnSuccessListener
-                
+            .addSnapshotListener { snapshots, e ->
+                if (!isAdded) return@addSnapshotListener
+                if (e != null || snapshots == null) return@addSnapshotListener
+
                 val allBookings = snapshots.documents.mapNotNull { doc ->
                     doc.toObject(Booking::class.java)?.apply { id = doc.id }
                 }
 
-                val completedBookings = allBookings.filter { it.status == "completed" }
+                val completedBookings = allBookings
+                    .filter { it.status == "completed" }
                     .sortedByDescending { it.date }
 
                 allCompletedBookings = completedBookings
                 filterBookings(binding.chipGroupFilter.checkedChipId)
-                
+
                 // Total Earnings
                 val total = completedBookings.sumOf { it.rateBreakdown["total"] ?: 0.0 }
                 binding.tvTotalEarnings.text = "৳${String.format("%.2f", total)}"
@@ -112,19 +116,22 @@ class EarningsFragment : Fragment() {
                     bookingCal.get(java.util.Calendar.MONTH) == currentMonth &&
                     bookingCal.get(java.util.Calendar.YEAR) == currentYear
                 }.sumOf { it.rateBreakdown["total"] ?: 0.0 }
-                
+
                 binding.tvMonthlyEarnings.text = "৳${String.format("%.2f", monthlyTotal)}"
 
                 // Pending (Ongoing/Requested) Potential Earnings
-                val pendingTotal = allBookings.filter { it.status != "completed" && it.status != "cancelled" }
+                val pendingTotal = allBookings
+                    .filter { it.status != "completed" && it.status != "cancelled" }
                     .sumOf { it.rateBreakdown["total"] ?: 0.0 }
-                
+
                 binding.tvPendingEarnings.text = "৳${String.format("%.2f", pendingTotal)}"
             }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
+        // Detach the listener to prevent memory leaks
+        earningsListener?.remove()
         _binding = null
     }
 }
