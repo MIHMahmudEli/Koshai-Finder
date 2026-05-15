@@ -60,7 +60,6 @@ class ChatListFragment : Fragment() {
 
         db.collection("chatRooms")
             .whereArrayContains("participants", userId)
-            .orderBy("lastTimestamp", Query.Direction.DESCENDING)
             .addSnapshotListener { snapshots, e ->
                 if (!isAdded) return@addSnapshotListener
                 binding.progressBar.visibility = View.GONE
@@ -70,7 +69,10 @@ class ChatListFragment : Fragment() {
                     return@addSnapshotListener
                 }
 
-                val rooms = snapshots?.toObjects(ChatRoom::class.java) ?: emptyList()
+                // Sort locally by timestamp to avoid requiring a Firestore Index
+                val rooms = snapshots?.toObjects(ChatRoom::class.java)
+                    ?.sortedByDescending { it.lastTimestamp } ?: emptyList()
+                
                 adapter.updateList(rooms)
                 binding.emptyState.visibility = if (rooms.isEmpty()) View.VISIBLE else View.GONE
             }
