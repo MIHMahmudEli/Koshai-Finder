@@ -26,7 +26,7 @@ class ChatAdapter(
 
     class SentViewHolder(val binding: ItemChatSentBinding) : ChatViewHolder(binding) {
         override fun bind(message: ChatMessage) {
-            binding.tvMessage.text = message.message
+            binding.tvMessage.text = message.text
             val sdf = SimpleDateFormat("hh:mm a", Locale.getDefault())
             binding.tvTime.text = sdf.format(message.timestamp.toDate())
         }
@@ -34,7 +34,7 @@ class ChatAdapter(
 
     class ReceivedViewHolder(val binding: ItemChatReceivedBinding) : ChatViewHolder(binding) {
         override fun bind(message: ChatMessage) {
-            binding.tvMessage.text = message.message
+            binding.tvMessage.text = message.text
             val sdf = SimpleDateFormat("hh:mm a", Locale.getDefault())
             binding.tvTime.text = sdf.format(message.timestamp.toDate())
         }

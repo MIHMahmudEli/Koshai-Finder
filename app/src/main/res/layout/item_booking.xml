@@ -133,6 +133,19 @@
             android:gravity="end"
             app:layout_constraintTop_toBottomOf="@id/divider">
 
+            <ImageButton
+                android:id="@+id/ibChat"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@android:drawable/stat_notify_chat"
+                app:tint="#1565C0" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1" />
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnDecline"
                 style="@style/Widget.Material3.Button.TextButton"

@@ -105,12 +105,46 @@
         android:label="My Bookings" />
 
     <fragment
+        android:id="@+id/chatListFragment"
+        android:name="com.example.koshailagbe.fragment.ChatListFragment"
+        android:label="Inbox">
+        <action
+            android:id="@+id/action_chatListFragment_to_chatFragment"
+            app:destination="@id/chatFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/chatFragment"
+        android:name="com.example.koshailagbe.fragment.ChatFragment"
+        android:label="Chat">
+        <argument
+            android:name="receiverId"
+            app:argType="string" />
+        <argument
+            android:name="receiverName"
+            android:defaultValue="@null"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="receiverPhoto"
+            android:defaultValue="@null"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
+
+    <fragment
         android:id="@+id/userKoshaiDetailFragment"
         android:name="com.example.koshailagbe.fragment.UserKoshaiDetailFragment"
-        android:label="Koshai Detail">
+        android:label="Koshai Details">
+        <argument
+            android:name="koshaiId"
+            app:argType="string" />
         <action
             android:id="@+id/action_userKoshaiDetailFragment_to_bookingRequestFragment"
             app:destination="@id/bookingRequestFragment" />
+        <action
+            android:id="@+id/action_userKoshaiDetailFragment_to_chatFragment"
+            app:destination="@id/chatFragment" />
     </fragment>
 
     <fragment

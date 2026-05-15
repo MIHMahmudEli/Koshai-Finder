@@ -15,7 +15,8 @@ class BookingAdapter(
     private val onItemClick: (Booking) -> Unit,
     private val onAccept: (Booking) -> Unit,
     private val onDecline: (Booking) -> Unit,
-    private val onUpdateStatus: (Booking) -> Unit
+    private val onUpdateStatus: (Booking) -> Unit,
+    private val onChat: (Booking) -> Unit
 ) : RecyclerView.Adapter<BookingAdapter.BookingViewHolder>() {
 
     inner class BookingViewHolder(val binding: ItemBookingBinding) : RecyclerView.ViewHolder(binding.root)
@@ -90,6 +91,7 @@ class BookingAdapter(
         binding.btnAccept.setOnClickListener { onAccept(booking) }
         binding.btnDecline.setOnClickListener { onDecline(booking) }
         binding.btnUpdateStatus.setOnClickListener { onUpdateStatus(booking) }
+        binding.ibChat.setOnClickListener { onChat(booking) }
         binding.root.setOnClickListener { onItemClick(booking) }
     }
 

@@ -129,6 +129,10 @@ class UserHomeFragment : Fragment() {
             )
         }
 
+        binding.ibChatList.setOnClickListener {
+            findNavController().navigate(R.id.chatListFragment)
+        }
+
         binding.fabBookings.setOnClickListener {
             findNavController().navigate(R.id.action_userHomeFragment_to_userBookingsFragment)
         }

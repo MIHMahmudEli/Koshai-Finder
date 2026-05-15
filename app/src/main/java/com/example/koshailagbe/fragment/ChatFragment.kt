@@ -7,9 +7,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
+import com.example.koshailagbe.R
 import com.example.koshailagbe.adapter.ChatAdapter
 import com.example.koshailagbe.databinding.FragmentChatBinding
 import com.example.koshailagbe.model.ChatMessage
+import com.example.koshailagbe.model.ChatRoom
 import com.example.koshailagbe.utils.showSnackBar
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
@@ -25,8 +28,10 @@ class ChatFragment : Fragment() {
     private lateinit var db: FirebaseFirestore
     private lateinit var adapter: ChatAdapter
     
-    private var bookingId: String? = null
+    private var chatRoomId: String? = null
     private var receiverId: String? = null
+    private var receiverName: String? = null
+    private var receiverPhoto: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,24 +41,37 @@ class ChatFragment : Fragment() {
         auth = FirebaseAuth.getInstance()
         db = FirebaseFirestore.getInstance()
 
-        bookingId = arguments?.getString("bookingId")
         receiverId = arguments?.getString("receiverId")
+        receiverName = arguments?.getString("receiverName")
+        receiverPhoto = arguments?.getString("receiverPhoto")
 
-        if (bookingId == null || receiverId == null) {
-            showSnackBar("Error: Invalid chat session", isError = true)
+        val currentUserId = auth.currentUser?.uid
+        if (currentUserId == null || receiverId == null) {
+            showSnackBar("Error: Invalid chat session")
             findNavController().popBackStack()
-        } else {
-            setupRecyclerView()
-            setupToolbar()
-            listenForMessages()
-            setupSendButton()
+            return binding.root
         }
+
+        // Generate a consistent ChatRoom ID for these two participants
+        chatRoomId = if (currentUserId < receiverId!!) "${currentUserId}_${receiverId}" else "${receiverId}_${currentUserId}"
+
+        setupUI()
+        setupRecyclerView()
+        listenForMessages()
+        setupSendButton()
+        createOrUpdateChatRoom()
 
         return binding.root
     }
 
-    private fun setupToolbar() {
+    private fun setupUI() {
         binding.toolbar.setNavigationOnClickListener { findNavController().popBackStack() }
+        binding.tvChatPartnerName.text = receiverName ?: "Koshai"
+        
+        Glide.with(this)
+            .load(receiverPhoto)
+            .placeholder(R.drawable.bg_dashboard_header)
+            .into(binding.ivPartnerProfile)
     }
 
     private fun setupRecyclerView() {
@@ -75,32 +93,60 @@ class ChatFragment : Fragment() {
 
     private fun sendMessage(text: String) {
         val currentUserId = auth.currentUser?.uid ?: return
+        val roomId = chatRoomId ?: return
+
         val message = ChatMessage(
             senderId = currentUserId,
-            receiverId = receiverId!!,
-            message = text,
-            timestamp = Timestamp.now(),
-            bookingId = bookingId!!
+            text = text,
+            timestamp = Timestamp.now()
         )
 
         binding.etMessage.setText("")
-        db.collection("chats").add(message)
+
+        // Add to sub-collection
+        db.collection("chatRooms").document(roomId)
+            .collection("messages").add(message)
+            .addOnSuccessListener {
+                // Update room's last message
+                db.collection("chatRooms").document(roomId)
+                    .update(
+                        "lastMessage", text,
+                        "lastTimestamp", Timestamp.now()
+                    )
+            }
             .addOnFailureListener {
-                if (!isAdded) return@addOnFailureListener
-                showSnackBar("Failed to send: ${it.message}", isError = true)
+                if (isAdded) showSnackBar("Failed to send: ${it.message}")
             }
     }
 
+    private fun createOrUpdateChatRoom() {
+        val currentUserId = auth.currentUser?.uid ?: return
+        val roomId = chatRoomId ?: return
+        val rId = receiverId ?: return
+
+        val roomRef = db.collection("chatRooms").document(roomId)
+        roomRef.get().addOnSuccessListener { doc ->
+            if (!doc.exists()) {
+                val room = ChatRoom(
+                    id = roomId,
+                    participants = listOf(currentUserId, rId),
+                    userNames = mapOf(currentUserId to (auth.currentUser?.displayName ?: "User"), rId to (receiverName ?: "Koshai")),
+                    userPhotos = mapOf(currentUserId to "", rId to (receiverPhoto ?: "")),
+                    lastTimestamp = Timestamp.now()
+                )
+                roomRef.set(room)
+            }
+        }
+    }
+
     private fun listenForMessages() {
-        db.collection("chats")
-            .whereEqualTo("bookingId", bookingId)
+        val roomId = chatRoomId ?: return
+        db.collection("chatRooms").document(roomId)
+            .collection("messages")
             .orderBy("timestamp", Query.Direction.ASCENDING)
             .addSnapshotListener { snapshots, e ->
                 if (!isAdded) return@addSnapshotListener
-                if (e != null) {
-                    showSnackBar("Chat error: ${e.message}", isError = true)
-                    return@addSnapshotListener
-                }
+                if (e != null) return@addSnapshotListener
 
                 val messages = snapshots?.toObjects(ChatMessage::class.java) ?: emptyList()
                 adapter.updateMessages(messages)

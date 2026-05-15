@@ -60,7 +60,15 @@ class BookingManagerFragment : Fragment() {
             },
             onAccept = { booking -> updateBookingStatus(booking, "confirmed") },
             onDecline = { booking -> updateBookingStatus(booking, "cancelled") },
-            onUpdateStatus = { booking -> handleStatusCycle(booking) }
+            onUpdateStatus = { booking -> handleStatusCycle(booking) },
+            onChat = { booking ->
+                val bundle = Bundle().apply {
+                    putString("receiverId", booking.userId)
+                    putString("receiverName", booking.userName)
+                    putString("receiverPhoto", null) // Photos are harder to get here, can fetch later if needed
+                }
+                findNavController().navigate(R.id.chatFragment, bundle)
+            }
         )
         binding.rvBookings.layoutManager = LinearLayoutManager(requireContext())
         binding.rvBookings.adapter = adapter

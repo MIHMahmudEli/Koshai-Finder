@@ -39,6 +39,10 @@ class KoshaiDashboardFragment : Fragment() {
     }
 
     private fun setupClickListeners() {
+        binding.ibChatList.setOnClickListener {
+            findNavController().navigate(R.id.chatListFragment)
+        }
+
         binding.btnLogout.setOnClickListener {
             SharedPrefsHelper.clearUserRole(requireContext())
             auth.signOut()

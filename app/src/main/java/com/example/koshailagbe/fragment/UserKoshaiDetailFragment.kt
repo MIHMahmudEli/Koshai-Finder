@@ -31,7 +31,7 @@ class UserKoshaiDetailFragment : Fragment() {
         
         setupToolbar()
         loadKoshaiData()
-        setupBookingButton()
+        setupActions()
 
         return binding.root
     }
@@ -63,12 +63,22 @@ class UserKoshaiDetailFragment : Fragment() {
 
     private var doc: com.google.firebase.firestore.DocumentSnapshot? = null
 
-    private fun setupBookingButton() {
+    private fun setupActions() {
         binding.btnBookNow.setOnClickListener {
             val bundle = Bundle().apply { 
                 putString("koshaiId", koshaiId)
             }
             findNavController().navigate(R.id.action_userKoshaiDetailFragment_to_bookingRequestFragment, bundle)
+        }
+
+        binding.btnChat.setOnClickListener {
+            val profile = koshaiProfile ?: return@setOnClickListener
+            val bundle = Bundle().apply {
+                putString("receiverId", profile.id)
+                putString("receiverName", profile.name)
+                putString("receiverPhoto", profile.photoUrl)
+            }
+            findNavController().navigate(R.id.action_userKoshaiDetailFragment_to_chatFragment, bundle)
         }
     }
 
