@@ -97,6 +97,18 @@
         <action
             android:id="@+id/action_userHomeFragment_to_userBookingsFragment"
             app:destination="@id/userBookingsFragment" />
+        <action
+            android:id="@+id/action_userHomeFragment_to_userProfileFragment"
+            app:destination="@id/userProfileFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/userProfileFragment"
+        android:name="com.example.koshailagbe.fragment.UserProfileFragment"
+        android:label="My Profile">
+        <action
+            android:id="@+id/action_userProfileFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
     </fragment>
 
     <fragment
@@ -206,7 +218,16 @@
     <fragment
         android:id="@+id/koshaiProfileFragment"
         android:name="com.example.koshailagbe.fragment.KoshaiProfileFragment"
-        android:label="Profile" />
+        android:label="Profile">
+        <action
+            android:id="@+id/action_koshaiProfileFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.example.koshailagbe.fragment.EditProfileFragment"
+        android:label="Edit Profile" />
 
     <fragment
         android:id="@+id/bookingManagerFragment"

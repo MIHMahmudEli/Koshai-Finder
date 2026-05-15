@@ -136,6 +136,10 @@ class UserHomeFragment : Fragment() {
         binding.fabBookings.setOnClickListener {
             findNavController().navigate(R.id.action_userHomeFragment_to_userBookingsFragment)
         }
+
+        binding.ibProfile.setOnClickListener {
+            findNavController().navigate(R.id.action_userHomeFragment_to_userProfileFragment)
+        }
     }
 
     override fun onDestroyView() {

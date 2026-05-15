@@ -1,0 +1,173 @@
+package com.example.koshailagbe.fragment
+
+import android.app.Activity
+import android.content.Intent
+import android.net.Uri
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
+import com.example.koshailagbe.R
+import com.example.koshailagbe.databinding.FragmentEditProfileBinding
+import com.example.koshailagbe.utils.SharedPrefsHelper
+import com.example.koshailagbe.utils.showSnackBar
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
+import java.util.*
+
+class EditProfileFragment : Fragment() {
+
+    private var _binding: FragmentEditProfileBinding? = null
+    private val binding get() = _binding!!
+
+    private lateinit var auth: FirebaseAuth
+    private lateinit var db: FirebaseFirestore
+    private lateinit var storage: FirebaseStorage
+    
+    private var imageUri: Uri? = null
+    private var currentPhotoUrl: String? = null
+    private var userRole: String? = null
+
+    private val imagePickerLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            imageUri = result.data?.data
+            binding.ivProfile.setImageURI(imageUri)
+        }
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentEditProfileBinding.inflate(inflater, container, false)
+        auth = FirebaseAuth.getInstance()
+        db = FirebaseFirestore.getInstance()
+        storage = FirebaseStorage.getInstance()
+        userRole = SharedPrefsHelper.getUserRole(requireContext())
+
+        setupUI()
+        loadCurrentData()
+        setupListeners()
+
+        return binding.root
+    }
+
+    private fun setupUI() {
+        if (userRole == SharedPrefsHelper.ROLE_USER) {
+            binding.tilBio.visibility = View.GONE
+        }
+    }
+
+    private fun loadCurrentData() {
+        val uid = auth.currentUser?.uid ?: return
+        val collection = if (userRole == SharedPrefsHelper.ROLE_KOSHAI) "koshais" else "users"
+
+        binding.progressBar.visibility = View.VISIBLE
+        db.collection(collection).document(uid).get()
+            .addOnSuccessListener { doc ->
+                if (!isAdded) return@addOnSuccessListener
+                binding.progressBar.visibility = View.GONE
+                
+                binding.etName.setText(doc.getString("name"))
+                binding.etPhone.setText(doc.getString("phone"))
+                if (userRole == SharedPrefsHelper.ROLE_KOSHAI) {
+                    binding.etBio.setText(doc.getString("bio"))
+                }
+                
+                currentPhotoUrl = doc.getString("photoUrl")
+                if (!currentPhotoUrl.isNullOrEmpty()) {
+                    Glide.with(this).load(currentPhotoUrl).into(binding.ivProfile)
+                }
+            }
+    }
+
+    private fun setupListeners() {
+        binding.btnBack.setOnClickListener { findNavController().popBackStack() }
+        
+        binding.btnChangePhoto.setOnClickListener {
+            val intent = Intent(Intent.ACTION_PICK)
+            intent.type = "image/*"
+            imagePickerLauncher.launch(intent)
+        }
+
+        binding.btnSave.setOnClickListener {
+            saveProfile()
+        }
+    }
+
+    private fun saveProfile() {
+        val name = binding.etName.text.toString().trim()
+        val phone = binding.etPhone.text.toString().trim()
+        val bio = if (userRole == SharedPrefsHelper.ROLE_KOSHAI) binding.etBio.text.toString().trim() else null
+
+        if (name.isEmpty()) {
+            showSnackBar("Name cannot be empty", isError = true)
+            return
+        }
+
+        binding.btnSave.isEnabled = false
+        binding.progressBar.visibility = View.VISIBLE
+
+        if (imageUri != null) {
+            uploadImageAndSave(name, phone, bio)
+        } else {
+            updateFirestore(name, phone, bio, currentPhotoUrl)
+        }
+    }
+
+    private fun uploadImageAndSave(name: String, phone: String, bio: String?) {
+        val uid = auth.currentUser?.uid ?: return
+        val ref = storage.reference.child("profile_photos/$uid.jpg")
+
+        imageUri?.let { uri ->
+            ref.putFile(uri)
+                .addOnSuccessListener {
+                    ref.downloadUrl.addOnSuccessListener { downloadUri ->
+                        updateFirestore(name, phone, bio, downloadUri.toString())
+                    }
+                }
+                .addOnFailureListener {
+                    showSnackBar("Failed to upload image: ${it.message}", isError = true)
+                    binding.btnSave.isEnabled = true
+                    binding.progressBar.visibility = View.GONE
+                }
+        }
+    }
+
+    private fun updateFirestore(name: String, phone: String, bio: String?, photoUrl: String?) {
+        val uid = auth.currentUser?.uid ?: return
+        val collection = if (userRole == SharedPrefsHelper.ROLE_KOSHAI) "koshais" else "users"
+
+        val updates = mutableMapOf<String, Any>(
+            "name" to name,
+            "phone" to phone
+        )
+        photoUrl?.let { updates["photoUrl"] = it }
+        bio?.let { updates["bio"] = it }
+
+        db.collection(collection).document(uid).update(updates)
+            .addOnSuccessListener {
+                if (!isAdded) return@addOnSuccessListener
+                showSnackBar("Profile updated successfully")
+                findNavController().popBackStack()
+            }
+            .addOnFailureListener {
+                if (!isAdded) return@addOnFailureListener
+                showSnackBar("Failed to update profile: ${it.message}", isError = true)
+                binding.btnSave.isEnabled = true
+                binding.progressBar.visibility = View.GONE
+            }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+}

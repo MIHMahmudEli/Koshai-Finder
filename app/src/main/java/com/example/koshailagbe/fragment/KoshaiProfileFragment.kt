@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.koshailagbe.R
 import com.example.koshailagbe.adapter.ReviewAdapter
 import com.example.koshailagbe.databinding.FragmentKoshaiProfileBinding
 import com.example.koshailagbe.model.Review
@@ -41,6 +42,9 @@ class KoshaiProfileFragment : Fragment() {
 
     private fun setupToolbar() {
         binding.btnBack.setOnClickListener { findNavController().popBackStack() }
+        binding.btnEditProfile.setOnClickListener {
+            findNavController().navigate(R.id.action_koshaiProfileFragment_to_editProfileFragment)
+        }
     }
 
     private fun setupRecyclerView() {
