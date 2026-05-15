@@ -46,12 +46,13 @@ class LeaderboardFragment : Fragment() {
 
     private fun fetchLeaderboard() {
         db.collection("koshais")
-            .orderBy("totalJobs", Query.Direction.DESCENDING)
-            .limit(10)
+            .limit(50) // Fetch a larger set to sort locally
             .get()
             .addOnSuccessListener { snapshots ->
                 if (!isAdded) return@addOnSuccessListener
                 val list = snapshots.toObjects(KoshaiProfile::class.java)
+                    .sortedByDescending { it.totalJobs }
+                    .take(10)
                 adapter.updateList(list)
             }
     }

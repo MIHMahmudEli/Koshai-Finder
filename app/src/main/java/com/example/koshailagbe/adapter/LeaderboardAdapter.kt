@@ -25,7 +25,7 @@ class LeaderboardAdapter(
         binding.tvName.text = koshai.name
         binding.tvStats.text = "${String.format("%.1f", koshai.rating)} ★ | ${koshai.totalJobs} Jobs"
         
-        val earnings = if (koshai.earnings >= 1000) "৳${String.format("%.1fk", koshai.earnings / 1000.0)}" else "৳${String.format("%.0f", koshai.earnings)}"
+        val earnings = if (koshai.earnings >= 1000) "৳${String.format("%.1fk", koshai.earnings / 1000.0)}" else "৳${koshai.earnings}"
         binding.tvEarnings.text = earnings
     }
 
