@@ -29,7 +29,7 @@ class BookingAdapter(
         val booking = bookings[position]
         val binding = holder.binding
 
-        binding.tvUserName.text = "Customer (ID: ${booking.userId.takeLast(6)})" // Placeholder name
+        binding.tvUserName.text = if (booking.userName.isNotEmpty()) booking.userName else "Customer (ID: ${booking.userId.takeLast(6)})"
         
         val sdf = SimpleDateFormat("MMM dd, yyyy", Locale.getDefault())
         val dateStr = sdf.format(booking.date.toDate())

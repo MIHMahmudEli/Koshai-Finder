@@ -16,6 +16,7 @@ import com.google.android.material.tabs.TabLayout
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
+import java.util.Calendar
 
 class BookingManagerFragment : Fragment() {
 
@@ -117,10 +118,56 @@ class BookingManagerFragment : Fragment() {
             .addOnSuccessListener {
                 if (!isAdded) return@addOnSuccessListener
                 showSnackBar("Booking $newStatus successfully")
+
+                // COMPETITIVE SLOT LOGIC: If a booking is confirmed, cancel all other pending requests for the same slot
+                if (newStatus == "confirmed") {
+                    cancelCompetingRequests(booking)
+                }
             }
             .addOnFailureListener {
                 if (!isAdded) return@addOnFailureListener
                 showSnackBar("Failed to update booking: ${it.message}", isError = true)
+            }
+    }
+
+    private fun cancelCompetingRequests(confirmedBooking: Booking) {
+        val uid = auth.currentUser?.uid ?: return
+        
+        // Define the target date info
+        val calendar = Calendar.getInstance()
+        calendar.time = confirmedBooking.date.toDate()
+        val targetDay = calendar.get(Calendar.DAY_OF_YEAR)
+        val targetYear = calendar.get(Calendar.YEAR)
+
+        db.collection("bookings")
+            .whereEqualTo("koshaiId", uid)
+            .whereEqualTo("status", "pending")
+            .get()
+            .addOnSuccessListener { snapshots ->
+                val batch = db.batch()
+                var competingFound = false
+                
+                snapshots.documents.forEach { doc ->
+                    val b = doc.toObject(Booking::class.java) ?: return@forEach
+                    val bCal = Calendar.getInstance()
+                    bCal.time = b.date.toDate()
+                    
+                    // Check if it's the same day and same slot
+                    if (doc.id != confirmedBooking.id && 
+                        b.slot == confirmedBooking.slot &&
+                        bCal.get(Calendar.DAY_OF_YEAR) == targetDay &&
+                        bCal.get(Calendar.YEAR) == targetYear) {
+                        
+                        batch.update(doc.reference, "status", "cancelled")
+                        competingFound = true
+                    }
+                }
+                
+                if (competingFound) {
+                    batch.commit().addOnSuccessListener {
+                        if (isAdded) showSnackBar("Other requests for this slot have been automatically declined")
+                    }
+                }
             }
     }
 

@@ -16,5 +16,7 @@ data class Booking(
     var depositPaid: Double = 0.0,
     var status: String = "pending", // pending, confirmed, en_route, arrived, completed, cancelled
     var isGroupBooking: Boolean = false,
+    var userName: String = "",
+    var koshaiName: String = "",
     var createdAt: Timestamp = Timestamp.now()
 )

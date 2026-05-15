@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FDFDFD">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        app:elevation="0dp">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:navigationIcon="@drawable/ic_back"
+            app:title="Book Appointment"
+            app:titleCentered="true"
+            app:titleTextAppearance="@style/TextAppearance.Material3.TitleLarge" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <!-- Koshai Summary Header -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    app:cardCornerRadius="30dp"
+                    app:cardElevation="0dp"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="#EEEEEE">
+                    <ImageView
+                        android:id="@+id/ivKoshai"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/bg_dashboard_header" />
+                </com.google.android.material.card.MaterialCardView>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/tvKoshaiName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Koshai Name"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:textColor="#1A1A1A" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Professional Butcher"
+                        android:textSize="14sp"
+                        android:textColor="#757575" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- 1. Schedule Selection -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Choose Schedule"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="#1A1A1A"
+                android:layout_marginBottom="12dp" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="4dp"
+                app:cardBackgroundColor="@android:color/white"
+                app:strokeWidth="0dp">
+                
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnSelectDate"
+                        style="@style/Widget.Material3.Button.TonalButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:text="Select Service Date"
+                        android:textAlignment="viewStart"
+                        android:textColor="#1565C0"
+                        app:cornerRadius="12dp"
+                        app:icon="@android:drawable/ic_menu_my_calendar"
+                        app:iconTint="#1565C0" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginVertical="16dp"
+                        android:background="#F0F0F0" />
+
+                    <TextView
+                        android:id="@+id/tvSlotHint"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Available Time Slots"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:textColor="#444444" />
+
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/slotGroup"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        app:singleSelection="true"
+                        app:selectionRequired="true" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- 2. Animal Details -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Animal Details"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="#1A1A1A"
+                android:layout_marginTop="28dp"
+                android:layout_marginBottom="12dp" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="4dp"
+                app:cardBackgroundColor="@android:color/white">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <!-- Cow -->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingVertical="8dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Cow / Cattle"
+                            android:textSize="16sp"
+                            android:layout_centerVertical="true" />
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:gravity="center_vertical">
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnMinusCow"
+                                style="@style/Widget.Material3.Button.IconButton.Filled.Tonal"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                app:icon="@android:drawable/ic_menu_close_clear_cancel"
+                                app:iconSize="16dp" />
+                            <TextView
+                                android:id="@+id/tvCowCount"
+                                android:layout_width="40dp"
+                                android:layout_height="wrap_content"
+                                android:text="0"
+                                android:gravity="center"
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnAddCow"
+                                style="@style/Widget.Material3.Button.IconButton.Filled.Tonal"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                app:icon="@android:drawable/ic_menu_add"
+                                app:iconSize="16dp" />
+                        </LinearLayout>
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#F0F0F0"
+                        android:layout_marginVertical="8dp" />
+
+                    <!-- Goat -->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingVertical="8dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Goat / Sheep"
+                            android:textSize="16sp"
+                            android:layout_centerVertical="true" />
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:gravity="center_vertical">
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnMinusGoat"
+                                style="@style/Widget.Material3.Button.IconButton.Filled.Tonal"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                app:icon="@android:drawable/ic_menu_close_clear_cancel"
+                                app:iconSize="16dp" />
+                            <TextView
+                                android:id="@+id/tvGoatCount"
+                                android:layout_width="40dp"
+                                android:layout_height="wrap_content"
+                                android:text="0"
+                                android:gravity="center"
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnAddGoat"
+                                style="@style/Widget.Material3.Button.IconButton.Filled.Tonal"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                app:icon="@android:drawable/ic_menu_add"
+                                app:iconSize="16dp" />
+                        </LinearLayout>
+                    </RelativeLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- 3. Address -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Service Address"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="#1A1A1A"
+                android:layout_marginTop="28dp"
+                android:layout_marginBottom="12dp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:boxCornerRadiusBottomEnd="16dp"
+                app:boxCornerRadiusBottomStart="16dp"
+                app:boxCornerRadiusTopEnd="16dp"
+                app:boxCornerRadiusTopStart="16dp"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etLocation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Street, Area, Building..."
+                    android:padding="16dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Price Summary Floating-style -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="0dp"
+                app:strokeWidth="2dp"
+                app:strokeColor="#E3F2FD"
+                app:cardBackgroundColor="#F1F8FE">
+                
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Estimated Total"
+                            android:textColor="#1565C0"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/tvTotalPrice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:text="৳0"
+                            android:textColor="#1565C0"
+                            android:textSize="22sp"
+                            android:textStyle="bold" />
+                    </RelativeLayout>
+                    <TextView
+                        android:id="@+id/tvPriceDetails"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="No animals selected"
+                        android:textColor="#546E7A"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSubmitRequest"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="40dp"
+                android:text="CONFIRM BOOKING"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:cornerRadius="16dp"
+                app:backgroundTint="#2E7D32" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -89,7 +89,34 @@
     <!-- User Home -->
     <fragment
         android:id="@+id/userHomeFragment"
-        android:name="com.example.koshailagbe.fragment.UserHomeFragment" />
+        android:name="com.example.koshailagbe.fragment.UserHomeFragment"
+        android:label="Koshai Finder">
+        <action
+            android:id="@+id/action_userHomeFragment_to_userKoshaiDetailFragment"
+            app:destination="@id/userKoshaiDetailFragment" />
+        <action
+            android:id="@+id/action_userHomeFragment_to_userBookingsFragment"
+            app:destination="@id/userBookingsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/userBookingsFragment"
+        android:name="com.example.koshailagbe.fragment.UserBookingsFragment"
+        android:label="My Bookings" />
+
+    <fragment
+        android:id="@+id/userKoshaiDetailFragment"
+        android:name="com.example.koshailagbe.fragment.UserKoshaiDetailFragment"
+        android:label="Koshai Detail">
+        <action
+            android:id="@+id/action_userKoshaiDetailFragment_to_bookingRequestFragment"
+            app:destination="@id/bookingRequestFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/bookingRequestFragment"
+        android:name="com.example.koshailagbe.fragment.BookingRequestFragment"
+        android:label="Booking Request" />
 
     <!-- Koshai Screens -->
     <fragment
