@@ -96,9 +96,37 @@
         android:id="@+id/koshaiDashboardFragment"
         android:name="com.example.koshailagbe.fragment.KoshaiDashboardFragment"
         android:label="Koshai Dashboard">
-        <action android:id="@+id/action_koshaiDashboardFragment_to_bookingManagerFragment" app:destination="@id/bookingManagerFragment" />
-        <action android:id="@+id/action_koshaiDashboardFragment_to_earningsFragment"       app:destination="@id/earningsFragment" />
+        <action
+            android:id="@+id/action_koshaiDashboardFragment_to_bookingManagerFragment"
+            app:destination="@id/bookingManagerFragment" />
+        <action
+            android:id="@+id/action_koshaiDashboardFragment_to_earningsFragment"
+            app:destination="@id/earningsFragment" />
+        <action
+            android:id="@+id/action_koshaiDashboardFragment_to_availabilityFragment"
+            app:destination="@id/availabilityFragment" />
+        <action
+            android:id="@+id/action_koshaiDashboardFragment_to_leaderboardFragment"
+            app:destination="@id/leaderboardFragment" />
+        <action
+            android:id="@+id/action_koshaiDashboardFragment_to_koshaiProfileFragment"
+            app:destination="@id/koshaiProfileFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/availabilityFragment"
+        android:name="com.example.koshailagbe.fragment.AvailabilityFragment"
+        android:label="Availability" />
+
+    <fragment
+        android:id="@+id/leaderboardFragment"
+        android:name="com.example.koshailagbe.fragment.LeaderboardFragment"
+        android:label="Leaderboard" />
+
+    <fragment
+        android:id="@+id/koshaiProfileFragment"
+        android:name="com.example.koshailagbe.fragment.KoshaiProfileFragment"
+        android:label="Profile" />
 
     <fragment
         android:id="@+id/bookingManagerFragment"

@@ -66,9 +66,20 @@ class KoshaiDashboardFragment : Fragment() {
             findNavController().navigate(R.id.action_koshaiDashboardFragment_to_bookingManagerFragment)
         }
 
-        binding.scheduleCard.setOnClickListener {
-            // TODO: Navigate to TodayScheduleFragment
-            showSnackBar("Opening Today's Schedule...")
+        binding.cardAvailability.setOnClickListener {
+            findNavController().navigate(R.id.action_koshaiDashboardFragment_to_availabilityFragment)
+        }
+
+        binding.cardEarnings.setOnClickListener {
+            findNavController().navigate(R.id.action_koshaiDashboardFragment_to_earningsFragment)
+        }
+
+        binding.cardLeaderboard.setOnClickListener {
+            findNavController().navigate(R.id.action_koshaiDashboardFragment_to_leaderboardFragment)
+        }
+
+        binding.cardProfile.setOnClickListener {
+            findNavController().navigate(R.id.action_koshaiDashboardFragment_to_koshaiProfileFragment)
         }
     }
 
