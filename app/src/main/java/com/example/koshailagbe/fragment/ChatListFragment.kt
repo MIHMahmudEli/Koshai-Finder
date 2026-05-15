@@ -77,7 +77,12 @@ class ChatListFragment : Fragment() {
                     ?.sortedByDescending { it.lastTimestamp } ?: emptyList()
                 
                 adapter.updateList(rooms)
-                binding.emptyState.visibility = if (rooms.isEmpty()) View.VISIBLE else View.GONE
+                binding.layoutEmpty.root.visibility = if (rooms.isEmpty()) View.VISIBLE else View.GONE
+                if (rooms.isEmpty()) {
+                    binding.layoutEmpty.tvEmptyTitle.text = "No Conversations Yet"
+                    binding.layoutEmpty.tvEmptySubtitle.text = "Book a Koshai to start chatting about your service."
+                    binding.layoutEmpty.ivEmptyIcon.setImageResource(R.drawable.ic_empty_search)
+                }
             }
     }
 

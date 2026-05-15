@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.koshailagbe.R
 import com.example.koshailagbe.adapter.AdminManagementAdapter
 import com.example.koshailagbe.databinding.FragmentAdminUserManagementBinding
 import com.example.koshailagbe.model.KoshaiProfile
@@ -128,9 +129,9 @@ class AdminUserManagementFragment : Fragment() {
             val title = if (query.isEmpty()) "No Accounts Registered" else "No Matching Results"
             val subtitle = if (query.isEmpty()) "Wait for new users or Koshais to sign up." else "Try searching with a different name or location."
             
-            binding.layoutEmpty.findViewById<android.widget.TextView>(R.id.tvEmptyTitle).text = title
-            binding.layoutEmpty.findViewById<android.widget.TextView>(R.id.tvEmptySubtitle).text = subtitle
-            binding.layoutEmpty.findViewById<android.widget.ImageView>(R.id.ivEmptyIcon).setImageResource(R.drawable.ic_empty_search)
+            binding.layoutEmpty.tvEmptyTitle.text = title
+            binding.layoutEmpty.tvEmptySubtitle.text = subtitle
+            binding.layoutEmpty.ivEmptyIcon.setImageResource(R.drawable.ic_empty_search)
         }
     }
 

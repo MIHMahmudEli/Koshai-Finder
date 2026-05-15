@@ -87,13 +87,15 @@ class BookingManagerFragment : Fragment() {
 
     private fun fetchBookings() {
         val uid = auth.currentUser?.uid ?: return
-        binding.progressBar.visibility = View.VISIBLE
+        binding.shimmerLoading.visibility = View.VISIBLE
+        binding.shimmerLoading.startShimmer()
         
         db.collection("bookings")
             .whereEqualTo("koshaiId", uid)
             .addSnapshotListener { snapshots, e ->
                 if (!isAdded) return@addSnapshotListener
-                binding.progressBar.visibility = View.GONE
+                binding.shimmerLoading.stopShimmer()
+                binding.shimmerLoading.visibility = View.GONE
                 
                 if (e != null) {
                     showSnackBar("Failed to load bookings: ${e.message}", isError = true)
@@ -118,7 +120,7 @@ class BookingManagerFragment : Fragment() {
         }
 
         adapter.updateList(filteredList)
-        binding.emptyState.visibility = if (filteredList.isEmpty()) View.VISIBLE else View.GONE
+        binding.layoutEmpty.root.visibility = if (filteredList.isEmpty()) View.VISIBLE else View.GONE
         
         if (filteredList.isEmpty()) {
             val title = when (currentTab) {
@@ -132,8 +134,8 @@ class BookingManagerFragment : Fragment() {
                 else -> "Your job history will be displayed here."
             }
             
-            binding.emptyState.findViewById<android.widget.TextView>(R.id.tvEmptyTitle).text = title
-            binding.emptyState.findViewById<android.widget.TextView>(R.id.tvEmptySubtitle).text = subtitle
+            binding.layoutEmpty.tvEmptyTitle.text = title
+            binding.layoutEmpty.tvEmptySubtitle.text = subtitle
         }
     }
 

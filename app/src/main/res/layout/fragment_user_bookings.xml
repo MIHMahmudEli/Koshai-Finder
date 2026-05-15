@@ -69,58 +69,29 @@
             android:clipToPadding="false"
             android:padding="16dp" />
 
-        <ProgressBar
-            android:id="@+id/progressBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:visibility="gone" />
-
-        <LinearLayout
-            android:id="@+id/emptyState"
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmerLoading"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:padding="40dp"
             android:visibility="gone">
-
-            <ImageView
-                android:layout_width="160dp"
-                android:layout_height="160dp"
-                android:src="@drawable/ic_empty_bookings" />
-
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:gravity="center"
-                android:text="No Bookings Yet"
-                android:textColor="#212121"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:orientation="vertical"
+                android:paddingTop="16dp">
+                <include layout="@layout/layout_skeleton_booking" />
+                <include layout="@layout/layout_skeleton_booking" />
+                <include layout="@layout/layout_skeleton_booking" />
+            </LinearLayout>
+        </com.facebook.shimmer.ShimmerFrameLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:gravity="center"
-                android:lineSpacingExtra="4dp"
-                android:text="Find a skilled Koshai and book your first service today!"
-                android:textColor="#9E9E9E"
-                android:textSize="14sp" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnBrowse"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="28dp"
-                android:text="Browse Koshais"
-                app:cornerRadius="24dp"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                app:backgroundTint="#2E7D32" />
-        </LinearLayout>
+        <!-- Empty State -->
+        <include
+            android:id="@+id/layoutEmpty"
+            layout="@layout/layout_empty_state"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone" />
     </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

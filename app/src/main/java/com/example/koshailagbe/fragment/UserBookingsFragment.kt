@@ -38,8 +38,12 @@ class UserBookingsFragment : Fragment() {
         setupTabs()
         fetchBookings()
 
-        binding.btnBrowse?.setOnClickListener {
-            findNavController().popBackStack(R.id.userHomeFragment, false)
+        binding.layoutEmpty.btnEmptyAction.apply {
+            visibility = View.VISIBLE
+            text = "Browse Koshais"
+            setOnClickListener {
+                findNavController().popBackStack(R.id.userHomeFragment, false)
+            }
         }
 
         return binding.root
@@ -81,13 +85,15 @@ class UserBookingsFragment : Fragment() {
 
     private fun fetchBookings() {
         val userId = auth.currentUser?.uid ?: return
-        binding.progressBar.visibility = View.VISIBLE
+        binding.shimmerLoading.visibility = View.VISIBLE
+        binding.shimmerLoading.startShimmer()
 
         db.collection("bookings")
             .whereEqualTo("userId", userId)
             .addSnapshotListener { snapshots, e ->
                 if (!isAdded) return@addSnapshotListener
-                binding.progressBar.visibility = View.GONE
+                binding.shimmerLoading.stopShimmer()
+                binding.shimmerLoading.visibility = View.GONE
 
                 if (e != null) return@addSnapshotListener
 
@@ -109,7 +115,7 @@ class UserBookingsFragment : Fragment() {
         }
 
         adapter.updateList(filteredList)
-        binding.emptyState.visibility = if (filteredList.isEmpty()) View.VISIBLE else View.GONE
+        binding.layoutEmpty.root.visibility = if (filteredList.isEmpty()) View.VISIBLE else View.GONE
         
         if (filteredList.isEmpty()) {
             val title = when (currentTab) {
@@ -123,8 +129,8 @@ class UserBookingsFragment : Fragment() {
                 else -> "Your completed or cancelled jobs will be archived here."
             }
             
-            binding.emptyState.findViewById<android.widget.TextView>(R.id.tvEmptyTitle).text = title
-            binding.emptyState.findViewById<android.widget.TextView>(R.id.tvEmptySubtitle).text = subtitle
+            binding.layoutEmpty.tvEmptyTitle.text = title
+            binding.layoutEmpty.tvEmptySubtitle.text = subtitle
         }
     }
 

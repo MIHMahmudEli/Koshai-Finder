@@ -118,9 +118,9 @@ class UserHomeFragment : Fragment() {
             binding.rvTopRated.visibility = View.GONE
             binding.lblNearby.visibility = View.GONE
             
-            binding.emptyStateView.findViewById<android.widget.TextView>(R.id.tvEmptyTitle).text = "No Experts Found"
-            binding.emptyStateView.findViewById<android.widget.TextView>(R.id.tvEmptySubtitle).text = "Try searching for a different location or check other categories."
-            binding.emptyStateView.findViewById<android.widget.ImageView>(R.id.ivEmptyIcon).setImageResource(R.drawable.ic_empty_search)
+            binding.emptyStateView.tvEmptyTitle.text = "No Experts Found"
+            binding.emptyStateView.tvEmptySubtitle.text = "Try searching for a different location or check other categories."
+            binding.emptyStateView.ivEmptyIcon.setImageResource(R.drawable.ic_empty_search)
         } else {
             binding.emptyStateView.root.visibility = View.GONE
             binding.rvNearby.visibility = View.VISIBLE
@@ -150,10 +150,12 @@ class UserHomeFragment : Fragment() {
     }
 
     private fun fetchKoshais() {
-        binding.progressBar.visibility = View.VISIBLE
+        binding.shimmerLoading.visibility = View.VISIBLE
+        binding.shimmerLoading.startShimmer()
         db.collection("koshais").addSnapshotListener { snapshots, e ->
             if (!isAdded) return@addSnapshotListener
-            binding.progressBar.visibility = View.GONE
+            binding.shimmerLoading.stopShimmer()
+            binding.shimmerLoading.visibility = View.GONE
             
             if (e != null || snapshots == null) return@addSnapshotListener
             

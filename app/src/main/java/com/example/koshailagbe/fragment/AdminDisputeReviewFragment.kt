@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.koshailagbe.R
 import com.example.koshailagbe.adapter.AdminModerationAdapter
 import com.example.koshailagbe.databinding.FragmentAdminDisputeReviewBinding
 import com.example.koshailagbe.model.Report
@@ -111,9 +112,9 @@ class AdminDisputeReviewFragment : Fragment() {
             val title = if (currentTab == 0) "No Reviews Found" else "No Reports Pending"
             val subtitle = if (currentTab == 0) "User feedback will appear here once submitted." else "All disputes have been resolved or none reported."
             
-            binding.layoutEmpty.findViewById<android.widget.TextView>(R.id.tvEmptyTitle).text = title
-            binding.layoutEmpty.findViewById<android.widget.TextView>(R.id.tvEmptySubtitle).text = subtitle
-            binding.layoutEmpty.findViewById<android.widget.ImageView>(R.id.ivEmptyIcon).setImageResource(
+            binding.layoutEmpty.tvEmptyTitle.text = title
+            binding.layoutEmpty.tvEmptySubtitle.text = subtitle
+            binding.layoutEmpty.ivEmptyIcon.setImageResource(
                 if (currentTab == 0) R.drawable.ic_empty_search else R.drawable.ic_empty_bookings
             )
         }
