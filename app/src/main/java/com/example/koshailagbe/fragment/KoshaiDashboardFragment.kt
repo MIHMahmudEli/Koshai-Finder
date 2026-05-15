@@ -58,7 +58,13 @@ class KoshaiDashboardFragment : Fragment() {
                     R.id.btnBusy -> "busy"
                     else -> "offline"
                 }
-                updateStatus(newStatus)
+                
+                // Only update Firestore and show SnackBar if the status actually changed
+                // This prevents the trigger during initial data load in updateUI()
+                if (koshaiProfile != null && newStatus != koshaiProfile?.status) {
+                    updateStatus(newStatus)
+                    koshaiProfile?.status = newStatus // Update local state immediately
+                }
             }
         }
 
