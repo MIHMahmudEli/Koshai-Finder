@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.koshailagbe.adapter.LeaderboardAdapter
 import com.example.koshailagbe.databinding.FragmentLeaderboardBinding
 import com.example.koshailagbe.model.KoshaiProfile
+import com.bumptech.glide.Glide
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 
@@ -46,15 +47,39 @@ class LeaderboardFragment : Fragment() {
 
     private fun fetchLeaderboard() {
         db.collection("koshais")
-            .limit(50) // Fetch a larger set to sort locally
+            .limit(50)
             .get()
             .addOnSuccessListener { snapshots ->
                 if (!isAdded) return@addOnSuccessListener
-                val list = snapshots.toObjects(KoshaiProfile::class.java)
+                val fullList = snapshots.toObjects(KoshaiProfile::class.java)
                     .sortedByDescending { it.totalJobs }
-                    .take(10)
-                adapter.updateList(list)
+
+                if (fullList.isNotEmpty()) {
+                    updatePodium(fullList.take(3))
+                    val remaining = if (fullList.size > 3) fullList.drop(3) else emptyList()
+                    adapter.updateList(remaining)
+                }
             }
+    }
+
+    private fun updatePodium(top3: List<KoshaiProfile>) {
+        // Rank 1
+        top3.getOrNull(0)?.let { profile: KoshaiProfile ->
+            binding.tvName1.text = profile.name
+            Glide.with(this).load(profile.photoUrl).placeholder(android.R.drawable.ic_menu_gallery).into(binding.ivRank1)
+        }
+
+        // Rank 2
+        top3.getOrNull(1)?.let { profile: KoshaiProfile ->
+            binding.tvName2.text = profile.name
+            Glide.with(this).load(profile.photoUrl).placeholder(android.R.drawable.ic_menu_gallery).into(binding.ivRank2)
+        }
+
+        // Rank 3
+        top3.getOrNull(2)?.let { profile: KoshaiProfile ->
+            binding.tvName3.text = profile.name
+            Glide.with(this).load(profile.photoUrl).placeholder(android.R.drawable.ic_menu_gallery).into(binding.ivRank3)
+        }
     }
 
     override fun onDestroyView() {
