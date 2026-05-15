@@ -90,7 +90,7 @@ class RegisterKoshaiFragment : Fragment() {
             "lat"                to 0.0,
             "lng"                to 0.0,
             "locationUpdatedAt"  to Timestamp.now(),
-            "earnings"           to 0,
+            "earnings"           to 0.0,
             "fcmToken"           to "",
             "createdAt"          to Timestamp.now()
         )

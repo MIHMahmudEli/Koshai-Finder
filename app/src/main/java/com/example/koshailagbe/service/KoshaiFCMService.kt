@@ -71,7 +71,7 @@ class KoshaiFCMService : FirebaseMessagingService() {
             if (!alreadyCounted) {
                 // Increment stats atomically
                 transaction.update(koshaiRef, "totalJobs", FieldValue.increment(1))
-                transaction.update(koshaiRef, "earnings", FieldValue.increment(earnings.toLong()))
+                transaction.update(koshaiRef, "earnings", FieldValue.increment(earnings))
                 // Mark booking so we never count it twice
                 transaction.update(bookingRef, "statsCounted", true)
             }

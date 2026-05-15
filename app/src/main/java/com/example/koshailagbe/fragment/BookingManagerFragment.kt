@@ -134,7 +134,7 @@ class BookingManagerFragment : Fragment() {
                 transaction.update(bookingRef, "status", newStatus)
 
                 if (!alreadyCounted) {
-                    val totalEarnings = (booking.rateBreakdown["total"] ?: 0.0).toLong()
+                    val totalEarnings = (booking.rateBreakdown["total"] ?: 0.0)
                     transaction.update(koshaiRef, "totalJobs", com.google.firebase.firestore.FieldValue.increment(1))
                     transaction.update(koshaiRef, "earnings", com.google.firebase.firestore.FieldValue.increment(totalEarnings))
                     transaction.update(bookingRef, "statsCounted", true)

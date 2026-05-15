@@ -123,7 +123,7 @@ class KoshaiDashboardFragment : Fragment() {
     private fun updateUI(profile: KoshaiProfile) {
         binding.tvKoshaiName.text = "Welcome, ${profile.name}"
         // tvTotalJobs is updated by fetchBookingCounts() with live active job count
-        binding.tvEarnings.text = "৳${formatShort(profile.earnings.toLong())}"
+        binding.tvEarnings.text = "৳${formatShort(profile.earnings)}"
         binding.tvRating.text = String.format("%.1f", profile.rating)
 
         Glide.with(this)
@@ -151,13 +151,15 @@ class KoshaiDashboardFragment : Fragment() {
 
     /**
      * Formats a number into a compact shorthand:
-     * 500 → 500, 1500 → 1.5k, 1200000 → 1.2M
+     * 500 → ৳500, 1500 → ৳1.5k, 1200000 → ৳1.2M
      */
-    private fun formatShort(value: Long): String = when {
+    private fun formatShort(value: Double): String = when {
         value >= 1_000_000 -> String.format("%.1fM", value / 1_000_000.0)
-        value >= 1_000    -> String.format("%.1fk", value / 1_000.0)
-            .replace(".0k", "k")   // 10.0k → 10k
-        else -> value.toString()
+        value >= 1_000     -> {
+            val formatted = String.format("%.1fk", value / 1_000.0)
+            if (formatted.endsWith(".0k")) formatted.replace(".0k", "k") else formatted
+        }
+        else -> value.toInt().toString()
     }
 
     private fun updateStatus(status: String) {
