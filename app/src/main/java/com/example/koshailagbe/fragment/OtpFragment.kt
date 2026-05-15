@@ -62,7 +62,7 @@ class OtpFragment : Fragment() {
                                     .addOnSuccessListener { koshaiDoc ->
                                         if (!isAdded) return@addOnSuccessListener
                                         if (koshaiDoc.exists()) {
-                                            findNavController().navigate(R.id.action_otpFragment_to_koshaiHomeFragment)
+                                            findNavController().navigate(R.id.action_otpFragment_to_koshaiDashboardFragment)
                                         } else {
                                             findNavController().navigate(R.id.action_otpFragment_to_roleFragment)
                                         }

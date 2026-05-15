@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.koshailagbe.R
 import com.example.koshailagbe.databinding.FragmentLoginBinding
+import com.example.koshailagbe.utils.showSnackBar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -46,7 +47,7 @@ class LoginFragment : Fragment() {
         val password   = binding.etPassword.text.toString().trim()
 
         if (emailPhone.isEmpty() || password.isEmpty()) {
-            Toast.makeText(requireContext(), "Please fill in all fields", Toast.LENGTH_SHORT).show()
+            showSnackBar("Please fill in all fields", isError = true)
             return
         }
 
@@ -55,7 +56,7 @@ class LoginFragment : Fragment() {
             emailPhone
         } else {
             // phone number provided — not supported for email login
-            Toast.makeText(requireContext(), "Please enter your registered email address", Toast.LENGTH_LONG).show()
+            showSnackBar("Please enter your registered email address", isError = true)
             return
         }
 
@@ -71,11 +72,7 @@ class LoginFragment : Fragment() {
                 if (user?.isEmailVerified == false) {
                     binding.btnLogin.isEnabled = true
                     binding.btnLogin.text = "Login"
-                    Toast.makeText(
-                        requireContext(),
-                        "Please verify your email first. Check your inbox.",
-                        Toast.LENGTH_LONG
-                    ).show()
+                    showSnackBar("Please verify your email first. Check your inbox.", isError = true)
                     // Offer to go to verification screen
                     routeToVerification(user.uid)
                     return@addOnSuccessListener
@@ -93,7 +90,7 @@ class LoginFragment : Fragment() {
                     it.message?.contains("password") == true   -> "Incorrect password."
                     else -> "Login failed: ${it.message}"
                 }
-                Toast.makeText(requireContext(), msg, Toast.LENGTH_LONG).show()
+                showSnackBar(msg, isError = true)
             }
     }
 
@@ -148,14 +145,14 @@ class LoginFragment : Fragment() {
                                         if (koshaiDoc.exists()) {
                                             com.example.koshailagbe.utils.SharedPrefsHelper.saveUserRole(requireContext(), com.example.koshailagbe.utils.SharedPrefsHelper.ROLE_KOSHAI)
                                             findNavController().navigate(
-                                                R.id.action_loginFragment_to_koshaiHomeFragment,
+                                                R.id.action_loginFragment_to_koshaiDashboardFragment,
                                                 null,
                                                 androidx.navigation.NavOptions.Builder()
                                                     .setPopUpTo(R.id.loginFragment, true).build()
                                             )
                                         } else {
                                             resetLoginButton()
-                                            Toast.makeText(requireContext(), "Account not found.", Toast.LENGTH_SHORT).show()
+                                            showSnackBar("Account not found.", isError = true)
                                         }
                                     }
                                     .addOnFailureListener { resetLoginButton() }

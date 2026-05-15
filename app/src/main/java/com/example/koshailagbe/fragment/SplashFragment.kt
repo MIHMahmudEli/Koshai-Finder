@@ -60,7 +60,7 @@ class SplashFragment : Fragment() {
             navigate(R.id.action_splashFragment_to_userHomeFragment)
             return
         } else if (savedRole == com.example.koshailagbe.utils.SharedPrefsHelper.ROLE_KOSHAI) {
-            navigate(R.id.action_splashFragment_to_koshaiHomeFragment)
+            navigate(R.id.action_splashFragment_to_koshaiDashboardFragment)
             return
         } else if (savedRole == com.example.koshailagbe.utils.SharedPrefsHelper.ROLE_ADMIN) {
             navigate(R.id.action_splashFragment_to_adminHomeFragment)
@@ -88,9 +88,9 @@ class SplashFragment : Fragment() {
                                         if (!isAdded) return@addOnSuccessListener
                                         when {
                                             koshaiDoc.exists() -> {
-                                                com.example.koshailagbe.utils.SharedPrefsHelper.saveUserRole(requireContext(), com.example.koshailagbe.utils.SharedPrefsHelper.ROLE_KOSHAI)
-                                                navigate(R.id.action_splashFragment_to_koshaiHomeFragment)
-                                            }
+                                            com.example.koshailagbe.utils.SharedPrefsHelper.saveUserRole(requireContext(), com.example.koshailagbe.utils.SharedPrefsHelper.ROLE_KOSHAI)
+                                            navigate(R.id.action_splashFragment_to_koshaiDashboardFragment)
+                                        }
                                             else -> {
                                                 // Logged in but no profile — go to role selection
                                                 navigate(R.id.action_splashFragment_to_roleFragment)

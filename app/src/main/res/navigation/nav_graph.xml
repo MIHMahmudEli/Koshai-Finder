@@ -10,7 +10,7 @@
         android:name="com.example.koshailagbe.fragment.SplashFragment">
         <action android:id="@+id/action_splashFragment_to_loginFragment"         app:destination="@id/loginFragment" />
         <action android:id="@+id/action_splashFragment_to_userHomeFragment"      app:destination="@id/userHomeFragment" />
-        <action android:id="@+id/action_splashFragment_to_koshaiHomeFragment"    app:destination="@id/koshaiHomeFragment" />
+        <action android:id="@+id/action_splashFragment_to_koshaiDashboardFragment"    app:destination="@id/koshaiDashboardFragment" />
         <action android:id="@+id/action_splashFragment_to_adminHomeFragment"     app:destination="@id/adminHomeFragment" />
         <action android:id="@+id/action_splashFragment_to_roleFragment"          app:destination="@id/roleFragment" />
     </fragment>
@@ -22,7 +22,7 @@
         android:label="Login">
         <action android:id="@+id/action_loginFragment_to_roleFragment"                  app:destination="@id/roleFragment" />
         <action android:id="@+id/action_loginFragment_to_userHomeFragment"               app:destination="@id/userHomeFragment" />
-        <action android:id="@+id/action_loginFragment_to_koshaiHomeFragment"             app:destination="@id/koshaiHomeFragment" />
+        <action android:id="@+id/action_loginFragment_to_koshaiDashboardFragment"             app:destination="@id/koshaiDashboardFragment" />
         <action android:id="@+id/action_loginFragment_to_adminHomeFragment"              app:destination="@id/adminHomeFragment" />
         <action android:id="@+id/action_loginFragment_to_forgotPasswordFragment"         app:destination="@id/forgotPasswordFragment" />
         <action android:id="@+id/action_loginFragment_to_emailVerificationFragment"      app:destination="@id/emailVerificationFragment" />
@@ -42,7 +42,7 @@
         <action android:id="@+id/action_roleFragment_to_registerUserFragment"   app:destination="@id/registerUserFragment" />
         <action android:id="@+id/action_roleFragment_to_registerKoshaiFragment" app:destination="@id/registerKoshaiFragment" />
         <action android:id="@+id/action_roleFragment_to_userHomeFragment"       app:destination="@id/userHomeFragment" />
-        <action android:id="@+id/action_roleFragment_to_koshaiHomeFragment"     app:destination="@id/koshaiHomeFragment" />
+        <action android:id="@+id/action_roleFragment_to_koshaiDashboardFragment"     app:destination="@id/koshaiDashboardFragment" />
     </fragment>
 
     <!-- Register User -->
@@ -59,7 +59,7 @@
         android:id="@+id/registerKoshaiFragment"
         android:name="com.example.koshailagbe.fragment.RegisterKoshaiFragment"
         android:label="Register as Koshai">
-        <action android:id="@+id/action_registerKoshaiFragment_to_koshaiHomeFragment"          app:destination="@id/koshaiHomeFragment" />
+        <action android:id="@+id/action_registerKoshaiFragment_to_koshaiDashboardFragment"          app:destination="@id/koshaiDashboardFragment" />
         <action android:id="@+id/action_registerKoshaiFragment_to_emailVerificationFragment"   app:destination="@id/emailVerificationFragment" />
     </fragment>
 
@@ -73,7 +73,7 @@
             app:argType="string"
             android:defaultValue="user" />
         <action android:id="@+id/action_emailVerificationFragment_to_userHomeFragment"   app:destination="@id/userHomeFragment" />
-        <action android:id="@+id/action_emailVerificationFragment_to_koshaiHomeFragment" app:destination="@id/koshaiHomeFragment" />
+        <action android:id="@+id/action_emailVerificationFragment_to_koshaiDashboardFragment" app:destination="@id/koshaiDashboardFragment" />
         <action android:id="@+id/action_emailVerificationFragment_to_loginFragment"      app:destination="@id/loginFragment" />
     </fragment>
 
@@ -83,7 +83,7 @@
         android:name="com.example.koshailagbe.fragment.OtpFragment">
         <action android:id="@+id/action_otpFragment_to_roleFragment"         app:destination="@id/roleFragment" />
         <action android:id="@+id/action_otpFragment_to_userHomeFragment"     app:destination="@id/userHomeFragment" />
-        <action android:id="@+id/action_otpFragment_to_koshaiHomeFragment"   app:destination="@id/koshaiHomeFragment" />
+        <action android:id="@+id/action_otpFragment_to_koshaiDashboardFragment"   app:destination="@id/koshaiDashboardFragment" />
     </fragment>
 
     <!-- User Home -->
@@ -91,10 +91,21 @@
         android:id="@+id/userHomeFragment"
         android:name="com.example.koshailagbe.fragment.UserHomeFragment" />
 
-    <!-- Koshai Home -->
+    <!-- Koshai Screens -->
     <fragment
-        android:id="@+id/koshaiHomeFragment"
-        android:name="com.example.koshailagbe.fragment.KoshaiHomeFragment" />
+        android:id="@+id/koshaiDashboardFragment"
+        android:name="com.example.koshailagbe.fragment.KoshaiDashboardFragment"
+        android:label="Koshai Dashboard" />
+
+    <fragment
+        android:id="@+id/bookingManagerFragment"
+        android:name="com.example.koshailagbe.fragment.BookingManagerFragment"
+        android:label="Booking Manager" />
+
+    <fragment
+        android:id="@+id/earningsFragment"
+        android:name="com.example.koshailagbe.fragment.EarningsFragment"
+        android:label="Earnings" />
 
     <!-- Admin Home -->
     <fragment

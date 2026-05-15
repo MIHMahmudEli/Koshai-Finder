@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.koshailagbe.R
 import com.example.koshailagbe.databinding.FragmentRegisterUserBinding
+import com.example.koshailagbe.utils.showSnackBar
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import java.util.UUID
@@ -41,7 +42,7 @@ class RegisterUserFragment : Fragment() {
 
         // Validation
         if (name.isEmpty() || email.isEmpty() || phone.isEmpty() || district.isEmpty() || upazila.isEmpty() || password.isEmpty()) {
-            Toast.makeText(requireContext(), "Please fill all required fields", Toast.LENGTH_SHORT).show()
+            showSnackBar("Please fill all required fields", isError = true)
             return
         }
         if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
@@ -86,7 +87,7 @@ class RegisterUserFragment : Fragment() {
                     if (!isAdded) return@addOnCompleteListener
                     binding.btnRegisterUser.isEnabled = true
                     binding.btnRegisterUser.text = "Create Account"
-                    Toast.makeText(requireContext(), "Verification email sent! Please check your inbox 📧", Toast.LENGTH_SHORT).show()
+                    showSnackBar("Verification email sent! Please check your inbox 📧")
                     findNavController().navigate(
                         R.id.action_registerUserFragment_to_emailVerificationFragment,
                         bundleOf(EmailVerificationFragment.ARG_DESTINATION to EmailVerificationFragment.DEST_USER)
@@ -103,7 +104,7 @@ class RegisterUserFragment : Fragment() {
                     handleExistingUnverifiedAccount(email, password)
                 } else {
                     PendingRegistration.clear()
-                    Toast.makeText(requireContext(), "Registration failed: ${ex.message}", Toast.LENGTH_LONG).show()
+                    showSnackBar("Registration failed: ${ex.message}", isError = true)
                 }
             }
     }
@@ -118,13 +119,13 @@ class RegisterUserFragment : Fragment() {
                     // Already verified but no Firestore — rare edge case, just go to login
                     auth.signOut()
                     PendingRegistration.clear()
-                    Toast.makeText(requireContext(), "Account already exists. Please login.", Toast.LENGTH_LONG).show()
+                    showSnackBar("Account already exists. Please login.", isError = true)
                     findNavController().popBackStack()
                 } else {
                     // Still unverified — resend and go to verify screen
                     user.sendEmailVerification()?.addOnCompleteListener {
                         if (!isAdded) return@addOnCompleteListener
-                        Toast.makeText(requireContext(), "Verification email resent 📧", Toast.LENGTH_SHORT).show()
+                        showSnackBar("Verification email resent 📧")
                         findNavController().navigate(
                             R.id.action_registerUserFragment_to_emailVerificationFragment,
                             bundleOf(EmailVerificationFragment.ARG_DESTINATION to EmailVerificationFragment.DEST_USER)
@@ -135,7 +136,7 @@ class RegisterUserFragment : Fragment() {
             .addOnFailureListener {
                 if (!isAdded) return@addOnFailureListener
                 PendingRegistration.clear()
-                Toast.makeText(requireContext(), "This email is already registered. Try logging in.", Toast.LENGTH_LONG).show()
+                showSnackBar("This email is already registered. Try logging in.", isError = true)
             }
     }
 

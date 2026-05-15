@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.koshailagbe.R
 import com.example.koshailagbe.databinding.FragmentRegisterKoshaiBinding
+import com.example.koshailagbe.utils.showSnackBar
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 
@@ -44,7 +45,7 @@ class RegisterKoshaiFragment : Fragment() {
         if (name.isEmpty() || email.isEmpty() || phone.isEmpty() || district.isEmpty() ||
             upazila.isEmpty() || rateCow.isEmpty() || rateGoat.isEmpty() || rateSheep.isEmpty() || password.isEmpty()
         ) {
-            Toast.makeText(requireContext(), "Please fill all required fields", Toast.LENGTH_SHORT).show()
+            showSnackBar("Please fill all required fields", isError = true)
             return
         }
         if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
@@ -104,7 +105,7 @@ class RegisterKoshaiFragment : Fragment() {
                     if (!isAdded) return@addOnCompleteListener
                     binding.btnRegisterKoshai.isEnabled = true
                     binding.btnRegisterKoshai.text = "Submit Registration"
-                    Toast.makeText(requireContext(), "Verification email sent! Please check your inbox 📧", Toast.LENGTH_SHORT).show()
+                    showSnackBar("Verification email sent! Please check your inbox 📧")
                     findNavController().navigate(
                         R.id.action_registerKoshaiFragment_to_emailVerificationFragment,
                         bundleOf(EmailVerificationFragment.ARG_DESTINATION to EmailVerificationFragment.DEST_KOSHAI)
@@ -120,7 +121,7 @@ class RegisterKoshaiFragment : Fragment() {
                     handleExistingUnverifiedAccount(email, password)
                 } else {
                     PendingRegistration.clear()
-                    Toast.makeText(requireContext(), "Registration failed: ${ex.message}", Toast.LENGTH_LONG).show()
+                    showSnackBar("Registration failed: ${ex.message}", isError = true)
                 }
             }
     }
@@ -133,12 +134,12 @@ class RegisterKoshaiFragment : Fragment() {
                 if (user.isEmailVerified) {
                     auth.signOut()
                     PendingRegistration.clear()
-                    Toast.makeText(requireContext(), "Account already exists. Please login.", Toast.LENGTH_LONG).show()
+                    showSnackBar("Account already exists. Please login.", isError = true)
                     findNavController().popBackStack()
                 } else {
                     user.sendEmailVerification()?.addOnCompleteListener {
                         if (!isAdded) return@addOnCompleteListener
-                        Toast.makeText(requireContext(), "Verification email resent 📧", Toast.LENGTH_SHORT).show()
+                        showSnackBar("Verification email resent 📧")
                         findNavController().navigate(
                             R.id.action_registerKoshaiFragment_to_emailVerificationFragment,
                             bundleOf(EmailVerificationFragment.ARG_DESTINATION to EmailVerificationFragment.DEST_KOSHAI)
@@ -149,7 +150,7 @@ class RegisterKoshaiFragment : Fragment() {
             .addOnFailureListener {
                 if (!isAdded) return@addOnFailureListener
                 PendingRegistration.clear()
-                Toast.makeText(requireContext(), "This email is already registered. Try logging in.", Toast.LENGTH_LONG).show()
+                showSnackBar("This email is already registered. Try logging in.", isError = true)
             }
     }
 

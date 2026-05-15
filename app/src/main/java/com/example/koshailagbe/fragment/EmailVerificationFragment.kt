@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.koshailagbe.R
 import com.example.koshailagbe.databinding.FragmentEmailVerificationBinding
+import com.example.koshailagbe.utils.showSnackBar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -70,7 +71,7 @@ class EmailVerificationFragment : Fragment() {
             auth.currentUser?.sendEmailVerification()
                 ?.addOnSuccessListener {
                     if (!isAdded) return@addOnSuccessListener
-                    Toast.makeText(requireContext(), "Verification email resent! ✉️", Toast.LENGTH_SHORT).show()
+                    showSnackBar("Verification email resent! ✉️")
                     binding.btnResendEmail.isEnabled = false
                     binding.btnResendEmail.text = "Resent! Wait 30s..."
                     Handler(Looper.getMainLooper()).postDelayed({
@@ -109,11 +110,7 @@ class EmailVerificationFragment : Fragment() {
             if (!isAdded) return@addOnCompleteListener
             if (!task.isSuccessful || auth.currentUser?.isEmailVerified != true) {
                 resetButton()
-                Toast.makeText(
-                    requireContext(),
-                    "Email not verified yet. Please click the link in your inbox.",
-                    Toast.LENGTH_LONG
-                ).show()
+                showSnackBar("Email not verified yet. Please click the link in your inbox.", isError = true)
                 return@addOnCompleteListener
             }
             saveToFirestore(auto = false)
@@ -126,7 +123,7 @@ class EmailVerificationFragment : Fragment() {
         val uid = auth.currentUser?.uid
         if (uid == null) {
             resetButton()
-            Toast.makeText(requireContext(), "Session expired. Please login again.", Toast.LENGTH_LONG).show()
+            showSnackBar("Session expired. Please login again.", isError = true)
             return
         }
 
@@ -153,7 +150,7 @@ class EmailVerificationFragment : Fragment() {
                 PendingRegistration.clear(requireContext())
                 val roleToSave = if (destinationRole == DEST_KOSHAI) com.example.koshailagbe.utils.SharedPrefsHelper.ROLE_KOSHAI else com.example.koshailagbe.utils.SharedPrefsHelper.ROLE_USER
                 com.example.koshailagbe.utils.SharedPrefsHelper.saveUserRole(requireContext(), roleToSave)
-                Toast.makeText(requireContext(), "Welcome! Your account is ready 🎉", Toast.LENGTH_SHORT).show()
+                showSnackBar("Welcome! Your account is ready 🎉")
                 navigateHome()
             }
             .addOnFailureListener {
@@ -166,7 +163,7 @@ class EmailVerificationFragment : Fragment() {
                         "Firestore database not created yet. Please create it in Firebase Console."
                     else -> "Failed to save profile: ${it.message}"
                 }
-                Toast.makeText(requireContext(), errMsg, Toast.LENGTH_LONG).show()
+                showSnackBar(errMsg, isError = true)
                 // Restart polling so auto-detection still works
                 pollHandler.postDelayed(pollRunnable, 4_000)
             }
@@ -205,7 +202,7 @@ class EmailVerificationFragment : Fragment() {
     private fun navigateHome() {
         if (!isAdded) return
         val action = if (destinationRole == DEST_KOSHAI)
-            R.id.action_emailVerificationFragment_to_koshaiHomeFragment
+            R.id.action_emailVerificationFragment_to_koshaiDashboardFragment
         else
             R.id.action_emailVerificationFragment_to_userHomeFragment
 
