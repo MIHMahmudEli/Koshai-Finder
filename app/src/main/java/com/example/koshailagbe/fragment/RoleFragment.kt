@@ -25,6 +25,10 @@ class RoleFragment : Fragment() {
             findNavController().navigate(R.id.action_roleFragment_to_registerKoshaiFragment)
         }
 
+        binding.tvBackToLogin.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
         return binding.root
     }
 

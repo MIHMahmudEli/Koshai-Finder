@@ -76,6 +76,10 @@ class OtpFragment : Fragment() {
                 }
         }
 
+        binding.tvResend.setOnClickListener {
+            Toast.makeText(requireContext(), "Resending code...", Toast.LENGTH_SHORT).show()
+        }
+
         return binding.root
     }
 
