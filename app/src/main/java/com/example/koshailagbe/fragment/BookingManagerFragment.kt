@@ -52,6 +52,10 @@ class BookingManagerFragment : Fragment() {
     private fun setupRecyclerView() {
         adapter = BookingAdapter(
             emptyList(),
+            onItemClick = { booking ->
+                val bundle = Bundle().apply { putString("bookingId", booking.id) }
+                findNavController().navigate(R.id.action_bookingManagerFragment_to_bookingDetailFragment, bundle)
+            },
             onAccept = { booking -> updateBookingStatus(booking, "confirmed") },
             onDecline = { booking -> updateBookingStatus(booking, "cancelled") },
             onUpdateStatus = { booking -> handleStatusCycle(booking) }

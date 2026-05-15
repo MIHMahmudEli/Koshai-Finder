@@ -12,6 +12,7 @@ import java.util.*
 
 class BookingAdapter(
     private var bookings: List<Booking>,
+    private val onItemClick: (Booking) -> Unit,
     private val onAccept: (Booking) -> Unit,
     private val onDecline: (Booking) -> Unit,
     private val onUpdateStatus: (Booking) -> Unit
@@ -89,6 +90,7 @@ class BookingAdapter(
         binding.btnAccept.setOnClickListener { onAccept(booking) }
         binding.btnDecline.setOnClickListener { onDecline(booking) }
         binding.btnUpdateStatus.setOnClickListener { onUpdateStatus(booking) }
+        binding.root.setOnClickListener { onItemClick(booking) }
     }
 
     override fun getItemCount() = bookings.size

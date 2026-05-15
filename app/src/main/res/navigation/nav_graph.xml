@@ -103,7 +103,9 @@
     <fragment
         android:id="@+id/bookingManagerFragment"
         android:name="com.example.koshailagbe.fragment.BookingManagerFragment"
-        android:label="Booking Manager" />
+        android:label="Booking Manager">
+        <action android:id="@+id/action_bookingManagerFragment_to_bookingDetailFragment" app:destination="@id/bookingDetailFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/earningsFragment"
