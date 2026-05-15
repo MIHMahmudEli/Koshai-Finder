@@ -52,7 +52,8 @@ class KoshaiDiscoveryAdapter(
 
             Glide.with(holder.itemView.context)
                 .load(koshai.photoUrl)
-                .placeholder(R.drawable.bg_dashboard_header)
+                .placeholder(R.drawable.ic_profile)
+                .error(R.drawable.ic_profile)
                 .into(holder.binding.ivKoshai)
             
             holder.itemView.setOnClickListener { onKoshaiClick(koshai) }
@@ -64,7 +65,8 @@ class KoshaiDiscoveryAdapter(
 
             Glide.with(holder.itemView.context)
                 .load(koshai.photoUrl)
-                .placeholder(R.drawable.bg_dashboard_header)
+                .placeholder(R.drawable.ic_profile)
+                .error(R.drawable.ic_profile)
                 .into(holder.binding.ivKoshai)
             
             holder.itemView.setOnClickListener { onKoshaiClick(koshai) }

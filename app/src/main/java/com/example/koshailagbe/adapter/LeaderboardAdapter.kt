@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.koshailagbe.databinding.ItemLeaderboardBinding
 import com.example.koshailagbe.model.KoshaiProfile
 import com.bumptech.glide.Glide
+import com.example.koshailagbe.R
 
 class LeaderboardAdapter(
     private var koshais: List<KoshaiProfile>
@@ -28,7 +29,8 @@ class LeaderboardAdapter(
         
         Glide.with(holder.itemView.context)
             .load(koshai.photoUrl)
-            .placeholder(android.R.drawable.ic_menu_gallery)
+            .placeholder(R.drawable.ic_profile)
+            .error(R.drawable.ic_profile)
             .into(binding.ivAvatar)
         
         val earnings = if (koshai.earnings >= 1000) "৳${String.format("%.1fk", koshai.earnings / 1000.0)}" else "৳${koshai.earnings}"

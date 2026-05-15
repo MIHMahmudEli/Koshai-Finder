@@ -11,6 +11,7 @@ import com.example.koshailagbe.R
 import com.example.koshailagbe.adapter.ReviewAdapter
 import com.example.koshailagbe.databinding.FragmentKoshaiProfileBinding
 import com.example.koshailagbe.model.Review
+import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
@@ -66,6 +67,13 @@ class KoshaiProfileFragment : Fragment() {
                 if (!bio.isNullOrEmpty()) {
                     binding.tvBio.text = bio
                 }
+
+                val photoUrl = doc.getString("photoUrl")
+                com.bumptech.glide.Glide.with(this)
+                    .load(photoUrl)
+                    .placeholder(R.drawable.ic_profile)
+                    .error(R.drawable.ic_profile)
+                    .into(binding.ivProfile)
             }
     }
 

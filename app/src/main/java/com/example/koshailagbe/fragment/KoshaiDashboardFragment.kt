@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.koshailagbe.R
+import com.bumptech.glide.Glide
 import com.example.koshailagbe.databinding.FragmentKoshaiDashboardBinding
 import com.example.koshailagbe.model.KoshaiProfile
 import com.example.koshailagbe.utils.SharedPrefsHelper
@@ -113,6 +114,12 @@ class KoshaiDashboardFragment : Fragment() {
         binding.tvTotalJobs.text = profile.totalJobs.toString()
         binding.tvEarnings.text = "৳${profile.earnings}"
         binding.tvRating.text = String.format("%.1f", profile.rating)
+
+        Glide.with(this)
+            .load(profile.photoUrl)
+            .placeholder(R.drawable.ic_profile)
+            .error(R.drawable.ic_profile)
+            .into(binding.ivProfile)
 
         // Set status toggle
         when (profile.status) {

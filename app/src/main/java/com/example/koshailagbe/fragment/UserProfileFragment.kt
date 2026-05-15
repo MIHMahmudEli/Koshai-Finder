@@ -55,9 +55,11 @@ class UserProfileFragment : Fragment() {
                 binding.tvLocation.text = if (district.isNotEmpty()) "$upazila, $district" else "Location not set"
                 
                 val photoUrl = doc.getString("photoUrl")
-                if (!photoUrl.isNullOrEmpty()) {
-                    Glide.with(this).load(photoUrl).into(binding.ivProfile)
-                }
+                Glide.with(this)
+                    .load(photoUrl)
+                    .placeholder(R.drawable.ic_profile)
+                    .error(R.drawable.ic_profile)
+                    .into(binding.ivProfile)
             }
     }
 

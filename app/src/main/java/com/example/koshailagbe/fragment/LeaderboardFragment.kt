@@ -11,6 +11,7 @@ import com.example.koshailagbe.adapter.LeaderboardAdapter
 import com.example.koshailagbe.databinding.FragmentLeaderboardBinding
 import com.example.koshailagbe.model.KoshaiProfile
 import com.bumptech.glide.Glide
+import com.example.koshailagbe.R
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 
@@ -66,19 +67,19 @@ class LeaderboardFragment : Fragment() {
         // Rank 1
         top3.getOrNull(0)?.let { profile: KoshaiProfile ->
             binding.tvName1.text = profile.name
-            Glide.with(this).load(profile.photoUrl).placeholder(android.R.drawable.ic_menu_gallery).into(binding.ivRank1)
+            Glide.with(this).load(profile.photoUrl).placeholder(R.drawable.ic_profile).into(binding.ivRank1)
         }
 
         // Rank 2
         top3.getOrNull(1)?.let { profile: KoshaiProfile ->
             binding.tvName2.text = profile.name
-            Glide.with(this).load(profile.photoUrl).placeholder(android.R.drawable.ic_menu_gallery).into(binding.ivRank2)
+            Glide.with(this).load(profile.photoUrl).placeholder(R.drawable.ic_profile).into(binding.ivRank2)
         }
 
         // Rank 3
         top3.getOrNull(2)?.let { profile: KoshaiProfile ->
             binding.tvName3.text = profile.name
-            Glide.with(this).load(profile.photoUrl).placeholder(android.R.drawable.ic_menu_gallery).into(binding.ivRank3)
+            Glide.with(this).load(profile.photoUrl).placeholder(R.drawable.ic_profile).into(binding.ivRank3)
         }
     }
 

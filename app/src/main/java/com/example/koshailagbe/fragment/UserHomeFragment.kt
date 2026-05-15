@@ -13,6 +13,7 @@ import com.example.koshailagbe.adapter.KoshaiDiscoveryAdapter
 import com.example.koshailagbe.databinding.FragmentUserHomeBinding
 import com.example.koshailagbe.model.KoshaiProfile
 import com.example.koshailagbe.utils.SharedPrefsHelper
+import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -41,6 +42,7 @@ class UserHomeFragment : Fragment() {
         setupSearch()
         setupLogout()
         fetchKoshais()
+        loadUserProfileImage()
 
         return binding.root
     }
@@ -140,6 +142,20 @@ class UserHomeFragment : Fragment() {
         binding.ibProfile.setOnClickListener {
             findNavController().navigate(R.id.action_userHomeFragment_to_userProfileFragment)
         }
+    }
+
+    private fun loadUserProfileImage() {
+        val uid = auth.currentUser?.uid ?: return
+        db.collection("users").document(uid).get()
+            .addOnSuccessListener { doc ->
+                if (!isAdded) return@addOnSuccessListener
+                val photoUrl = doc.getString("photoUrl")
+                Glide.with(this)
+                    .load(photoUrl)
+                    .placeholder(R.drawable.ic_profile)
+                    .error(R.drawable.ic_profile)
+                    .into(binding.ibProfile)
+            }
     }
 
     override fun onDestroyView() {

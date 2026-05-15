@@ -82,9 +82,11 @@ class EditProfileFragment : Fragment() {
                 }
                 
                 currentPhotoUrl = doc.getString("photoUrl")
-                if (!currentPhotoUrl.isNullOrEmpty()) {
-                    Glide.with(this).load(currentPhotoUrl).into(binding.ivProfile)
-                }
+                Glide.with(this)
+                    .load(currentPhotoUrl)
+                    .placeholder(R.drawable.ic_profile)
+                    .error(R.drawable.ic_profile)
+                    .into(binding.ivProfile)
             }
     }
 
