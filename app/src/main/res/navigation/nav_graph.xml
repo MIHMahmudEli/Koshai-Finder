@@ -1,168 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<navigation
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/splashFragment">
 
+    <!-- Splash -->
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.example.koshailagbe.fragment.SplashFragment">
+        <action android:id="@+id/action_splashFragment_to_loginFragment"         app:destination="@id/loginFragment" />
+        <action android:id="@+id/action_splashFragment_to_userHomeFragment"      app:destination="@id/userHomeFragment" />
+        <action android:id="@+id/action_splashFragment_to_koshaiHomeFragment"    app:destination="@id/koshaiHomeFragment" />
+        <action android:id="@+id/action_splashFragment_to_roleFragment"          app:destination="@id/roleFragment" />
+    </fragment>
+
+    <!-- Login -->
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.koshailagbe.fragment.LoginFragment"
-        android:label="Login"
-        tools:layout="@layout/fragment_login">
-
-        <action
-            android:id="@+id/action_login_to_dashboard"
-            app:destination="@id/dashboardFragment"
-            app:popUpTo="@id/loginFragment"
-            app:popUpToInclusive="true" />
-
-        <action
-            android:id="@+id/action_login_to_chooseRegister"
-            app:destination="@id/chooseRegisterFragment" />
+        android:label="Login">
+        <action android:id="@+id/action_loginFragment_to_roleFragment"                  app:destination="@id/roleFragment" />
+        <action android:id="@+id/action_loginFragment_to_userHomeFragment"               app:destination="@id/userHomeFragment" />
+        <action android:id="@+id/action_loginFragment_to_koshaiHomeFragment"             app:destination="@id/koshaiHomeFragment" />
+        <action android:id="@+id/action_loginFragment_to_forgotPasswordFragment"         app:destination="@id/forgotPasswordFragment" />
+        <action android:id="@+id/action_loginFragment_to_emailVerificationFragment"      app:destination="@id/emailVerificationFragment" />
     </fragment>
 
+    <!-- Forgot Password -->
     <fragment
-        android:id="@+id/dashboardFragment"
-        android:name="com.example.koshailagbe.fragment.DashboardFragment"
-        android:label="Dashboard"
-        tools:layout="@layout/fragment_dashboard">
+        android:id="@+id/forgotPasswordFragment"
+        android:name="com.example.koshailagbe.fragment.ForgotPasswordFragment"
+        android:label="Forgot Password" />
 
-        <action
-            android:id="@+id/action_dashboard_to_meatShop"
-            app:destination="@id/meatShopFragment" />
-
-        <action
-            android:id="@+id/action_dashboard_to_butcherBooking"
-            app:destination="@id/butcherBookingFragment" />
-
-        <action
-            android:id="@+id/action_dashboard_to_toolsAndGear"
-            app:destination="@id/toolsAndGearFragment" />
-
-        <action
-            android:id="@+id/action_dashboard_to_cleaningService"
-            app:destination="@id/cleaningServiceFragment" />
-
-        <action
-            android:id="@+id/action_dashboard_to_fullServicePackage"
-            app:destination="@id/fullServicePackageFragment" />
-        <action
-            android:id="@+id/action_dashboard_to_liveStatusTracking"
-            app:destination="@id/liveStatusTrackingFragment" />
+    <!-- Role Select -->
+    <fragment
+        android:id="@+id/roleFragment"
+        android:name="com.example.koshailagbe.fragment.RoleFragment"
+        android:label="Choose Role">
+        <action android:id="@+id/action_roleFragment_to_registerUserFragment"   app:destination="@id/registerUserFragment" />
+        <action android:id="@+id/action_roleFragment_to_registerKoshaiFragment" app:destination="@id/registerKoshaiFragment" />
+        <action android:id="@+id/action_roleFragment_to_userHomeFragment"       app:destination="@id/userHomeFragment" />
+        <action android:id="@+id/action_roleFragment_to_koshaiHomeFragment"     app:destination="@id/koshaiHomeFragment" />
     </fragment>
 
+    <!-- Register User -->
     <fragment
-        android:id="@+id/liveStatusTrackingFragment"
-        android:name="com.example.koshailagbe.fragment.LiveStatusTrackingFragment"
-        android:label="Live Status Tracking"
-        tools:layout="@layout/fragment_live_status_tracking" />
-
-    <fragment
-        android:id="@+id/fullServicePackageFragment"
-        android:name="com.example.koshailagbe.fragment.FullServicePackageFragment"
-        android:label="Full Service Package"
-        tools:layout="@layout/fragment_full_service_package" />
-
-    <fragment
-        android:id="@+id/cleaningServiceFragment"
-        android:name="com.example.koshailagbe.fragment.CleaningServiceFragment"
-        android:label="Cleaning Service"
-        tools:layout="@layout/fragment_cleaning_service" />
-
-    <fragment
-        android:id="@+id/chooseRegisterFragment"
-        android:name="com.example.koshailagbe.fragment.ChooseRegisterFragment"
-        android:label="Choose Register"
-        tools:layout="@layout/fragment_choose_register">
-
-        <action
-            android:id="@+id/action_chooseRegister_to_customerRegister"
-            app:destination="@id/customerRegisterFragment" />
-
-        <action
-            android:id="@+id/action_chooseRegister_to_butcherRegister"
-            app:destination="@id/butcherRegisterFragment" />
-
-        <action
-            android:id="@+id/action_chooseRegister_to_login"
-            app:destination="@id/loginFragment"
-            app:popUpTo="@id/loginFragment"
-            app:popUpToInclusive="true" />
+        android:id="@+id/registerUserFragment"
+        android:name="com.example.koshailagbe.fragment.RegisterUserFragment"
+        android:label="Register as User">
+        <action android:id="@+id/action_registerUserFragment_to_userHomeFragment"           app:destination="@id/userHomeFragment" />
+        <action android:id="@+id/action_registerUserFragment_to_emailVerificationFragment"  app:destination="@id/emailVerificationFragment" />
     </fragment>
 
+    <!-- Register Koshai -->
     <fragment
-        android:id="@+id/customerRegisterFragment"
-        android:name="com.example.koshailagbe.fragment.CustomerRegisterFragment"
-        android:label="Customer Register"
-        tools:layout="@layout/fragment_customer_register">
-
-        <action
-            android:id="@+id/action_customerRegister_to_dashboard"
-            app:destination="@id/dashboardFragment"
-            app:popUpTo="@id/loginFragment"
-            app:popUpToInclusive="true" />
-
-        <action
-            android:id="@+id/action_customerRegister_to_login"
-            app:destination="@id/loginFragment"
-            app:popUpTo="@id/loginFragment"
-            app:popUpToInclusive="true" />
+        android:id="@+id/registerKoshaiFragment"
+        android:name="com.example.koshailagbe.fragment.RegisterKoshaiFragment"
+        android:label="Register as Koshai">
+        <action android:id="@+id/action_registerKoshaiFragment_to_koshaiHomeFragment"          app:destination="@id/koshaiHomeFragment" />
+        <action android:id="@+id/action_registerKoshaiFragment_to_emailVerificationFragment"   app:destination="@id/emailVerificationFragment" />
     </fragment>
 
+    <!-- Email Verification -->
     <fragment
-        android:id="@+id/butcherRegisterFragment"
-        android:name="com.example.koshailagbe.fragment.ButcherRegisterFragment"
-        android:label="Butcher Register"
-        tools:layout="@layout/fragment_butcher_register">
-
-        <action
-            android:id="@+id/action_butcherRegister_to_login"
-            app:destination="@id/loginFragment"
-            app:popUpTo="@id/loginFragment"
-            app:popUpToInclusive="true" />
+        android:id="@+id/emailVerificationFragment"
+        android:name="com.example.koshailagbe.fragment.EmailVerificationFragment"
+        android:label="Verify Email">
+        <argument
+            android:name="destination"
+            app:argType="string"
+            android:defaultValue="user" />
+        <action android:id="@+id/action_emailVerificationFragment_to_userHomeFragment"   app:destination="@id/userHomeFragment" />
+        <action android:id="@+id/action_emailVerificationFragment_to_koshaiHomeFragment" app:destination="@id/koshaiHomeFragment" />
+        <action android:id="@+id/action_emailVerificationFragment_to_loginFragment"      app:destination="@id/loginFragment" />
     </fragment>
 
+    <!-- OTP Fragment (legacy - kept for compatibility) -->
     <fragment
-        android:id="@+id/meatShopFragment"
-        android:name="com.example.koshailagbe.fragment.MeatShopFragment"
-        android:label="Meat Shop"
-        tools:layout="@layout/fragment_meat_shop" />
-
-    <fragment
-        android:id="@+id/butcherBookingFragment"
-        android:name="com.example.koshailagbe.fragment.ButcherBookingFragment"
-        android:label="Butcher Booking"
-        tools:layout="@layout/fragment_butcher_booking" />
-
-    <fragment
-        android:id="@+id/toolsAndGearFragment"
-        android:name="com.example.koshailagbe.fragment.ToolsAndGearFragment"
-        android:label="Tools and Gear"
-        tools:layout="@layout/fragment_tools_and_gear" />
-
-    <fragment
-        android:id="@+id/charityDistributionFragment"
-        android:name="com.example.koshailagbe.fragment.CharityDistributionFragment"
-        android:label="Charity Distribution"
-        tools:layout="@layout/fragment_charity_distribution" />
-
-    <fragment
-        android:id="@+id/profileFragment"
-        android:name="com.example.koshailagbe.fragment.ProfileFragment"
-        android:label="Profile"
-        tools:layout="@layout/fragment_profile">
-
-        <action
-            android:id="@+id/action_profile_to_login"
-            app:destination="@id/loginFragment"
-            app:popUpTo="@id/nav_graph"
-            app:popUpToInclusive="true" />
-
-        <action
-            android:id="@+id/action_profile_to_koshaiLogin"
-            app:destination="@id/butcherRegisterFragment" />
+        android:id="@+id/otpFragment"
+        android:name="com.example.koshailagbe.fragment.OtpFragment">
+        <action android:id="@+id/action_otpFragment_to_roleFragment"         app:destination="@id/roleFragment" />
+        <action android:id="@+id/action_otpFragment_to_userHomeFragment"     app:destination="@id/userHomeFragment" />
+        <action android:id="@+id/action_otpFragment_to_koshaiHomeFragment"   app:destination="@id/koshaiHomeFragment" />
     </fragment>
+
+    <!-- User Home -->
+    <fragment
+        android:id="@+id/userHomeFragment"
+        android:name="com.example.koshailagbe.fragment.UserHomeFragment" />
+
+    <!-- Koshai Home -->
+    <fragment
+        android:id="@+id/koshaiHomeFragment"
+        android:name="com.example.koshailagbe.fragment.KoshaiHomeFragment" />
 
 </navigation>

@@ -2,7 +2,10 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="primary_green">#1B5E35</color>
-    <color name="text_gray">#888888</color>
-    <color name="primary_yellow">#E8B530</color>
+    <color name="primary_green">#1D6B45</color>
+    <color name="light_green">#E8F5EE</color>
+    <color name="dark_text">#1A1A1A</color>
+    <color name="gray_text">#555555</color>
+    <color name="light_gray">#F5F5F5</color>
+    <color name="mid_gray">#CCCCCC</color>
 </resources>

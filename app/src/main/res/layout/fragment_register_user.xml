@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Create User Account"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:textColor="@color/primary_green"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Join Koshai Finder as a User"
+            android:textSize="15sp"
+            android:textColor="@color/gray_text"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="32dp" />
+
+        <!-- Full Name -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilName"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Full Name"
+            android:layout_marginBottom="16dp"
+            app:boxStrokeColor="@color/primary_green"
+            app:hintTextColor="@color/primary_green">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:textColor="@color/dark_text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Email -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilEmail"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Email Address"
+            android:layout_marginBottom="16dp"
+            app:boxStrokeColor="@color/primary_green"
+            app:hintTextColor="@color/primary_green">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:textColor="@color/dark_text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Phone -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilPhone"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Phone Number"
+            app:prefixText="+88 "
+            android:layout_marginBottom="16dp"
+            app:boxStrokeColor="@color/primary_green"
+            app:hintTextColor="@color/primary_green">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="phone"
+                android:maxLength="11"
+                android:textColor="@color/dark_text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- District -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilDistrict"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="District"
+            android:layout_marginBottom="16dp"
+            app:boxStrokeColor="@color/primary_green"
+            app:hintTextColor="@color/primary_green">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etDistrict"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:textColor="@color/dark_text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Upazila -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilUpazila"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Upazila / Sub-district"
+            android:layout_marginBottom="16dp"
+            app:boxStrokeColor="@color/primary_green"
+            app:hintTextColor="@color/primary_green">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etUpazila"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:textColor="@color/dark_text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Referral Code (optional) -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilReferral"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Referral Code (Optional)"
+            android:layout_marginBottom="16dp"
+            app:boxStrokeColor="@color/primary_green"
+            app:hintTextColor="@color/primary_green">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etReferral"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:textColor="@color/dark_text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Password -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilPassword"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Password"
+            app:passwordToggleEnabled="true"
+            android:layout_marginBottom="32dp"
+            app:boxStrokeColor="@color/primary_green"
+            app:hintTextColor="@color/primary_green">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:textColor="@color/dark_text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnRegisterUser"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="Create Account"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:cornerRadius="12dp"
+            app:backgroundTint="@color/primary_green"
+            android:layout_marginBottom="16dp" />
+
+        <TextView
+            android:id="@+id/tvBackToLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Already have an account? Login"
+            android:textColor="@color/primary_green"
+            android:textStyle="bold"
+            android:layout_gravity="center_horizontal" />
+
+    </LinearLayout>
+</ScrollView>
