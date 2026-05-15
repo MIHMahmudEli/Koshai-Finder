@@ -12,8 +12,10 @@ import com.example.koshailagbe.adapter.ReviewAdapter
 import com.example.koshailagbe.databinding.FragmentUserKoshaiDetailBinding
 import com.example.koshailagbe.model.KoshaiProfile
 import com.example.koshailagbe.model.Review
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
+import com.example.koshailagbe.utils.vibrate
 
 class UserKoshaiDetailFragment : Fragment() {
 
@@ -24,6 +26,12 @@ class UserKoshaiDetailFragment : Fragment() {
     private lateinit var db: FirebaseFirestore
     private var koshaiProfile: KoshaiProfile? = null
     private lateinit var reviewAdapter: ReviewAdapter
+    
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        sharedElementEnterTransition = android.transition.TransitionInflater.from(requireContext())
+            .inflateTransition(android.R.transition.move)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -104,6 +112,12 @@ class UserKoshaiDetailFragment : Fragment() {
         binding.tvFullLocation.text = "📍 Available in $upazila, $district"
         binding.tvLocation.text = "$upazila, $district"
 
+        com.bumptech.glide.Glide.with(this)
+            .load(doc.getString("photoUrl") ?: profile.photoUrl)
+            .placeholder(R.drawable.ic_profile)
+            .error(R.drawable.ic_profile)
+            .into(binding.ivProfile)
+
         // Show About card only if bio is available
         val bio = doc.getString("bio")?.trim()
         if (!bio.isNullOrEmpty()) {
@@ -118,6 +132,7 @@ class UserKoshaiDetailFragment : Fragment() {
 
     private fun setupActions() {
         binding.btnBookNow.setOnClickListener {
+            it.vibrate()
             val bundle = Bundle().apply { 
                 putString("koshaiId", koshaiId)
             }
@@ -125,6 +140,7 @@ class UserKoshaiDetailFragment : Fragment() {
         }
 
         binding.btnChat.setOnClickListener {
+            it.vibrate()
             val profile = koshaiProfile ?: return@setOnClickListener
             val bundle = Bundle().apply {
                 putString("receiverId", profile.id)
@@ -135,6 +151,7 @@ class UserKoshaiDetailFragment : Fragment() {
         }
 
         binding.btnReport.setOnClickListener {
+            it.vibrate()
             showReportDialog()
         }
     }

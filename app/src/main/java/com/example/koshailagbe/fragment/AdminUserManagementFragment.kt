@@ -74,11 +74,15 @@ class AdminUserManagementFragment : Fragment() {
     }
 
     private fun loadData() {
-        binding.progressBar.visibility = View.VISIBLE
+        binding.shimmerLoading.visibility = View.VISIBLE
+        binding.shimmerLoading.startShimmer()
         
         // Listen to Users
         db.collection("users").addSnapshotListener { snapshot, _ ->
             if (!isAdded) return@addSnapshotListener
+            binding.shimmerLoading.stopShimmer()
+            binding.shimmerLoading.visibility = View.GONE
+
             allUsers = snapshot?.documents?.mapNotNull { doc ->
                 val user = doc.toObject(User::class.java)
                 user?.apply { 
@@ -92,7 +96,9 @@ class AdminUserManagementFragment : Fragment() {
         // Listen to Koshais
         db.collection("koshais").addSnapshotListener { snapshot, _ ->
             if (!isAdded) return@addSnapshotListener
-            binding.progressBar.visibility = View.GONE
+            binding.shimmerLoading.stopShimmer()
+            binding.shimmerLoading.visibility = View.GONE
+
             allKoshais = snapshot?.documents?.mapNotNull { doc ->
                 val koshai = doc.toObject(KoshaiProfile::class.java)
                 koshai?.apply { 

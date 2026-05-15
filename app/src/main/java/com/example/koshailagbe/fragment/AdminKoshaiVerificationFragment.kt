@@ -45,12 +45,15 @@ class AdminKoshaiVerificationFragment : Fragment() {
     }
 
     private fun loadPendingKoshais() {
-        binding.progressBar.visibility = View.VISIBLE
+        binding.shimmerLoading.visibility = View.VISIBLE
+        binding.shimmerLoading.startShimmer()
+        
         db.collection("koshais")
             .whereEqualTo("isVerified", false)
             .addSnapshotListener { snapshot, e ->
                 if (!isAdded) return@addSnapshotListener
-                binding.progressBar.visibility = View.GONE
+                binding.shimmerLoading.stopShimmer()
+                binding.shimmerLoading.visibility = View.GONE
                 
                 if (e != null) return@addSnapshotListener
                 
@@ -61,10 +64,12 @@ class AdminKoshaiVerificationFragment : Fragment() {
                 adapter.updateList(koshais)
                 
                 if (koshais.isEmpty()) {
-                    binding.emptyState.visibility = View.VISIBLE
+                    binding.layoutEmpty.root.visibility = View.VISIBLE
+                    binding.layoutEmpty.tvEmptyTitle.text = "All Clear!"
+                    binding.layoutEmpty.tvEmptySubtitle.text = "No pending Koshai registrations at the moment."
                     binding.rvVerification.visibility = View.GONE
                 } else {
-                    binding.emptyState.visibility = View.GONE
+                    binding.layoutEmpty.root.visibility = View.GONE
                     binding.rvVerification.visibility = View.VISIBLE
                 }
             }

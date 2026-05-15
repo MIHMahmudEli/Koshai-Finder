@@ -179,7 +179,11 @@
         android:label="My Bookings">
         <action
             android:id="@+id/action_userBookingsFragment_to_reviewFragment"
-            app:destination="@id/reviewFragment" />
+            app:destination="@id/reviewFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <fragment
@@ -203,7 +207,11 @@
         android:label="Inbox">
         <action
             android:id="@+id/action_chatListFragment_to_chatFragment"
-            app:destination="@id/chatFragment" />
+            app:destination="@id/chatFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <fragment
@@ -234,10 +242,18 @@
             app:argType="string" />
         <action
             android:id="@+id/action_userKoshaiDetailFragment_to_bookingRequestFragment"
-            app:destination="@id/bookingRequestFragment" />
+            app:destination="@id/bookingRequestFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_userKoshaiDetailFragment_to_chatFragment"
-            app:destination="@id/chatFragment" />
+            app:destination="@id/chatFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <fragment
@@ -252,19 +268,39 @@
         android:label="Koshai Dashboard">
         <action
             android:id="@+id/action_koshaiDashboardFragment_to_bookingManagerFragment"
-            app:destination="@id/bookingManagerFragment" />
+            app:destination="@id/bookingManagerFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_koshaiDashboardFragment_to_earningsFragment"
-            app:destination="@id/earningsFragment" />
+            app:destination="@id/earningsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_koshaiDashboardFragment_to_availabilityFragment"
-            app:destination="@id/availabilityFragment" />
+            app:destination="@id/availabilityFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_koshaiDashboardFragment_to_leaderboardFragment"
-            app:destination="@id/leaderboardFragment" />
+            app:destination="@id/leaderboardFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_koshaiDashboardFragment_to_koshaiProfileFragment"
-            app:destination="@id/koshaiProfileFragment" />
+            app:destination="@id/koshaiProfileFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <fragment
@@ -283,7 +319,11 @@
         android:label="Profile">
         <action
             android:id="@+id/action_koshaiProfileFragment_to_editProfileFragment"
-            app:destination="@id/editProfileFragment" />
+            app:destination="@id/editProfileFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <fragment

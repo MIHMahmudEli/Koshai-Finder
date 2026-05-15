@@ -68,8 +68,8 @@ class UserBookingsFragment : Fragment() {
                 findNavController().navigate(R.id.action_userBookingsFragment_to_reviewFragment, bundle)
             }
         )
-        binding.rvUserBookings.layoutManager = LinearLayoutManager(requireContext())
-        binding.rvUserBookings.adapter = adapter
+        binding.rvBookings.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvBookings.adapter = adapter
     }
 
     private fun setupTabs() {

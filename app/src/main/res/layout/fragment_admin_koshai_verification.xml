@@ -46,53 +46,37 @@
         android:layout_height="0dp"
         android:clipToPadding="false"
         android:paddingVertical="16dp"
+        android:layoutAnimation="@anim/layout_animation_fall_down"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/headerBg"
         tools:listitem="@layout/item_koshai_verification" />
 
-    <!-- Loading -->
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/headerBg" />
-
-    <!-- Empty State -->
-    <LinearLayout
-        android:id="@+id/emptyState"
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmerLoading"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="vertical"
+        android:layout_height="0dp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/headerBg">
-
-        <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:src="@android:drawable/checkbox_on_background"
-            app:tint="#BDBDBD" />
-
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="All Clear!"
-            android:textColor="#9E9E9E"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:orientation="vertical"
+            android:padding="16dp">
+            <include layout="@layout/layout_skeleton_koshai" />
+            <include layout="@layout/layout_skeleton_koshai" />
+            <include layout="@layout/layout_skeleton_koshai" />
+        </LinearLayout>
+    </com.facebook.shimmer.ShimmerFrameLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="No pending Koshai registrations."
-            android:textColor="#BDBDBD" />
-    </LinearLayout>
+    <!-- Empty State -->
+    <include
+        android:id="@+id/layoutEmpty"
+        layout="@layout/layout_empty_state"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/headerBg" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

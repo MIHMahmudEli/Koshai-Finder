@@ -78,6 +78,7 @@
         android:padding="5dp"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_profile"
+        android:transitionName="profile_image"
         app:shapeAppearanceOverlay="@style/CircleImage"
         app:strokeColor="#FFFFFF"
         app:strokeWidth="3dp"

@@ -48,27 +48,26 @@ class LeaderboardFragment : Fragment() {
     }
 
     private fun loadLeaderboard() {
-        binding.progressBar.visibility = View.VISIBLE
+        binding.shimmerLoading.visibility = View.VISIBLE
+        binding.shimmerLoading.startShimmer()
         
-        // Sort by Rating (Primary) and Total Jobs (Secondary)
         db.collection("koshais")
             .whereEqualTo("isVerified", true)
             .whereEqualTo("isBanned", false)
-            .orderBy("rating", Query.Direction.DESCENDING)
-            .orderBy("totalJobs", Query.Direction.DESCENDING)
-            .limit(50) // Top 50
             .addSnapshotListener { snapshot, e ->
                 if (!isAdded) return@addSnapshotListener
-                binding.progressBar.visibility = View.GONE
+                binding.shimmerLoading.stopShimmer()
+                binding.shimmerLoading.visibility = View.GONE
                 
                 if (e != null) {
-                    // Handle index error or permission error
+                    android.util.Log.e("Leaderboard", "Error loading leaderboard", e)
                     return@addSnapshotListener
                 }
 
                 val list = snapshot?.documents?.mapNotNull { doc ->
                     doc.toObject(KoshaiProfile::class.java)?.apply { id = doc.id }
-                } ?: emptyList()
+                }?.sortedWith(compareByDescending<KoshaiProfile> { it.rating }.thenByDescending { it.totalJobs }) 
+                 ?.take(50) ?: emptyList()
                 
                 adapter.updateList(list)
             }

@@ -66,11 +66,11 @@ class AdminDisputeReviewFragment : Fragment() {
     }
 
     private fun loadData() {
-        binding.progressBar.visibility = View.VISIBLE
+        binding.shimmerLoading.visibility = View.VISIBLE
+        binding.shimmerLoading.startShimmer()
         
         // 1. Load All Reviews (Collection Group Query)
         db.collectionGroup("reviews")
-            .orderBy("timestamp", Query.Direction.DESCENDING)
             .addSnapshotListener { snapshot, e ->
                 if (!isAdded) return@addSnapshotListener
                 
@@ -85,19 +85,22 @@ class AdminDisputeReviewFragment : Fragment() {
                         id = doc.id
                         koshaiId = doc.reference.parent.parent?.id ?: ""
                     }
-                } ?: emptyList()
+                }?.sortedByDescending { it.timestamp } ?: emptyList()
                 if (currentTab == 0) displayCurrentTab()
             }
 
         // 2. Load All Reports
         db.collection("reports")
-            .orderBy("timestamp", Query.Direction.DESCENDING)
             .addSnapshotListener { snapshot, e ->
                 if (!isAdded) return@addSnapshotListener
-                binding.progressBar.visibility = View.GONE
+                binding.shimmerLoading.stopShimmer()
+                binding.shimmerLoading.visibility = View.GONE
+                
+                if (e != null) return@addSnapshotListener
+
                 allReports = snapshot?.documents?.mapNotNull { doc ->
                     doc.toObject(Report::class.java)?.apply { id = doc.id }
-                } ?: emptyList()
+                }?.sortedByDescending { it.timestamp } ?: emptyList()
                 if (currentTab == 1) displayCurrentTab()
             }
     }

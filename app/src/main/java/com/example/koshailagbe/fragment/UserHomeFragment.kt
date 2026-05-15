@@ -16,6 +16,7 @@ import com.example.koshailagbe.utils.SharedPrefsHelper
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.example.koshailagbe.utils.vibrate
 
 class UserHomeFragment : Fragment() {
 
@@ -52,15 +53,15 @@ class UserHomeFragment : Fragment() {
 
     private fun setupRecyclerViews() {
         // Top Rated (Horizontal)
-        topRatedAdapter = KoshaiDiscoveryAdapter(emptyList(), true) { koshai ->
-            navigateToDetail(koshai)
+        topRatedAdapter = KoshaiDiscoveryAdapter(emptyList(), true) { koshai, view ->
+            navigateToDetail(koshai, view)
         }
         binding.rvTopRated.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.rvTopRated.adapter = topRatedAdapter
 
         // Nearby (Vertical)
-        nearbyAdapter = KoshaiDiscoveryAdapter(emptyList(), false) { koshai ->
-            navigateToDetail(koshai)
+        nearbyAdapter = KoshaiDiscoveryAdapter(emptyList(), false) { koshai, view ->
+            navigateToDetail(koshai, view)
         }
         binding.rvNearby.layoutManager = LinearLayoutManager(requireContext())
         binding.rvNearby.adapter = nearbyAdapter
@@ -105,7 +106,13 @@ class UserHomeFragment : Fragment() {
             it.district.contains(userDistrict!!, ignoreCase = true) ||
             it.upazila.contains(userUpazila ?: "", ignoreCase = true)
         }
-        updateDiscoveryLists(filtered)
+        
+        if (filtered.isEmpty() && !allKoshais.isEmpty()) {
+            // Fallback: If no one is nearby, show all verified experts but show a small hint or just the list
+            updateDiscoveryLists(allKoshais)
+        } else {
+            updateDiscoveryLists(filtered)
+        }
     }
 
     private fun updateDiscoveryLists(list: List<KoshaiProfile>) {
@@ -152,28 +159,60 @@ class UserHomeFragment : Fragment() {
     private fun fetchKoshais() {
         binding.shimmerLoading.visibility = View.VISIBLE
         binding.shimmerLoading.startShimmer()
+        
         db.collection("koshais").addSnapshotListener { snapshots, e ->
             if (!isAdded) return@addSnapshotListener
             binding.shimmerLoading.stopShimmer()
             binding.shimmerLoading.visibility = View.GONE
             
-            if (e != null || snapshots == null) return@addSnapshotListener
+            if (e != null) {
+                android.util.Log.e("UserHome", "Firestore Error: ${e.message}", e)
+                android.widget.Toast.makeText(requireContext(), "Error: ${e.message}", android.widget.Toast.LENGTH_LONG).show()
+                return@addSnapshotListener
+            }
             
-            allKoshais = snapshots.documents.mapNotNull { doc ->
-                doc.toObject(KoshaiProfile::class.java)?.apply { id = doc.id }
-            }.filter { it.isVerified }
+            if (snapshots == null || snapshots.isEmpty) {
+                allKoshais = emptyList()
+                updateDiscoveryLists(allKoshais)
+                return@addSnapshotListener
+            }
+            
+            val fetchedList = snapshots.documents.mapNotNull { doc ->
+                try {
+                    val koshai = doc.toObject(KoshaiProfile::class.java)
+                    koshai?.id = doc.id
+                    koshai
+                } catch (ex: Exception) {
+                    android.util.Log.e("UserHome", "Mapping Error for ${doc.id}", ex)
+                    null
+                }
+            }
+            
+            // Restore production filter: Only verified and not banned
+            allKoshais = fetchedList.filter { it.isVerified && !it.isBanned }
+            
+            android.util.Log.d("UserHome", "Found ${fetchedList.size} total, ${allKoshais.size} verified")
             
             updateDiscoveryLists(allKoshais)
         }
     }
 
-    private fun navigateToDetail(koshai: KoshaiProfile) {
+    private fun navigateToDetail(koshai: KoshaiProfile, sharedElement: View) {
         val bundle = Bundle().apply { putString("koshaiId", koshai.id) }
-        findNavController().navigate(R.id.action_userHomeFragment_to_userKoshaiDetailFragment, bundle)
+        val extras = androidx.navigation.fragment.FragmentNavigatorExtras(
+            sharedElement to "profile_image"
+        )
+        findNavController().navigate(
+            R.id.action_userHomeFragment_to_userKoshaiDetailFragment,
+            bundle,
+            null,
+            extras
+        )
     }
 
     private fun setupLogout() {
         binding.btnLogout.setOnClickListener {
+            it.vibrate()
             SharedPrefsHelper.clearUserRole(requireContext())
             auth.signOut()
             findNavController().navigate(
@@ -186,14 +225,17 @@ class UserHomeFragment : Fragment() {
         }
 
         binding.ibChatList.setOnClickListener {
+            it.vibrate()
             findNavController().navigate(R.id.chatListFragment)
         }
 
         binding.fabBookings.setOnClickListener {
+            it.vibrate()
             findNavController().navigate(R.id.action_userHomeFragment_to_userBookingsFragment)
         }
 
         binding.ibProfile.setOnClickListener {
+            it.vibrate()
             findNavController().navigate(R.id.action_userHomeFragment_to_userProfileFragment)
         }
     }

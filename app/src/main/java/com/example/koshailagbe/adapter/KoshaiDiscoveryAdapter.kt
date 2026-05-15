@@ -14,7 +14,7 @@ import com.example.koshailagbe.model.KoshaiProfile
 class KoshaiDiscoveryAdapter(
     private var koshais: List<KoshaiProfile>,
     private val isHorizontal: Boolean,
-    private val onKoshaiClick: (KoshaiProfile) -> Unit
+    private val onKoshaiClick: (KoshaiProfile, View) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
@@ -58,7 +58,8 @@ class KoshaiDiscoveryAdapter(
                 .error(R.drawable.ic_profile)
                 .into(holder.binding.ivKoshai)
             
-            holder.itemView.setOnClickListener { onKoshaiClick(koshai) }
+            holder.binding.ivKoshai.transitionName = "profile_image_${koshai.id}"
+            holder.itemView.setOnClickListener { onKoshaiClick(koshai, holder.binding.ivKoshai) }
         } else if (holder is VerticalViewHolder) {
             holder.binding.tvName.text = koshai.name
             holder.binding.ivVerified.visibility = if (koshai.isVerified) View.VISIBLE else View.GONE
@@ -73,8 +74,10 @@ class KoshaiDiscoveryAdapter(
                 .error(R.drawable.ic_profile)
                 .into(holder.binding.ivKoshai)
             
-            holder.itemView.setOnClickListener { onKoshaiClick(koshai) }
-            holder.binding.btnBook.setOnClickListener { onKoshaiClick(koshai) }
+            holder.binding.ivKoshai.transitionName = "profile_image_${koshai.id}"
+            
+            holder.itemView.setOnClickListener { onKoshaiClick(koshai, holder.binding.ivKoshai) }
+            holder.binding.btnBook.setOnClickListener { onKoshaiClick(koshai, holder.binding.ivKoshai) }
         }
     }
 

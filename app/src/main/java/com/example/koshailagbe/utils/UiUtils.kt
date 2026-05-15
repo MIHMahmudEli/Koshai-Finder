@@ -39,3 +39,7 @@ fun Fragment.showSnackBar(
 
     snackbar.show()
 }
+
+fun View.vibrate() {
+    this.performHapticFeedback(android.view.HapticFeedbackConstants.VIRTUAL_KEY)
+}

@@ -58,14 +58,16 @@ class ChatListFragment : Fragment() {
     }
 
     private fun fetchChatRooms() {
-        val userId = auth.currentUser?.uid ?: return
-        binding.progressBar.visibility = View.VISIBLE
-
+        val uid = auth.currentUser?.uid ?: return
+        binding.shimmerLoading.visibility = View.VISIBLE
+        binding.shimmerLoading.startShimmer()
+        
         db.collection("chatRooms")
-            .whereArrayContains("participants", userId)
+            .whereArrayContains("participants", uid)
             .addSnapshotListener { snapshots, e ->
                 if (!isAdded) return@addSnapshotListener
-                binding.progressBar.visibility = View.GONE
+                binding.shimmerLoading.stopShimmer()
+                binding.shimmerLoading.visibility = View.GONE
 
                 if (e != null) {
                     showSnackBar("Failed to load chats: ${e.message}")
