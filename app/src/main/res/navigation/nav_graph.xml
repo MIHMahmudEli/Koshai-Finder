@@ -95,7 +95,10 @@
     <fragment
         android:id="@+id/koshaiDashboardFragment"
         android:name="com.example.koshailagbe.fragment.KoshaiDashboardFragment"
-        android:label="Koshai Dashboard" />
+        android:label="Koshai Dashboard">
+        <action android:id="@+id/action_koshaiDashboardFragment_to_bookingManagerFragment" app:destination="@id/bookingManagerFragment" />
+        <action android:id="@+id/action_koshaiDashboardFragment_to_earningsFragment"       app:destination="@id/earningsFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/bookingManagerFragment"

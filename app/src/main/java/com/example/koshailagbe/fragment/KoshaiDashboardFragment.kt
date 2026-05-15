@@ -63,8 +63,7 @@ class KoshaiDashboardFragment : Fragment() {
         }
 
         binding.requestsCard.setOnClickListener {
-            // TODO: Navigate to BookingManagerFragment
-            showSnackBar("Opening Booking Manager...")
+            findNavController().navigate(R.id.action_koshaiDashboardFragment_to_bookingManagerFragment)
         }
 
         binding.scheduleCard.setOnClickListener {
