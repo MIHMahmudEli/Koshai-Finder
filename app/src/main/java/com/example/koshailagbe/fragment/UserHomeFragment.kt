@@ -156,7 +156,7 @@ class UserHomeFragment : Fragment() {
             
             allKoshais = snapshots.documents.mapNotNull { doc ->
                 doc.toObject(KoshaiProfile::class.java)?.apply { id = doc.id }
-            }
+            }.filter { it.isVerified }
             
             updateDiscoveryLists(allKoshais)
         }

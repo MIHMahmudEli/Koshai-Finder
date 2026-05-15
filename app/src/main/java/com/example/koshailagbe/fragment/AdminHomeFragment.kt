@@ -23,15 +23,47 @@ class AdminHomeFragment : Fragment() {
     ): View {
         _binding = FragmentAdminHomeBinding.inflate(inflater, container, false)
         auth = FirebaseAuth.getInstance()
+        setupStats()
+        setupLogout()
+        
+        binding.cardVerification.setOnClickListener {
+            findNavController().navigate(R.id.action_adminHomeFragment_to_adminKoshaiVerificationFragment)
+        }
 
+        return binding.root
+    }
+
+    private fun setupStats() {
+        val db = com.google.firebase.firestore.FirebaseFirestore.getInstance()
+
+        // Pending Koshais
+        db.collection("koshais")
+            .whereEqualTo("isVerified", false)
+            .addSnapshotListener { snapshot, _ ->
+                if (!isAdded) return@addSnapshotListener
+                val count = snapshot?.size() ?: 0
+                binding.tvPendingCount.text = "$count pending registrations"
+            }
+
+        // Total Users
+        db.collection("users")
+            .addSnapshotListener { snapshot, _ ->
+                if (!isAdded) return@addSnapshotListener
+                binding.tvTotalUsers.text = (snapshot?.size() ?: 0).toString()
+            }
+
+        // Total Koshais
+        db.collection("koshais")
+            .addSnapshotListener { snapshot, _ ->
+                if (!isAdded) return@addSnapshotListener
+                binding.tvTotalKoshais.text = (snapshot?.size() ?: 0).toString()
+            }
+    }
+
+    private fun setupLogout() {
         binding.btnLogout.setOnClickListener {
-            // Clear user role
             SharedPrefsHelper.clearUserRole(requireContext())
-            
-            // Sign out from Firebase
             auth.signOut()
-
-            // Navigate back to login screen
             findNavController().navigate(
                 R.id.loginFragment,
                 null,
@@ -40,8 +72,6 @@ class AdminHomeFragment : Fragment() {
                     .build()
             )
         }
-
-        return binding.root
     }
 
     override fun onDestroyView() {

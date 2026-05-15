@@ -2,6 +2,7 @@ package com.example.koshailagbe.adapter
 
 import android.graphics.Color
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -39,6 +40,7 @@ class KoshaiDiscoveryAdapter(
         val koshai = koshais[position]
         if (holder is HorizontalViewHolder) {
             holder.binding.tvName.text = koshai.name
+            holder.binding.ivVerified.visibility = if (koshai.isVerified) View.VISIBLE else View.GONE
             holder.binding.tvRating.text = String.format("%.1f", koshai.rating)
             holder.binding.tvJobs.text = "(${koshai.totalJobs})"
             holder.binding.tvStatus.text = koshai.status.replaceFirstChar { it.uppercase() }
@@ -59,6 +61,7 @@ class KoshaiDiscoveryAdapter(
             holder.itemView.setOnClickListener { onKoshaiClick(koshai) }
         } else if (holder is VerticalViewHolder) {
             holder.binding.tvName.text = koshai.name
+            holder.binding.ivVerified.visibility = if (koshai.isVerified) View.VISIBLE else View.GONE
             holder.binding.tvLocation.text = "${koshai.upazila}, ${koshai.district}"
             holder.binding.tvRating.text = String.format("%.1f", koshai.rating)
             holder.binding.tvJobs.text = "(${koshai.totalJobs})"

@@ -81,6 +81,7 @@ class UserKoshaiDetailFragment : Fragment() {
 
     private fun updateUI(profile: KoshaiProfile, doc: com.google.firebase.firestore.DocumentSnapshot) {
         binding.tvName.text = doc.getString("name") ?: profile.name
+        binding.ivVerified.visibility = if (doc.getBoolean("isVerified") == true) View.VISIBLE else View.GONE
 
         // Read numeric fields directly from snapshot to avoid Int→Long deserialization issues
         val rating = doc.getDouble("rating") ?: 0.0
