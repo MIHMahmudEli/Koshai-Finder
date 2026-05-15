@@ -36,28 +36,29 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/ibProfile"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginEnd="12dp"
+                android:padding="2dp"
+                android:background="@android:color/white"
+                app:shapeAppearanceOverlay="@style/CircleImage"
+                android:src="@drawable/ic_profile"
+                app:layout_constraintBottom_toBottomOf="@id/btnLogout"
+                app:layout_constraintEnd_toStartOf="@id/btnLogout"
+                app:layout_constraintTop_toTopOf="@id/btnLogout" />
+
             <ImageButton
                 android:id="@+id/ibChatList"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_marginEnd="12dp"
+                android:layout_marginEnd="8dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:src="@android:drawable/stat_notify_chat"
-                app:layout_constraintBottom_toBottomOf="@id/btnLogout"
-                app:layout_constraintEnd_toStartOf="@id/btnLogout"
-                app:layout_constraintTop_toTopOf="@id/btnLogout"
-                app:tint="@android:color/white" />
-
-            <ImageButton
-                android:id="@+id/ibProfile"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginEnd="12dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:src="@android:drawable/ic_menu_my_calendar"
-                app:layout_constraintBottom_toBottomOf="@id/btnLogout"
-                app:layout_constraintEnd_toStartOf="@id/btnLogout"
-                app:layout_constraintTop_toTopOf="@id/btnLogout"
+                app:layout_constraintBottom_toBottomOf="@id/ibProfile"
+                app:layout_constraintEnd_toStartOf="@id/ibProfile"
+                app:layout_constraintTop_toTopOf="@id/ibProfile"
                 app:tint="@android:color/white" />
 
             <ImageButton

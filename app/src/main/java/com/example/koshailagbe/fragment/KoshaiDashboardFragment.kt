@@ -35,8 +35,17 @@ class KoshaiDashboardFragment : Fragment() {
         setupClickListeners()
         loadKoshaiData()
         fetchBookingCounts()
+        setupSwipeRefresh()
 
         return binding.root
+    }
+
+    private fun setupSwipeRefresh() {
+        binding.swipeRefresh.setOnRefreshListener {
+            loadKoshaiData()
+            fetchBookingCounts()
+            binding.swipeRefresh.isRefreshing = false
+        }
     }
 
     private fun setupClickListeners() {
@@ -101,10 +110,12 @@ class KoshaiDashboardFragment : Fragment() {
 
     private fun loadKoshaiData() {
         val uid = auth.currentUser?.uid ?: return
-        db.collection("koshais").document(uid).get()
-            .addOnSuccessListener { doc ->
-                if (!isAdded) return@addOnSuccessListener
-                koshaiProfile = doc.toObject(KoshaiProfile::class.java)
+        db.collection("koshais").document(uid)
+            .addSnapshotListener { snapshot, e ->
+                if (!isAdded) return@addSnapshotListener
+                if (e != null) return@addSnapshotListener
+                
+                koshaiProfile = snapshot?.toObject(KoshaiProfile::class.java)
                 koshaiProfile?.let { updateUI(it) }
             }
     }

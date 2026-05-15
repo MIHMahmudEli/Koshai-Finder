@@ -122,12 +122,23 @@ class BookingManagerFragment : Fragment() {
     }
 
     private fun updateBookingStatus(booking: Booking, newStatus: String) {
-        db.collection("bookings").document(booking.id).update("status", newStatus)
+        val batch = db.batch()
+        val bookingRef = db.collection("bookings").document(booking.id)
+        batch.update(bookingRef, "status", newStatus)
+
+        // If completed, update koshai stats
+        if (newStatus == "completed") {
+            val koshaiRef = db.collection("koshais").document(booking.koshaiId)
+            batch.update(koshaiRef, "totalJobs", com.google.firebase.firestore.FieldValue.increment(1))
+            val totalEarnings = (booking.rateBreakdown["total"] ?: 0.0).toLong()
+            batch.update(koshaiRef, "earnings", com.google.firebase.firestore.FieldValue.increment(totalEarnings))
+        }
+
+        batch.commit()
             .addOnSuccessListener {
                 if (!isAdded) return@addOnSuccessListener
                 showSnackBar("Booking $newStatus successfully")
 
-                // COMPETITIVE SLOT LOGIC: If a booking is confirmed, cancel all other pending requests for the same slot
                 if (newStatus == "confirmed") {
                     cancelCompetingRequests(booking)
                 }
