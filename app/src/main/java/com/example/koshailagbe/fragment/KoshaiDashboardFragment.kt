@@ -66,6 +66,11 @@ class KoshaiDashboardFragment : Fragment() {
             findNavController().navigate(R.id.action_koshaiDashboardFragment_to_bookingManagerFragment)
         }
 
+        binding.scheduleCard.setOnClickListener {
+            // Navigate to Booking Manager (Active tab) or a dedicated schedule view
+            findNavController().navigate(R.id.action_koshaiDashboardFragment_to_bookingManagerFragment)
+        }
+
         binding.cardAvailability.setOnClickListener {
             findNavController().navigate(R.id.action_koshaiDashboardFragment_to_availabilityFragment)
         }
