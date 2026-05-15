@@ -7,11 +7,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.koshailagbe.R
 import com.example.koshailagbe.adapter.LeaderboardAdapter
 import com.example.koshailagbe.databinding.FragmentLeaderboardBinding
 import com.example.koshailagbe.model.KoshaiProfile
-import com.bumptech.glide.Glide
-import com.example.koshailagbe.R
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 
@@ -29,58 +28,50 @@ class LeaderboardFragment : Fragment() {
         _binding = FragmentLeaderboardBinding.inflate(inflater, container, false)
         db = FirebaseFirestore.getInstance()
 
-        setupToolbar()
         setupRecyclerView()
-        fetchLeaderboard()
+        loadLeaderboard()
+
+        binding.btnBack.setOnClickListener { findNavController().popBackStack() }
 
         return binding.root
     }
 
-    private fun setupToolbar() {
-        binding.toolbar.setNavigationOnClickListener { findNavController().popBackStack() }
-    }
-
     private fun setupRecyclerView() {
-        adapter = LeaderboardAdapter(emptyList())
+        adapter = LeaderboardAdapter(emptyList()) { koshai ->
+            val bundle = Bundle().apply {
+                putString("koshaiId", koshai.id)
+            }
+            findNavController().navigate(R.id.userKoshaiDetailFragment, bundle)
+        }
         binding.rvLeaderboard.layoutManager = LinearLayoutManager(requireContext())
         binding.rvLeaderboard.adapter = adapter
     }
 
-    private fun fetchLeaderboard() {
+    private fun loadLeaderboard() {
+        binding.progressBar.visibility = View.VISIBLE
+        
+        // Sort by Rating (Primary) and Total Jobs (Secondary)
         db.collection("koshais")
-            .limit(50)
-            .get()
-            .addOnSuccessListener { snapshots ->
-                if (!isAdded) return@addOnSuccessListener
-                val fullList = snapshots.toObjects(KoshaiProfile::class.java)
-                    .sortedByDescending { it.totalJobs }
-
-                if (fullList.isNotEmpty()) {
-                    updatePodium(fullList.take(3))
-                    val remaining = if (fullList.size > 3) fullList.drop(3) else emptyList()
-                    adapter.updateList(remaining)
+            .whereEqualTo("isVerified", true)
+            .whereEqualTo("isBanned", false)
+            .orderBy("rating", Query.Direction.DESCENDING)
+            .orderBy("totalJobs", Query.Direction.DESCENDING)
+            .limit(50) // Top 50
+            .addSnapshotListener { snapshot, e ->
+                if (!isAdded) return@addSnapshotListener
+                binding.progressBar.visibility = View.GONE
+                
+                if (e != null) {
+                    // Handle index error or permission error
+                    return@addSnapshotListener
                 }
+
+                val list = snapshot?.documents?.mapNotNull { doc ->
+                    doc.toObject(KoshaiProfile::class.java)?.apply { id = doc.id }
+                } ?: emptyList()
+                
+                adapter.updateList(list)
             }
-    }
-
-    private fun updatePodium(top3: List<KoshaiProfile>) {
-        // Rank 1
-        top3.getOrNull(0)?.let { profile: KoshaiProfile ->
-            binding.tvName1.text = profile.name
-            Glide.with(this).load(profile.photoUrl).placeholder(R.drawable.ic_profile).into(binding.ivRank1)
-        }
-
-        // Rank 2
-        top3.getOrNull(1)?.let { profile: KoshaiProfile ->
-            binding.tvName2.text = profile.name
-            Glide.with(this).load(profile.photoUrl).placeholder(R.drawable.ic_profile).into(binding.ivRank2)
-        }
-
-        // Rank 3
-        top3.getOrNull(2)?.let { profile: KoshaiProfile ->
-            binding.tvName3.text = profile.name
-            Glide.with(this).load(profile.photoUrl).placeholder(R.drawable.ic_profile).into(binding.ivRank3)
-        }
     }
 
     override fun onDestroyView() {

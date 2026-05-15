@@ -1,43 +1,70 @@
 package com.example.koshailagbe.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.koshailagbe.databinding.ItemLeaderboardBinding
-import com.example.koshailagbe.model.KoshaiProfile
 import com.bumptech.glide.Glide
 import com.example.koshailagbe.R
+import com.example.koshailagbe.databinding.ItemLeaderboardBinding
+import com.example.koshailagbe.model.KoshaiProfile
 
 class LeaderboardAdapter(
-    private var koshais: List<KoshaiProfile>
-) : RecyclerView.Adapter<LeaderboardAdapter.LeaderboardViewHolder>() {
+    private var list: List<KoshaiProfile>,
+    private val onItemClick: (KoshaiProfile) -> Unit
+) : RecyclerView.Adapter<LeaderboardAdapter.ViewHolder>() {
 
-    inner class LeaderboardViewHolder(val binding: ItemLeaderboardBinding) : RecyclerView.ViewHolder(binding.root)
+    inner class ViewHolder(val binding: ItemLeaderboardBinding) : RecyclerView.ViewHolder(binding.root)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LeaderboardViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemLeaderboardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return LeaderboardViewHolder(binding)
+        return ViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: LeaderboardViewHolder, position: Int) {
-        val koshai = koshais[position]
-        val binding = holder.binding
-
-        binding.tvRank.text = (position + 4).toString()
-        binding.tvName.text = koshai.name
-        binding.tvStats.text = "${String.format("%.1f", koshai.rating)} ★ | ${koshai.totalJobs} Jobs"
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val koshai = list[position]
+        val rank = position + 1
         
-        Glide.with(holder.itemView.context)
-            .load(koshai.photoUrl)
-            .placeholder(R.drawable.ic_profile)
-            .error(R.drawable.ic_profile)
-            .into(binding.ivAvatar)
+        with(holder.binding) {
+            tvRank.text = rank.toString()
+            tvName.text = koshai.name
+            tvLocation.text = "${koshai.upazila}, ${koshai.district}"
+            tvRating.text = String.format("%.1f", koshai.rating)
+            tvJobsDone.text = "${koshai.totalJobs} Jobs"
+
+            // Highlight top 3
+            when (rank) {
+                1 -> {
+                    tvRank.setTextColor(android.graphics.Color.parseColor("#FFD700")) // Gold
+                    tvRank.textSize = 24f
+                }
+                2 -> {
+                    tvRank.setTextColor(android.graphics.Color.parseColor("#C0C0C0")) // Silver
+                    tvRank.textSize = 20f
+                }
+                3 -> {
+                    tvRank.setTextColor(android.graphics.Color.parseColor("#CD7F32")) // Bronze
+                    tvRank.textSize = 18f
+                }
+                else -> {
+                    tvRank.setTextColor(android.graphics.Color.parseColor("#1A237E"))
+                    tvRank.textSize = 18f
+                }
+            }
+
+            Glide.with(ivProfile.context)
+                .load(koshai.photoUrl)
+                .placeholder(R.drawable.ic_profile)
+                .into(ivProfile)
+
+            root.setOnClickListener { onItemClick(koshai) }
+        }
     }
 
-    override fun getItemCount() = koshais.size
+    override fun getItemCount() = list.size
 
     fun updateList(newList: List<KoshaiProfile>) {
-        koshais = newList
+        list = newList
         notifyDataSetChanged()
     }
 }

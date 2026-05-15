@@ -1,194 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F8F9FA">
 
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appBar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        app:elevation="0dp">
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolbar"
+        android:layout_height="240dp"
+        android:background="@android:color/transparent">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:title="Hall of Fame"
-            app:titleCentered="true"
-            app:titleTextColor="@android:color/white"
-            app:navigationIcon="@android:drawable/ic_menu_revert"
-            app:navigationIconTint="@android:color/white" />
-    </com.google.android.material.appbar.AppBarLayout>
+            android:layout_height="match_parent"
+            app:contentScrim="@drawable/bg_login_gradient"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clipToPadding="false">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_login_gradient" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <!-- Top 3 Podium Section -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="320dp"
-                android:background="@drawable/bg_login_gradient"
-                android:paddingBottom="32dp">
+                android:layout_height="match_parent"
+                android:padding="24dp">
+
+                <ImageButton
+                    android:id="@+id/btnBack"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="24dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:src="@drawable/ic_back"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@android:color/white" />
 
                 <TextView
-                    android:id="@+id/tvLeaderboardTitle"
+                    android:id="@+id/tvTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="72dp"
-                    android:text="Koshai Champions"
+                    android:text="Koshai Leaderboard"
                     android:textColor="@android:color/white"
-                    android:textSize="24sp"
+                    android:textSize="26sp"
                     android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintBottom_toBottomOf="@id/btnBack"
+                    app:layout_constraintStart_toEndOf="@id/btnBack"
+                    app:layout_constraintTop_toTopOf="@id/btnBack" />
 
-                <!-- Rank 2 (Silver) -->
-                <LinearLayout
-                    android:id="@+id/podium2"
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/podium1"
-                    app:layout_constraintHorizontal_chainStyle="packed"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginEnd="12dp">
+                    android:layout_marginTop="8dp"
+                    android:text="Highlighting the top performers of the season"
+                    android:textColor="#E0E0E0"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="@id/tvTitle"
+                    app:layout_constraintTop_toBottomOf="@id/tvTitle" />
 
-                    <com.google.android.material.imageview.ShapeableImageView
-                        android:id="@+id/ivRank2"
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:padding="3dp"
-                        android:background="#C0C0C0"
-                        app:shapeAppearanceOverlay="@style/CircleImage"
-                        android:src="@drawable/ic_profile" />
-                    <TextView
-                        android:id="@+id/tvName2"
-                        android:layout_width="85dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="Koshai 2"
-                        android:textAlignment="center"
-                        android:textColor="@android:color/white"
-                        android:textSize="13sp"
-                        android:textStyle="bold"
-                        android:ellipsize="end"
-                        android:maxLines="1" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="🥈 Silver"
-                        android:textColor="#E0E0E0"
-                        android:textSize="11sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-
-                <!-- Rank 1 (Gold) -->
-                <LinearLayout
-                    android:id="@+id/podium1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="vertical"
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@android:drawable/btn_star_big_on"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginBottom="32dp">
-
-                    <com.google.android.material.imageview.ShapeableImageView
-                        android:id="@+id/ivRank1"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:padding="5dp"
-                        android:background="#FFD700"
-                        app:shapeAppearanceOverlay="@style/CircleImage"
-                        android:src="@drawable/ic_profile" />
-                    <TextView
-                        android:id="@+id/tvName1"
-                        android:layout_width="110dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:text="Champion"
-                        android:textAlignment="center"
-                        android:textColor="@android:color/white"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:ellipsize="end"
-                        android:maxLines="1" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="🥇 Gold"
-                        android:textColor="#FFD700"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-
-                <!-- Rank 3 (Bronze) -->
-                <LinearLayout
-                    android:id="@+id/podium3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/podium1"
-                    android:layout_marginStart="12dp">
-
-                    <com.google.android.material.imageview.ShapeableImageView
-                        android:id="@+id/ivRank3"
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:padding="3dp"
-                        android:background="#CD7F32"
-                        app:shapeAppearanceOverlay="@style/CircleImage"
-                        android:src="@drawable/ic_profile" />
-                    <TextView
-                        android:id="@+id/tvName3"
-                        android:layout_width="85dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="Koshai 3"
-                        android:textAlignment="center"
-                        android:textColor="@android:color/white"
-                        android:textSize="13sp"
-                        android:textStyle="bold"
-                        android:ellipsize="end"
-                        android:maxLines="1" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="🥉 Bronze"
-                        android:textColor="#CD7F32"
-                        android:textSize="11sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
+                    app:tint="#4DFFFFFF" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvLeaderboard"
+            <androidx.appcompat.widget.Toolbar
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="-24dp"
-                android:background="@drawable/bg_bottom_sheet_surface"
-                android:paddingTop="32dp"
-                android:paddingBottom="48dp"
-                android:clipToPadding="false"
-                android:nestedScrollingEnabled="false" />
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin" />
 
-        </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvLeaderboard"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:paddingTop="16dp"
+        android:paddingBottom="80dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:listitem="@layout/item_leaderboard" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -339,6 +339,11 @@
             app:destination="@id/adminAnnouncementFragment"
             app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_adminHomeFragment_to_leaderboardFragment"
+            app:destination="@id/leaderboardFragment"
+            app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <fragment
@@ -360,5 +365,10 @@
         android:id="@+id/adminAnnouncementFragment"
         android:name="com.example.koshailagbe.fragment.AdminAnnouncementFragment"
         android:label="Broadcast" />
+
+    <fragment
+        android:id="@+id/leaderboardFragment"
+        android:name="com.example.koshailagbe.fragment.LeaderboardFragment"
+        android:label="Leaderboard" />
 
 </navigation>

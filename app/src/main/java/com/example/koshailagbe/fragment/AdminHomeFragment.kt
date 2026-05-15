@@ -42,6 +42,10 @@ class AdminHomeFragment : Fragment() {
             findNavController().navigate(R.id.action_adminHomeFragment_to_adminAnnouncementFragment)
         }
 
+        binding.cardLeaderboard.setOnClickListener {
+            findNavController().navigate(R.id.action_adminHomeFragment_to_leaderboardFragment)
+        }
+
         return binding.root
     }
 
