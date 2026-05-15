@@ -21,18 +21,18 @@
         <com.google.android.material.card.MaterialCardView
             android:layout_width="110dp"
             android:layout_height="110dp"
-            android:background="@drawable/bg_glass_card"
             app:cardBackgroundColor="@android:color/transparent"
             app:cardCornerRadius="55dp"
             app:cardElevation="0dp"
-            app:strokeWidth="0dp">
+            app:strokeWidth="1.5dp"
+            app:strokeColor="#80FFFFFF">
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@drawable/bg_glass_card"
                 android:padding="24dp"
                 android:src="@drawable/koshai_finder_logo"
-                android:scaleType="centerInside"
-                app:tint="@android:color/white" />
+                android:scaleType="centerInside" />
         </com.google.android.material.card.MaterialCardView>
 
         <TextView
