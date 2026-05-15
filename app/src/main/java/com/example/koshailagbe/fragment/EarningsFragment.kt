@@ -21,6 +21,7 @@ class EarningsFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
     private lateinit var db: FirebaseFirestore
     private lateinit var adapter: EarningAdapter
+    private var allCompletedBookings: List<Booking> = emptyList()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,9 +33,40 @@ class EarningsFragment : Fragment() {
 
         setupToolbar()
         setupRecyclerView()
+        setupFilters()
         fetchEarnings()
 
         return binding.root
+    }
+
+    private fun setupFilters() {
+        binding.chipGroupFilter.setOnCheckedStateChangeListener { group, checkedIds ->
+            filterBookings(checkedIds.firstOrNull())
+        }
+    }
+
+    private fun filterBookings(checkedId: Int?) {
+        val calendar = java.util.Calendar.getInstance()
+        val currentMonth = calendar.get(java.util.Calendar.MONTH)
+        val currentYear = calendar.get(java.util.Calendar.YEAR)
+        val currentWeek = calendar.get(java.util.Calendar.WEEK_OF_YEAR)
+
+        val filtered = when (checkedId) {
+            binding.chipMonth.id -> {
+                allCompletedBookings.filter {
+                    val cal = java.util.Calendar.getInstance().apply { timeInMillis = it.date.seconds * 1000 }
+                    cal.get(java.util.Calendar.MONTH) == currentMonth && cal.get(java.util.Calendar.YEAR) == currentYear
+                }
+            }
+            binding.chipWeek.id -> {
+                allCompletedBookings.filter {
+                    val cal = java.util.Calendar.getInstance().apply { timeInMillis = it.date.seconds * 1000 }
+                    cal.get(java.util.Calendar.WEEK_OF_YEAR) == currentWeek && cal.get(java.util.Calendar.YEAR) == currentYear
+                }
+            }
+            else -> allCompletedBookings
+        }
+        adapter.updateList(filtered)
     }
 
     private fun setupToolbar() {
@@ -50,22 +82,44 @@ class EarningsFragment : Fragment() {
     private fun fetchEarnings() {
         val uid = auth.currentUser?.uid ?: return
         
-        // Fetch without orderBy to avoid index requirement for now
         db.collection("bookings")
             .whereEqualTo("koshaiId", uid)
-            .whereEqualTo("status", "completed")
             .get()
             .addOnSuccessListener { snapshots ->
                 if (!isAdded) return@addOnSuccessListener
                 
-                val bookings = snapshots.documents.mapNotNull { doc ->
+                val allBookings = snapshots.documents.mapNotNull { doc ->
                     doc.toObject(Booking::class.java)?.apply { id = doc.id }
-                }.sortedByDescending { it.date }
+                }
 
-                adapter.updateList(bookings)
+                val completedBookings = allBookings.filter { it.status == "completed" }
+                    .sortedByDescending { it.date }
+
+                allCompletedBookings = completedBookings
+                filterBookings(binding.chipGroupFilter.checkedChipId)
                 
-                val total = bookings.sumOf { it.rateBreakdown["total"] ?: 0.0 }
+                // Total Earnings
+                val total = completedBookings.sumOf { it.rateBreakdown["total"] ?: 0.0 }
                 binding.tvTotalEarnings.text = "৳${String.format("%.2f", total)}"
+
+                // Monthly Earnings
+                val calendar = java.util.Calendar.getInstance()
+                val currentMonth = calendar.get(java.util.Calendar.MONTH)
+                val currentYear = calendar.get(java.util.Calendar.YEAR)
+
+                val monthlyTotal = completedBookings.filter {
+                    val bookingCal = java.util.Calendar.getInstance().apply { timeInMillis = it.date.seconds * 1000 }
+                    bookingCal.get(java.util.Calendar.MONTH) == currentMonth &&
+                    bookingCal.get(java.util.Calendar.YEAR) == currentYear
+                }.sumOf { it.rateBreakdown["total"] ?: 0.0 }
+                
+                binding.tvMonthlyEarnings.text = "৳${String.format("%.2f", monthlyTotal)}"
+
+                // Pending (Ongoing/Requested) Potential Earnings
+                val pendingTotal = allBookings.filter { it.status != "completed" && it.status != "cancelled" }
+                    .sumOf { it.rateBreakdown["total"] ?: 0.0 }
+                
+                binding.tvPendingEarnings.text = "৳${String.format("%.2f", pendingTotal)}"
             }
     }
 
