@@ -119,6 +119,22 @@ class BookingManagerFragment : Fragment() {
 
         adapter.updateList(filteredList)
         binding.emptyState.visibility = if (filteredList.isEmpty()) View.VISIBLE else View.GONE
+        
+        if (filteredList.isEmpty()) {
+            val title = when (currentTab) {
+                0 -> "No New Requests"
+                1 -> "No Active Jobs"
+                else -> "No Completed Jobs"
+            }
+            val subtitle = when (currentTab) {
+                0 -> "Waiting for customers to book your services."
+                1 -> "Accepted bookings will appear here for management."
+                else -> "Your job history will be displayed here."
+            }
+            
+            binding.emptyState.findViewById<android.widget.TextView>(R.id.tvEmptyTitle).text = title
+            binding.emptyState.findViewById<android.widget.TextView>(R.id.tvEmptySubtitle).text = subtitle
+        }
     }
 
     private fun updateBookingStatus(booking: Booking, newStatus: String) {

@@ -111,6 +111,16 @@
         app:layout_constraintTop_toBottomOf="@id/tabLayout"
         tools:listitem="@layout/item_admin_management" />
 
+    <!-- Empty State -->
+    <include
+        android:id="@+id/layoutEmpty"
+        layout="@layout/layout_empty_state"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tabLayout" />
+
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_width="wrap_content"

@@ -102,8 +102,21 @@ class AdminDisputeReviewFragment : Fragment() {
     }
 
     private fun displayCurrentTab() {
-        if (currentTab == 0) adapter.updateList(allReviews)
-        else adapter.updateList(allReports)
+        val list = if (currentTab == 0) allReviews else allReports
+        adapter.updateList(list)
+        
+        binding.layoutEmpty.root.visibility = if (list.isEmpty()) View.VISIBLE else View.GONE
+        
+        if (list.isEmpty()) {
+            val title = if (currentTab == 0) "No Reviews Found" else "No Reports Pending"
+            val subtitle = if (currentTab == 0) "User feedback will appear here once submitted." else "All disputes have been resolved or none reported."
+            
+            binding.layoutEmpty.findViewById<android.widget.TextView>(R.id.tvEmptyTitle).text = title
+            binding.layoutEmpty.findViewById<android.widget.TextView>(R.id.tvEmptySubtitle).text = subtitle
+            binding.layoutEmpty.findViewById<android.widget.ImageView>(R.id.ivEmptyIcon).setImageResource(
+                if (currentTab == 0) R.drawable.ic_empty_search else R.drawable.ic_empty_bookings
+            )
+        }
     }
 
     private fun handleReviewAction(review: Review, action: String) {

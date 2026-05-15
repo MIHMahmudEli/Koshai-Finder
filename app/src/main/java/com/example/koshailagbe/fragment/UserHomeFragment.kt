@@ -111,15 +111,18 @@ class UserHomeFragment : Fragment() {
     private fun updateDiscoveryLists(list: List<KoshaiProfile>) {
         nearbyAdapter.updateList(list)
         
-        // Toggle visibility of empty state
         if (list.isEmpty()) {
-            binding.emptyStateView.visibility = View.VISIBLE
+            binding.emptyStateView.root.visibility = View.VISIBLE
             binding.rvNearby.visibility = View.GONE
             binding.sectionTopRated.visibility = View.GONE
             binding.rvTopRated.visibility = View.GONE
             binding.lblNearby.visibility = View.GONE
+            
+            binding.emptyStateView.findViewById<android.widget.TextView>(R.id.tvEmptyTitle).text = "No Experts Found"
+            binding.emptyStateView.findViewById<android.widget.TextView>(R.id.tvEmptySubtitle).text = "Try searching for a different location or check other categories."
+            binding.emptyStateView.findViewById<android.widget.ImageView>(R.id.ivEmptyIcon).setImageResource(R.drawable.ic_empty_search)
         } else {
-            binding.emptyStateView.visibility = View.GONE
+            binding.emptyStateView.root.visibility = View.GONE
             binding.rvNearby.visibility = View.VISIBLE
             binding.sectionTopRated.visibility = View.VISIBLE
             binding.rvTopRated.visibility = View.VISIBLE

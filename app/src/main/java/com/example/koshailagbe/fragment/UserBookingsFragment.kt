@@ -38,6 +38,10 @@ class UserBookingsFragment : Fragment() {
         setupTabs()
         fetchBookings()
 
+        binding.btnBrowse?.setOnClickListener {
+            findNavController().popBackStack(R.id.userHomeFragment, false)
+        }
+
         return binding.root
     }
 
@@ -106,6 +110,22 @@ class UserBookingsFragment : Fragment() {
 
         adapter.updateList(filteredList)
         binding.emptyState.visibility = if (filteredList.isEmpty()) View.VISIBLE else View.GONE
+        
+        if (filteredList.isEmpty()) {
+            val title = when (currentTab) {
+                0 -> "No Pending Requests"
+                1 -> "No Upcoming Services"
+                else -> "No Booking History"
+            }
+            val subtitle = when (currentTab) {
+                0 -> "Your new service requests will appear here."
+                1 -> "Once a Koshai confirms, your active jobs will show up here."
+                else -> "Your completed or cancelled jobs will be archived here."
+            }
+            
+            binding.emptyState.findViewById<android.widget.TextView>(R.id.tvEmptyTitle).text = title
+            binding.emptyState.findViewById<android.widget.TextView>(R.id.tvEmptySubtitle).text = subtitle
+        }
     }
 
     override fun onDestroyView() {

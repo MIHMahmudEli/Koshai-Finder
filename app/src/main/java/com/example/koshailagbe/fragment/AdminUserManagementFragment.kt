@@ -122,6 +122,16 @@ class AdminUserManagementFragment : Fragment() {
         }
         
         adapter.updateList(filteredList)
+        
+        binding.layoutEmpty.root.visibility = if (filteredList.isEmpty()) View.VISIBLE else View.GONE
+        if (filteredList.isEmpty()) {
+            val title = if (query.isEmpty()) "No Accounts Registered" else "No Matching Results"
+            val subtitle = if (query.isEmpty()) "Wait for new users or Koshais to sign up." else "Try searching with a different name or location."
+            
+            binding.layoutEmpty.findViewById<android.widget.TextView>(R.id.tvEmptyTitle).text = title
+            binding.layoutEmpty.findViewById<android.widget.TextView>(R.id.tvEmptySubtitle).text = subtitle
+            binding.layoutEmpty.findViewById<android.widget.ImageView>(R.id.ivEmptyIcon).setImageResource(R.drawable.ic_empty_search)
+        }
     }
 
     private fun toggleBanStatus(item: Any) {

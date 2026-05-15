@@ -1,0 +1,15 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="160dp"
+    android:height="160dp"
+    android:viewportWidth="160"
+    android:viewportHeight="160">
+    <!-- Background circle -->
+    <path android:fillColor="#E3F2FD" android:pathData="M80,80m-70,0a70,70 0,1 1,140 0a70,70 0,1 1,-140 0"/>
+    <!-- Magnifying glass handle -->
+    <path android:strokeColor="#1565C0" android:strokeWidth="6" android:pathData="M100,100 L118,118" android:strokeLineCap="round" android:fillColor="#00000000"/>
+    <!-- Magnifying glass circle -->
+    <path android:strokeColor="#1565C0" android:strokeWidth="6" android:pathData="M72,72m-28,0a28,28 0,1 1,56 0a28,28 0,1 1,-56 0" android:fillColor="#BBDEFB"/>
+    <!-- Question mark inside -->
+    <path android:fillColor="#1565C0" android:pathData="M68,63 Q68,55 72,55 Q80,55 80,63 Q80,68 74,71 L74,75 L70,75 L70,69 Q76,66 76,63 Q76,59 72,59 Q68,59 68,63 Z"/>
+    <path android:fillColor="#1565C0" android:pathData="M70,78 L74,78 L74,82 L70,82 Z"/>
+</vector>

@@ -170,40 +170,15 @@
                 app:layout_constraintTop_toBottomOf="@id/categoryScroll" />
 
             <!-- Empty State View -->
-            <LinearLayout
+            <!-- Empty State View -->
+            <include
                 android:id="@+id/emptyStateView"
+                layout="@layout/layout_empty_state"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="60dp"
-                android:gravity="center"
-                android:orientation="vertical"
                 android:visibility="gone"
-                app:layout_constraintTop_toBottomOf="@id/categoryScroll">
-
-                <ImageView
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
-                    android:src="@android:drawable/ic_menu_search"
-                    app:tint="#BDBDBD" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="No Koshai Found"
-                    android:textColor="#9E9E9E"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="Try searching for a different location\nor filter."
-                    android:textAlignment="center"
-                    android:textColor="#BDBDBD"
-                    android:textSize="14sp" />
-            </LinearLayout>
+                app:layout_constraintTop_toBottomOf="@id/categoryScroll" />
 
             <!-- Top Rated Section -->
             <RelativeLayout
