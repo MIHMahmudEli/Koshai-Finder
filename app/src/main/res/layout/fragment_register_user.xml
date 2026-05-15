@@ -133,6 +133,22 @@
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
 
+                <!-- Referral Code (Optional) -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilReferral"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:hint="Referral Code (Optional)"
+                    app:startIconDrawable="@android:drawable/ic_menu_share">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etReferral"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text" />
+                </com.google.android.material.textfield.TextInputLayout>
+
                 <!-- Password -->
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/tilPassword"

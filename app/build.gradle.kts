@@ -60,4 +60,5 @@ dependencies {
     implementation("com.google.firebase:firebase-storage")
     implementation(libs.glide)
     annotationProcessor(libs.glide.compiler)
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
 }

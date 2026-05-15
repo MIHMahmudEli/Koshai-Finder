@@ -19,5 +19,6 @@ data class Booking(
     var userName: String = "",
     var koshaiName: String = "",
     var createdAt: Timestamp = Timestamp.now(),
-    var isReviewed: Boolean = false
+    var isReviewed: Boolean = false,
+    var statsCounted: Boolean = false  // Prevents double-counting jobs/earnings
 )

@@ -180,7 +180,33 @@ class BookingDetailFragment : Fragment() {
     }
 
     private fun updateStatus(newStatus: String) {
-        bookingId?.let { id ->
+        val currentBooking = booking ?: return
+        val id = bookingId ?: return
+
+        val bookingRef = db.collection("bookings").document(id)
+        val koshaiRef = db.collection("koshais").document(currentBooking.koshaiId)
+
+        if (newStatus == "completed") {
+            db.runTransaction { transaction ->
+                val bookingSnap = transaction.get(bookingRef)
+                val alreadyCounted = bookingSnap.getBoolean("statsCounted") ?: false
+
+                transaction.update(bookingRef, "status", newStatus)
+
+                if (!alreadyCounted) {
+                    val totalEarnings = (currentBooking.rateBreakdown["total"] ?: 0.0).toLong()
+                    transaction.update(koshaiRef, "totalJobs", com.google.firebase.firestore.FieldValue.increment(1))
+                    transaction.update(koshaiRef, "earnings", com.google.firebase.firestore.FieldValue.increment(totalEarnings))
+                    transaction.update(bookingRef, "statsCounted", true)
+                }
+            }.addOnSuccessListener {
+                if (!isAdded) return@addOnSuccessListener
+                showSnackBar("Booking marked as completed")
+            }.addOnFailureListener {
+                if (!isAdded) return@addOnFailureListener
+                showSnackBar("Update failed: ${it.message}", isError = true)
+            }
+        } else {
             db.collection("bookings").document(id).update("status", newStatus)
                 .addOnSuccessListener {
                     if (!isAdded) return@addOnSuccessListener

@@ -122,31 +122,48 @@ class BookingManagerFragment : Fragment() {
     }
 
     private fun updateBookingStatus(booking: Booking, newStatus: String) {
-        val batch = db.batch()
         val bookingRef = db.collection("bookings").document(booking.id)
-        batch.update(bookingRef, "status", newStatus)
+        val koshaiRef = db.collection("koshais").document(booking.koshaiId)
 
-        // If completed, update koshai stats
         if (newStatus == "completed") {
-            val koshaiRef = db.collection("koshais").document(booking.koshaiId)
-            batch.update(koshaiRef, "totalJobs", com.google.firebase.firestore.FieldValue.increment(1))
-            val totalEarnings = (booking.rateBreakdown["total"] ?: 0.0).toLong()
-            batch.update(koshaiRef, "earnings", com.google.firebase.firestore.FieldValue.increment(totalEarnings))
-        }
+            // Use a transaction to atomically check statsCounted and update stats
+            db.runTransaction { transaction ->
+                val bookingSnap = transaction.get(bookingRef)
+                val alreadyCounted = bookingSnap.getBoolean("statsCounted") ?: false
 
-        batch.commit()
-            .addOnSuccessListener {
-                if (!isAdded) return@addOnSuccessListener
-                showSnackBar("Booking $newStatus successfully")
+                transaction.update(bookingRef, "status", newStatus)
 
-                if (newStatus == "confirmed") {
-                    cancelCompetingRequests(booking)
+                if (!alreadyCounted) {
+                    val totalEarnings = (booking.rateBreakdown["total"] ?: 0.0).toLong()
+                    transaction.update(koshaiRef, "totalJobs", com.google.firebase.firestore.FieldValue.increment(1))
+                    transaction.update(koshaiRef, "earnings", com.google.firebase.firestore.FieldValue.increment(totalEarnings))
+                    transaction.update(bookingRef, "statsCounted", true)
                 }
-            }
-            .addOnFailureListener {
+            }.addOnSuccessListener {
+                if (!isAdded) return@addOnSuccessListener
+                showSnackBar("Booking completed successfully")
+                cancelCompetingRequests(booking)
+            }.addOnFailureListener {
                 if (!isAdded) return@addOnFailureListener
                 showSnackBar("Failed to update booking: ${it.message}", isError = true)
             }
+        } else {
+            // For non-completed statuses, a simple update is fine
+            val batch = db.batch()
+            batch.update(bookingRef, "status", newStatus)
+            batch.commit()
+                .addOnSuccessListener {
+                    if (!isAdded) return@addOnSuccessListener
+                    showSnackBar("Booking $newStatus successfully")
+                    if (newStatus == "confirmed") {
+                        cancelCompetingRequests(booking)
+                    }
+                }
+                .addOnFailureListener {
+                    if (!isAdded) return@addOnFailureListener
+                    showSnackBar("Failed to update booking: ${it.message}", isError = true)
+                }
+        }
     }
 
     private fun cancelCompetingRequests(confirmedBooking: Booking) {
