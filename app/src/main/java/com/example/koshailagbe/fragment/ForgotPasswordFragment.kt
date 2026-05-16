@@ -38,22 +38,40 @@ class ForgotPasswordFragment : Fragment() {
         binding.btnResetPassword.setOnClickListener {
             val email = binding.etEmail.text.toString().trim()
             if (email.isEmpty()) {
-                Toast.makeText(requireContext(), "Please enter your email", Toast.LENGTH_SHORT).show()
+                android.widget.Toast.makeText(requireContext(), "Please enter your email", android.widget.Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             auth.sendPasswordResetEmail(email)
                 .addOnSuccessListener {
-                    Toast.makeText(requireContext(), "Reset link sent! Check your email.", Toast.LENGTH_LONG).show()
+                    android.widget.Toast.makeText(requireContext(), "Reset link sent! Check your email.", android.widget.Toast.LENGTH_LONG).show()
                     findNavController().popBackStack()
                 }
                 .addOnFailureListener {
-                    Toast.makeText(requireContext(), "Error: ${it.message}", Toast.LENGTH_LONG).show()
+                    android.widget.Toast.makeText(requireContext(), "Error: ${it.message}", android.widget.Toast.LENGTH_LONG).show()
                 }
         }
+        
+        setupFocusEffects()
 
         binding.tvBackToLogin.setOnClickListener { findNavController().popBackStack() }
 
         return binding.root
+    }
+
+    private fun setupFocusEffects() {
+        val focusListener = View.OnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                binding.focusOverlay.visibility = View.VISIBLE
+                binding.focusOverlay.animate().alpha(1f).setDuration(300).start()
+                binding.cardContainer.animate().scaleX(1.02f).scaleY(1.02f).setDuration(300).start()
+            } else {
+                binding.focusOverlay.animate().alpha(0f).setDuration(300).withEndAction {
+                    binding.focusOverlay.visibility = View.GONE
+                }.start()
+                binding.cardContainer.animate().scaleX(1f).scaleY(1f).setDuration(300).start()
+            }
+        }
+        binding.etEmail.onFocusChangeListener = focusListener
     }
 
     override fun onDestroyView() {
