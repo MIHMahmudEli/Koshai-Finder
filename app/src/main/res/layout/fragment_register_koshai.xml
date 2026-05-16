@@ -53,7 +53,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
                     android:text="Personal Information"
-                    android:textColor="@android:color/white"
+                    android:textColor="#1A237E"
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
@@ -64,17 +64,17 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
                     android:hint="Full Name"
-                    android:textColorHint="#BDBDBD"
-                    app:boxStrokeColor="@android:color/white"
-                    app:hintTextColor="@android:color/white"
+                    android:textColorHint="#616161"
+                    app:boxStrokeColor="#1A237E"
+                    app:hintTextColor="#1A237E"
                     app:startIconDrawable="@android:drawable/ic_menu_edit"
-                    app:startIconTint="@android:color/white">
+                    app:startIconTint="#1A237E">
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="textPersonName"
-                        android:textColor="@android:color/white" />
+                        android:textColor="#1A237E" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -84,17 +84,17 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
                     android:hint="Email Address"
-                    android:textColorHint="#BDBDBD"
-                    app:boxStrokeColor="@android:color/white"
-                    app:hintTextColor="@android:color/white"
+                    android:textColorHint="#616161"
+                    app:boxStrokeColor="#1A237E"
+                    app:hintTextColor="#1A237E"
                     app:startIconDrawable="@android:drawable/sym_action_email"
-                    app:startIconTint="@android:color/white">
+                    app:startIconTint="#1A237E">
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etEmail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="textEmailAddress"
-                        android:textColor="@android:color/white" />
+                        android:textColor="#1A237E" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -104,20 +104,20 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
                     android:hint="Phone Number"
-                    android:textColorHint="#BDBDBD"
-                    app:boxStrokeColor="@android:color/white"
-                    app:hintTextColor="@android:color/white"
+                    android:textColorHint="#616161"
+                    app:boxStrokeColor="#1A237E"
+                    app:hintTextColor="#1A237E"
                     app:prefixText="+88 "
-                    app:prefixTextColor="@android:color/white"
+                    app:prefixTextColor="#1A237E"
                     app:startIconDrawable="@android:drawable/ic_menu_call"
-                    app:startIconTint="@android:color/white">
+                    app:startIconTint="#1A237E">
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etPhone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="phone"
                         android:maxLength="11"
-                        android:textColor="@android:color/white" />
+                        android:textColor="#1A237E" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <LinearLayout
@@ -134,15 +134,15 @@
                         android:layout_marginEnd="8dp"
                         android:layout_weight="1"
                         android:hint="District"
-                        android:textColorHint="#BDBDBD"
-                        app:boxStrokeColor="@android:color/white"
-                        app:hintTextColor="@android:color/white">
+                        android:textColorHint="#616161"
+                        app:boxStrokeColor="#1A237E"
+                        app:hintTextColor="#1A237E">
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/etDistrict"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="text"
-                            android:textColor="@android:color/white" />
+                            android:textColor="#1A237E" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -153,15 +153,15 @@
                         android:layout_marginStart="8dp"
                         android:layout_weight="1"
                         android:hint="Upazila"
-                        android:textColorHint="#BDBDBD"
-                        app:boxStrokeColor="@android:color/white"
-                        app:hintTextColor="@android:color/white">
+                        android:textColorHint="#616161"
+                        app:boxStrokeColor="#1A237E"
+                        app:hintTextColor="#1A237E">
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/etUpazila"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="text"
-                            android:textColor="@android:color/white" />
+                            android:textColor="#1A237E" />
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
 
@@ -172,7 +172,7 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="16dp"
                     android:text="Service Rates"
-                    android:textColor="@android:color/white"
+                    android:textColor="#1A237E"
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
@@ -183,17 +183,17 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="12dp"
                     android:hint="Rate per Cow"
-                    android:textColorHint="#BDBDBD"
-                    app:boxStrokeColor="@android:color/white"
-                    app:hintTextColor="@android:color/white"
+                    android:textColorHint="#616161"
+                    app:boxStrokeColor="#1A237E"
+                    app:hintTextColor="#1A237E"
                     app:suffixText="৳"
-                    app:suffixTextColor="@android:color/white">
+                    app:suffixTextColor="#1A237E">
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etRateCow"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="numberDecimal"
-                        android:textColor="@android:color/white" />
+                        android:textColor="#1A237E" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -203,17 +203,17 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="12dp"
                     android:hint="Rate per Goat"
-                    android:textColorHint="#BDBDBD"
-                    app:boxStrokeColor="@android:color/white"
-                    app:hintTextColor="@android:color/white"
+                    android:textColorHint="#616161"
+                    app:boxStrokeColor="#1A237E"
+                    app:hintTextColor="#1A237E"
                     app:suffixText="৳"
-                    app:suffixTextColor="@android:color/white">
+                    app:suffixTextColor="#1A237E">
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etRateGoat"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="numberDecimal"
-                        android:textColor="@android:color/white" />
+                        android:textColor="#1A237E" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -223,17 +223,17 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="24dp"
                     android:hint="Rate per Sheep"
-                    android:textColorHint="#BDBDBD"
-                    app:boxStrokeColor="@android:color/white"
-                    app:hintTextColor="@android:color/white"
+                    android:textColorHint="#616161"
+                    app:boxStrokeColor="#1A237E"
+                    app:hintTextColor="#1A237E"
                     app:suffixText="৳"
-                    app:suffixTextColor="@android:color/white">
+                    app:suffixTextColor="#1A237E">
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etRateSheep"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="numberDecimal"
-                        android:textColor="@android:color/white" />
+                        android:textColor="#1A237E" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <!-- Section: Account -->
@@ -243,7 +243,7 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="16dp"
                     android:text="Account Security"
-                    android:textColor="@android:color/white"
+                    android:textColor="#1A237E"
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
@@ -254,19 +254,19 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="32dp"
                     android:hint="Password"
-                    android:textColorHint="#BDBDBD"
-                    app:boxStrokeColor="@android:color/white"
-                    app:hintTextColor="@android:color/white"
+                    android:textColorHint="#616161"
+                    app:boxStrokeColor="#1A237E"
+                    app:hintTextColor="#1A237E"
                     app:passwordToggleEnabled="true"
-                    app:passwordToggleTint="@android:color/white"
+                    app:passwordToggleTint="#1A237E"
                     app:startIconDrawable="@android:drawable/ic_lock_idle_lock"
-                    app:startIconTint="@android:color/white">
+                    app:startIconTint="#1A237E">
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etPassword"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="textPassword"
-                        android:textColor="@android:color/white" />
+                        android:textColor="#1A237E" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.button.MaterialButton

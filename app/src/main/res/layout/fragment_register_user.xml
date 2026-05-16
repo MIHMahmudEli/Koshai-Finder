@@ -48,70 +48,70 @@
                 android:padding="28dp">
 
                 <!-- Full Name -->
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/tilName"
-                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:hint="Full Name"
-                    android:textColorHint="#BDBDBD"
-                    app:boxStrokeColor="@android:color/white"
-                    app:hintTextColor="@android:color/white"
-                    app:startIconDrawable="@android:drawable/ic_menu_edit"
-                    app:startIconTint="@android:color/white">
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etName"
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tilName"
+                        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="textPersonName"
-                        android:textColor="@android:color/white" />
-                </com.google.android.material.textfield.TextInputLayout>
+                        android:layout_marginBottom="16dp"
+                        android:hint="Full Name"
+                        android:textColorHint="#616161"
+                        app:boxStrokeColor="#1A237E"
+                        app:hintTextColor="#1A237E"
+                        app:startIconDrawable="@android:drawable/ic_menu_edit"
+                        app:startIconTint="#1A237E">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textPersonName"
+                            android:textColor="#1A237E" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
                 <!-- Email -->
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/tilEmail"
-                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:hint="Email Address"
-                    android:textColorHint="#BDBDBD"
-                    app:boxStrokeColor="@android:color/white"
-                    app:hintTextColor="@android:color/white"
-                    app:startIconDrawable="@android:drawable/sym_action_email"
-                    app:startIconTint="@android:color/white">
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etEmail"
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tilEmail"
+                        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="textEmailAddress"
-                        android:textColor="@android:color/white" />
-                </com.google.android.material.textfield.TextInputLayout>
+                        android:layout_marginBottom="16dp"
+                        android:hint="Email Address"
+                        android:textColorHint="#616161"
+                        app:boxStrokeColor="#1A237E"
+                        app:hintTextColor="#1A237E"
+                        app:startIconDrawable="@android:drawable/sym_action_email"
+                        app:startIconTint="#1A237E">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etEmail"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textEmailAddress"
+                            android:textColor="#1A237E" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
                 <!-- Phone -->
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/tilPhone"
-                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:hint="Phone Number"
-                    android:textColorHint="#BDBDBD"
-                    app:boxStrokeColor="@android:color/white"
-                    app:hintTextColor="@android:color/white"
-                    app:prefixText="+88 "
-                    app:prefixTextColor="@android:color/white"
-                    app:startIconDrawable="@android:drawable/ic_menu_call"
-                    app:startIconTint="@android:color/white">
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etPhone"
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tilPhone"
+                        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="phone"
-                        android:maxLength="11"
-                        android:textColor="@android:color/white" />
-                </com.google.android.material.textfield.TextInputLayout>
+                        android:layout_marginBottom="16dp"
+                        android:hint="Phone Number"
+                        android:textColorHint="#616161"
+                        app:boxStrokeColor="#1A237E"
+                        app:hintTextColor="#1A237E"
+                        app:prefixText="+88 "
+                        app:prefixTextColor="#1A237E"
+                        app:startIconDrawable="@android:drawable/ic_menu_call"
+                        app:startIconTint="#1A237E">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etPhone"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="phone"
+                            android:maxLength="11"
+                            android:textColor="#1A237E" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -120,89 +120,89 @@
                     android:orientation="horizontal">
 
                     <!-- District -->
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/tilDistrict"
-                        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        android:layout_weight="1"
-                        android:hint="District"
-                        android:textColorHint="#BDBDBD"
-                        app:boxStrokeColor="@android:color/white"
-                        app:hintTextColor="@android:color/white">
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/etDistrict"
-                            android:layout_width="match_parent"
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/tilDistrict"
+                            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:inputType="text"
-                            android:textColor="@android:color/white" />
-                    </com.google.android.material.textfield.TextInputLayout>
+                            android:layout_marginEnd="8dp"
+                            android:layout_weight="1"
+                            android:hint="District"
+                            android:textColorHint="#616161"
+                            app:boxStrokeColor="#1A237E"
+                            app:hintTextColor="#1A237E">
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/etDistrict"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="text"
+                                android:textColor="#1A237E" />
+                        </com.google.android.material.textfield.TextInputLayout>
 
                     <!-- Upazila -->
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/tilUpazila"
-                        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_weight="1"
-                        android:hint="Upazila"
-                        android:textColorHint="#BDBDBD"
-                        app:boxStrokeColor="@android:color/white"
-                        app:hintTextColor="@android:color/white">
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/etUpazila"
-                            android:layout_width="match_parent"
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/tilUpazila"
+                            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:inputType="text"
-                            android:textColor="@android:color/white" />
-                    </com.google.android.material.textfield.TextInputLayout>
+                            android:layout_marginStart="8dp"
+                            android:layout_weight="1"
+                            android:hint="Upazila"
+                            android:textColorHint="#616161"
+                            app:boxStrokeColor="#1A237E"
+                            app:hintTextColor="#1A237E">
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/etUpazila"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="text"
+                                android:textColor="#1A237E" />
+                        </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
 
                 <!-- Referral Code (Optional) -->
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/tilReferral"
-                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:hint="Referral Code (Optional)"
-                    android:textColorHint="#BDBDBD"
-                    app:boxStrokeColor="@android:color/white"
-                    app:hintTextColor="@android:color/white"
-                    app:startIconDrawable="@android:drawable/ic_menu_share"
-                    app:startIconTint="@android:color/white">
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etReferral"
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tilReferral"
+                        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="text"
-                        android:textColor="@android:color/white" />
-                </com.google.android.material.textfield.TextInputLayout>
+                        android:layout_marginBottom="16dp"
+                        android:hint="Referral Code (Optional)"
+                        android:textColorHint="#616161"
+                        app:boxStrokeColor="#1A237E"
+                        app:hintTextColor="#1A237E"
+                        app:startIconDrawable="@android:drawable/ic_menu_share"
+                        app:startIconTint="#1A237E">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etReferral"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="text"
+                            android:textColor="#1A237E" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
                 <!-- Password -->
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/tilPassword"
-                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="24dp"
-                    android:hint="Create Password"
-                    android:textColorHint="#BDBDBD"
-                    app:boxStrokeColor="@android:color/white"
-                    app:hintTextColor="@android:color/white"
-                    app:passwordToggleEnabled="true"
-                    app:passwordToggleTint="@android:color/white"
-                    app:startIconDrawable="@android:drawable/ic_lock_idle_lock"
-                    app:startIconTint="@android:color/white">
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etPassword"
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tilPassword"
+                        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="textPassword"
-                        android:textColor="@android:color/white" />
-                </com.google.android.material.textfield.TextInputLayout>
+                        android:layout_marginBottom="24dp"
+                        android:hint="Create Password"
+                        android:textColorHint="#616161"
+                        app:boxStrokeColor="#1A237E"
+                        app:hintTextColor="#1A237E"
+                        app:passwordToggleEnabled="true"
+                        app:passwordToggleTint="#1A237E"
+                        app:startIconDrawable="@android:drawable/ic_lock_idle_lock"
+                        app:startIconTint="#1A237E">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etPassword"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textPassword"
+                            android:textColor="#1A237E" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnRegisterUser"
