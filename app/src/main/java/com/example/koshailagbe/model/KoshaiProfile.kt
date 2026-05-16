@@ -11,7 +11,11 @@ data class KoshaiProfile(
     var district: String = "",
     var upazila: String = "",
     var status: String = "offline", // online, busy, offline
+    @get:com.google.firebase.firestore.PropertyName("isVerified")
+    @set:com.google.firebase.firestore.PropertyName("isVerified")
     var isVerified: Boolean = false,
+    @get:com.google.firebase.firestore.PropertyName("isEidMode")
+    @set:com.google.firebase.firestore.PropertyName("isEidMode")
     var isEidMode: Boolean = false,
     var rating: Double = 0.0,
     var totalRatings: Long = 0,
@@ -20,6 +24,8 @@ data class KoshaiProfile(
     var ratePerCow: Double = 0.0,
     var ratePerGoat: Double = 0.0,
     var ratePerSheep: Double = 0.0,
+    @get:com.google.firebase.firestore.PropertyName("isBanned")
+    @set:com.google.firebase.firestore.PropertyName("isBanned")
     var isBanned: Boolean = false,
     var bannedReason: String = "",
     var bio: String = ""

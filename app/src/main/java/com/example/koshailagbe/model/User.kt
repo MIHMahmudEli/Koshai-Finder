@@ -14,6 +14,8 @@ data class User(
     var referredBy: String = "",
     var credits: Int = 0,
     var createdAt: Timestamp? = null,
+    @get:com.google.firebase.firestore.PropertyName("isBanned")
+    @set:com.google.firebase.firestore.PropertyName("isBanned")
     var isBanned: Boolean = false,
     var bannedReason: String = ""
 )

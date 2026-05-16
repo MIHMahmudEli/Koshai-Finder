@@ -85,34 +85,12 @@ class UserHomeFragment : Fragment() {
         binding.chipAll.setOnClickListener { filterKoshais(null) }
         binding.chipCattleExpert.setOnClickListener { filterByCategory("cattle") }
         binding.chipGoatSheep.setOnClickListener { filterByCategory("goat") }
-        binding.chipNearby.setOnClickListener { filterNearby() }
     }
 
     private fun filterByCategory(category: String) {
-        val filtered = when (category) {
-            "cattle" -> allKoshais.filter { it.ratePerCow > 0 }
-            "goat" -> allKoshais.filter { it.ratePerGoat > 0 || it.ratePerSheep > 0 }
-            else -> allKoshais
-        }
-        updateDiscoveryLists(filtered)
-    }
-
-    private fun filterNearby() {
-        if (userDistrict == null) {
-            updateDiscoveryLists(allKoshais)
-            return
-        }
-        val filtered = allKoshais.filter {
-            it.district.contains(userDistrict!!, ignoreCase = true) ||
-            it.upazila.contains(userUpazila ?: "", ignoreCase = true)
-        }
-        
-        if (filtered.isEmpty() && !allKoshais.isEmpty()) {
-            // Fallback: If no one is nearby, show all verified experts but show a small hint or just the list
-            updateDiscoveryLists(allKoshais)
-        } else {
-            updateDiscoveryLists(filtered)
-        }
+        // Temporarily disable strict category filtering so users can see all verified experts
+        // even if the experts haven't set their specific animal rates yet.
+        updateDiscoveryLists(allKoshais)
     }
 
     private fun updateDiscoveryLists(list: List<KoshaiProfile>) {
@@ -183,8 +161,33 @@ class UserHomeFragment : Fragment() {
                     koshai?.id = doc.id
                     koshai
                 } catch (ex: Exception) {
-                    android.util.Log.e("UserHome", "Mapping Error for ${doc.id}", ex)
-                    null
+                    android.util.Log.e("UserHome", "Mapping Error for ${doc.id}, doing manual parse", ex)
+                    try {
+                        KoshaiProfile(
+                            id = doc.id,
+                            name = doc.getString("name") ?: "",
+                            email = doc.getString("email") ?: "",
+                            phone = doc.getString("phone") ?: "",
+                            photoUrl = doc.getString("photoUrl") ?: "",
+                            district = doc.getString("district") ?: "",
+                            upazila = doc.getString("upazila") ?: "",
+                            status = doc.getString("status") ?: "offline",
+                            isVerified = doc.getBoolean("isVerified") ?: false,
+                            isEidMode = doc.getBoolean("isEidMode") ?: false,
+                            rating = (doc.get("rating") as? Number)?.toDouble() ?: 0.0,
+                            totalRatings = (doc.get("totalRatings") as? Number)?.toLong() ?: 0L,
+                            totalJobs = (doc.get("totalJobs") as? Number)?.toLong() ?: 0L,
+                            earnings = (doc.get("earnings") as? Number)?.toDouble() ?: 0.0,
+                            ratePerCow = (doc.get("ratePerCow") as? Number)?.toDouble() ?: 0.0,
+                            ratePerGoat = (doc.get("ratePerGoat") as? Number)?.toDouble() ?: 0.0,
+                            ratePerSheep = (doc.get("ratePerSheep") as? Number)?.toDouble() ?: 0.0,
+                            isBanned = doc.getBoolean("isBanned") ?: false,
+                            bannedReason = doc.getString("bannedReason") ?: "",
+                            bio = doc.getString("bio") ?: ""
+                        )
+                    } catch (e2: Exception) {
+                        null
+                    }
                 }
             }
             

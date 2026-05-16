@@ -15,10 +15,14 @@ data class Booking(
     var rateBreakdown: Map<String, Double> = mapOf("total" to 0.0, "surgeMultiplier" to 1.0),
     var depositPaid: Double = 0.0,
     var status: String = "pending", // pending, confirmed, en_route, arrived, completed, cancelled
+    @get:com.google.firebase.firestore.PropertyName("isGroupBooking")
+    @set:com.google.firebase.firestore.PropertyName("isGroupBooking")
     var isGroupBooking: Boolean = false,
     var userName: String = "",
     var koshaiName: String = "",
     var createdAt: Timestamp = Timestamp.now(),
+    @get:com.google.firebase.firestore.PropertyName("isReviewed")
+    @set:com.google.firebase.firestore.PropertyName("isReviewed")
     var isReviewed: Boolean = false,
     var statsCounted: Boolean = false  // Prevents double-counting jobs/earnings
 )

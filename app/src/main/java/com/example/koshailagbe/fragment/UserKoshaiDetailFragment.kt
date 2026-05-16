@@ -84,7 +84,36 @@ class UserKoshaiDetailFragment : Fragment() {
             
             snapshot?.let { doc ->
                 if (doc.exists()) {
-                    koshaiProfile = doc.toObject(KoshaiProfile::class.java)?.apply { this.id = doc.id }
+                    try {
+                        koshaiProfile = doc.toObject(KoshaiProfile::class.java)?.apply { this.id = doc.id }
+                    } catch (e: Exception) {
+                        try {
+                            koshaiProfile = KoshaiProfile(
+                                id = doc.id,
+                                name = doc.getString("name") ?: "",
+                                email = doc.getString("email") ?: "",
+                                phone = doc.getString("phone") ?: "",
+                                photoUrl = doc.getString("photoUrl") ?: "",
+                                district = doc.getString("district") ?: "",
+                                upazila = doc.getString("upazila") ?: "",
+                                status = doc.getString("status") ?: "offline",
+                                isVerified = doc.getBoolean("isVerified") ?: false,
+                                isEidMode = doc.getBoolean("isEidMode") ?: false,
+                                rating = (doc.get("rating") as? Number)?.toDouble() ?: 0.0,
+                                totalRatings = (doc.get("totalRatings") as? Number)?.toLong() ?: 0L,
+                                totalJobs = (doc.get("totalJobs") as? Number)?.toLong() ?: 0L,
+                                earnings = (doc.get("earnings") as? Number)?.toDouble() ?: 0.0,
+                                ratePerCow = (doc.get("ratePerCow") as? Number)?.toDouble() ?: 0.0,
+                                ratePerGoat = (doc.get("ratePerGoat") as? Number)?.toDouble() ?: 0.0,
+                                ratePerSheep = (doc.get("ratePerSheep") as? Number)?.toDouble() ?: 0.0,
+                                isBanned = doc.getBoolean("isBanned") ?: false,
+                                bannedReason = doc.getString("bannedReason") ?: "",
+                                bio = doc.getString("bio") ?: ""
+                            )
+                        } catch (e2: Exception) {
+                            koshaiProfile = null
+                        }
+                    }
                     koshaiProfile?.let { updateUI(it, doc) }
                 }
             }
