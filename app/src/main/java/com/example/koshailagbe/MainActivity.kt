@@ -18,6 +18,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.messaging.FirebaseMessaging
 import androidx.navigation.findNavController
+import androidx.activity.enableEdgeToEdge
 
 class MainActivity : AppCompatActivity() {
 
@@ -35,7 +36,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         
         // Modern Edge-to-Edge display
-        androidx.activity.enableEdgeToEdge()
+        enableEdgeToEdge()
         
         setContentView(R.layout.activity_main)
 
