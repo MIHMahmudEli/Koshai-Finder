@@ -125,17 +125,39 @@ class ChatFragment : Fragment() {
         val roomId = chatRoomId ?: return
         val rId = receiverId ?: return
 
-        val roomRef = db.collection("chatRooms").document(roomId)
-        roomRef.get().addOnSuccessListener { doc ->
-            if (!doc.exists()) {
-                val room = ChatRoom(
-                    id = roomId,
-                    participants = listOf(currentUserId, rId),
-                    userNames = mapOf(currentUserId to (auth.currentUser?.displayName ?: "User"), rId to (receiverName ?: "Koshai")),
-                    userPhotos = mapOf(currentUserId to "", rId to (receiverPhoto ?: "")),
-                    lastTimestamp = Timestamp.now()
-                )
-                roomRef.set(room)
+        val role = com.example.koshailagbe.utils.SharedPrefsHelper.getUserRole(requireContext())
+        val myCollection = if (role == com.example.koshailagbe.utils.SharedPrefsHelper.ROLE_KOSHAI) "koshais" else "users"
+        val otherCollection = if (role == com.example.koshailagbe.utils.SharedPrefsHelper.ROLE_KOSHAI) "users" else "koshais"
+
+        db.collection(myCollection).document(currentUserId).get().addOnSuccessListener { myDoc ->
+            val myName = myDoc.getString("name") ?: auth.currentUser?.displayName ?: "User"
+
+            db.collection(otherCollection).document(rId).get().addOnSuccessListener { otherDoc ->
+                val otherName = otherDoc.getString("name") ?: receiverName ?: "User"
+                
+                if (isAdded) {
+                    binding.tvChatPartnerName.text = otherName
+                }
+
+                val roomRef = db.collection("chatRooms").document(roomId)
+                roomRef.get().addOnSuccessListener { doc ->
+                    if (!doc.exists()) {
+                        val room = ChatRoom(
+                            id = roomId,
+                            participants = listOf(currentUserId, rId).sorted(),
+                            userNames = mapOf(currentUserId to myName, rId to otherName),
+                            userPhotos = mapOf(currentUserId to "", rId to (receiverPhoto ?: "")),
+                            lastTimestamp = Timestamp.now()
+                        )
+                        roomRef.set(room)
+                    } else {
+                        val updates = mapOf(
+                            "userNames.$currentUserId" to myName,
+                            "userNames.$rId" to otherName
+                        )
+                        roomRef.update(updates)
+                    }
+                }
             }
         }
     }

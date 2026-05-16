@@ -36,6 +36,7 @@ class BookingRequestFragment : Fragment() {
     
     private val slots = listOf("06:00-08:00", "08:00-10:00", "10:00-12:00", "13:00-15:00", "15:00-17:00")
     private var selectedSlot: String? = null
+    private var currentUserName: String = "User"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,6 +49,7 @@ class BookingRequestFragment : Fragment() {
         koshaiId = arguments?.getString("koshaiId")
         
         loadKoshaiData()
+        loadCurrentUserName()
         setupListeners()
         
         // Initial slot state
@@ -69,6 +71,15 @@ class BookingRequestFragment : Fragment() {
                     .placeholder(R.drawable.bg_dashboard_header)
                     .into(binding.ivKoshai)
             }
+    }
+
+    private fun loadCurrentUserName() {
+        val uid = auth.currentUser?.uid ?: return
+        db.collection("users").document(uid).get().addOnSuccessListener { doc ->
+            if (doc.exists()) {
+                currentUserName = doc.getString("name") ?: auth.currentUser?.displayName ?: "User"
+            }
+        }
     }
 
     private fun setupListeners() {
@@ -226,7 +237,7 @@ class BookingRequestFragment : Fragment() {
             address = location,
             animalTypes = mapOf("cow" to cowCount, "goat" to goatCount),
             rateBreakdown = mapOf("total" to total, "surgeMultiplier" to 1.0),
-            userName = auth.currentUser?.displayName ?: "User",
+            userName = currentUserName,
             koshaiName = koshai.name,
             createdAt = com.google.firebase.Timestamp.now()
         )

@@ -100,7 +100,7 @@ class BookingDetailFragment : Fragment() {
         binding.tvDate.text = "${sdf.format(booking.date.toDate())} (${booking.slot})"
         
         binding.tvAddress.text = booking.address
-        binding.tvCustomerName.text = "Customer (UID: ${booking.userId.takeLast(6)})"
+        binding.tvCustomerName.text = if (booking.userName.isNotEmpty()) booking.userName else "Customer"
         
         // Animal breakdown
         binding.animalContainer.removeAllViews()
