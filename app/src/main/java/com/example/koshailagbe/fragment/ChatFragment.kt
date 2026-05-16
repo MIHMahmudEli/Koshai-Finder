@@ -125,19 +125,13 @@ class ChatFragment : Fragment() {
         val roomId = chatRoomId ?: return
         val rId = receiverId ?: return
 
-        val role = com.example.koshailagbe.utils.SharedPrefsHelper.getUserRole(requireContext())
-        val myCollection = if (role == com.example.koshailagbe.utils.SharedPrefsHelper.ROLE_KOSHAI) "koshais" else "users"
-        val otherCollection = if (role == com.example.koshailagbe.utils.SharedPrefsHelper.ROLE_KOSHAI) "users" else "koshais"
-
-        db.collection(myCollection).document(currentUserId).get().addOnSuccessListener { myDoc ->
-            val myName = myDoc.getString("name") ?: auth.currentUser?.displayName ?: "User"
-
-            db.collection(otherCollection).document(rId).get().addOnSuccessListener { otherDoc ->
-                val otherName = otherDoc.getString("name") ?: receiverName ?: "User"
-                
+        fetchUserName(currentUserId) { myName ->
+            fetchUserName(rId) { otherName ->
                 if (isAdded) {
-                    binding.tvChatPartnerName.text = otherName
+                    binding.tvChatPartnerName.text = if (otherName == "Unknown" && receiverName != null) receiverName else otherName
                 }
+
+                val finalOtherName = if (otherName == "Unknown" && receiverName != null) receiverName!! else otherName
 
                 val roomRef = db.collection("chatRooms").document(roomId)
                 roomRef.get().addOnSuccessListener { doc ->
@@ -145,7 +139,7 @@ class ChatFragment : Fragment() {
                         val room = ChatRoom(
                             id = roomId,
                             participants = listOf(currentUserId, rId).sorted(),
-                            userNames = mapOf(currentUserId to myName, rId to otherName),
+                            userNames = mapOf(currentUserId to myName, rId to finalOtherName),
                             userPhotos = mapOf(currentUserId to "", rId to (receiverPhoto ?: "")),
                             lastTimestamp = Timestamp.now()
                         )
@@ -153,13 +147,35 @@ class ChatFragment : Fragment() {
                     } else {
                         val updates = mapOf(
                             "userNames.$currentUserId" to myName,
-                            "userNames.$rId" to otherName
+                            "userNames.$rId" to finalOtherName
                         )
                         roomRef.update(updates)
                     }
                 }
             }
         }
+    }
+
+    private fun fetchUserName(uid: String, onResult: (String) -> Unit) {
+        db.collection("users").document(uid).get().addOnSuccessListener { doc ->
+            if (doc.exists() && doc.getString("name") != null) {
+                onResult(doc.getString("name")!!)
+            } else {
+                db.collection("koshais").document(uid).get().addOnSuccessListener { kDoc ->
+                    if (kDoc.exists() && kDoc.getString("name") != null) {
+                        onResult(kDoc.getString("name")!!)
+                    } else {
+                        db.collection("admin").document(uid).get().addOnSuccessListener { aDoc ->
+                            if (aDoc.exists() && aDoc.getString("name") != null) {
+                                onResult(aDoc.getString("name")!!)
+                            } else {
+                                onResult("Unknown")
+                            }
+                        }.addOnFailureListener { onResult("Unknown") }
+                    }
+                }.addOnFailureListener { onResult("Unknown") }
+            }
+        }.addOnFailureListener { onResult("Unknown") }
     }
 
     private fun listenForMessages() {
