@@ -34,10 +34,17 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         
-        // Ensure status bar and navigation bar are visible
-        WindowCompat.setDecorFitsSystemWindows(window, true)
+        // Modern Edge-to-Edge display
+        androidx.activity.enableEdgeToEdge()
         
         setContentView(R.layout.activity_main)
+
+        // Handle system bar insets for the root view
+        androidx.core.view.ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.nav_host_fragment)) { v, insets ->
+            val systemBars = insets.getInsets(androidx.core.view.WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, 0, systemBars.right, systemBars.bottom)
+            insets
+        }
 
         askNotificationPermission()
         updateFcmToken()
