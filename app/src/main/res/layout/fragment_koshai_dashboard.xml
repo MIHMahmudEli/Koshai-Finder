@@ -81,7 +81,7 @@
                     android:padding="10dp"
                     android:scaleType="centerInside"
                     android:src="@android:drawable/stat_notify_chat"
-                    app:tint="@android:color/white" />
+                    app:tint="#212121" />
 
                 <ImageButton
                     android:id="@+id/btnLogout"
@@ -91,7 +91,7 @@
                     android:padding="10dp"
                     android:scaleType="centerInside"
                     android:src="@android:drawable/ic_lock_power_off"
-                    app:tint="@android:color/white" />
+                    app:tint="#212121" />
             </LinearLayout>
 
             <!-- Status Toggle Card -->
@@ -118,7 +118,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Work Status"
-                        android:textColor="@android:color/white"
+                        android:textColor="#212121"
                         android:textSize="18sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
@@ -142,8 +142,8 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="Offline"
-                            android:textColor="@android:color/white"
-                            app:strokeColor="@android:color/white"
+                            android:textColor="#212121"
+                            app:strokeColor="#212121"
                             android:textSize="12sp"
                             app:cornerRadius="12dp" />
 
@@ -154,8 +154,8 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="Busy"
-                            android:textColor="@android:color/white"
-                            app:strokeColor="@android:color/white"
+                            android:textColor="#212121"
+                            app:strokeColor="#212121"
                             android:textSize="12sp"
                             app:cornerRadius="12dp" />
 
@@ -166,8 +166,8 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="Online"
-                            android:textColor="@android:color/white"
-                            app:strokeColor="@android:color/white"
+                            android:textColor="#212121"
+                            app:strokeColor="#212121"
                             android:textSize="12sp"
                             app:cornerRadius="12dp" />
 
