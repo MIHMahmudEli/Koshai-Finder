@@ -42,6 +42,8 @@ class LoginFragment : Fragment() {
         db = FirebaseFirestore.getInstance()
 
         binding.btnLogin.setOnClickListener { attemptLogin() }
+        
+        setupFocusEffects()
 
         binding.tvForgotPassword.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_forgotPasswordFragment)
@@ -193,6 +195,24 @@ class LoginFragment : Fragment() {
             binding.btnLogin.isEnabled = true
             binding.btnLogin.text = "Login"
         }
+    }
+
+    private fun setupFocusEffects() {
+        val focusListener = View.OnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                binding.focusOverlay.visibility = View.VISIBLE
+                binding.focusOverlay.animate().alpha(1f).setDuration(300).start()
+                binding.loginCard.animate().scaleX(1.02f).scaleY(1.02f).setDuration(300).start()
+            } else {
+                binding.focusOverlay.animate().alpha(0f).setDuration(300).withEndAction {
+                    binding.focusOverlay.visibility = View.GONE
+                }.start()
+                binding.loginCard.animate().scaleX(1f).scaleY(1f).setDuration(300).start()
+            }
+        }
+
+        binding.etEmailPhone.onFocusChangeListener = focusListener
+        binding.etPassword.onFocusChangeListener = focusListener
     }
 
     override fun onDestroyView() {

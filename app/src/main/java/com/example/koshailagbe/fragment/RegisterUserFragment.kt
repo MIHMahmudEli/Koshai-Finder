@@ -37,6 +37,7 @@ class RegisterUserFragment : Fragment() {
 
         auth = FirebaseAuth.getInstance()
         binding.btnRegisterUser.setOnClickListener { attemptRegister() }
+        setupFocusEffects()
         binding.tvBackToLogin.setOnClickListener { findNavController().popBackStack() }
         return binding.root
     }
@@ -156,6 +157,26 @@ class RegisterUserFragment : Fragment() {
                 PendingRegistration.clear()
                 showSnackBar("This email is already registered. Try logging in.", isError = true)
             }
+    }
+
+    private fun setupFocusEffects() {
+        val focusListener = View.OnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                binding.focusOverlay.visibility = View.VISIBLE
+                binding.focusOverlay.animate().alpha(1f).setDuration(300).start()
+                binding.registerUserCard.animate().scaleX(1.01f).scaleY(1.01f).setDuration(300).start()
+            } else {
+                binding.focusOverlay.animate().alpha(0f).setDuration(300).withEndAction {
+                    binding.focusOverlay.visibility = View.GONE
+                }.start()
+                binding.registerUserCard.animate().scaleX(1f).scaleY(1f).setDuration(300).start()
+            }
+        }
+
+        listOf(binding.etName, binding.etEmail, binding.etPhone, binding.etDistrict, 
+               binding.etUpazila, binding.etReferral, binding.etPassword).forEach {
+            it.onFocusChangeListener = focusListener
+        }
     }
 
     override fun onDestroyView() {
