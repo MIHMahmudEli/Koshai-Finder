@@ -61,6 +61,17 @@ class ForgotPasswordFragment : Fragment() {
     private fun setupFocusDimming() {
         binding.etEmail.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
+                // Calculate the hole for the glass card
+                val card = binding.cardContainer
+                val rect = android.graphics.RectF(
+                    card.x,
+                    card.y,
+                    card.x + card.width,
+                    card.y + card.height
+                )
+                binding.focusDimOverlay.holeRect = rect
+                binding.focusDimOverlay.holeRadius = 28f * resources.displayMetrics.density
+
                 binding.focusDimOverlay.visibility = View.VISIBLE
                 binding.focusDimOverlay.animate().alpha(1f).setDuration(300).start()
             } else {
