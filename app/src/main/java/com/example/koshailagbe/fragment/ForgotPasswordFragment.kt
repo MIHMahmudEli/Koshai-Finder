@@ -35,43 +35,46 @@ class ForgotPasswordFragment : Fragment() {
 
         auth = FirebaseAuth.getInstance()
 
+        setupFocusDimming()
+
         binding.btnResetPassword.setOnClickListener {
             val email = binding.etEmail.text.toString().trim()
             if (email.isEmpty()) {
-                android.widget.Toast.makeText(requireContext(), "Please enter your email", android.widget.Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Please enter your email", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             auth.sendPasswordResetEmail(email)
                 .addOnSuccessListener {
-                    android.widget.Toast.makeText(requireContext(), "Reset link sent! Check your email.", android.widget.Toast.LENGTH_LONG).show()
+                    Toast.makeText(requireContext(), "Reset link sent! Check your email.", Toast.LENGTH_LONG).show()
                     findNavController().popBackStack()
                 }
                 .addOnFailureListener {
-                    android.widget.Toast.makeText(requireContext(), "Error: ${it.message}", android.widget.Toast.LENGTH_LONG).show()
+                    Toast.makeText(requireContext(), "Error: ${it.message}", Toast.LENGTH_LONG).show()
                 }
         }
-        
-        setupFocusEffects()
 
         binding.tvBackToLogin.setOnClickListener { findNavController().popBackStack() }
 
         return binding.root
     }
 
-    private fun setupFocusEffects() {
-        val focusListener = View.OnFocusChangeListener { _, hasFocus ->
+    private fun setupFocusDimming() {
+        binding.etEmail.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
-                binding.focusOverlay.visibility = View.VISIBLE
-                binding.focusOverlay.animate().alpha(1f).setDuration(300).start()
-                binding.cardContainer.animate().scaleX(1.02f).scaleY(1.02f).setDuration(300).start()
+                binding.focusDimOverlay.visibility = View.VISIBLE
+                binding.focusDimOverlay.animate().alpha(1f).setDuration(300).start()
             } else {
-                binding.focusOverlay.animate().alpha(0f).setDuration(300).withEndAction {
-                    binding.focusOverlay.visibility = View.GONE
+                binding.focusDimOverlay.animate().alpha(0f).setDuration(300).withEndAction {
+                    binding.focusDimOverlay.visibility = View.GONE
                 }.start()
-                binding.cardContainer.animate().scaleX(1f).scaleY(1f).setDuration(300).start()
             }
         }
-        binding.etEmail.onFocusChangeListener = focusListener
+        
+        binding.focusDimOverlay.setOnClickListener {
+            binding.etEmail.clearFocus()
+            val imm = requireContext().getSystemService(android.content.Context.INPUT_METHOD_SERVICE) as android.view.inputmethod.InputMethodManager
+            imm.hideSoftInputFromWindow(it.windowToken, 0)
+        }
     }
 
     override fun onDestroyView() {

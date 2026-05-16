@@ -42,8 +42,8 @@ class LoginFragment : Fragment() {
         db = FirebaseFirestore.getInstance()
 
         binding.btnLogin.setOnClickListener { attemptLogin() }
-        
-        setupFocusEffects()
+
+        setupFocusDimming()
 
         binding.tvForgotPassword.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_forgotPasswordFragment)
@@ -190,29 +190,37 @@ class LoginFragment : Fragment() {
             .addOnFailureListener { resetLoginButton() }
     }
 
+    private fun setupFocusDimming() {
+        val focusListener = View.OnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                binding.focusDimOverlay.visibility = View.VISIBLE
+                binding.focusDimOverlay.animate().alpha(1f).setDuration(300).start()
+            } else {
+                if (!binding.etEmailPhone.hasFocus() && !binding.etPassword.hasFocus()) {
+                    binding.focusDimOverlay.animate().alpha(0f).setDuration(300).withEndAction {
+                        binding.focusDimOverlay.visibility = View.GONE
+                    }.start()
+                }
+            }
+        }
+        binding.etEmailPhone.onFocusChangeListener = focusListener
+        binding.etPassword.onFocusChangeListener = focusListener
+        
+        // Hide dim when clicking the overlay itself
+        binding.focusDimOverlay.setOnClickListener {
+            binding.etEmailPhone.clearFocus()
+            binding.etPassword.clearFocus()
+            // Hide keyboard
+            val imm = requireContext().getSystemService(android.content.Context.INPUT_METHOD_SERVICE) as android.view.inputmethod.InputMethodManager
+            imm.hideSoftInputFromWindow(it.windowToken, 0)
+        }
+    }
+
     private fun resetLoginButton() {
         if (isAdded) {
             binding.btnLogin.isEnabled = true
             binding.btnLogin.text = "Login"
         }
-    }
-
-    private fun setupFocusEffects() {
-        val focusListener = View.OnFocusChangeListener { _, hasFocus ->
-            if (hasFocus) {
-                binding.focusOverlay.visibility = View.VISIBLE
-                binding.focusOverlay.animate().alpha(1f).setDuration(300).start()
-                binding.loginCard.animate().scaleX(1.02f).scaleY(1.02f).setDuration(300).start()
-            } else {
-                binding.focusOverlay.animate().alpha(0f).setDuration(300).withEndAction {
-                    binding.focusOverlay.visibility = View.GONE
-                }.start()
-                binding.loginCard.animate().scaleX(1f).scaleY(1f).setDuration(300).start()
-            }
-        }
-
-        binding.etEmailPhone.onFocusChangeListener = focusListener
-        binding.etPassword.onFocusChangeListener = focusListener
     }
 
     override fun onDestroyView() {

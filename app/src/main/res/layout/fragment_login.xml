@@ -11,6 +11,17 @@
         android:layout_height="wrap_content"
         android:paddingBottom="24dp">
 
+        <!-- Focus Dim Overlay -->
+        <View
+            android:id="@+id/focusDimOverlay"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="#80000000"
+            android:visibility="gone"
+            android:elevation="1dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <!-- Top Logo & Title -->
         <LinearLayout
             android:id="@+id/logoContainer"
@@ -65,10 +76,10 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="24dp"
             android:layout_marginTop="48dp"
+            android:elevation="2dp"
             app:cardBackgroundColor="@android:color/transparent"
             app:cardCornerRadius="28dp"
             app:cardElevation="0dp"
-            android:elevation="8dp"
             app:layout_constraintTop_toBottomOf="@id/logoContainer"
             app:strokeWidth="0dp">
 
@@ -184,19 +195,6 @@
                 android:textColor="@android:color/white"
                 android:textStyle="bold" />
         </LinearLayout>
-
-        <!-- Dynamic Focus Overlay (Simulated Blur) -->
-        <View
-            android:id="@+id/focusOverlay"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#99000000"
-            android:visibility="gone"
-            android:alpha="0"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

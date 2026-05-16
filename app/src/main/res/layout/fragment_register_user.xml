@@ -33,13 +33,11 @@
             android:textSize="15sp" />
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/registerUserCard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardBackgroundColor="@android:color/transparent"
             app:cardCornerRadius="28dp"
             app:cardElevation="0dp"
-            android:elevation="8dp"
             app:strokeWidth="0dp">
 
             <LinearLayout
@@ -219,19 +217,6 @@
 
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
-
-        <!-- Dynamic Focus Overlay (Simulated Blur) -->
-        <View
-            android:id="@+id/focusOverlay"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#99000000"
-            android:visibility="gone"
-            android:alpha="0"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
 
         <TextView
             android:id="@+id/tvBackToLogin"
