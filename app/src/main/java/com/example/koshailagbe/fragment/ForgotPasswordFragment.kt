@@ -21,6 +21,18 @@ class ForgotPasswordFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         _binding = FragmentForgotPasswordBinding.inflate(inflater, container, false)
+        
+        // Modern Keyboard Animation
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
+            binding.root.setWindowInsetsAnimationCallback(object : android.view.WindowInsetsAnimation.Callback(DISPATCH_MODE_STOP) {
+                override fun onProgress(insets: android.view.WindowInsets, animations: MutableList<android.view.WindowInsetsAnimation>): android.view.WindowInsets {
+                    val imeInsets = insets.getInsets(android.view.WindowInsets.Type.ime())
+                    binding.cardContainer.translationY = -(imeInsets.bottom / 2f)
+                    return insets
+                }
+            })
+        }
+
         auth = FirebaseAuth.getInstance()
 
         binding.btnResetPassword.setOnClickListener {
