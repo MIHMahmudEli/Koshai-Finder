@@ -69,7 +69,6 @@ class ReviewFragment : Fragment() {
         val rating = binding.ratingBar.rating
         val comment = binding.etComment.text.toString().trim()
         val userId = auth.currentUser?.uid ?: return
-        val userName = auth.currentUser?.displayName ?: "User"
 
         if (koshaiId == null || bookingId == null) {
             showSnackBar("Error: Missing information", isError = true)
@@ -79,23 +78,43 @@ class ReviewFragment : Fragment() {
         binding.btnSubmit.isEnabled = false
         binding.btnSubmit.text = "Submitting..."
 
-        val review = Review(
-            userId = userId,
-            userName = userName,
-            rating = rating,
-            comment = comment
-        )
+        // Fetch actual user name from Firestore to ensure it's correct
+        db.collection("users").document(userId).get().addOnSuccessListener { doc ->
+            val userName = doc.getString("name") ?: auth.currentUser?.displayName ?: "User"
 
-        // 1. Add review to Koshai's reviews collection
-        db.collection("koshais").document(koshaiId!!).collection("reviews").add(review)
-            .addOnSuccessListener {
-                updateKoshaiRating(rating)
-            }
-            .addOnFailureListener {
-                showSnackBar("Failed to submit review: ${it.message}", isError = true)
-                binding.btnSubmit.isEnabled = true
-                binding.btnSubmit.text = "Submit Review"
-            }
+            val review = Review(
+                userId = userId,
+                userName = userName,
+                rating = rating,
+                comment = comment
+            )
+
+            // 1. Add review to Koshai's reviews collection
+            db.collection("koshais").document(koshaiId!!).collection("reviews").add(review)
+                .addOnSuccessListener {
+                    updateKoshaiRating(rating)
+                }
+                .addOnFailureListener {
+                    showSnackBar("Failed to submit review: ${it.message}", isError = true)
+                    binding.btnSubmit.isEnabled = true
+                    binding.btnSubmit.text = "Submit Review"
+                }
+        }.addOnFailureListener {
+            val userName = auth.currentUser?.displayName ?: "User"
+            val review = Review(
+                userId = userId,
+                userName = userName,
+                rating = rating,
+                comment = comment
+            )
+            db.collection("koshais").document(koshaiId!!).collection("reviews").add(review)
+                .addOnSuccessListener { updateKoshaiRating(rating) }
+                .addOnFailureListener {
+                    showSnackBar("Failed to submit review: ${it.message}", isError = true)
+                    binding.btnSubmit.isEnabled = true
+                    binding.btnSubmit.text = "Submit Review"
+                }
+        }
     }
 
     private fun updateKoshaiRating(newRating: Float) {
