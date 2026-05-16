@@ -33,6 +33,13 @@ class LoginFragment : Fragment() {
                 override fun onProgress(insets: android.view.WindowInsets, animations: MutableList<android.view.WindowInsetsAnimation>): android.view.WindowInsets {
                     val imeInsets = insets.getInsets(android.view.WindowInsets.Type.ime())
                     binding.loginCard.translationY = -(imeInsets.bottom / 2f)
+                    
+                    // Keep the dim overlay's hole synced with the card's new position
+                    val card = binding.loginCard
+                    binding.focusDimOverlay.holeRect = android.graphics.RectF(
+                        card.x, card.y, card.x + card.width, card.y + card.height
+                    )
+                    
                     return insets
                 }
             })
