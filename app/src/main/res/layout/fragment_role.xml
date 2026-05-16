@@ -58,7 +58,7 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="64dp"
                 android:layout_height="64dp"
-                app:cardBackgroundColor="#40FFFFFF"
+                app:cardBackgroundColor="#1A1A237E"
                 app:cardCornerRadius="32dp"
                 app:cardElevation="0dp"
                 app:strokeWidth="0dp">
@@ -67,7 +67,7 @@
                     android:layout_height="match_parent"
                     android:padding="16dp"
                     android:src="@android:drawable/ic_menu_search"
-                    app:tint="@android:color/white" />
+                    app:tint="#1A237E" />
             </com.google.android.material.card.MaterialCardView>
 
             <LinearLayout
@@ -81,7 +81,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="I am a Customer"
-                    android:textColor="@android:color/white"
+                    android:textColor="#1A237E"
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
@@ -90,7 +90,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:text="Find and book expert Koshais nearby"
-                    android:textColor="#BDBDBD"
+                    android:textColor="#5C6BC0"
                     android:textSize="13sp" />
             </LinearLayout>
 
@@ -98,7 +98,7 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@android:drawable/ic_media_play"
-                app:tint="@android:color/white" />
+                app:tint="#1A237E" />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 
@@ -129,7 +129,7 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="64dp"
                 android:layout_height="64dp"
-                app:cardBackgroundColor="#40FFFFFF"
+                app:cardBackgroundColor="#1A1A237E"
                 app:cardCornerRadius="32dp"
                 app:cardElevation="0dp"
                 app:strokeWidth="0dp">
@@ -138,7 +138,7 @@
                     android:layout_height="match_parent"
                     android:padding="16dp"
                     android:src="@android:drawable/ic_menu_edit"
-                    app:tint="@android:color/white" />
+                    app:tint="#1A237E" />
             </com.google.android.material.card.MaterialCardView>
 
             <LinearLayout
@@ -152,7 +152,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="I am a Koshai"
-                    android:textColor="@android:color/white"
+                    android:textColor="#1A237E"
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
@@ -161,7 +161,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:text="Earn money by offering your skills"
-                    android:textColor="#BDBDBD"
+                    android:textColor="#5C6BC0"
                     android:textSize="13sp" />
             </LinearLayout>
 
@@ -169,7 +169,7 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@android:drawable/ic_media_play"
-                app:tint="@android:color/white" />
+                app:tint="#1A237E" />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 
