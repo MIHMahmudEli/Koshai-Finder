@@ -54,7 +54,7 @@ class AvailabilityFragment : Fragment() {
             .addOnSuccessListener { doc ->
                 if (!isAdded) return@addOnSuccessListener
                 val status = doc.getString("status") ?: "offline"
-                val eidMode = doc.getBoolean("eidMode") ?: false
+                val eidMode = doc.getBoolean("isEidMode") ?: false
                 val surgeRate = (doc.get("surgeRate") as? Number)?.toDouble() ?: 1.5
 
                 when (status) {
@@ -83,7 +83,7 @@ class AvailabilityFragment : Fragment() {
 
         val updates = hashMapOf<String, Any>(
             "status" to status,
-            "eidMode" to eidMode,
+            "isEidMode" to eidMode,
             "surgeRate" to surgeRate
         )
 

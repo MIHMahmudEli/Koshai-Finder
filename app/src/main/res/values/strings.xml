@@ -314,7 +314,10 @@
     <string name="system_announcements_title">System Announcements</string>
     <string name="system_announcements_desc">Send push notifications</string>
     <string name="koshai_leaderboard_title">Koshai Leaderboard</string>
-    <string name="koshai_leaderboard_desc">Top performers &amp; rankings</string>
+    <string name="koshai_leaderboard_desc">Highlighting the top performers of the season</string>
+    <string name="leaderboard_location_format">%1$s, %2$s</string>
+    <string name="leaderboard_jobs_format">%d Jobs</string>
+    <string name="leaderboard_rating_format">%.1f</string>
     <string name="currency_bdt_sign">৳</string>
     <string name="zero_placeholder">0</string>
     <string name="zero_users_placeholder">0 👤</string>
