@@ -40,7 +40,7 @@ class AvailabilityFragment : Fragment() {
 
     private fun setupListeners() {
         binding.sliderSurge.addOnChangeListener { _, value, _ ->
-            binding.tvSurgeValue.text = String.format("%.1fx Base Rate", value)
+            binding.tvSurgeValue.text = getString(R.string.surge_rate_format, value)
         }
 
         binding.btnSaveAvailability.setOnClickListener {
@@ -65,7 +65,7 @@ class AvailabilityFragment : Fragment() {
 
                 binding.switchEidMode.isChecked = eidMode
                 binding.sliderSurge.value = surgeRate.toFloat()
-                binding.tvSurgeValue.text = String.format("%.1fx Base Rate", surgeRate)
+                binding.tvSurgeValue.text = getString(R.string.surge_rate_format, surgeRate)
             }
     }
 
@@ -90,12 +90,12 @@ class AvailabilityFragment : Fragment() {
         db.collection("koshais").document(uid).update(updates)
             .addOnSuccessListener {
                 if (!isAdded) return@addOnSuccessListener
-                showSnackBar("Availability updated successfully!")
+                showSnackBar(getString(R.string.msg_availability_updated))
                 findNavController().popBackStack()
             }
             .addOnFailureListener {
                 if (!isAdded) return@addOnFailureListener
-                showSnackBar("Failed to update: ${it.message}", isError = true)
+                showSnackBar(getString(R.string.msg_update_failed, it.message), isError = true)
             }
     }
 
