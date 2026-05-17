@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.koshailagbe.R
@@ -121,7 +120,7 @@ class KoshaiDashboardFragment : Fragment() {
 
     private fun checkProfileCompletion(profile: KoshaiProfile) {
         // If bio is empty or they haven't set their upazila, prompt them
-        if ((profile.bio.isNullOrEmpty() || profile.upazila.isEmpty()) && isAdded) {
+        if ((profile.bio.isEmpty() || profile.upazila.isEmpty()) && isAdded) {
             com.google.android.material.dialog.MaterialAlertDialogBuilder(requireContext())
                 .setTitle("Complete Your Profile")
                 .setMessage("A complete profile helps you get more bookings. Add a bio and specify your exact service area now.")
@@ -136,7 +135,7 @@ class KoshaiDashboardFragment : Fragment() {
     private fun updateUI(profile: KoshaiProfile) {
         binding.tvKoshaiName.text = "Welcome, ${profile.name}"
         // tvTotalJobs is updated by fetchBookingCounts() with live active job count
-        binding.tvRating.text = String.format("%.1f", profile.rating)
+        binding.tvRating.text = String.format(java.util.Locale.getDefault(), "%.1f", profile.rating)
 
         Glide.with(this)
             .load(profile.photoUrl)
@@ -167,7 +166,7 @@ class KoshaiDashboardFragment : Fragment() {
         db.collection("koshais").document(uid).update("status", status)
             .addOnSuccessListener {
                 if (!isAdded) return@addOnSuccessListener
-                binding.tvKoshaiStatus.text = "Currently ${status.replaceFirstChar { it.uppercase() }}"
+                binding.tvKoshaiStatus.text = "Currently ${status.replaceFirstChar { if (it.isLowerCase()) it.titlecase(java.util.Locale.getDefault()) else it.toString() }}"
                 showSnackBar("Status updated to $status")
             }
     }
