@@ -294,6 +294,33 @@
     <string name="select_organization_title">Select Organization</string>
     <string name="progress_tracker_title">Progress Tracker</string>
     <string name="btn_donate_upper">DONATE NOW</string>
+
+    <!-- Admin Dashboard -->
+    <string name="admin_dashboard_title">Admin Dashboard</string>
+    <string name="verification_queue_title">Verification Queue</string>
+    <string name="pending_registrations_format">%s pending registrations</string>
+    <string name="total_users_label">Total Users</string>
+    <string name="verified_koshais_label">Verified Koshais</string>
+    <string name="completed_jobs_label">Completed Jobs</string>
+    <string name="total_earnings_label">Total Earnings</string>
+    <string name="logout_button">Logout</string>
+    <string name="booking_activity_title">Booking Activity</string>
+    <string name="pending_bookings_label">Pending</string>
+    <string name="active_bookings_label">Active</string>
+    <string name="account_management_title">Account Management</string>
+    <string name="account_management_desc">Ban users or Koshais</string>
+    <string name="disputes_reviews_title">Disputes &amp; Reviews</string>
+    <string name="disputes_reviews_desc">Moderate content and reports</string>
+    <string name="system_announcements_title">System Announcements</string>
+    <string name="system_announcements_desc">Send push notifications</string>
+    <string name="koshai_leaderboard_title">Koshai Leaderboard</string>
+    <string name="koshai_leaderboard_desc">Top performers &amp; rankings</string>
+    <string name="currency_bdt_sign">৳</string>
+    <string name="zero_placeholder">0</string>
+    <string name="zero_users_placeholder">0 👤</string>
+    <string name="zero_verified_placeholder">0 🟢</string>
+    <string name="zero_bdt_placeholder">৳ 0</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
