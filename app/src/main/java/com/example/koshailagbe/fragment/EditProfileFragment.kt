@@ -18,7 +18,6 @@ import com.example.koshailagbe.utils.showSnackBar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
-import java.util.*
 
 class EditProfileFragment : Fragment() {
 
@@ -60,8 +59,9 @@ class EditProfileFragment : Fragment() {
     }
 
     private fun setupUI() {
-        // Default to GONE, show only for Koshai
-        binding.tilBio.visibility = if (userRole == SharedPrefsHelper.ROLE_KOSHAI) View.VISIBLE else View.GONE
+        val isKoshai = userRole == SharedPrefsHelper.ROLE_KOSHAI
+        binding.tilBio.visibility = if (isKoshai) View.VISIBLE else View.GONE
+        binding.llKoshaiSettings.visibility = if (isKoshai) View.VISIBLE else View.GONE
     }
 
     private fun loadCurrentData() {
@@ -82,20 +82,23 @@ class EditProfileFragment : Fragment() {
                     
                     if (userRole == SharedPrefsHelper.ROLE_KOSHAI) {
                         binding.etBio.setText(doc.getString("bio"))
+                        binding.switchEidMode.isChecked = doc.getBoolean("isEidMode") ?: false
                     }
                     
                     currentPhotoUrl = doc.getString("photoUrl")
-                    Glide.with(this)
-                        .load(currentPhotoUrl)
-                        .placeholder(R.drawable.ic_profile)
-                        .error(R.drawable.ic_profile)
-                        .into(binding.ivProfile)
+                    if (!currentPhotoUrl.isNullOrEmpty()) {
+                        Glide.with(this)
+                            .load(currentPhotoUrl)
+                            .placeholder(R.drawable.ic_profile)
+                            .error(R.drawable.ic_profile)
+                            .into(binding.ivProfile)
+                    }
                 }
             }
             .addOnFailureListener {
                 if (!isAdded) return@addOnFailureListener
                 binding.progressBar.visibility = View.GONE
-                showSnackBar("Failed to load profile: ${it.message}", isError = true)
+                showSnackBar(getString(R.string.error_load_failed, it.message), isError = true)
             }
     }
 
@@ -108,38 +111,50 @@ class EditProfileFragment : Fragment() {
             imagePickerLauncher.launch(intent)
         }
 
-        binding.btnSave.setOnClickListener { saveProfile() }
-        binding.btnSaveChanges.setOnClickListener { saveProfile() }
+        binding.btnSave.setOnClickListener { validateAndSave() }
+        binding.btnSaveChanges.setOnClickListener { validateAndSave() }
     }
 
-    private fun saveProfile() {
+    private fun validateAndSave() {
         val name = binding.etName.text.toString().trim()
         val phone = binding.etPhone.text.toString().trim()
         val district = binding.etDistrict.text.toString().trim()
         val upazila = binding.etUpazila.text.toString().trim()
         val bio = if (userRole == SharedPrefsHelper.ROLE_KOSHAI) binding.etBio.text.toString().trim() else null
+        val isEidMode = if (userRole == SharedPrefsHelper.ROLE_KOSHAI) binding.switchEidMode.isChecked else null
 
         if (name.isEmpty() || district.isEmpty() || upazila.isEmpty()) {
-            showSnackBar("Name and Location cannot be empty", isError = true)
+            showSnackBar(getString(R.string.error_empty_fields), isError = true)
+            return
+        }
+
+        if (phone.isNotEmpty() && !isValidPhone(phone)) {
+            showSnackBar(getString(R.string.error_invalid_phone), isError = true)
             return
         }
 
         setLoadingState(true)
 
         if (imageUri != null) {
-            uploadImageAndSave(name, phone, district, upazila, bio)
+            uploadImageAndSave(name, phone, district, upazila, bio, isEidMode)
         } else {
-            updateFirestore(name, phone, district, upazila, bio, currentPhotoUrl)
+            updateFirestore(name, phone, district, upazila, bio, isEidMode, currentPhotoUrl)
         }
     }
 
+    private fun isValidPhone(phone: String): Boolean {
+        return phone.length >= 11 && android.util.Patterns.PHONE.matcher(phone).matches()
+    }
+
     private fun setLoadingState(isLoading: Boolean) {
+        if (!isAdded) return
         binding.btnSave.isEnabled = !isLoading
         binding.btnSaveChanges.isEnabled = !isLoading
+        binding.btnSave.alpha = if (isLoading) 0.5f else 1.0f
         binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
-    private fun uploadImageAndSave(name: String, phone: String, district: String, upazila: String, bio: String?) {
+    private fun uploadImageAndSave(name: String, phone: String, district: String, upazila: String, bio: String?, isEidMode: Boolean?) {
         val uid = auth.currentUser?.uid ?: return
         val ref = storage.reference.child("profile_photos/$uid.jpg")
 
@@ -147,20 +162,27 @@ class EditProfileFragment : Fragment() {
             ref.putFile(uri)
                 .addOnSuccessListener {
                     ref.downloadUrl.addOnSuccessListener { downloadUri ->
-                        updateFirestore(name, phone, district, upazila, bio, downloadUri.toString())
+                        updateFirestore(name, phone, district, upazila, bio, isEidMode, downloadUri.toString())
                     }.addOnFailureListener {
-                        showSnackBar("Failed to get download URL: ${it.message}", isError = true)
-                        setLoadingState(false)
+                        if (isAdded) {
+                            showSnackBar(getString(R.string.error_download_url, it.message), isError = true)
+                            setLoadingState(false)
+                        }
                     }
                 }
                 .addOnFailureListener {
-                    showSnackBar("Failed to upload image: ${it.message}", isError = true)
-                    setLoadingState(false)
+                    if (isAdded) {
+                        showSnackBar(getString(R.string.error_upload_failed, it.message), isError = true)
+                        setLoadingState(false)
+                    }
                 }
+        } ?: run {
+            // Should not happen if imageUri is checked before calling, but for safety:
+            updateFirestore(name, phone, district, upazila, bio, isEidMode, currentPhotoUrl)
         }
     }
 
-    private fun updateFirestore(name: String, phone: String, district: String, upazila: String, bio: String?, photoUrl: String?) {
+    private fun updateFirestore(name: String, phone: String, district: String, upazila: String, bio: String?, isEidMode: Boolean?, photoUrl: String?) {
         val uid = auth.currentUser?.uid ?: return
         val collection = if (userRole == SharedPrefsHelper.ROLE_KOSHAI) "koshais" else "users"
 
@@ -172,16 +194,17 @@ class EditProfileFragment : Fragment() {
         )
         photoUrl?.let { updates["photoUrl"] = it }
         bio?.let { updates["bio"] = it }
+        isEidMode?.let { updates["isEidMode"] = it }
 
         db.collection(collection).document(uid).update(updates)
             .addOnSuccessListener {
                 if (!isAdded) return@addOnSuccessListener
-                showSnackBar("Profile updated successfully")
+                showSnackBar(getString(R.string.msg_profile_updated))
                 findNavController().popBackStack()
             }
             .addOnFailureListener {
                 if (!isAdded) return@addOnFailureListener
-                showSnackBar("Failed to update profile: ${it.message}", isError = true)
+                showSnackBar(getString(R.string.error_update_failed, it.message), isError = true)
                 setLoadingState(false)
             }
     }

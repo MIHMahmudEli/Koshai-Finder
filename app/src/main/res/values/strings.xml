@@ -345,5 +345,26 @@
     <string name="msg_update_failed">Failed to update: %s</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- Edit Profile -->
+    <string name="edit_profile_title">Edit Profile</string>
+    <string name="label_personal_info">Personal Information</string>
+    <string name="label_location_details">Location Details</string>
+    <string name="hint_full_name">Full Name</string>
+    <string name="hint_bio">Bio</string>
+    <string name="hint_phone">Phone Number</string>
+    <string name="hint_district">District</string>
+    <string name="hint_upazila">Upazila</string>
+    <string name="btn_save">Save</string>
+    <string name="btn_save_changes">Save Changes</string>
+    <string name="btn_save_changes_caps">SAVE CHANGES</string>
+    <string name="change_photo_desc">Change Profile Photo</string>
+    <string name="error_empty_fields">Name and Location cannot be empty</string>
+    <string name="msg_profile_updated">Profile updated successfully!</string>
+    <string name="error_upload_failed">Failed to upload image: %s</string>
+    <string name="error_update_failed">Failed to update profile: %s</string>
+    <string name="error_load_failed">Failed to load profile: %s</string>
+    <string name="error_download_url">Failed to get download URL: %s</string>
+    <string name="label_eid_mode">Eid-ul-Adha Mode</string>
+    <string name="desc_eid_mode">Enable this during Eid to show special availability.</string>
+    <string name="error_invalid_phone">Please enter a valid phone number</string>
 </resources>
