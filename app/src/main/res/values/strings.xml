@@ -367,4 +367,11 @@
     <string name="label_eid_mode">Eid-ul-Adha Mode</string>
     <string name="desc_eid_mode">Enable this during Eid to show special availability.</string>
     <string name="error_invalid_phone">Please enter a valid phone number</string>
+    <string name="msg_logging_in">Logging in...</string>
+    <string name="error_fill_all_fields">Please fill in all fields</string>
+    <string name="error_verify_email_check">Please verify your email first. Check your inbox.</string>
+    <string name="error_no_account_found">No account found with this email.</string>
+    <string name="error_incorrect_password">Incorrect password.</string>
+    <string name="error_account_banned">Your account is banned. Contact support.</string>
+    <string name="error_account_missing">Account not found.</string>
 </resources>
