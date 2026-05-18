@@ -16,18 +16,19 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:fillViewport="true"
+        android:scrollbars="none">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="40dp">
+            android:paddingBottom="48dp">
 
             <LinearLayout
                 android:id="@+id/headerContainer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="60dp"
+                android:layout_marginTop="50dp"
                 android:gravity="center"
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -39,45 +40,63 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/create_account_title"
-                    android:textColor="#FFFFFF"
-                    android:textSize="32sp"
+                    android:textColor="#EAD295"
+                    android:textSize="34sp"
                     android:textStyle="bold"
-                    android:letterSpacing="-0.02" />
+                    android:fontFamily="sans-serif-medium"
+                    android:letterSpacing="-0.01" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="6dp"
                     android:text="Join our community of customers"
-                    android:textColor="#D1D5DB"
-                    android:textSize="15sp" />
+                    android:textColor="#ECEFF1"
+                    android:textSize="15sp"
+                    android:alpha="0.85" />
             </LinearLayout>
+
+            <FrameLayout
+                android:id="@+id/emblemContainer"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:layout_marginTop="20dp"
+                app:layout_constraintTop_toBottomOf="@id/headerContainer"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:scaleType="fitCenter"
+                    android:alpha="0.95"/>
+            </FrameLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/registrationCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="24dp"
-                android:layout_marginTop="32dp"
-                android:background="@drawable/bg_luxury_glass_card"
-                android:elevation="8dp"
-                android:padding="28dp"
-                app:layout_constraintTop_toBottomOf="@id/headerContainer">
+                android:layout_marginTop="16dp"
+                android:background="@drawable/bg_customer_glass_card" android:elevation="12dp"
+                android:paddingHorizontal="24dp"
+                android:paddingVertical="28dp"
+                app:layout_constraintTop_toBottomOf="@id/emblemContainer">
 
-                <!-- Full Name -->
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/tilName"
                     style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/full_name_label"
-                    android:textColorHint="#475569"
+                    android:textColorHint="#4F6357"
                     app:boxStrokeWidth="0dp"
                     app:boxStrokeWidthFocused="0dp"
-                    app:hintTextColor="#064E3B"
+                    app:hintTextColor="#0A362A"
                     app:layout_constraintTop_toTopOf="parent"
                     app:startIconDrawable="@android:drawable/ic_menu_edit"
-                    app:startIconTint="#1E3A8A">
+                    app:startIconTint="#5A7365">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etName"
@@ -86,26 +105,25 @@
                         android:background="@drawable/bg_luxury_input_box"
                         android:inputType="textPersonName"
                         android:paddingHorizontal="16dp"
-                        android:paddingVertical="18dp"
-                        android:textColor="#0F172A"
+                        android:paddingVertical="16dp"
+                        android:textColor="#0F241A"
                         android:textSize="16sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <!-- Email -->
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/tilEmail"
                     style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="14dp"
                     android:hint="@string/email_label"
-                    android:textColorHint="#475569"
+                    android:textColorHint="#4F6357"
                     app:boxStrokeWidth="0dp"
                     app:boxStrokeWidthFocused="0dp"
-                    app:hintTextColor="#064E3B"
+                    app:hintTextColor="#0A362A"
                     app:layout_constraintTop_toBottomOf="@id/tilName"
                     app:startIconDrawable="@android:drawable/sym_action_email"
-                    app:startIconTint="#1E3A8A">
+                    app:startIconTint="#5A7365">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etEmail"
@@ -114,28 +132,27 @@
                         android:background="@drawable/bg_luxury_input_box"
                         android:inputType="textEmailAddress"
                         android:paddingHorizontal="16dp"
-                        android:paddingVertical="18dp"
-                        android:textColor="#0F172A"
+                        android:paddingVertical="16dp"
+                        android:textColor="#0F241A"
                         android:textSize="16sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <!-- Phone -->
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/tilPhone"
                     style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="14dp"
                     android:hint="@string/phone_number_label"
-                    android:textColorHint="#475569"
+                    android:textColorHint="#4F6357"
                     app:boxStrokeWidth="0dp"
                     app:boxStrokeWidthFocused="0dp"
-                    app:hintTextColor="#064E3B"
+                    app:hintTextColor="#0A362A"
                     app:layout_constraintTop_toBottomOf="@id/tilEmail"
                     app:prefixText="+88 "
-                    app:prefixTextColor="#1E3A8A"
+                    app:prefixTextColor="#0A362A"
                     app:startIconDrawable="@android:drawable/ic_menu_call"
-                    app:startIconTint="#1E3A8A">
+                    app:startIconTint="#5A7365">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etPhone"
@@ -145,8 +162,8 @@
                         android:inputType="phone"
                         android:maxLength="11"
                         android:paddingHorizontal="16dp"
-                        android:paddingVertical="18dp"
-                        android:textColor="#0F172A"
+                        android:paddingVertical="16dp"
+                        android:textColor="#0F241A"
                         android:textSize="16sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -154,7 +171,7 @@
                     android:id="@+id/locationRow"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="14dp"
                     android:orientation="horizontal"
                     app:layout_constraintTop_toBottomOf="@id/tilPhone">
 
@@ -163,13 +180,13 @@
                         style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
+                        android:layout_marginEnd="6dp"
                         android:layout_weight="1"
                         android:hint="District"
-                        android:textColorHint="#475569"
+                        android:textColorHint="#4F6357"
                         app:boxStrokeWidth="0dp"
                         app:boxStrokeWidthFocused="0dp"
-                        app:hintTextColor="#064E3B">
+                        app:hintTextColor="#0A362A">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/etDistrict"
@@ -178,8 +195,8 @@
                             android:background="@drawable/bg_luxury_input_box"
                             android:inputType="text"
                             android:paddingHorizontal="16dp"
-                            android:paddingVertical="18dp"
-                            android:textColor="#0F172A"
+                            android:paddingVertical="16dp"
+                            android:textColor="#0F241A"
                             android:textSize="16sp" />
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -188,13 +205,13 @@
                         style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
+                        android:layout_marginStart="6dp"
                         android:layout_weight="1"
                         android:hint="Upazila"
-                        android:textColorHint="#475569"
+                        android:textColorHint="#4F6357"
                         app:boxStrokeWidth="0dp"
                         app:boxStrokeWidthFocused="0dp"
-                        app:hintTextColor="#064E3B">
+                        app:hintTextColor="#0A362A">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/etUpazila"
@@ -203,29 +220,28 @@
                             android:background="@drawable/bg_luxury_input_box"
                             android:inputType="text"
                             android:paddingHorizontal="16dp"
-                            android:paddingVertical="18dp"
-                            android:textColor="#0F172A"
+                            android:paddingVertical="16dp"
+                            android:textColor="#0F241A"
                             android:textSize="16sp" />
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
 
-                <!-- Password -->
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/tilPassword"
                     style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="14dp"
                     android:hint="@string/password_label"
-                    android:textColorHint="#475569"
+                    android:textColorHint="#4F6357"
                     app:boxStrokeWidth="0dp"
                     app:boxStrokeWidthFocused="0dp"
-                    app:hintTextColor="#064E3B"
+                    app:hintTextColor="#0A362A"
                     app:layout_constraintTop_toBottomOf="@id/locationRow"
                     app:passwordToggleEnabled="true"
-                    app:passwordToggleTint="#1E3A8A"
+                    app:passwordToggleTint="#5A7365"
                     app:startIconDrawable="@android:drawable/ic_lock_idle_lock"
-                    app:startIconTint="#1E3A8A">
+                    app:startIconTint="#5A7365">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etPassword"
@@ -234,26 +250,25 @@
                         android:background="@drawable/bg_luxury_input_box"
                         android:inputType="textPassword"
                         android:paddingHorizontal="16dp"
-                        android:paddingVertical="18dp"
-                        android:textColor="#0F172A"
+                        android:paddingVertical="16dp"
+                        android:textColor="#0F241A"
                         android:textSize="16sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <!-- Referral -->
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/tilReferral"
                     style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="14dp"
                     android:hint="Referral Code (Optional)"
-                    android:textColorHint="#475569"
+                    android:textColorHint="#4F6357"
                     app:boxStrokeWidth="0dp"
                     app:boxStrokeWidthFocused="0dp"
-                    app:hintTextColor="#064E3B"
+                    app:hintTextColor="#0A362A"
                     app:layout_constraintTop_toBottomOf="@id/tilPassword"
                     app:startIconDrawable="@android:drawable/ic_menu_share"
-                    app:startIconTint="#1E3A8A">
+                    app:startIconTint="#5A7365">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etReferral"
@@ -262,24 +277,57 @@
                         android:background="@drawable/bg_luxury_input_box"
                         android:inputType="text"
                         android:paddingHorizontal="16dp"
-                        android:paddingVertical="18dp"
-                        android:textColor="#0F172A"
+                        android:paddingVertical="16dp"
+                        android:textColor="#0F241A"
                         android:textSize="16sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.button.MaterialButton
+                <View
+                    android:id="@+id/premiumDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="20dp"
+                    android:background="#AABDB2"
+                    app:layout_constraintTop_toBottomOf="@id/tilReferral"/>
+
+                <LinearLayout
+                    android:id="@+id/badgeRow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    app:layout_constraintTop_toBottomOf="@id/premiumDivider"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:src="@android:drawable/btn_star_big_on"
+                        app:tint="#0F543C"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
+                        android:text="Industry-Level Profile Protected"
+                        android:textColor="#0F543C"
+                        android:textStyle="bold"
+                        android:textSize="12sp"/>
+                </LinearLayout>
+
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnRegisterUser"
                     android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:layout_marginTop="32dp"
-                    android:backgroundTint="#FFFFFF"
+                    android:layout_height="54dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/bg_luxury_submit_btn"
                     android:text="@string/create_account_button"
-                    android:textColor="#1E3A8A"
+                    android:textColor="#EAD295"
                     android:textSize="16sp"
                     android:textStyle="bold"
-                    app:cornerRadius="16dp"
-                    app:elevation="4dp"
-                    app:layout_constraintTop_toBottomOf="@id/tilReferral" />
+                    android:textAllCaps="false"
+                    android:letterSpacing="0.02"
+                    app:layout_constraintTop_toBottomOf="@id/badgeRow" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -287,17 +335,17 @@
                 android:id="@+id/tvBackToLogin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="24dp"
                 android:padding="8dp"
                 android:text="@string/already_have_account_login"
                 android:textColor="#FFFFFF"
                 android:textSize="15sp"
                 android:textStyle="bold"
+                android:letterSpacing="0.01"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/registrationCard" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
