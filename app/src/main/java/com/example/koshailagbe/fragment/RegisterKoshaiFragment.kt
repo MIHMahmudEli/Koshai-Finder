@@ -217,7 +217,7 @@ class RegisterKoshaiFragment : Fragment() {
         binding.focusDimOverlay.setOnClickListener {
             editTexts.forEach { it.clearFocus() }
             val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            imm.hideSoftInputFromWindow(it.windowToken, 0)
+            imm.hideSoftInputFromWindow(binding.root.windowToken, 0)
         }
     }
 
