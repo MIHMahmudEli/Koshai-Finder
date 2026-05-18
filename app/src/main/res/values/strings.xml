@@ -390,4 +390,12 @@
     <string name="msg_account_exists_login">Account already exists. Please login.</string>
     <string name="btn_submit_application">Submit Application</string>
     <string name="rate_sheep_label">Rate per Sheep</string>
+
+    <!-- OTP Verification -->
+    <string name="verify_phone_title">Verify Phone</string>
+    <string name="otp_instruction">Enter the 6-digit code sent to your phone</string>
+    <string name="otp_digit_label">6-digit code</string>
+    <string name="btn_verify_continue">Verify &amp; Continue</string>
+    <string name="didnt_receive_code">Didn\'t receive code? </string>
+    <string name="resend_label">Resend</string>
 </resources>
