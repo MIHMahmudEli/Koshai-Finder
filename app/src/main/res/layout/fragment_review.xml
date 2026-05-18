@@ -9,7 +9,7 @@
         android:layout_height="28dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="44dp"
-        android:src="@androidx.appcompat.drawable.abc_ic_ab_back_material"
+        android:src="?attr/homeAsUpIndicator"
         android:contentDescription="Back"
         app:tint="#FFFFFF"
         app:layout_constraintStart_toStartOf="parent"
