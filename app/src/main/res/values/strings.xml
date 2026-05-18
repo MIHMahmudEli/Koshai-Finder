@@ -374,4 +374,9 @@
     <string name="error_incorrect_password">Incorrect password.</string>
     <string name="error_account_banned">Your account is banned. Contact support.</string>
     <string name="error_account_missing">Account not found.</string>
+    <string name="error_invalid_otp">Enter a valid 6-digit OTP</string>
+    <string name="error_session_expired">Session expired. Please try again.</string>
+    <string name="msg_verifying">Verifying...</string>
+    <string name="msg_resending_otp">Resending code...</string>
+    <string name="btn_verify_continue">Verify &amp; Continue</string>
 </resources>
