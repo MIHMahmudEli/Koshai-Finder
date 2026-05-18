@@ -11,8 +11,12 @@ import androidx.navigation.fragment.findNavController
 import com.example.koshailagbe.R
 import com.example.koshailagbe.databinding.FragmentRegisterKoshaiBinding
 import com.example.koshailagbe.utils.showSnackBar
+import com.example.koshailagbe.utils.SharedPrefsHelper
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
+import android.graphics.RectF
+import android.view.inputmethod.InputMethodManager
+import android.content.Context
 
 class RegisterKoshaiFragment : Fragment() {
 
@@ -29,12 +33,21 @@ class RegisterKoshaiFragment : Fragment() {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
             binding.root.setWindowInsetsAnimationCallback(object : android.view.WindowInsetsAnimation.Callback(DISPATCH_MODE_STOP) {
                 override fun onProgress(insets: android.view.WindowInsets, animations: MutableList<android.view.WindowInsetsAnimation>): android.view.WindowInsets {
+                    val imeInsets = insets.getInsets(android.view.WindowInsets.Type.ime())
+                    binding.registrationCard.translationY = -(imeInsets.bottom / 3f)
+                    
+                    val card = binding.registrationCard
+                    binding.focusDimOverlay.holeRect = RectF(
+                        card.x, card.y + card.translationY, card.x + card.width, card.y + card.height + card.translationY
+                    )
+                    
                     return insets
                 }
             })
         }
 
         auth = FirebaseAuth.getInstance()
+        setupFocusDimming()
         binding.btnRegisterKoshai.setOnClickListener { attemptRegister() }
         binding.tvBackToLogin.setOnClickListener { findNavController().popBackStack() }
         return binding.root
@@ -55,23 +68,23 @@ class RegisterKoshaiFragment : Fragment() {
         if (name.isEmpty() || email.isEmpty() || phone.isEmpty() || district.isEmpty() ||
             upazila.isEmpty() || rateCow.isEmpty() || rateGoat.isEmpty() || rateSheep.isEmpty() || password.isEmpty()
         ) {
-            showSnackBar("Please fill all required fields", isError = true)
+            showSnackBar(getString(R.string.error_fill_all_fields), isError = true)
             return
         }
         if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            binding.tilEmail.error = "Enter a valid email address"; return
-        } else binding.tilEmail.error = null
+            binding.etEmail.error = getString(R.string.msg_valid_email); return
+        } else binding.etEmail.error = null
 
         if (phone.length < 10) {
-            binding.tilPhone.error = "Enter a valid phone number"; return
-        } else binding.tilPhone.error = null
+            binding.etPhone.error = getString(R.string.error_invalid_phone); return
+        } else binding.etPhone.error = null
 
         if (password.length < 6) {
-            binding.tilPassword.error = "Password must be at least 6 characters"; return
-        } else binding.tilPassword.error = null
+            binding.etPassword.error = getString(R.string.msg_password_length); return
+        } else binding.etPassword.error = null
 
         binding.btnRegisterKoshai.isEnabled = false
-        binding.btnRegisterKoshai.text = "Submitting..."
+        binding.btnRegisterKoshai.text = getString(R.string.msg_submitting)
 
         // Store data to be saved AFTER email verification
         PendingRegistration.role = PendingRegistration.ROLE_KOSHAI
@@ -114,8 +127,8 @@ class RegisterKoshaiFragment : Fragment() {
                 result.user?.sendEmailVerification()?.addOnCompleteListener {
                     if (!isAdded) return@addOnCompleteListener
                     binding.btnRegisterKoshai.isEnabled = true
-                    binding.btnRegisterKoshai.text = "Submit Registration"
-                    showSnackBar("Verification email sent! Please check your inbox 📧")
+                    binding.btnRegisterKoshai.text = getString(R.string.btn_submit_application)
+                    showSnackBar(getString(R.string.msg_verification_email_sent))
                     findNavController().navigate(
                         R.id.action_registerKoshaiFragment_to_emailVerificationFragment,
                         bundleOf(EmailVerificationFragment.ARG_DESTINATION to EmailVerificationFragment.DEST_KOSHAI)
@@ -125,13 +138,13 @@ class RegisterKoshaiFragment : Fragment() {
             .addOnFailureListener { ex ->
                 if (!isAdded) return@addOnFailureListener
                 binding.btnRegisterKoshai.isEnabled = true
-                binding.btnRegisterKoshai.text = "Submit Registration"
+                binding.btnRegisterKoshai.text = getString(R.string.btn_submit_application)
 
                 if (ex.message?.contains("already in use") == true) {
                     handleExistingUnverifiedAccount(email, password)
                 } else {
-                    PendingRegistration.clear()
-                    showSnackBar("Registration failed: ${ex.message}", isError = true)
+                    PendingRegistration.clear(requireContext())
+                    showSnackBar(getString(R.string.error_update_failed, ex.message), isError = true)
                 }
             }
     }
@@ -143,13 +156,13 @@ class RegisterKoshaiFragment : Fragment() {
                 val user = result.user ?: return@addOnSuccessListener
                 if (user.isEmailVerified) {
                     auth.signOut()
-                    PendingRegistration.clear()
-                    showSnackBar("Account already exists. Please login.", isError = true)
+                    PendingRegistration.clear(requireContext())
+                    showSnackBar(getString(R.string.msg_account_exists_login), isError = true)
                     findNavController().popBackStack()
                 } else {
                     user.sendEmailVerification()?.addOnCompleteListener {
                         if (!isAdded) return@addOnCompleteListener
-                        showSnackBar("Verification email resent 📧")
+                        showSnackBar(getString(R.string.msg_verification_email_resent))
                         findNavController().navigate(
                             R.id.action_registerKoshaiFragment_to_emailVerificationFragment,
                             bundleOf(EmailVerificationFragment.ARG_DESTINATION to EmailVerificationFragment.DEST_KOSHAI)
@@ -159,9 +172,53 @@ class RegisterKoshaiFragment : Fragment() {
             }
             .addOnFailureListener {
                 if (!isAdded) return@addOnFailureListener
-                PendingRegistration.clear()
-                showSnackBar("This email is already registered. Try logging in.", isError = true)
+                PendingRegistration.clear(requireContext())
+                showSnackBar(getString(R.string.msg_already_registered_login), isError = true)
             }
+    }
+
+    private fun setupFocusDimming() {
+        val focusListener = View.OnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                val card = binding.registrationCard
+                val rect = RectF(
+                    card.x,
+                    card.y,
+                    card.x + card.width,
+                    card.y + card.height
+                )
+                binding.focusDimOverlay.holeRect = rect
+                binding.focusDimOverlay.holeRadius = 28f * resources.displayMetrics.density
+                
+                binding.focusDimOverlay.visibility = View.VISIBLE
+                binding.focusDimOverlay.animate().alpha(1f).setDuration(300).start()
+            } else {
+                val anyFocused = binding.etName.hasFocus() || binding.etEmail.hasFocus() || 
+                                 binding.etPhone.hasFocus() || binding.etDistrict.hasFocus() || 
+                                 binding.etUpazila.hasFocus() || binding.etRateCow.hasFocus() || 
+                                 binding.etRateGoat.hasFocus() || binding.etRateSheep.hasFocus() || 
+                                 binding.etPassword.hasFocus()
+                
+                if (!anyFocused) {
+                    binding.focusDimOverlay.animate().alpha(0f).setDuration(300).withEndAction {
+                        binding.focusDimOverlay.visibility = View.GONE
+                    }.start()
+                }
+            }
+        }
+        
+        val editTexts = listOf(
+            binding.etName, binding.etEmail, binding.etPhone,
+            binding.etDistrict, binding.etUpazila, binding.etRateCow,
+            binding.etRateGoat, binding.etRateSheep, binding.etPassword
+        )
+        editTexts.forEach { it.onFocusChangeListener = focusListener }
+        
+        binding.focusDimOverlay.setOnClickListener {
+            editTexts.forEach { it.clearFocus() }
+            val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(it.windowToken, 0)
+        }
     }
 
     override fun onDestroyView() {
