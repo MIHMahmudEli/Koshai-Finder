@@ -85,8 +85,7 @@ class OtpFragment : Fragment() {
                 if (!isAdded) return@addOnSuccessListener
                 if (adminDoc.exists()) {
                     SharedPrefsHelper.saveUserRole(requireContext(), SharedPrefsHelper.ROLE_ADMIN)
-                    navigateTo(R.id.action_otpFragment_to_roleFragment) // Role fragment logic handles admin redirection or use specific action
-                    // In many cases admin might not use OTP but keeping it robust
+                    navigateTo(R.id.action_otpFragment_to_adminHomeFragment)
                 } else {
                     db.collection("users").document(uid).get()
                         .addOnSuccessListener { userDoc ->

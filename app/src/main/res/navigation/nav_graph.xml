@@ -139,6 +139,7 @@
         <action android:id="@+id/action_otpFragment_to_roleFragment"         app:destination="@id/roleFragment" />
         <action android:id="@+id/action_otpFragment_to_userHomeFragment"     app:destination="@id/userHomeFragment" />
         <action android:id="@+id/action_otpFragment_to_koshaiDashboardFragment"   app:destination="@id/koshaiDashboardFragment" />
+        <action android:id="@+id/action_otpFragment_to_adminHomeFragment"    app:destination="@id/adminHomeFragment" />
     </fragment>
 
     <!-- User Home -->
