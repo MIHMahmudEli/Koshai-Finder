@@ -60,9 +60,8 @@ class EditProfileFragment : Fragment() {
     }
 
     private fun setupUI() {
-        if (userRole == SharedPrefsHelper.ROLE_USER) {
-            binding.tilBio.visibility = View.GONE
-        }
+        // Default to GONE, show only for Koshai
+        binding.tilBio.visibility = if (userRole == SharedPrefsHelper.ROLE_KOSHAI) View.VISIBLE else View.GONE
     }
 
     private fun loadCurrentData() {
@@ -75,21 +74,28 @@ class EditProfileFragment : Fragment() {
                 if (!isAdded) return@addOnSuccessListener
                 binding.progressBar.visibility = View.GONE
                 
-                binding.etName.setText(doc.getString("name"))
-                binding.etPhone.setText(doc.getString("phone"))
-                binding.etDistrict.setText(doc.getString("district"))
-                binding.etUpazila.setText(doc.getString("upazila"))
-                
-                if (userRole == SharedPrefsHelper.ROLE_KOSHAI) {
-                    binding.etBio.setText(doc.getString("bio"))
+                if (doc.exists()) {
+                    binding.etName.setText(doc.getString("name"))
+                    binding.etPhone.setText(doc.getString("phone"))
+                    binding.etDistrict.setText(doc.getString("district"))
+                    binding.etUpazila.setText(doc.getString("upazila"))
+                    
+                    if (userRole == SharedPrefsHelper.ROLE_KOSHAI) {
+                        binding.etBio.setText(doc.getString("bio"))
+                    }
+                    
+                    currentPhotoUrl = doc.getString("photoUrl")
+                    Glide.with(this)
+                        .load(currentPhotoUrl)
+                        .placeholder(R.drawable.ic_profile)
+                        .error(R.drawable.ic_profile)
+                        .into(binding.ivProfile)
                 }
-                
-                currentPhotoUrl = doc.getString("photoUrl")
-                Glide.with(this)
-                    .load(currentPhotoUrl)
-                    .placeholder(R.drawable.ic_profile)
-                    .error(R.drawable.ic_profile)
-                    .into(binding.ivProfile)
+            }
+            .addOnFailureListener {
+                if (!isAdded) return@addOnFailureListener
+                binding.progressBar.visibility = View.GONE
+                showSnackBar("Failed to load profile: ${it.message}", isError = true)
             }
     }
 
@@ -102,9 +108,8 @@ class EditProfileFragment : Fragment() {
             imagePickerLauncher.launch(intent)
         }
 
-        binding.btnSave.setOnClickListener {
-            saveProfile()
-        }
+        binding.btnSave.setOnClickListener { saveProfile() }
+        binding.btnSaveChanges.setOnClickListener { saveProfile() }
     }
 
     private fun saveProfile() {
@@ -119,14 +124,19 @@ class EditProfileFragment : Fragment() {
             return
         }
 
-        binding.btnSave.isEnabled = false
-        binding.progressBar.visibility = View.VISIBLE
+        setLoadingState(true)
 
         if (imageUri != null) {
             uploadImageAndSave(name, phone, district, upazila, bio)
         } else {
             updateFirestore(name, phone, district, upazila, bio, currentPhotoUrl)
         }
+    }
+
+    private fun setLoadingState(isLoading: Boolean) {
+        binding.btnSave.isEnabled = !isLoading
+        binding.btnSaveChanges.isEnabled = !isLoading
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
     private fun uploadImageAndSave(name: String, phone: String, district: String, upazila: String, bio: String?) {
@@ -138,12 +148,14 @@ class EditProfileFragment : Fragment() {
                 .addOnSuccessListener {
                     ref.downloadUrl.addOnSuccessListener { downloadUri ->
                         updateFirestore(name, phone, district, upazila, bio, downloadUri.toString())
+                    }.addOnFailureListener {
+                        showSnackBar("Failed to get download URL: ${it.message}", isError = true)
+                        setLoadingState(false)
                     }
                 }
                 .addOnFailureListener {
                     showSnackBar("Failed to upload image: ${it.message}", isError = true)
-                    binding.btnSave.isEnabled = true
-                    binding.progressBar.visibility = View.GONE
+                    setLoadingState(false)
                 }
         }
     }
@@ -170,10 +182,10 @@ class EditProfileFragment : Fragment() {
             .addOnFailureListener {
                 if (!isAdded) return@addOnFailureListener
                 showSnackBar("Failed to update profile: ${it.message}", isError = true)
-                binding.btnSave.isEnabled = true
-                binding.progressBar.visibility = View.GONE
+                setLoadingState(false)
             }
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
