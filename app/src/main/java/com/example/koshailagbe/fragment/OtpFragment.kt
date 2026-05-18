@@ -23,7 +23,6 @@ class OtpFragment : Fragment() {
     private lateinit var db: FirebaseFirestore
 
     companion object {
-        // Verification ID passed from phone login flow
         var verificationId: String = ""
     }
 
@@ -60,7 +59,6 @@ class OtpFragment : Fragment() {
 
         binding.tvResend.setOnClickListener {
             showSnackBar(getString(R.string.msg_resending_otp))
-            // Logic for resending OTP would go here if implemented
         }
     }
 
@@ -77,26 +75,44 @@ class OtpFragment : Fragment() {
             .addOnFailureListener {
                 if (!isAdded) return@addOnFailureListener
                 setLoadingState(false)
-                showSnackBar(getString(R.string.error_update_failed, it.message), isError = true)
+                showSnackBar(it.message ?: getString(R.string.error_update_failed), isError = true)
             }
     }
 
     private fun routeUserByRole(uid: String) {
-        db.collection("users").document(uid).get()
-            .addOnSuccessListener { userDoc ->
+        db.collection("admin").document(uid).get()
+            .addOnSuccessListener { adminDoc ->
                 if (!isAdded) return@addOnSuccessListener
-                if (userDoc.exists()) {
-                    SharedPrefsHelper.saveUserRole(requireContext(), SharedPrefsHelper.ROLE_USER)
-                    navigateTo(R.id.action_otpFragment_to_userHomeFragment)
+                if (adminDoc.exists()) {
+                    SharedPrefsHelper.saveUserRole(requireContext(), SharedPrefsHelper.ROLE_ADMIN)
+                    navigateTo(R.id.action_otpFragment_to_roleFragment) // Role fragment logic handles admin redirection or use specific action
+                    // In many cases admin might not use OTP but keeping it robust
                 } else {
-                    db.collection("koshais").document(uid).get()
-                        .addOnSuccessListener { koshaiDoc ->
+                    db.collection("users").document(uid).get()
+                        .addOnSuccessListener { userDoc ->
                             if (!isAdded) return@addOnSuccessListener
-                            if (koshaiDoc.exists()) {
-                                SharedPrefsHelper.saveUserRole(requireContext(), SharedPrefsHelper.ROLE_KOSHAI)
-                                navigateTo(R.id.action_otpFragment_to_koshaiDashboardFragment)
+                            if (userDoc.exists()) {
+                                if (userDoc.getBoolean("isBanned") == true) {
+                                    handleBanned()
+                                    return@addOnSuccessListener
+                                }
+                                SharedPrefsHelper.saveUserRole(requireContext(), SharedPrefsHelper.ROLE_USER)
+                                navigateTo(R.id.action_otpFragment_to_userHomeFragment)
                             } else {
-                                navigateTo(R.id.action_otpFragment_to_roleFragment)
+                                db.collection("koshais").document(uid).get()
+                                    .addOnSuccessListener { koshaiDoc ->
+                                        if (!isAdded) return@addOnSuccessListener
+                                        if (koshaiDoc.exists()) {
+                                            if (koshaiDoc.getBoolean("isBanned") == true) {
+                                                handleBanned()
+                                                return@addOnSuccessListener
+                                            }
+                                            SharedPrefsHelper.saveUserRole(requireContext(), SharedPrefsHelper.ROLE_KOSHAI)
+                                            navigateTo(R.id.action_otpFragment_to_koshaiDashboardFragment)
+                                        } else {
+                                            navigateTo(R.id.action_otpFragment_to_roleFragment)
+                                        }
+                                    }
                             }
                         }
                 }
@@ -104,8 +120,14 @@ class OtpFragment : Fragment() {
             .addOnFailureListener {
                 if (!isAdded) return@addOnFailureListener
                 setLoadingState(false)
-                showSnackBar(getString(R.string.error_load_failed, it.message), isError = true)
+                showSnackBar(it.message ?: getString(R.string.error_load_failed), isError = true)
             }
+    }
+
+    private fun handleBanned() {
+        setLoadingState(false)
+        showSnackBar(getString(R.string.error_account_banned), isError = true)
+        auth.signOut()
     }
 
     private fun navigateTo(actionId: Int) {
@@ -121,7 +143,6 @@ class OtpFragment : Fragment() {
     private fun setLoadingState(isLoading: Boolean) {
         binding.btnVerifyContinue.isEnabled = !isLoading
         binding.btnVerifyContinue.text = if (isLoading) getString(R.string.msg_verifying) else getString(R.string.btn_verify_continue)
-        // Add more visual feedback if needed
     }
 
     override fun onDestroyView() {
