@@ -378,10 +378,16 @@
     <string name="error_session_expired">Session expired. Please try again.</string>
     <string name="msg_verifying">Verifying...</string>
     <string name="msg_resending_otp">Resending code...</string>
+    <string name="koshai_partner_title">Koshai Partner</string>
+    <string name="koshai_partner_subtitle">Find your perfect Koshai easily</string>
+    <string name="service_rates_label">Service Rates</string>
+    <string name="account_security_label">Account Security</string>
+    <string name="already_have_account_login">Already have an account? Login</string>
     <string name="msg_submitting">Submitting...</string>
     <string name="msg_verification_email_sent">Verification email sent! Please check your inbox 📧</string>
     <string name="msg_verification_email_resent">Verification email resent 📧</string>
     <string name="msg_already_registered_login">This email is already registered. Try logging in.</string>
     <string name="msg_account_exists_login">Account already exists. Please login.</string>
     <string name="btn_submit_application">Submit Application</string>
+    <string name="rate_sheep_label">Rate per Sheep</string>
 </resources>
