@@ -3,59 +3,82 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
-    android:padding="32dp">
+    android:background="#F4F6F5"> <TextView
+    android:id="@+id/tvBrandTitle"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="80dp"
+    android:text="Koshai Finder"
+    android:textColor="#856404"
+    android:textSize="28sp"
+    android:textStyle="bold"
+    android:fontFamily="serif"
+    android:letterSpacing="0.02"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/ivOffline"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:src="@android:drawable/ic_menu_close_clear_cancel"
-        app:layout_constraintBottom_toTopOf="@+id/tvOfflineTitle"
+    <FrameLayout
+        android:id="@+id/errorFrame"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:layout_marginTop="48dp"
+        android:background="@drawable/bg_error_glass_frame"
+        android:elevation="4dp"
+        android:padding="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed"
-        app:tint="#D32F2F" />
+        app:layout_constraintTop_toBottomOf="@id/tvBrandTitle">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_error_cross"
+            android:scaleType="centerInside"
+            android:alpha="0.85" />
+    </FrameLayout>
 
     <TextView
-        android:id="@+id/tvOfflineTitle"
+        android:id="@+id/tvErrorTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="36dp"
         android:text="No Connection"
-        android:textColor="#212121"
-        android:textSize="24sp"
+        android:textColor="#0F4C3A" android:textSize="26sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/tvOfflineDesc"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivOffline" />
+        app:layout_constraintTop_toBottomOf="@id/errorFrame" />
 
     <TextView
-        android:id="@+id/tvOfflineDesc"
-        android:layout_width="match_parent"
+        android:id="@+id/tvErrorMessage"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="48dp"
         android:layout_marginTop="12dp"
         android:gravity="center"
         android:text="Please check your internet connection and try again."
-        android:textColor="#757575"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/btnRetry"
+        android:textColor="#4A5568"
+        android:textSize="15sp"
+        android:lineSpacingMultiplier="1.2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvOfflineTitle" />
+        app:layout_constraintTop_toBottomOf="@id/tvErrorTitle" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnRetry"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:layout_marginTop="32dp"
+        android:layout_width="220dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/bg_btn_retry_luxury"
         android:text="Retry"
-        android:textAllCaps="false"
-        android:textSize="16sp"
-        app:cornerRadius="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvOfflineDesc" />
+        android:textColor="#D4AF37" android:textSize="16sp"
+        android:textStyle="bold"
+        android:letterSpacing="0.05"
+        app:backgroundTint="@android:color/transparent"
+        app:elevation="6dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvErrorMessage" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

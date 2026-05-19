@@ -40,7 +40,7 @@ class AvailabilityFragment : Fragment() {
 
     private fun setupListeners() {
         binding.sliderSurge.addOnChangeListener { _, value, _ ->
-            binding.tvSurgeValue.text = String.format("%.1fx Base Rate", value)
+            binding.tvSurgeValue.text = getString(R.string.surge_rate_format, value)
         }
 
         binding.btnSaveAvailability.setOnClickListener {
@@ -54,7 +54,7 @@ class AvailabilityFragment : Fragment() {
             .addOnSuccessListener { doc ->
                 if (!isAdded) return@addOnSuccessListener
                 val status = doc.getString("status") ?: "offline"
-                val eidMode = doc.getBoolean("eidMode") ?: false
+                val eidMode = doc.getBoolean("isEidMode") ?: false
                 val surgeRate = (doc.get("surgeRate") as? Number)?.toDouble() ?: 1.5
 
                 when (status) {
@@ -65,7 +65,7 @@ class AvailabilityFragment : Fragment() {
 
                 binding.switchEidMode.isChecked = eidMode
                 binding.sliderSurge.value = surgeRate.toFloat()
-                binding.tvSurgeValue.text = String.format("%.1fx Base Rate", surgeRate)
+                binding.tvSurgeValue.text = getString(R.string.surge_rate_format, surgeRate)
             }
     }
 
@@ -83,19 +83,19 @@ class AvailabilityFragment : Fragment() {
 
         val updates = hashMapOf<String, Any>(
             "status" to status,
-            "eidMode" to eidMode,
+            "isEidMode" to eidMode,
             "surgeRate" to surgeRate
         )
 
         db.collection("koshais").document(uid).update(updates)
             .addOnSuccessListener {
                 if (!isAdded) return@addOnSuccessListener
-                showSnackBar("Availability updated successfully!")
+                showSnackBar(getString(R.string.msg_availability_updated))
                 findNavController().popBackStack()
             }
             .addOnFailureListener {
                 if (!isAdded) return@addOnFailureListener
-                showSnackBar("Failed to update: ${it.message}", isError = true)
+                showSnackBar(getString(R.string.msg_update_failed, it.message), isError = true)
             }
     }
 

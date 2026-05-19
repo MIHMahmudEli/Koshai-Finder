@@ -3,76 +3,72 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_login_gradient">
+    android:background="@drawable/bg_admin_premium_gradient">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="100dp">
-
-            <!-- Header -->
-            <View
-                android:id="@+id/headerBg"
-                android:layout_width="match_parent"
-                android:layout_height="220dp"
-                android:background="@drawable/bg_login_gradient"
-                app:layout_constraintTop_toTopOf="parent" />
+            android:paddingHorizontal="20dp"
+            android:paddingBottom="48dp">
 
             <TextView
                 android:id="@+id/tvWelcome"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="64dp"
-                android:text="Admin\nDashboard"
+                android:layout_marginTop="54dp"
+                android:text="@string/admin_dashboard_title"
                 android:textColor="@android:color/white"
-                android:textSize="32sp"
+                android:textSize="34sp"
                 android:textStyle="bold"
+                android:letterSpacing="-0.02"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageButton
                 android:id="@+id/btnLogout"
-                android:layout_width="44dp"
-                android:layout_height="44dp"
-                android:layout_marginEnd="24dp"
-                android:background="@drawable/bg_glass_card"
-                android:padding="10dp"
+                android:layout_width="54dp"
+                android:layout_height="54dp"
+                android:background="@drawable/bg_power_btn_gold"
+                android:padding="14dp"
+                android:elevation="6dp"
                 android:scaleType="centerInside"
                 android:src="@android:drawable/ic_lock_power_off"
                 app:layout_constraintBottom_toBottomOf="@id/tvWelcome"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/tvWelcome"
-                app:tint="@android:color/white" />
+                android:contentDescription="@string/logout_button"
+                app:tint="#0A192F" />
 
-            <!-- Stats Card -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardVerification"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="24dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="28dp"
                 app:cardCornerRadius="24dp"
-                app:cardElevation="4dp"
+                app:cardElevation="0dp"
                 app:strokeWidth="0dp"
+                app:cardBackgroundColor="@android:color/transparent"
                 app:layout_constraintTop_toBottomOf="@id/tvWelcome">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/bg_glass_card_premium"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:padding="24dp">
+                    android:padding="20dp">
 
-                    <View
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:background="@android:drawable/checkbox_on_background"
-                        android:backgroundTint="#E3F2FD" />
+                    <ImageView
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:src="@android:drawable/ic_menu_agenda"
+                        app:tint="#64B5F6"
+                        android:contentDescription="@string/verification_queue_title" />
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -84,257 +80,272 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Verification Queue"
-                            android:textColor="#212121"
-                            android:textSize="18sp"
+                            android:text="@string/verification_queue_title"
+                            android:textColor="@android:color/white"
+                            android:textSize="19sp"
                             android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/tvPendingCount"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:text="0 pending registrations"
-                            android:textColor="#757575"
+                            android:layout_marginTop="2dp"
+                            android:text="@string/zero_placeholder"
+                            android:textColor="#B0BEC5"
                             android:textSize="14sp" />
                     </LinearLayout>
 
                     <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
                         android:src="@android:drawable/ic_media_play"
-                        app:tint="#1565C0" />
+                        app:tint="#1E88E5"
+                        android:contentDescription="@null" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Analytics Grid -->
-            <GridLayout
-                android:id="@+id/statsGrid"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="16dp"
-                android:columnCount="2"
-                app:layout_constraintTop_toBottomOf="@id/cardVerification">
-
-                <!-- Total Users -->
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="8dp"
-                    app:cardCornerRadius="20dp"
-                    app:cardElevation="2dp"
-                    app:strokeWidth="0dp">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="20dp">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Total Users"
-                            android:textColor="#757575"
-                            android:textSize="12sp" />
-                        <TextView
-                            android:id="@+id/tvTotalUsers"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:text="0"
-                            android:textColor="#212121"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
-
-                <!-- Verified Koshais -->
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="8dp"
-                    app:cardCornerRadius="20dp"
-                    app:cardElevation="2dp"
-                    app:strokeWidth="0dp">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="20dp">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Verified Koshais"
-                            android:textColor="#757575"
-                            android:textSize="12sp" />
-                        <TextView
-                            android:id="@+id/tvTotalVerified"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:text="0"
-                            android:textColor="#2E7D32"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
-
-                <!-- Completed Jobs -->
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="8dp"
-                    app:cardCornerRadius="20dp"
-                    app:cardElevation="2dp"
-                    app:strokeWidth="0dp">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="20dp">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Completed Jobs"
-                            android:textColor="#757575"
-                            android:textSize="12sp" />
-                        <TextView
-                            android:id="@+id/tvCompletedJobs"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:text="0"
-                            android:textColor="#1565C0"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
-
-                <!-- System Earnings -->
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="8dp"
-                    app:cardCornerRadius="20dp"
-                    app:cardElevation="2dp"
-                    app:strokeWidth="0dp">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="20dp">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Total Earnings"
-                            android:textColor="#757575"
-                            android:textSize="12sp" />
-                        <TextView
-                            android:id="@+id/tvTotalEarnings"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:text="৳0"
-                            android:textColor="#F9A825"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
-
-                <!-- Pending Bookings -->
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="8dp"
-                    app:cardCornerRadius="20dp"
-                    app:cardElevation="2dp"
-                    app:strokeWidth="0dp">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="20dp">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Pending Requests"
-                            android:textColor="#757575"
-                            android:textSize="12sp" />
-                        <TextView
-                            android:id="@+id/tvPendingBookings"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:text="0"
-                            android:textColor="#C62828"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
-
-                <!-- Active Bookings -->
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="8dp"
-                    app:cardCornerRadius="20dp"
-                    app:cardElevation="2dp"
-                    app:strokeWidth="0dp">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="20dp">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Active Services"
-                            android:textColor="#757575"
-                            android:textSize="12sp" />
-                        <TextView
-                            android:id="@+id/tvActiveBookings"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:text="0"
-                            android:textColor="#6A1B9A"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
-
-            </GridLayout>
-
-            <!-- Manage Accounts Card -->
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cardManagement"
+                android:id="@+id/cardAnalyticsMatrix"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="24dp"
                 android:layout_marginTop="16dp"
                 app:cardCornerRadius="24dp"
-                app:cardElevation="4dp"
+                app:cardElevation="0dp"
                 app:strokeWidth="0dp"
-                app:layout_constraintTop_toBottomOf="@id/statsGrid">
+                app:cardBackgroundColor="@android:color/transparent"
+                app:layout_constraintTop_toBottomOf="@id/cardVerification">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/bg_glass_card_premium"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:baselineAligned="false"
+                        android:weightSum="2">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:paddingEnd="10dp"
+                            android:paddingStart="0dp">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/total_users_label"
+                                android:textColor="#B0BEC5"
+                                android:textSize="13sp" />
+                            <View android:layout_width="match_parent" android:layout_height="3dp" android:background="#1E88E5" android:layout_marginVertical="4dp"/>
+                            <TextView
+                                android:id="@+id/tvTotalUsers"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/zero_users_placeholder"
+                                android:textColor="@android:color/white"
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="0dp">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/verified_koshais_label"
+                                android:textColor="#B0BEC5"
+                                android:textSize="13sp" />
+                            <View android:layout_width="match_parent" android:layout_height="3dp" android:background="#43A047" android:layout_marginVertical="4dp"/>
+                            <TextView
+                                android:id="@+id/tvTotalVerified"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/zero_verified_placeholder"
+                                android:textColor="@android:color/white"
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:orientation="horizontal"
+                        android:baselineAligned="false"
+                        android:weightSum="2">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:paddingEnd="10dp"
+                            android:paddingStart="0dp">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/completed_jobs_label"
+                                android:textColor="#B0BEC5"
+                                android:textSize="13sp" />
+                            <View android:layout_width="match_parent" android:layout_height="3dp" android:background="#F57C00" android:layout_marginVertical="4dp"/>
+                            <TextView
+                                android:id="@+id/tvCompletedJobs"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/zero_placeholder"
+                                android:textColor="@android:color/white"
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="0dp">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/total_earnings_label"
+                                android:textColor="#B0BEC5"
+                                android:textSize="13sp" />
+                            <View android:layout_width="match_parent" android:layout_height="3dp" android:background="#FFD54F" android:layout_marginVertical="4dp"/>
+                            <TextView
+                                android:id="@+id/tvTotalEarnings"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/zero_bdt_placeholder"
+                                android:textColor="#FFD54F"
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardBookingActivity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="0dp"
+                app:strokeWidth="0dp"
+                app:cardBackgroundColor="@android:color/transparent"
+                app:layout_constraintTop_toBottomOf="@id/cardAnalyticsMatrix">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_glass_card_premium"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/booking_activity_title"
+                        android:textColor="@android:color/white"
+                        android:textSize="19sp"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:orientation="horizontal"
+                        android:baselineAligned="false"
+                        android:weightSum="2">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:paddingEnd="10dp"
+                            android:paddingStart="0dp">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/pending_bookings_label"
+                                android:textColor="#B0BEC5"
+                                android:textSize="13sp" />
+                            <TextView
+                                android:id="@+id/tvPendingBookings"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/zero_placeholder"
+                                android:textColor="@android:color/white"
+                                android:textSize="22sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="0dp">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/active_bookings_label"
+                                android:textColor="#B0BEC5"
+                                android:textSize="13sp" />
+                            <TextView
+                                android:id="@+id/tvActiveBookings"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/zero_placeholder"
+                                android:textColor="@android:color/white"
+                                android:textSize="22sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardManagement"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="0dp"
+                app:strokeWidth="0dp"
+                app:cardBackgroundColor="@android:color/transparent"
+                app:layout_constraintTop_toBottomOf="@id/cardBookingActivity">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_glass_card_premium"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:padding="24dp">
+                    android:padding="20dp">
 
-                    <View
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:background="@android:drawable/ic_menu_myplaces"
-                        android:backgroundTint="#E8F5E9" />
+                    <ImageView
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:src="@android:drawable/ic_menu_myplaces"
+                        app:tint="#A5D6A7"
+                        android:contentDescription="@string/account_management_title" />
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -346,53 +357,54 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Account Management"
-                            android:textColor="#212121"
-                            android:textSize="18sp"
+                            android:text="@string/account_management_title"
+                            android:textColor="@android:color/white"
+                            android:textSize="19sp"
                             android:textStyle="bold" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:text="Ban users or Koshais"
-                            android:textColor="#757575"
+                            android:layout_marginTop="2dp"
+                            android:text="@string/account_management_desc"
+                            android:textColor="#B0BEC5"
                             android:textSize="14sp" />
                     </LinearLayout>
 
                     <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
                         android:src="@android:drawable/ic_media_play"
-                        app:tint="#2E7D32" />
+                        app:tint="#4CAF50"
+                        android:contentDescription="@null" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Disputes & Reviews Card -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardModeration"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="24dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginBottom="32dp"
                 app:cardCornerRadius="24dp"
-                app:cardElevation="4dp"
+                app:cardElevation="0dp"
                 app:strokeWidth="0dp"
+                app:cardBackgroundColor="@android:color/transparent"
                 app:layout_constraintTop_toBottomOf="@id/cardManagement">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/bg_glass_card_premium"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:padding="24dp">
+                    android:padding="20dp">
 
-                    <View
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:background="@android:drawable/ic_menu_agenda"
-                        android:backgroundTint="#FFF3E0" />
+                    <ImageView
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:src="@android:drawable/ic_menu_gallery"
+                        app:tint="#FFCC80"
+                        android:contentDescription="@string/disputes_reviews_title" />
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -404,53 +416,54 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Disputes &amp; Reviews"
-                            android:textColor="#212121"
-                            android:textSize="18sp"
+                            android:text="@string/disputes_reviews_title"
+                            android:textColor="@android:color/white"
+                            android:textSize="19sp"
                             android:textStyle="bold" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:text="Moderate content and reports"
-                            android:textColor="#757575"
+                            android:layout_marginTop="2dp"
+                            android:text="@string/disputes_reviews_desc"
+                            android:textColor="#B0BEC5"
                             android:textSize="14sp" />
                     </LinearLayout>
 
                     <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
                         android:src="@android:drawable/ic_media_play"
-                        app:tint="#F57C00" />
+                        app:tint="#FF9800"
+                        android:contentDescription="@null" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Announcements Card -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardAnnouncements"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="24dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginBottom="40dp"
                 app:cardCornerRadius="24dp"
-                app:cardElevation="4dp"
+                app:cardElevation="0dp"
                 app:strokeWidth="0dp"
+                app:cardBackgroundColor="@android:color/transparent"
                 app:layout_constraintTop_toBottomOf="@id/cardModeration">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/bg_glass_card_premium"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:padding="24dp">
+                    android:padding="20dp">
 
-                    <View
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:background="@android:drawable/ic_dialog_email"
-                        android:backgroundTint="#E3F2FD" />
+                    <ImageView
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:src="@android:drawable/ic_dialog_email"
+                        app:tint="#FFAB91"
+                        android:contentDescription="@string/system_announcements_title" />
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -462,53 +475,54 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="System Announcements"
-                            android:textColor="#212121"
-                            android:textSize="18sp"
+                            android:text="@string/system_announcements_title"
+                            android:textColor="@android:color/white"
+                            android:textSize="19sp"
                             android:textStyle="bold" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:text="Send push notifications"
-                            android:textColor="#757575"
+                            android:layout_marginTop="2dp"
+                            android:text="@string/system_announcements_desc"
+                            android:textColor="#B0BEC5"
                             android:textSize="14sp" />
                     </LinearLayout>
 
                     <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
                         android:src="@android:drawable/ic_media_play"
-                        app:tint="#1565C0" />
+                        app:tint="#FF3D00"
+                        android:contentDescription="@null" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Leaderboard Card -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardLeaderboard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="24dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginBottom="40dp"
                 app:cardCornerRadius="24dp"
-                app:cardElevation="4dp"
+                app:cardElevation="0dp"
                 app:strokeWidth="0dp"
+                app:cardBackgroundColor="@android:color/transparent"
                 app:layout_constraintTop_toBottomOf="@id/cardAnnouncements">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/bg_glass_card_premium"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:padding="24dp">
+                    android:padding="20dp">
 
-                    <View
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:background="@android:drawable/btn_star_big_on"
-                        android:backgroundTint="#FFF9C4" />
+                    <ImageView
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:src="@android:drawable/btn_star_big_on"
+                        app:tint="#FFE082"
+                        android:contentDescription="@string/koshai_leaderboard_title" />
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -520,29 +534,29 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Koshai Leaderboard"
-                            android:textColor="#212121"
-                            android:textSize="18sp"
+                            android:text="@string/koshai_leaderboard_title"
+                            android:textColor="@android:color/white"
+                            android:textSize="19sp"
                             android:textStyle="bold" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:text="Top performers &amp; rankings"
-                            android:textColor="#757575"
+                            android:layout_marginTop="2dp"
+                            android:text="@string/koshai_leaderboard_desc"
+                            android:textColor="#B0BEC5"
                             android:textSize="14sp" />
                     </LinearLayout>
 
                     <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
                         android:src="@android:drawable/ic_media_play"
-                        app:tint="#FBC02D" />
+                        app:tint="#FFC107"
+                        android:contentDescription="@null" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

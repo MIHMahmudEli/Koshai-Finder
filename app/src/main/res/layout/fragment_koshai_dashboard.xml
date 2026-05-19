@@ -8,29 +8,28 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#F8F9FA">
+        android:background="#F4F7F6">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="48dp">
 
-            <!-- Header Section -->
             <View
                 android:id="@+id/headerBg"
                 android:layout_width="match_parent"
-                android:layout_height="280dp"
-                android:background="@drawable/bg_login_gradient"
+                android:layout_height="290dp"
+                android:background="@drawable/bg_koshai_premium_gradient"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/ivProfile"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="86dp"
+                android:layout_height="86dp"
                 android:layout_marginStart="24dp"
-                android:layout_marginTop="64dp"
-                android:background="@android:color/white"
-                android:padding="2dp"
+                android:layout_marginTop="60dp"
+                android:background="#4DFFFFFF"
+                android:padding="3dp"
                 android:src="@drawable/ic_profile"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -40,12 +39,14 @@
                 android:id="@+id/tvKoshaiName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="18dp"
                 android:layout_marginEnd="16dp"
-                android:text="Welcome Back!"
+                android:text="Welcome,\nDipo Koshai"
                 android:textColor="@android:color/white"
-                android:textSize="28sp"
+                android:textSize="26sp"
                 android:textStyle="bold"
+                android:letterSpacing="-0.02"
+                android:lineSpacingExtra="2dp"
                 app:layout_constraintEnd_toStartOf="@id/actionButtons"
                 app:layout_constraintStart_toEndOf="@id/ivProfile"
                 app:layout_constraintTop_toTopOf="@id/ivProfile" />
@@ -54,9 +55,9 @@
                 android:id="@+id/tvKoshaiStatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="Loading Status..."
-                android:textColor="#E0E0E0"
+                android:layout_marginTop="6dp"
+                android:text="Currently Offline"
+                android:textColor="#B3FFFFFF"
                 android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="@id/tvKoshaiName"
                 app:layout_constraintTop_toBottomOf="@id/tvKoshaiName" />
@@ -65,7 +66,7 @@
                 android:id="@+id/actionButtons"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="20dp"
+                android:layout_marginEnd="24dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 app:layout_constraintBottom_toBottomOf="@id/ivProfile"
@@ -74,126 +75,123 @@
 
                 <ImageButton
                     android:id="@+id/ibChatList"
-                    android:layout_width="44dp"
-                    android:layout_height="44dp"
-                    android:layout_marginEnd="8dp"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginEnd="10dp"
                     android:background="@drawable/bg_glass_card"
-                    android:padding="10dp"
+                    android:padding="12dp"
                     android:scaleType="centerInside"
                     android:src="@android:drawable/stat_notify_chat"
-                    app:tint="#212121" />
+                    app:tint="#FFFFFF" />
 
                 <ImageButton
                     android:id="@+id/btnLogout"
-                    android:layout_width="44dp"
-                    android:layout_height="44dp"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
                     android:background="@drawable/bg_glass_card"
-                    android:padding="10dp"
+                    android:padding="12dp"
                     android:scaleType="centerInside"
                     android:src="@android:drawable/ic_lock_power_off"
-                    app:tint="#212121" />
+                    app:tint="#FF5252" />
             </LinearLayout>
 
-            <!-- Status Toggle Card -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/statusCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="24dp"
-                android:layout_marginTop="-50dp"
-                app:cardBackgroundColor="@android:color/transparent"
-                app:cardCornerRadius="24dp"
-                app:cardElevation="0dp"
+                android:layout_marginTop="-40dp"
+                app:cardCornerRadius="28dp"
+                app:cardElevation="8dp"
+                app:cardBackgroundColor="#FFFFFF"
                 app:layout_constraintTop_toBottomOf="@id/headerBg"
                 app:strokeWidth="0dp">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/bg_glass_card"
-                    android:padding="24dp">
+                    android:orientation="vertical"
+                    android:padding="22dp">
 
                     <TextView
                         android:id="@+id/tvStatusLabel"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Work Status"
-                        android:textColor="#212121"
+                        android:textColor="#0F2922"
                         android:textSize="18sp"
                         android:textStyle="bold"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        android:letterSpacing="-0.01" />
 
                     <com.google.android.material.button.MaterialButtonToggleGroup
                         android:id="@+id/statusToggleGroup"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="16dp"
+                        android:background="#F0F4F2"
+                        android:padding="4dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tvStatusLabel"
                         app:selectionRequired="true"
                         app:singleSelection="true">
 
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/btnOffline"
-                            style="@style/Widget.Material3.Button.OutlinedButton"
+                            style="@style/Widget.Material3.Button.TextButton"
                             android:layout_width="0dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="48dp"
                             android:layout_weight="1"
                             android:text="Offline"
-                            android:textColor="#212121"
-                            app:strokeColor="#212121"
-                            android:textSize="12sp"
-                            app:cornerRadius="12dp" />
+                            android:textColor="#616161"
+                            android:textSize="13sp"
+                            android:textStyle="bold"
+                            app:backgroundTint="#E1D5E7"
+                            app:cornerRadius="16dp" />
 
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/btnBusy"
-                            style="@style/Widget.Material3.Button.OutlinedButton"
+                            style="@style/Widget.Material3.Button.TextButton"
                             android:layout_width="0dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="48dp"
                             android:layout_weight="1"
                             android:text="Busy"
-                            android:textColor="#212121"
-                            app:strokeColor="#212121"
-                            android:textSize="12sp"
-                            app:cornerRadius="12dp" />
+                            android:textColor="#616161"
+                            android:textSize="13sp"
+                            app:cornerRadius="16dp" />
 
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/btnOnline"
-                            style="@style/Widget.Material3.Button.OutlinedButton"
+                            style="@style/Widget.Material3.Button.TextButton"
                             android:layout_width="0dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="48dp"
                             android:layout_weight="1"
                             android:text="Online"
-                            android:textColor="#212121"
-                            app:strokeColor="#212121"
-                            android:textSize="12sp"
-                            app:cornerRadius="12dp" />
+                            android:textColor="#616161"
+                            android:textSize="13sp"
+                            app:cornerRadius="16dp" />
 
                     </com.google.android.material.button.MaterialButtonToggleGroup>
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Stats Grid -->
             <GridLayout
                 android:id="@+id/statsGrid"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="12dp"
                 android:columnCount="2"
                 app:layout_constraintTop_toBottomOf="@id/statusCard">
 
-                <!-- Total Jobs -->
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
                     android:layout_margin="8dp"
-                    app:cardCornerRadius="24dp"
-                    app:cardElevation="2dp"
+                    app:cardCornerRadius="28dp"
+                    app:cardElevation="3dp"
+                    app:cardBackgroundColor="#EAEAEA"
                     app:strokeWidth="0dp">
 
                     <LinearLayout
@@ -201,35 +199,36 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:orientation="vertical"
-                        android:padding="20dp">
+                        android:padding="24dp">
 
                         <TextView
                             android:id="@+id/tvTotalJobs"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="0"
-                            android:textColor="#1565C0"
-                            android:textSize="26sp"
+                            android:textColor="#0B409C"
+                            android:textSize="32sp"
                             android:textStyle="bold" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
+                            android:layout_marginTop="6dp"
                             android:text="Active Jobs"
-                            android:textColor="#616161"
-                            android:textSize="13sp" />
+                            android:textColor="#424242"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
-                <!-- Rating -->
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
                     android:layout_margin="8dp"
-                    app:cardCornerRadius="24dp"
-                    app:cardElevation="2dp"
+                    app:cardCornerRadius="28dp"
+                    app:cardElevation="4dp"
+                    app:cardBackgroundColor="#134E43"
                     app:strokeWidth="0dp">
 
                     <LinearLayout
@@ -237,51 +236,52 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:orientation="vertical"
-                        android:padding="20dp">
+                        android:padding="24dp">
 
                         <TextView
                             android:id="@+id/tvRating"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="0.0"
-                            android:textColor="#FFB300"
-                            android:textSize="26sp"
+                            android:textColor="#FFCA28"
+                            android:textSize="32sp"
                             android:textStyle="bold" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
+                            android:layout_marginTop="6dp"
                             android:text="Rating"
-                            android:textColor="#616161"
-                            android:textSize="13sp" />
+                            android:textColor="#E0F2F1"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
             </GridLayout>
 
-            <!-- Quick Actions Label -->
             <TextView
                 android:id="@+id/lblQuickActions"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
-                android:layout_marginTop="28dp"
+                android:layout_marginTop="24dp"
                 android:text="Quick Actions"
-                android:textColor="#212121"
-                android:textSize="20sp"
+                android:textColor="#0F2922"
+                android:textSize="22sp"
                 android:textStyle="bold"
+                android:letterSpacing="-0.01"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/statsGrid" />
 
-            <!-- Main Actions -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/requestsCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="24dp"
                 android:layout_marginTop="16dp"
-                app:cardCornerRadius="24dp"
+                app:cardCornerRadius="28dp"
                 app:cardElevation="2dp"
+                app:cardBackgroundColor="#EDF5FA"
                 app:layout_constraintTop_toBottomOf="@id/lblQuickActions"
                 app:strokeWidth="0dp">
 
@@ -290,25 +290,27 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:padding="20dp">
+                    android:padding="22dp">
 
-                    <View
-                        android:layout_width="52dp"
-                        android:layout_height="52dp"
-                        android:background="@drawable/bg_status_badge"
-                        android:backgroundTint="#E3F2FD" />
-
-                    <ImageView
-                        android:layout_width="26dp"
-                        android:layout_height="26dp"
-                        android:layout_marginStart="-39dp"
-                        android:src="@android:drawable/ic_menu_agenda"
-                        app:tint="#1E88E5" />
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="54dp"
+                        android:layout_height="54dp"
+                        app:cardCornerRadius="18dp"
+                        app:cardElevation="0dp"
+                        app:cardBackgroundColor="#FFFFFF"
+                        app:strokeWidth="0dp">
+                        <ImageView
+                            android:layout_width="26dp"
+                            android:layout_height="26dp"
+                            android:layout_gravity="center"
+                            android:src="@android:drawable/ic_menu_agenda"
+                            app:tint="#4A90E2" />
+                    </com.google.android.material.card.MaterialCardView>
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="32dp"
+                        android:layout_marginStart="20dp"
                         android:layout_weight="1"
                         android:orientation="vertical">
 
@@ -316,24 +318,25 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Incoming Requests"
-                            android:textColor="#212121"
-                            android:textSize="17sp"
+                            android:textColor="#1F2937"
+                            android:textSize="18sp"
                             android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/tvRequestCount"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
                             android:text="0 pending requests"
-                            android:textColor="#757575"
-                            android:textSize="13sp" />
+                            android:textColor="#6B7280"
+                            android:textSize="14sp" />
                     </LinearLayout>
 
                     <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:alpha="0.3"
-                        android:src="@android:drawable/ic_media_play" />
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:src="@android:drawable/ic_media_play"
+                        app:tint="#4A90E2" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -342,9 +345,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="24dp"
-                android:layout_marginTop="12dp"
-                app:cardCornerRadius="24dp"
+                android:layout_marginTop="14dp"
+                app:cardCornerRadius="28dp"
                 app:cardElevation="2dp"
+                app:cardBackgroundColor="#FFF8F2"
                 app:layout_constraintTop_toBottomOf="@id/requestsCard"
                 app:strokeWidth="0dp">
 
@@ -353,25 +357,27 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:padding="20dp">
+                    android:padding="22dp">
 
-                    <View
-                        android:layout_width="52dp"
-                        android:layout_height="52dp"
-                        android:background="@drawable/bg_status_badge"
-                        android:backgroundTint="#FFF3E0" />
-
-                    <ImageView
-                        android:layout_width="26dp"
-                        android:layout_height="26dp"
-                        android:layout_marginStart="-39dp"
-                        android:src="@android:drawable/ic_menu_day"
-                        app:tint="#FB8C00" />
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="54dp"
+                        android:layout_height="54dp"
+                        app:cardCornerRadius="18dp"
+                        app:cardElevation="0dp"
+                        app:cardBackgroundColor="#FFFFFF"
+                        app:strokeWidth="0dp">
+                        <ImageView
+                            android:layout_width="26dp"
+                            android:layout_height="26dp"
+                            android:layout_gravity="center"
+                            android:src="@android:drawable/ic_menu_day"
+                            app:tint="#F5A623" />
+                    </com.google.android.material.card.MaterialCardView>
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="32dp"
+                        android:layout_marginStart="20dp"
                         android:layout_weight="1"
                         android:orientation="vertical">
 
@@ -379,24 +385,25 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Today's Schedule"
-                            android:textColor="#212121"
-                            android:textSize="17sp"
+                            android:textColor="#1F2937"
+                            android:textSize="18sp"
                             android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/tvScheduleInfo"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="No bookings for today"
-                            android:textColor="#757575"
-                            android:textSize="13sp" />
+                            android:layout_marginTop="2dp"
+                            android:text="No active jobs right now"
+                            android:textColor="#6B7280"
+                            android:textSize="14sp" />
                     </LinearLayout>
 
                     <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:alpha="0.3"
-                        android:src="@android:drawable/ic_media_play" />
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:src="@android:drawable/ic_media_play"
+                        app:tint="#F5A623" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -405,9 +412,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="24dp"
-                android:layout_marginTop="12dp"
-                app:cardCornerRadius="24dp"
+                android:layout_marginTop="14dp"
+                app:cardCornerRadius="28dp"
                 app:cardElevation="2dp"
+                app:cardBackgroundColor="#F2FAF5"
                 app:layout_constraintTop_toBottomOf="@id/scheduleCard"
                 app:strokeWidth="0dp">
 
@@ -416,25 +424,27 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:padding="20dp">
+                    android:padding="22dp">
 
-                    <View
-                        android:layout_width="52dp"
-                        android:layout_height="52dp"
-                        android:background="@drawable/bg_status_badge"
-                        android:backgroundTint="#E8F5E9" />
-
-                    <ImageView
-                        android:layout_width="26dp"
-                        android:layout_height="26dp"
-                        android:layout_marginStart="-39dp"
-                        android:src="@android:drawable/ic_menu_today"
-                        app:tint="#43A047" />
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="54dp"
+                        android:layout_height="54dp"
+                        app:cardCornerRadius="18dp"
+                        app:cardElevation="0dp"
+                        app:cardBackgroundColor="#FFFFFF"
+                        app:strokeWidth="0dp">
+                        <ImageView
+                            android:layout_width="26dp"
+                            android:layout_height="26dp"
+                            android:layout_gravity="center"
+                            android:src="@android:drawable/ic_menu_today"
+                            app:tint="#41B873" />
+                    </com.google.android.material.card.MaterialCardView>
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="32dp"
+                        android:layout_marginStart="20dp"
                         android:layout_weight="1"
                         android:orientation="vertical">
 
@@ -442,23 +452,24 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Availability &amp; Eid Mode"
-                            android:textColor="#212121"
-                            android:textSize="17sp"
+                            android:textColor="#1F2937"
+                            android:textSize="18sp"
                             android:textStyle="bold" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
                             android:text="Manage your work status"
-                            android:textColor="#757575"
-                            android:textSize="13sp" />
+                            android:textColor="#6B7280"
+                            android:textSize="14sp" />
                     </LinearLayout>
 
                     <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:alpha="0.3"
-                        android:src="@android:drawable/ic_media_play" />
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:src="@android:drawable/ic_media_play"
+                        app:tint="#41B873" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -467,9 +478,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="24dp"
-                android:layout_marginTop="12dp"
-                app:cardCornerRadius="24dp"
+                android:layout_marginTop="14dp"
+                app:cardCornerRadius="28dp"
                 app:cardElevation="2dp"
+                app:cardBackgroundColor="#FFF0F0"
                 app:layout_constraintTop_toBottomOf="@id/cardAvailability"
                 app:strokeWidth="0dp">
 
@@ -478,25 +490,27 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:padding="20dp">
+                    android:padding="22dp">
 
-                    <View
-                        android:layout_width="52dp"
-                        android:layout_height="52dp"
-                        android:background="@drawable/bg_status_badge"
-                        android:backgroundTint="#F3E5F5" />
-
-                    <ImageView
-                        android:layout_width="26dp"
-                        android:layout_height="26dp"
-                        android:layout_marginStart="-39dp"
-                        android:src="@android:drawable/btn_star_big_on"
-                        app:tint="#8E24AA" />
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="54dp"
+                        android:layout_height="54dp"
+                        app:cardCornerRadius="18dp"
+                        app:cardElevation="0dp"
+                        app:cardBackgroundColor="#FFFFFF"
+                        app:strokeWidth="0dp">
+                        <ImageView
+                            android:layout_width="26dp"
+                            android:layout_height="26dp"
+                            android:layout_gravity="center"
+                            android:src="@android:drawable/btn_star_big_on"
+                            app:tint="#D32F2F" />
+                    </com.google.android.material.card.MaterialCardView>
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="32dp"
+                        android:layout_marginStart="20dp"
                         android:layout_weight="1"
                         android:orientation="vertical">
 
@@ -504,23 +518,24 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Leaderboard"
-                            android:textColor="#212121"
-                            android:textSize="17sp"
+                            android:textColor="#1F2937"
+                            android:textSize="18sp"
                             android:textStyle="bold" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="See top performers"
-                            android:textColor="#757575"
-                            android:textSize="13sp" />
+                            android:layout_marginTop="2dp"
+                            android:text="View top rated Koshais"
+                            android:textColor="#6B7280"
+                            android:textSize="14sp" />
                     </LinearLayout>
 
                     <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:alpha="0.3"
-                        android:src="@android:drawable/ic_media_play" />
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:src="@android:drawable/ic_media_play"
+                        app:tint="#D32F2F" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -529,9 +544,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="24dp"
-                android:layout_marginTop="12dp"
-                app:cardCornerRadius="24dp"
+                android:layout_marginTop="14dp"
+                app:cardCornerRadius="28dp"
                 app:cardElevation="2dp"
+                app:cardBackgroundColor="#F5F3FF"
                 app:layout_constraintTop_toBottomOf="@id/cardLeaderboard"
                 app:strokeWidth="0dp">
 
@@ -540,49 +556,52 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:padding="20dp">
+                    android:padding="22dp">
 
-                    <View
-                        android:layout_width="52dp"
-                        android:layout_height="52dp"
-                        android:background="@drawable/bg_status_badge"
-                        android:backgroundTint="#ECEFF1" />
-
-                    <ImageView
-                        android:layout_width="26dp"
-                        android:layout_height="26dp"
-                        android:layout_marginStart="-39dp"
-                        android:src="@android:drawable/ic_menu_gallery"
-                        app:tint="#546E7A" />
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="54dp"
+                        android:layout_height="54dp"
+                        app:cardCornerRadius="18dp"
+                        app:cardElevation="0dp"
+                        app:cardBackgroundColor="#FFFFFF"
+                        app:strokeWidth="0dp">
+                        <ImageView
+                            android:layout_width="26dp"
+                            android:layout_height="26dp"
+                            android:layout_gravity="center"
+                            android:src="@android:drawable/ic_menu_myplaces"
+                            app:tint="#7C3AED" />
+                    </com.google.android.material.card.MaterialCardView>
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="32dp"
+                        android:layout_marginStart="20dp"
                         android:layout_weight="1"
                         android:orientation="vertical">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="My Profile &amp; Reviews"
-                            android:textColor="#212121"
-                            android:textSize="17sp"
+                            android:text="Edit Profile"
+                            android:textColor="#1F2937"
+                            android:textSize="18sp"
                             android:textStyle="bold" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="View your public profile"
-                            android:textColor="#757575"
-                            android:textSize="13sp" />
+                            android:layout_marginTop="2dp"
+                            android:text="Update your information"
+                            android:textColor="#6B7280"
+                            android:textSize="14sp" />
                     </LinearLayout>
 
                     <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:alpha="0.3"
-                        android:src="@android:drawable/ic_media_play" />
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:src="@android:drawable/ic_media_play"
+                        app:tint="#7C3AED" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 

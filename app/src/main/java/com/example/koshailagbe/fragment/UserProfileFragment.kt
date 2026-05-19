@@ -35,9 +35,12 @@ class UserProfileFragment : Fragment() {
     }
 
     private fun setupToolbar() {
-        binding.btnBack.setOnClickListener { findNavController().popBackStack() }
-        binding.btnEditProfile.setOnClickListener {
+        binding.btnHeaderBack.setOnClickListener { findNavController().popBackStack() }
+        binding.btnHeaderEdit.setOnClickListener {
             findNavController().navigate(R.id.action_userProfileFragment_to_editProfileFragment)
+        }
+        binding.btnKoshaiProfile.setOnClickListener {
+            findNavController().navigate(R.id.action_userProfileFragment_to_roleFragment)
         }
         binding.btnLogout.setOnClickListener {
             com.example.koshailagbe.utils.SharedPrefsHelper.clearUserRole(requireContext())
@@ -57,8 +60,8 @@ class UserProfileFragment : Fragment() {
         db.collection("users").document(uid).get()
             .addOnSuccessListener { doc ->
                 if (!isAdded) return@addOnSuccessListener
-                binding.tvName.text = doc.getString("name") ?: "User Name"
-                binding.tvEmail.text = doc.getString("email") ?: auth.currentUser?.email
+                binding.tvProfileUserName.text = doc.getString("name") ?: "User Name"
+                binding.tvProfileUserEmail.text = doc.getString("email") ?: auth.currentUser?.email
                 binding.tvPhone.text = doc.getString("phone") ?: "No phone"
                 
                 val district = doc.getString("district") ?: ""

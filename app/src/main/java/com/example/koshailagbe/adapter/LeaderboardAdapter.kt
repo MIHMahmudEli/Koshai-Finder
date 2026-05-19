@@ -26,11 +26,12 @@ class LeaderboardAdapter(
         val rank = position + 1
         
         with(holder.binding) {
+            val context = root.context
             tvRank.text = rank.toString()
             tvName.text = koshai.name
-            tvLocation.text = "${koshai.upazila}, ${koshai.district}"
-            tvRating.text = String.format("%.1f", koshai.rating)
-            tvJobsDone.text = "${koshai.totalJobs} Jobs"
+            tvLocation.text = context.getString(R.string.leaderboard_location_format, koshai.upazila, koshai.district)
+            tvRating.text = context.getString(R.string.leaderboard_rating_format, koshai.rating)
+            tvJobsDone.text = context.getString(R.string.leaderboard_jobs_format, koshai.totalJobs)
 
             // Highlight top 3
             when (rank) {

@@ -4,8 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.koshailagbe.R
@@ -68,7 +66,7 @@ class LoginFragment : Fragment() {
         val password   = binding.etPassword.text.toString().trim()
 
         if (emailPhone.isEmpty() || password.isEmpty()) {
-            showSnackBar("Please fill in all fields", isError = true)
+            showSnackBar(getString(R.string.error_fill_all_fields), isError = true)
             return
         }
 
@@ -77,12 +75,12 @@ class LoginFragment : Fragment() {
             emailPhone
         } else {
             // phone number provided — not supported for email login
-            showSnackBar("Please enter your registered email address", isError = true)
+            showSnackBar(getString(R.string.msg_valid_email), isError = true)
             return
         }
 
         binding.btnLogin.isEnabled = false
-        binding.btnLogin.text = "Logging in..."
+        binding.btnLogin.text = getString(R.string.msg_logging_in)
 
         auth.signInWithEmailAndPassword(email, password)
             .addOnSuccessListener {
@@ -91,9 +89,8 @@ class LoginFragment : Fragment() {
 
                 // Check email verification
                 if (user?.isEmailVerified == false) {
-                    binding.btnLogin.isEnabled = true
-                    binding.btnLogin.text = "Login"
-                    showSnackBar("Please verify your email first. Check your inbox.", isError = true)
+                    resetLoginButton()
+                    showSnackBar(getString(R.string.error_verify_email_check), isError = true)
                     // Offer to go to verification screen
                     routeToVerification(user.uid)
                     return@addOnSuccessListener
@@ -103,13 +100,12 @@ class LoginFragment : Fragment() {
             }
             .addOnFailureListener {
                 if (!isAdded) return@addOnFailureListener
-                binding.btnLogin.isEnabled = true
-                binding.btnLogin.text = "Login"
+                resetLoginButton()
                 val msg = when {
                     it.message?.contains("no user") == true ||
-                    it.message?.contains("identifier") == true -> "No account found with this email."
-                    it.message?.contains("password") == true   -> "Incorrect password."
-                    else -> "Login failed: ${it.message}"
+                    it.message?.contains("identifier") == true -> getString(R.string.error_no_account_found)
+                    it.message?.contains("password") == true   -> getString(R.string.error_incorrect_password)
+                    else -> getString(R.string.error_update_failed, it.message)
                 }
                 showSnackBar(msg, isError = true)
             }
@@ -124,9 +120,12 @@ class LoginFragment : Fragment() {
                     EmailVerificationFragment.DEST_KOSHAI
                 else
                     EmailVerificationFragment.DEST_USER
+                val bundle = android.os.Bundle().apply { 
+                    putString(EmailVerificationFragment.ARG_DESTINATION, dest) 
+                }
                 findNavController().navigate(
                     R.id.action_loginFragment_to_emailVerificationFragment,
-                    bundleOf(EmailVerificationFragment.ARG_DESTINATION to dest)
+                    bundle
                 )
             }
     }
@@ -154,7 +153,7 @@ class LoginFragment : Fragment() {
                             if (userDoc.exists()) {
                                 if (userDoc.getBoolean("isBanned") == true) {
                                     resetLoginButton()
-                                    showSnackBar("Your account is banned. Contact support.", isError = true)
+                                    showSnackBar(getString(R.string.error_account_banned), isError = true)
                                     auth.signOut()
                                     return@addOnSuccessListener
                                 }
@@ -172,7 +171,7 @@ class LoginFragment : Fragment() {
                                         if (koshaiDoc.exists()) {
                                             if (koshaiDoc.getBoolean("isBanned") == true) {
                                                 resetLoginButton()
-                                                showSnackBar("Your account is banned. Contact support.", isError = true)
+                                                showSnackBar(getString(R.string.error_account_banned), isError = true)
                                                 auth.signOut()
                                                 return@addOnSuccessListener
                                             }
@@ -185,7 +184,7 @@ class LoginFragment : Fragment() {
                                             )
                                         } else {
                                             resetLoginButton()
-                                            showSnackBar("Account not found.", isError = true)
+                                            showSnackBar(getString(R.string.error_account_missing), isError = true)
                                         }
                                     }
                                     .addOnFailureListener { resetLoginButton() }
@@ -237,7 +236,7 @@ class LoginFragment : Fragment() {
     private fun resetLoginButton() {
         if (isAdded) {
             binding.btnLogin.isEnabled = true
-            binding.btnLogin.text = "Login"
+            binding.btnLogin.text = getString(R.string.login_button)
         }
     }
 
