@@ -86,7 +86,8 @@ class ReviewFragment : Fragment() {
                 userId = userId,
                 userName = userName,
                 rating = rating,
-                comment = comment
+                comment = comment,
+                koshaiId = koshaiId!!
             )
 
             // 1. Add review to Koshai's reviews collection
@@ -105,7 +106,8 @@ class ReviewFragment : Fragment() {
                 userId = userId,
                 userName = userName,
                 rating = rating,
-                comment = comment
+                comment = comment,
+                koshaiId = koshaiId!!
             )
             db.collection("koshais").document(koshaiId!!).collection("reviews").add(review)
                 .addOnSuccessListener { updateKoshaiRating(rating) }

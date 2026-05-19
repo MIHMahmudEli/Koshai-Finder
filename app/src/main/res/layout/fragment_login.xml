@@ -4,14 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    android:background="@drawable/bg_login_gradient">
+    android:background="@drawable/bg_main_luxury_gradient">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="24dp">
+        android:paddingBottom="32dp">
 
-        <!-- Focus Dim Overlay with Transparent Hole -->
+        <!-- Focus Dim Overlay -->
         <com.example.koshailagbe.utils.DimOverlayView
             android:id="@+id/focusDimOverlay"
             android:layout_width="match_parent"
@@ -21,169 +21,178 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <!-- Top Logo & Title -->
         <LinearLayout
             android:id="@+id/logoContainer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="70dp"
             android:gravity="center"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="110dp"
-                android:layout_height="110dp"
-                app:cardBackgroundColor="@android:color/transparent"
-                app:cardCornerRadius="55dp"
-                app:cardElevation="0dp"
-                app:strokeWidth="1.5dp"
-                app:strokeColor="#80FFFFFF">
-                <ImageView
+            <RelativeLayout
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:background="@drawable/bg_luxury_gold_logo_ring"
+                android:padding="6dp">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/ivLogo"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/bg_glass_card"
-                    android:padding="24dp"
+                    android:padding="8dp"
+                    android:scaleType="centerInside"
                     android:src="@drawable/koshai_finder_logo"
-                    android:scaleType="centerInside" />
-            </com.google.android.material.card.MaterialCardView>
+                    app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full" />
+            </RelativeLayout>
 
             <TextView
+                android:id="@+id/tvLogoTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="Koshai Finder"
-                android:textColor="@android:color/white"
-                android:textSize="32sp"
-                android:textStyle="bold" />
-            
+                android:textColor="#FFFFFF"
+                android:textSize="34sp"
+                android:textStyle="bold"
+                android:letterSpacing="-0.02"
+                android:shadowColor="#80000000"
+                android:shadowDx="0"
+                android:shadowDy="4"
+                android:shadowRadius="8" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="6dp"
                 android:text="Find your perfect Koshai easily"
-                android:textColor="#E0E0E0"
-                android:textSize="14sp" />
+                android:textColor="#D1D5DB"
+                android:textSize="14sp"
+                android:letterSpacing="0.02" />
         </LinearLayout>
 
-        <!-- Login Card -->
-        <com.google.android.material.card.MaterialCardView
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/loginCard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="24dp"
-            android:layout_marginTop="48dp"
-            android:elevation="2dp"
-            app:cardBackgroundColor="@android:color/transparent"
-            app:cardCornerRadius="28dp"
-            app:cardElevation="0dp"
-            app:layout_constraintTop_toBottomOf="@id/logoContainer"
-            app:strokeWidth="0dp">
+            android:layout_marginTop="40dp"
+            android:background="@drawable/bg_luxury_glass_card"
+            android:padding="28dp"
+            android:elevation="8dp"
+            app:layout_constraintTop_toBottomOf="@id/logoContainer">
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/tvWelcome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Welcome Back"
+                android:textColor="#0F172A" android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilEmailPhone"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_glass_card"
-                android:orientation="vertical"
-                android:padding="28dp">
+                android:layout_marginTop="24dp"
+                android:hint="Email or Phone Number"
+                android:textColorHint="#475569"
+                app:boxStrokeWidth="0dp" app:boxStrokeWidthFocused="0dp"
+                app:hintTextColor="#064E3B"
+                app:startIconDrawable="@android:drawable/ic_menu_my_calendar"
+                app:startIconTint="#1E3A8A"
+                app:layout_constraintTop_toBottomOf="@id/tvWelcome">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Welcome Back"
-                    android:textColor="#1A237E"
-                    android:textSize="24sp"
-                    android:textStyle="bold"
-                    android:layout_marginBottom="24dp" />
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/tilEmailPhone"
-                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etEmailPhone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Email or Phone Number"
-                    android:textColorHint="#616161"
-                    app:boxStrokeColor="#1A237E"
-                    app:hintTextColor="#1A237E"
-                    app:startIconDrawable="@android:drawable/ic_menu_my_calendar"
-                    app:startIconTint="#1A237E">
+                    android:background="@drawable/bg_luxury_input_box"
+                    android:paddingVertical="18dp"
+                    android:paddingHorizontal="16dp"
+                    android:inputType="textEmailAddress"
+                    android:textColor="#0F172A"
+                    android:textSize="15sp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etEmailPhone"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="textEmailAddress"
-                        android:textColor="#1A237E" />
-                </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilPassword"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="Password"
+                android:textColorHint="#475569"
+                app:boxStrokeWidth="0dp"
+                app:boxStrokeWidthFocused="0dp"
+                app:hintTextColor="#064E3B"
+                app:passwordToggleEnabled="true"
+                app:passwordToggleTint="#1E3A8A"
+                app:startIconDrawable="@android:drawable/ic_lock_idle_lock"
+                app:startIconTint="#1E3A8A"
+                app:layout_constraintTop_toBottomOf="@id/tilEmailPhone">
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/tilPassword"
-                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:hint="Password"
-                    android:textColorHint="#616161"
-                    app:boxStrokeColor="#1A237E"
-                    app:hintTextColor="#1A237E"
-                    app:passwordToggleEnabled="true"
-                    app:passwordToggleTint="#1A237E"
-                    app:startIconDrawable="@android:drawable/ic_lock_idle_lock"
-                    app:startIconTint="#1A237E">
+                    android:background="@drawable/bg_luxury_input_box"
+                    android:paddingVertical="18dp"
+                    android:paddingHorizontal="16dp"
+                    android:inputType="textPassword"
+                    android:textColor="#0F172A"
+                    android:textSize="15sp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etPassword"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="textPassword"
-                        android:textColor="#1A237E" />
-                </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:id="@+id/tvForgotPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:padding="4dp"
+                android:text="Forgot Password?"
+                android:textColor="#1E3A8A"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tilPassword" />
 
-                <TextView
-                    android:id="@+id/tvForgotPassword"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:layout_marginTop="12dp"
-                    android:padding="4dp"
-                    android:text="Forgot Password?"
-                    android:textColor="#1A237E"
-                    android:textStyle="bold" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnLogin"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="28dp"
+                android:backgroundTint="#FFFFFF"
+                android:text="Sign In"
+                android:textColor="#1E3A8A"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:cornerRadius="16dp"
+                app:elevation="4dp"
+                app:layout_constraintTop_toBottomOf="@id/tvForgotPassword" />
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnLogin"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:layout_marginTop="32dp"
-                    android:backgroundTint="@android:color/white"
-                    android:text="Sign In"
-                    android:textColor="#1A237E"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    app:cornerRadius="16dp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
-
-        <!-- Footer -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:layout_marginBottom="40dp"
+            android:layout_marginTop="32dp"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/loginCard"
-            app:layout_constraintBottom_toBottomOf="parent">
+            app:layout_constraintTop_toBottomOf="@id/loginCard">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="New here? "
-                android:textColor="#E0E0E0" />
+                android:textColor="#E2E8F0"
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/tvRegister"
@@ -191,9 +200,10 @@
                 android:layout_height="wrap_content"
                 android:padding="4dp"
                 android:text="Create Account"
-                android:textColor="@android:color/white"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
                 android:textStyle="bold" />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+</ScrollView>

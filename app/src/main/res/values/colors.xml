@@ -8,4 +8,11 @@
     <color name="gray_text">#555555</color>
     <color name="light_gray">#F5F5F5</color>
     <color name="mid_gray">#CCCCCC</color>
+    <color name="soft_bg">#F4F6F9</color>
+    <color name="text_dark">#1E293B</color>
+    <color name="text_muted">#64748B</color>
+    <color name="soft_green_bg">#E6F4EA</color>
+    <color name="soft_green_stroke">#34A853</color>
+    <color name="premium_indigo">#3F51B5</color>
+    <color name="soft_red">#E53935</color>
 </resources>

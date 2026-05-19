@@ -294,6 +294,108 @@
     <string name="select_organization_title">Select Organization</string>
     <string name="progress_tracker_title">Progress Tracker</string>
     <string name="btn_donate_upper">DONATE NOW</string>
+
+    <!-- Admin Dashboard -->
+    <string name="admin_dashboard_title">Admin Dashboard</string>
+    <string name="verification_queue_title">Verification Queue</string>
+    <string name="pending_registrations_format">%s pending registrations</string>
+    <string name="total_users_label">Total Users</string>
+    <string name="verified_koshais_label">Verified Koshais</string>
+    <string name="completed_jobs_label">Completed Jobs</string>
+    <string name="total_earnings_label">Total Earnings</string>
+    <string name="logout_button">Logout</string>
+    <string name="booking_activity_title">Booking Activity</string>
+    <string name="pending_bookings_label">Pending</string>
+    <string name="active_bookings_label">Active</string>
+    <string name="account_management_title">Account Management</string>
+    <string name="account_management_desc">Ban users or Koshais</string>
+    <string name="disputes_reviews_title">Disputes &amp; Reviews</string>
+    <string name="disputes_reviews_desc">Moderate content and reports</string>
+    <string name="system_announcements_title">System Announcements</string>
+    <string name="system_announcements_desc">Send push notifications</string>
+    <string name="koshai_leaderboard_title">Koshai Leaderboard</string>
+    <string name="koshai_leaderboard_desc">Highlighting the top performers of the season</string>
+    <string name="leaderboard_location_format">%1$s, %2$s</string>
+    <string name="leaderboard_jobs_format">%d Jobs</string>
+    <string name="leaderboard_rating_format">%.1f</string>
+    <string name="currency_bdt_sign">৳</string>
+    <string name="zero_placeholder">0</string>
+    <string name="zero_users_placeholder">0 👤</string>
+    <string name="zero_verified_placeholder">0 🟢</string>
+    <string name="zero_bdt_placeholder">৳ 0</string>
+
+    <!-- Availability Dashboard -->
+    <string name="availability_settings_title">Availability Settings</string>
+    <string name="current_work_status_label">Current Work Status</string>
+    <string name="status_online">Online</string>
+    <string name="status_busy">Busy</string>
+    <string name="status_offline">Offline</string>
+    <string name="eid_special_label">Eid-ul-Adha Special</string>
+    <string name="enable_eid_mode">Enable Eid Mode</string>
+    <string name="eid_mode_desc">When enabled, your profile will show \'Eid Availability\' and allow \'surge pricing\'.</string>
+    <string name="surge_multiplier_label">Surge Payout Multiplier</string>
+    <string name="surge_rate_format">%.1fx Base Rate</string>
+    <string name="surge_value_default">1.5x Base Rate</string>
+    <string name="preferred_hours_label">Preferred Working Hours</string>
+    <string name="working_hours_morning">  Morning (06:00-10:00)</string>
+    <string name="working_hours_noon">  Noon (11:00-15:00)</string>
+    <string name="working_hours_afternoon">  Afternoon (16:00-20:00)</string>
+    <string name="btn_update_availability">Update Availability</string>
+    <string name="msg_availability_updated">Availability updated successfully!</string>
+    <string name="msg_update_failed">Failed to update: %s</string>
+
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- Edit Profile -->
+    <string name="edit_profile_title">Edit Profile</string>
+    <string name="label_personal_info">Personal Information</string>
+    <string name="label_location_details">Location Details</string>
+    <string name="hint_full_name">Full Name</string>
+    <string name="hint_bio">Bio</string>
+    <string name="hint_phone">Phone Number</string>
+    <string name="hint_district">District</string>
+    <string name="hint_upazila">Upazila</string>
+    <string name="btn_save">Save</string>
+    <string name="btn_save_changes">Save Changes</string>
+    <string name="btn_save_changes_caps">SAVE CHANGES</string>
+    <string name="change_photo_desc">Change Profile Photo</string>
+    <string name="error_empty_fields">Name and Location cannot be empty</string>
+    <string name="msg_profile_updated">Profile updated successfully!</string>
+    <string name="error_upload_failed">Failed to upload image: %s</string>
+    <string name="error_update_failed">Failed to update profile: %s</string>
+    <string name="error_load_failed">Failed to load profile: %s</string>
+    <string name="error_download_url">Failed to get download URL: %s</string>
+    <string name="label_eid_mode">Eid-ul-Adha Mode</string>
+    <string name="desc_eid_mode">Enable this during Eid to show special availability.</string>
+    <string name="error_invalid_phone">Please enter a valid phone number</string>
+    <string name="msg_logging_in">Logging in...</string>
+    <string name="error_fill_all_fields">Please fill in all fields</string>
+    <string name="error_verify_email_check">Please verify your email first. Check your inbox.</string>
+    <string name="error_no_account_found">No account found with this email.</string>
+    <string name="error_incorrect_password">Incorrect password.</string>
+    <string name="error_account_banned">Your account is banned. Contact support.</string>
+    <string name="error_account_missing">Account not found.</string>
+    <string name="error_invalid_otp">Enter a valid 6-digit OTP</string>
+    <string name="error_session_expired">Session expired. Please try again.</string>
+    <string name="msg_verifying">Verifying...</string>
+    <string name="msg_resending_otp">Resending code...</string>
+    <string name="koshai_partner_title">Koshai Partner</string>
+    <string name="koshai_partner_subtitle">Find your perfect Koshai easily</string>
+    <string name="service_rates_label">Service Rates</string>
+    <string name="account_security_label">Account Security</string>
+    <string name="already_have_account_login">Already have an account? Login</string>
+    <string name="msg_submitting">Submitting...</string>
+    <string name="msg_verification_email_sent">Verification email sent! Please check your inbox 📧</string>
+    <string name="msg_verification_email_resent">Verification email resent 📧</string>
+    <string name="msg_already_registered_login">This email is already registered. Try logging in.</string>
+    <string name="msg_account_exists_login">Account already exists. Please login.</string>
+    <string name="btn_submit_application">Submit Application</string>
+    <string name="rate_sheep_label">Rate per Sheep</string>
+
+    <!-- OTP Verification -->
+    <string name="verify_phone_title">Verify Phone</string>
+    <string name="otp_instruction">Enter the 6-digit code sent to your phone</string>
+    <string name="otp_digit_label">6-digit code</string>
+    <string name="btn_verify_continue">Verify &amp; Continue</string>
+    <string name="didnt_receive_code">Didn\'t receive code? </string>
+    <string name="resend_label">Resend</string>
 </resources>

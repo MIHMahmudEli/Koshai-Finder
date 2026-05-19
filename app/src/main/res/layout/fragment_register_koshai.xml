@@ -1,299 +1,252 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_login_gradient">
-
-    <LinearLayout
+    android:fillViewport="true"
+    android:background="@drawable/bg_main_luxury_gradient">    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="24dp">
+        android:paddingBottom="32dp">
+
+        <com.example.koshailagbe.utils.DimOverlayView
+            android:id="@+id/focusDimOverlay"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            android:elevation="1dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/tvTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="48dp"
-            android:text="Koshai Partner"
-            android:textColor="@android:color/white"
+            android:layout_marginTop="40dp"
+            android:text="@string/koshai_partner_title"
+            android:textColor="#DFB664"
             android:textSize="32sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:letterSpacing="-0.01"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/tvSubtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
             android:layout_marginTop="4dp"
-            android:layout_marginBottom="40dp"
-            android:text="Join our network of professional Koshais"
+            android:text="@string/koshai_partner_subtitle"
             android:textColor="#E0E0E0"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:alpha="0.8"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvTitle" />
 
-        <com.google.android.material.card.MaterialCardView
+        <LinearLayout
+            android:id="@+id/registrationCard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardBackgroundColor="@android:color/transparent"
-            app:cardCornerRadius="28dp"
-            app:cardElevation="0dp"
-            app:strokeWidth="0dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_glass_card"
-                android:orientation="vertical"
-                android:padding="28dp">
-
-                <!-- Section: Personal Info -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:text="Personal Information"
-                    android:textColor="#1A237E"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/tilName"
-                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:hint="Full Name"
-                    android:textColorHint="#616161"
-                    app:boxStrokeColor="#1A237E"
-                    app:hintTextColor="#1A237E"
-                    app:startIconDrawable="@android:drawable/ic_menu_edit"
-                    app:startIconTint="#1A237E">
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etName"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="textPersonName"
-                        android:textColor="#1A237E" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/tilEmail"
-                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:hint="Email Address"
-                    android:textColorHint="#616161"
-                    app:boxStrokeColor="#1A237E"
-                    app:hintTextColor="#1A237E"
-                    app:startIconDrawable="@android:drawable/sym_action_email"
-                    app:startIconTint="#1A237E">
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etEmail"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="textEmailAddress"
-                        android:textColor="#1A237E" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/tilPhone"
-                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:hint="Phone Number"
-                    android:textColorHint="#616161"
-                    app:boxStrokeColor="#1A237E"
-                    app:hintTextColor="#1A237E"
-                    app:prefixText="+88 "
-                    app:prefixTextColor="#1A237E"
-                    app:startIconDrawable="@android:drawable/ic_menu_call"
-                    app:startIconTint="#1A237E">
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etPhone"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="phone"
-                        android:maxLength="11"
-                        android:textColor="#1A237E" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:orientation="horizontal">
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/tilDistrict"
-                        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        android:layout_weight="1"
-                        android:hint="District"
-                        android:textColorHint="#616161"
-                        app:boxStrokeColor="#1A237E"
-                        app:hintTextColor="#1A237E">
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/etDistrict"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:inputType="text"
-                            android:textColor="#1A237E" />
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/tilUpazila"
-                        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_weight="1"
-                        android:hint="Upazila"
-                        android:textColorHint="#616161"
-                        app:boxStrokeColor="#1A237E"
-                        app:hintTextColor="#1A237E">
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/etUpazila"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:inputType="text"
-                            android:textColor="#1A237E" />
-                    </com.google.android.material.textfield.TextInputLayout>
-                </LinearLayout>
-
-                <!-- Section: Rates -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="16dp"
-                    android:text="Service Rates"
-                    android:textColor="#1A237E"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/tilRateCow"
-                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="12dp"
-                    android:hint="Rate per Cow"
-                    android:textColorHint="#616161"
-                    app:boxStrokeColor="#1A237E"
-                    app:hintTextColor="#1A237E"
-                    app:suffixText="৳"
-                    app:suffixTextColor="#1A237E">
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etRateCow"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="numberDecimal"
-                        android:textColor="#1A237E" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/tilRateGoat"
-                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="12dp"
-                    android:hint="Rate per Goat"
-                    android:textColorHint="#616161"
-                    app:boxStrokeColor="#1A237E"
-                    app:hintTextColor="#1A237E"
-                    app:suffixText="৳"
-                    app:suffixTextColor="#1A237E">
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etRateGoat"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="numberDecimal"
-                        android:textColor="#1A237E" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/tilRateSheep"
-                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="24dp"
-                    android:hint="Rate per Sheep"
-                    android:textColorHint="#616161"
-                    app:boxStrokeColor="#1A237E"
-                    app:hintTextColor="#1A237E"
-                    app:suffixText="৳"
-                    app:suffixTextColor="#1A237E">
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etRateSheep"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="numberDecimal"
-                        android:textColor="#1A237E" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <!-- Section: Account -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="16dp"
-                    android:text="Account Security"
-                    android:textColor="#1A237E"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/tilPassword"
-                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="32dp"
-                    android:hint="Password"
-                    android:textColorHint="#616161"
-                    app:boxStrokeColor="#1A237E"
-                    app:hintTextColor="#1A237E"
-                    app:passwordToggleEnabled="true"
-                    app:passwordToggleTint="#1A237E"
-                    app:startIconDrawable="@android:drawable/ic_lock_idle_lock"
-                    app:startIconTint="#1A237E">
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etPassword"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="textPassword"
-                        android:textColor="#1A237E" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnRegisterKoshai"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:backgroundTint="@android:color/white"
-                    android:text="Submit Application"
-                    android:textColor="#1A237E"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    app:cornerRadius="16dp" />
-
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="28dp"
+            android:background="@drawable/bg_partner_glass_panel"
+            android:orientation="vertical"
+            android:padding="24dp"
+            android:elevation="4dp"
+            app:layout_constraintTop_toBottomOf="@id/tvSubtitle">
 
         <TextView
-            android:id="@+id/tvBackToLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="32dp"
-            android:layout_marginBottom="24dp"
-            android:padding="8dp"
-            android:text="Already have an account? Login"
-            android:textColor="@android:color/white"
+            android:layout_marginBottom="14dp"
+            android:text="@string/label_personal_info"
+            android:textColor="#0B3056" android:textSize="15sp"
             android:textStyle="bold" />
 
+        <EditText
+            android:id="@+id/etName"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/bg_partner_field_glass"
+            android:hint="@string/hint_full_name"
+            android:textColorHint="#E2E8F0"
+            android:textColor="#FFFFFF"
+            android:textSize="15sp"
+            android:paddingHorizontal="16dp"
+            android:inputType="textPersonName"
+            android:drawableStart="@android:drawable/ic_menu_edit"
+            android:drawablePadding="12dp"
+            android:drawableTint="#94A3B8" />
+
+        <EditText
+            android:id="@+id/etEmail"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/bg_partner_field_glass"
+            android:hint="@string/email_hint"
+            android:textColorHint="#E2E8F0"
+            android:textColor="#FFFFFF"
+            android:textSize="15sp"
+            android:paddingHorizontal="16dp"
+            android:inputType="textEmailAddress"
+            android:drawableStart="@android:drawable/sym_action_email"
+            android:drawablePadding="12dp"
+            android:drawableTint="#94A3B8" />
+
+        <EditText
+            android:id="@+id/etPhone"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/bg_partner_field_glass"
+            android:hint="@string/hint_phone"
+            android:textColorHint="#E2E8F0"
+            android:textColor="#FFFFFF"
+            android:textSize="15sp"
+            android:paddingHorizontal="16dp"
+            android:inputType="phone"
+            android:drawableStart="@android:drawable/ic_menu_call"
+            android:drawablePadding="12dp"
+            android:drawableTint="#94A3B8" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/etDistrict"
+                android:layout_width="0dp"
+                android:layout_height="52dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="6dp"
+                android:background="@drawable/bg_partner_field_glass"
+                android:hint="@string/hint_district"
+                android:textColorHint="#E2E8F0"
+                android:textColor="#FFFFFF"
+                android:textSize="15sp"
+                android:paddingHorizontal="16dp"
+                android:inputType="text" />
+
+            <EditText
+                android:id="@+id/etUpazila"
+                android:layout_width="0dp"
+                android:layout_height="52dp"
+                android:layout_weight="1"
+                android:layout_marginStart="6dp"
+                android:background="@drawable/bg_partner_field_glass"
+                android:hint="@string/hint_upazila"
+                android:textColorHint="#E2E8F0"
+                android:textColor="#FFFFFF"
+                android:textSize="15sp"
+                android:paddingHorizontal="16dp"
+                android:inputType="text" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="14dp"
+            android:text="@string/service_rates_label"
+            android:textColor="#0B3056"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/etRateCow"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/bg_partner_field_glass"
+            android:hint="@string/rate_cow_label"
+            android:textColorHint="#E2E8F0"
+            android:textColor="#FFFFFF"
+            android:textSize="15sp"
+            android:paddingHorizontal="16dp"
+            android:inputType="numberDecimal" />
+
+        <EditText
+            android:id="@+id/etRateGoat"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/bg_partner_field_glass"
+            android:hint="@string/rate_goat_label"
+            android:textColorHint="#E2E8F0"
+            android:textColor="#FFFFFF"
+            android:textSize="15sp"
+            android:paddingHorizontal="16dp"
+            android:inputType="numberDecimal" />
+
+        <EditText
+            android:id="@+id/etRateSheep"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/bg_partner_field_glass"
+            android:hint="@string/rate_sheep_label"
+            android:textColorHint="#E2E8F0"
+            android:textColor="#FFFFFF"
+            android:textSize="15sp"
+            android:paddingHorizontal="16dp"
+            android:inputType="numberDecimal" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="14dp"
+            android:text="@string/account_security_label"
+            android:textColor="#0B3056"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/etPassword"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginBottom="32dp"
+            android:background="@drawable/bg_partner_field_glass"
+            android:hint="@string/password_hint"
+            android:textColorHint="#E2E8F0"
+            android:textColor="#FFFFFF"
+            android:textSize="15sp"
+            android:paddingHorizontal="16dp"
+            android:inputType="textPassword"
+            android:drawableStart="@android:drawable/ic_lock_idle_lock"
+            android:drawablePadding="12dp"
+            android:drawableTint="#94A3B8" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnRegisterKoshai"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:background="@drawable/bg_partner_submit_btn"
+            android:text="@string/btn_submit_application"
+            android:textColor="#DFB664"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textAllCaps="false" />
+
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvBackToLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:padding="8dp"
+        android:text="@string/already_have_account_login"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:alpha="0.9"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/registrationCard" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
